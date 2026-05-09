@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.DashboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20,52,20,12" Spacing="16">
+
+                <!-- Header -->
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                        <Label x:Name="DateLabel" CharacterSpacing="1" FontAttributes="Bold" FontSize="11" Text="TUESDAY, 22 APR" TextColor="#9CA3AF" />
+                        <HorizontalStackLayout Spacing="8">
+                            <Label FontAttributes="Bold" FontSize="24" Text="Good morning, Alex" TextColor="#111827" />
+                            <Label FontSize="22" Text="👋" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <Border Grid.Column="1" BackgroundColor="#7C3AED" StrokeShape="RoundRectangle 14" StrokeThickness="0" VerticalOptions="Center" WidthRequest="64">
+                        <Label FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" Text="A" TextColor="White" VerticalOptions="Center" />
+                    </Border>
+                </Grid>
+
+                <!-- Stats Cards Row -->
+                <Grid ColumnDefinitions="*,8,*,8,*">
+                    <!-- Total Workouts -->
+                    <Border Grid.Column="0" BackgroundColor="White" Padding="14,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                        <VerticalStackLayout Spacing="2">
+                            <Label FontSize="20" Text="🏋️" />
+                            <Label FontAttributes="Bold" FontSize="24" Text="124" TextColor="#111827" />
+                            <Label FontAttributes="Bold" FontSize="11" Text="+3 this week" TextColor="#7C3AED" />
+                            <Label FontSize="11" Text="Total Workouts" TextColor="#9CA3AF" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <!-- Streak -->
+                    <Border Grid.Column="2" BackgroundColor="White" Padding="14,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                        <VerticalStackLayout Spacing="2">
+                            <Label FontSize="20" Text="🔥" />
+                            <Label FontAttributes="Bold" FontSize="24" Text="12" TextColor="#111827" />
+                            <Label FontSize="11" Text=" " TextColor="#7C3AED" />
+                            <Label FontSize="11" Text="Streak" TextColor="#9CA3AF" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <!-- Volume -->
+                    <Border Grid.Column="4" BackgroundColor="White" Padding="14,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                        <VerticalStackLayout Spacing="2">
+                            <Label FontSize="20" Text="⚡" />
+                            <Label FontAttributes="Bold" FontSize="24" Text="4.2t" TextColor="#111827" />
+                            <Label FontAttributes="Bold" FontSize="11" Text="this week" TextColor="#7C3AED" />
+                            <Label FontSize="11" Text="Volume" TextColor="#9CA3AF" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Weekly Activity -->
+                <Border BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" FontAttributes="Bold" FontSize="16" Text="Weekly Activity" TextColor="#111827" />
+                            <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="Month ›" TextColor="#7C3AED" />
+                        </Grid>
+                        <!-- Bar chart (simplified) -->
+                        <Grid ColumnDefinitions="*,*,*,*,*,*,*"  ColumnSpacing="6">
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="End" Spacing="4">
+                                <Border BackgroundColor="#DDD6FE" HeightRequest="40" StrokeShape="RoundRectangle 6" StrokeThickness="0" />
+                                <Label FontSize="10" HorizontalOptions="Center" Text="Mon" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="End" Spacing="4">
+                                <Border BackgroundColor="#DDD6FE" HeightRequest="30" StrokeShape="RoundRectangle 6" StrokeThickness="0" />
+                                <Label FontSize="10" HorizontalOptions="Center" Text="Tue" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" VerticalOptions="End" Spacing="4">
+                                <Border BackgroundColor="#C4B5FD" HeightRequest="55" StrokeShape="RoundRectangle 6" StrokeThickness="0" />
+                                <Label FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Wed" TextColor="#7C3AED" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="3" VerticalOptions="End" Spacing="4">
+                                <Border StrokeShape="RoundRectangle 6" StrokeThickness="0">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#9333EA" Offset="0" />
+                                            <GradientStop Color="#C084FC" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <BoxView HeightRequest="70" Color="Transparent" />
+                                </Border>
+                                <Label FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Thu" TextColor="#7C3AED" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="4" VerticalOptions="End" Spacing="4">
+                                <Border BackgroundColor="#DDD6FE" HeightRequest="45" StrokeShape="RoundRectangle 6" StrokeThickness="0" />
+                                <Label FontSize="10" HorizontalOptions="Center" Text="Fri" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="5" VerticalOptions="End" Spacing="4">
+                                <Border BackgroundColor="#EDE9FE" HeightRequest="20" StrokeShape="RoundRectangle 6" StrokeThickness="0" />
+                                <Label FontSize="10" HorizontalOptions="Center" Text="Sat" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="6" VerticalOptions="End" Spacing="4">
+                                <Border BackgroundColor="#F3F4F6" HeightRequest="10" StrokeShape="RoundRectangle 6" StrokeThickness="0" />
+                                <Label FontSize="10" HorizontalOptions="Center" Text="Sun" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Goals -->
+                <Border BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" FontAttributes="Bold" FontSize="16" Text="Goals" TextColor="#111827" />
+                            <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="Edit" TextColor="#7C3AED" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                            <!-- Workouts 78% -->
+                            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="6">
+                                <Border BackgroundColor="#F3F0FF" HeightRequest="64" StrokeShape="Ellipse" StrokeThickness="0" WidthRequest="64" HorizontalOptions="Center">
+                                    <Label FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" Text="78%" TextColor="#7C3AED" VerticalOptions="Center" />
+                                </Border>
+                                <Label FontSize="12" HorizontalOptions="Center" Text="Workouts" TextColor="#6B7280" />
+                            </VerticalStackLayout>
+                            <!-- Volume 55% -->
+                            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="6">
+                                <Border BackgroundColor="#F3F0FF" HeightRequest="64" StrokeShape="Ellipse" StrokeThickness="0" WidthRequest="64" HorizontalOptions="Center">
+                                    <Label FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" Text="55%" TextColor="#7C3AED" VerticalOptions="Center" />
+                                </Border>
+                                <Label FontSize="12" HorizontalOptions="Center" Text="Volume" TextColor="#6B7280" />
+                            </VerticalStackLayout>
+                            <!-- Cardio 90% -->
+                            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="6">
+                                <Border BackgroundColor="#F3F0FF" HeightRequest="64" StrokeShape="Ellipse" StrokeThickness="0" WidthRequest="64" HorizontalOptions="Center">
+                                    <Label FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" Text="90%" TextColor="#7C3AED" VerticalOptions="Center" />
+                                </Border>
+                                <Label FontSize="12" HorizontalOptions="Center" Text="Cardio" TextColor="#6B7280" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Last Workout -->
+                <Border BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="14">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" FontAttributes="Bold" FontSize="16" Text="Last Workout" TextColor="#111827" />
+                            <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="See all" TextColor="#7C3AED">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSeeAllWorkoutsTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                            <Border Grid.Column="0" BackgroundColor="#7C3AED" StrokeShape="RoundRectangle 14" StrokeThickness="0"
+                                    VerticalOptions="Center">
+                                <Label FontSize="22" HorizontalOptions="Center" Text="🏋️" VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label FontAttributes="Bold" FontSize="15" Text="Upper Body Push" TextColor="#111827" />
+                                <Label FontSize="12" Text="Yesterday · 52 min · 8 exercises" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" FontAttributes="Bold" FontSize="14" Text="1 280 kg" TextColor="#7C3AED" VerticalOptions="Center" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Tab Bar -->
+        <controls:MainTabBar Grid.Row="1" ActiveTab="Dashboard" />
+
+    </Grid>
+</ContentPage>

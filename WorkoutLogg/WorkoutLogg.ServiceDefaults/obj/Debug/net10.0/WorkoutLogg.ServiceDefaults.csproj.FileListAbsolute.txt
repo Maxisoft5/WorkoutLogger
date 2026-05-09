@@ -1,0 +1,12 @@
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\bin\Debug\net10.0\WorkoutLogg.ServiceDefaults.deps.json
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\bin\Debug\net10.0\WorkoutLogg.ServiceDefaults.dll
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\bin\Debug\net10.0\WorkoutLogg.ServiceDefaults.pdb
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\obj\Debug\net10.0\WorkoutLogg.ServiceDefaults.csproj.AssemblyReference.cache
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\obj\Debug\net10.0\WorkoutLogg.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\obj\Debug\net10.0\WorkoutLogg.ServiceDefaults.AssemblyInfoInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\obj\Debug\net10.0\WorkoutLogg.ServiceDefaults.AssemblyInfo.cs
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\obj\Debug\net10.0\WorkoutLogg.ServiceDefaults.csproj.CoreCompileInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\obj\Debug\net10.0\WorkoutLogg.ServiceDefaults.dll
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\obj\Debug\net10.0\refint\WorkoutLogg.ServiceDefaults.dll
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\obj\Debug\net10.0\WorkoutLogg.ServiceDefaults.pdb
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.ServiceDefaults\obj\Debug\net10.0\ref\WorkoutLogg.ServiceDefaults.dll

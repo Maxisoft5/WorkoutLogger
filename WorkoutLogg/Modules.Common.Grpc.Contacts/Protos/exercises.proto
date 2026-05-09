@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "WorkoutLogger.Grpc.Contracts";
+
+package exercises;
+
+service ExercisesService {
+  // Unary: получить одно упражнение по id
+  rpc GetExercise (GetExerciseRequest) returns (ExerciseDto);
+
+  // Server streaming: отдать все упражнения потоком
+  rpc StreamExercises (StreamExercisesRequest) returns (stream ExerciseDto);
+}
+
+message GetExerciseRequest {
+  string id = 1;
+}
+
+message StreamExercisesRequest {
+  string muscle_group = 1; 
+}
+
+message ExerciseDto {
+  string id = 1;
+  string name = 2;
+  string muscle_group = 3;
+  string description = 4;
+  int32 difficulty = 5;
+}

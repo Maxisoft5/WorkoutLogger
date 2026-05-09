@@ -1,0 +1,12 @@
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\bin\Debug\net10.0\Modules.Common.Infrastructure.deps.json
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\bin\Debug\net10.0\Modules.Common.Infrastructure.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\bin\Debug\net10.0\Modules.Common.Infrastructure.pdb
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\obj\Debug\net10.0\Modules.Common.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\obj\Debug\net10.0\Modules.Common.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\obj\Debug\net10.0\Modules.Common.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\obj\Debug\net10.0\Modules.Common.Infrastructure.AssemblyInfo.cs
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\obj\Debug\net10.0\Modules.Common.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\obj\Debug\net10.0\Modules.Common.Infrastructure.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\obj\Debug\net10.0\refint\Modules.Common.Infrastructure.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\obj\Debug\net10.0\Modules.Common.Infrastructure.pdb
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Infrastructure\obj\Debug\net10.0\ref\Modules.Common.Infrastructure.dll

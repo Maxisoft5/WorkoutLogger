@@ -1,0 +1,11 @@
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\bin\Debug\net10.0\Modules.Users.DTO.deps.json
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\bin\Debug\net10.0\Modules.Users.DTO.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\bin\Debug\net10.0\Modules.Users.DTO.pdb
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\obj\Debug\net10.0\Modules.Users.DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\obj\Debug\net10.0\Modules.Users.DTO.AssemblyInfoInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\obj\Debug\net10.0\Modules.Users.DTO.AssemblyInfo.cs
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\obj\Debug\net10.0\Modules.Users.DTO.csproj.CoreCompileInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\obj\Debug\net10.0\Modules.Users.DTO.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\obj\Debug\net10.0\refint\Modules.Users.DTO.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\obj\Debug\net10.0\Modules.Users.DTO.pdb
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Users.DTO\obj\Debug\net10.0\ref\Modules.Users.DTO.dll

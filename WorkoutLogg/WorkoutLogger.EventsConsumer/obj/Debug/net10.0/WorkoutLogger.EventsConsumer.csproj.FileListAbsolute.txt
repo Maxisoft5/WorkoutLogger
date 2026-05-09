@@ -1,0 +1,5 @@
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogger.EventsConsumer\obj\Debug\net10.0\WorkoutLogger.EventsConsumer.csproj.AssemblyReference.cache
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogger.EventsConsumer\obj\Debug\net10.0\WorkoutLogger.EventsConsumer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogger.EventsConsumer\obj\Debug\net10.0\WorkoutLogger.EventsConsumer.AssemblyInfoInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogger.EventsConsumer\obj\Debug\net10.0\WorkoutLogger.EventsConsumer.AssemblyInfo.cs
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogger.EventsConsumer\obj\Debug\net10.0\WorkoutLogger.EventsConsumer.csproj.CoreCompileInputs.cache

@@ -1,0 +1,26 @@
+<Solution>
+  <Folder Name="/Common/">
+    <Project Path="Modules.Common.Domain/Modules.Common.Domain.csproj" Id="5f4a2507-6d0a-4a4c-ac69-561d5bb33682" />
+    <Project Path="Modules.Common.Grpc.Contacts/Modules.Common.Grpc.Contacts.csproj" Id="d5993d2a-81de-4c0d-914d-53310836cc33" />
+    <Project Path="Modules.Common.Infrastructure/Modules.Common.Infrastructure.csproj" Id="b62e34b4-7d4d-4ace-9a4b-807d1e802216" />
+  </Folder>
+  <Folder Name="/Modules/" />
+  <Folder Name="/Modules/UsersModule/">
+    <Project Path="Modules.Users.Domain/Modules.Users.Domain.csproj" Id="0c2bb399-ba31-4beb-ba85-c9b4eeb3648a" />
+    <Project Path="Modules.Users.DTO/Modules.Users.DTO.csproj" Id="5e3dac1f-15a4-4774-8e98-e7cd6f24dfe2" />
+    <Project Path="Modules.Users.Infrastructure/Modules.Users.Infrastructure.csproj" Id="5f24b623-83be-4fed-87af-64253b323bfa" />
+  </Folder>
+  <Folder Name="/Modules/UsersModule/Tests/">
+    <Project Path="Module.Users.Tests/Module.Users.Tests.csproj" Id="dba49d39-b23e-440e-9bb1-b431607b0d88" />
+  </Folder>
+  <Folder Name="/Modules/WorkoutsModule/">
+    <Project Path="Moduels.Workouts.DTO/Moduels.Workouts.DTO.csproj" Id="b678eba3-de6e-410e-93b2-6971f53aa234" />
+  </Folder>
+  <Project Path="WorkoutLogg.AppHost/WorkoutLogg.AppHost.csproj" />
+  <Project Path="WorkoutLogg.ServiceDefaults/WorkoutLogg.ServiceDefaults.csproj" />
+  <Project Path="WorkoutLogg/WorkoutLogg.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="WorkoutLogger.EventsConsumer/WorkoutLogger.EventsConsumer.csproj" />
+  <Project Path="WorkoutLogger.WebApi/WorkoutLogger.WebApi.csproj" />
+</Solution>

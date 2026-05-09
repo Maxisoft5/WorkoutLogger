@@ -1,0 +1,12 @@
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\bin\Debug\net10.0\Modules.Common.Grpc.Contacts.deps.json
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\bin\Debug\net10.0\Modules.Common.Grpc.Contacts.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\bin\Debug\net10.0\Modules.Common.Grpc.Contacts.pdb
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\obj\Debug\net10.0\Modules.Common.Grpc.Contacts.csproj.AssemblyReference.cache
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\obj\Debug\net10.0\Modules.Common.Grpc.Contacts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\obj\Debug\net10.0\Modules.Common.Grpc.Contacts.AssemblyInfoInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\obj\Debug\net10.0\Modules.Common.Grpc.Contacts.AssemblyInfo.cs
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\obj\Debug\net10.0\Modules.Common.Grpc.Contacts.csproj.CoreCompileInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\obj\Debug\net10.0\Modules.Common.Grpc.Contacts.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\obj\Debug\net10.0\refint\Modules.Common.Grpc.Contacts.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\obj\Debug\net10.0\Modules.Common.Grpc.Contacts.pdb
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Grpc.Contacts\obj\Debug\net10.0\ref\Modules.Common.Grpc.Contacts.dll

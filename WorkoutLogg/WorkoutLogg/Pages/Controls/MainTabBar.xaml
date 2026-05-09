@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="WorkoutLogg.Pages.Controls.MainTabBar"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls">
+    <Border
+        BackgroundColor="White"
+        Padding="0,0,0,0"
+        Stroke="#F3F4F6"
+        StrokeShape="RoundRectangle 0"
+        StrokeThickness="0">
+        <Border.Shadow>
+            <Shadow Brush="#000000" Offset="0,-2" Radius="12" Opacity="0.06" />
+        </Border.Shadow>
+
+        <Grid ColumnDefinitions="*,*,68,*,*" HeightRequest="72" Padding="0,8,0,12">
+
+            <!-- Dashboard -->
+            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnDashboardTapped" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Label x:Name="DashboardIcon" FontSize="22" HorizontalOptions="Center" Text="⌂" TextColor="#9CA3AF" />
+                <Label x:Name="DashboardLabel" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Dashboard" TextColor="#9CA3AF" />
+            </VerticalStackLayout>
+
+            <!-- Workouts -->
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnWorkoutsTapped" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Label x:Name="WorkoutsIcon" FontSize="22" HorizontalOptions="Center" Text="☰" TextColor="#9CA3AF" />
+                <Label x:Name="WorkoutsLabel" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Workouts" TextColor="#9CA3AF" />
+            </VerticalStackLayout>
+
+            <!-- Center FAB -->
+            <Border
+                Grid.Column="2"
+                BackgroundColor="#7C3AED"
+                HeightRequest="52"
+                HorizontalOptions="Center"
+                StrokeShape="RoundRectangle 18"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                WidthRequest="52">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnNewWorkoutTapped" />
+                </Border.GestureRecognizers>
+                <Label FontAttributes="Bold" FontSize="28" HorizontalOptions="Center" Text="+" TextColor="White" VerticalOptions="Center" />
+            </Border>
+
+            <!-- Logger (placeholder col) -->
+            <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLoggerTapped" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Label x:Name="LoggerIcon" FontSize="22" HorizontalOptions="Center" Text="📋" TextColor="#9CA3AF" />
+                <Label x:Name="LoggerLabel" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Logger" TextColor="#9CA3AF" />
+            </VerticalStackLayout>
+
+            <!-- Profile -->
+            <VerticalStackLayout Grid.Column="4" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnProfileTapped" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Label x:Name="ProfileIcon" FontSize="22" HorizontalOptions="Center" Text="○" TextColor="#9CA3AF" />
+                <Label x:Name="ProfileLabel" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Profile" TextColor="#9CA3AF" />
+            </VerticalStackLayout>
+
+        </Grid>
+    </Border>
+</ContentView>

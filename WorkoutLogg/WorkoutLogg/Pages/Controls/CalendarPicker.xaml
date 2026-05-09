@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="WorkoutLogg.Pages.Controls.CalendarPicker"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+        <VerticalStackLayout Spacing="12">
+
+            <!-- Month navigation -->
+            <Grid ColumnDefinitions="40,*,40">
+                <Button Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        Clicked="OnPrevMonth"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="‹"
+                        TextColor="#9CA3AF"
+                        Padding="0"
+                        HorizontalOptions="Center" />
+                <Label x:Name="MonthLabel"
+                       Grid.Column="1"
+                       FontAttributes="Bold"
+                       FontSize="15"
+                       HorizontalOptions="Center"
+                       TextColor="#111827"
+                       VerticalOptions="Center" />
+                <Button Grid.Column="2"
+                        BackgroundColor="Transparent"
+                        Clicked="OnNextMonth"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="›"
+                        TextColor="#9CA3AF"
+                        Padding="0"
+                        HorizontalOptions="Center" />
+            </Grid>
+
+            <!-- Day of week headers -->
+            <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="4">
+                <Label Grid.Column="0" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Mo" TextColor="#9CA3AF" />
+                <Label Grid.Column="1" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Tu" TextColor="#9CA3AF" />
+                <Label Grid.Column="2" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="We" TextColor="#9CA3AF" />
+                <Label Grid.Column="3" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Th" TextColor="#9CA3AF" />
+                <Label Grid.Column="4" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Fr" TextColor="#9CA3AF" />
+                <Label Grid.Column="5" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Sa" TextColor="#9CA3AF" />
+                <Label Grid.Column="6" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Su" TextColor="#9CA3AF" />
+            </Grid>
+
+            <!-- Days grid populated from code-behind -->
+            <Grid x:Name="DaysGrid"
+                  ColumnDefinitions="*,*,*,*,*,*,*"
+                  RowDefinitions="*,*,*,*,*,*"
+                  ColumnSpacing="4"
+                  RowSpacing="4" />
+
+        </VerticalStackLayout>
+    </Border>
+
+</ContentView>

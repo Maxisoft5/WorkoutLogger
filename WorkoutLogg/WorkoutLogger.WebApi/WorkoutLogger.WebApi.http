@@ -1,0 +1,10 @@
+@WorkoutLogger.WebApi_HostAddress = https://localhost:7280
+
+POST {{WorkoutLogger.WebApi_HostAddress}}/auth/createAccount
+Content-Type: application/json
+{
+    "Email": "admin@test.com",
+    "Password": "Test1234!"
+}
+
+###

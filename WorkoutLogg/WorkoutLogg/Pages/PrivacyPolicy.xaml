@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.PrivacyPolicy"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*">
+        <!-- Fixed header: Back button -->
+        <HorizontalStackLayout Grid.Row="0" Margin="28,52,28,20" Spacing="8">
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 10" StrokeThickness="0">
+                <Label FontSize="16" HorizontalOptions="Center" Text="←" TextColor="#374151" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBackTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Border>
+        </HorizontalStackLayout>
+
+        <!-- Scrollable content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="28,0,28,48" Spacing="0">
+
+                <!-- Title row -->
+                <HorizontalStackLayout Margin="0,0,0,4" Spacing="14" VerticalOptions="Center">
+                    <Border BackgroundColor="#7C3AED" StrokeShape="RoundRectangle 14" StrokeThickness="0" 
+                            VerticalOptions="Center">
+                        <Label FontSize="24" HorizontalOptions="Center" Text="🔐" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label FontAttributes="Bold" FontSize="26" Text="Privacy Policy" TextColor="#111827" />
+                        <Label FontSize="12" Text="Last updated: April 28, 2026" TextColor="#9CA3AF" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                <!-- Intro banner -->
+                <Border Margin="0,20,0,24" BackgroundColor="#F3F0FF" Padding="18,14" Stroke="#DDD6FE" StrokeShape="RoundRectangle 14" StrokeThickness="1">
+                    <Label FontSize="14" LineBreakMode="WordWrap" Text="Your privacy matters. This policy explains what we collect, why, and how you stay in control." TextColor="#6B21A8" />
+                </Border>
+
+                <!-- Section: Information We Collect -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="📋" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="Information We Collect" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="We collect information you provide directly: name, email, body metrics (weight, height), and workout data. We also collect usage analytics to improve the app experience." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Section: How We Use Your Data -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="⚙️" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="How We Use Your Data" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="Your data is used solely to provide and improve the Workout Logger service — personalising your dashboard, tracking progress, and delivering notifications you've enabled." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Section: Data Storage & Security -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="🔒" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="Data Storage &amp; Security" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="All data is encrypted in transit (TLS 1.3) and at rest (AES-256). Your workout history is stored on secure servers in the EU. We never sell your personal data to third parties." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Section: Health Data -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="❤️" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="Health Data" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="Body metrics and workout records are treated as sensitive health information. They are never shared with advertisers and are not used for profiling outside of the app." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Section: Your Rights -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="⚖️" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="Your Rights" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="You may request access, correction, or deletion of your data at any time via Settings → Privacy → My Data. We respond within 30 days per GDPR requirements." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Section: Third-Party Services -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="🔗" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="Third-Party Services" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="We use Apple Sign In, Google Sign In, and anonymous analytics (no personal identifiers). Each provider's privacy policy governs their data handling." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Section: Contact Us -->
+                <Border Margin="0,0,0,0" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="✉️" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="Contact Us" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="For privacy questions: privacy@workoutlogger.app&#10;Data Protection Officer: dpo@workoutlogger.app" TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

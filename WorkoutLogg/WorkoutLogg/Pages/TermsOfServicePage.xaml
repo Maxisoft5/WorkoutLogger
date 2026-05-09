@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.TermsOfServicePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Fixed header: Back button -->
+        <HorizontalStackLayout Grid.Row="0" Margin="28,52,28,20" Spacing="8">
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 10" StrokeThickness="0">
+                <Label FontSize="16" HorizontalOptions="Center" Text="←" TextColor="#374151" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBackTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Border>
+        </HorizontalStackLayout>
+
+        <!-- Scrollable content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="28,0,28,48" Spacing="0">
+
+                <!-- Title row -->
+                <HorizontalStackLayout Margin="0,0,0,4" Spacing="14" VerticalOptions="Center">
+                    <Border BackgroundColor="#7C3AED" StrokeShape="RoundRectangle 14" 
+                            StrokeThickness="0" VerticalOptions="Center">
+                        <Label FontSize="24" HorizontalOptions="Center" Text="📄" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label FontAttributes="Bold" FontSize="26" Text="Terms of Service" TextColor="#111827" />
+                        <Label FontSize="12" Text="Last updated: April 28, 2026" TextColor="#9CA3AF" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                <!-- Intro banner -->
+                <Border Margin="0,20,0,24" BackgroundColor="#F3F0FF" Padding="18,14" Stroke="#DDD6FE" StrokeShape="RoundRectangle 14" StrokeThickness="1">
+                    <Label FontSize="14" LineBreakMode="WordWrap" Text="Please read these terms carefully before using Workout Logger. They govern your use of our service." TextColor="#6B21A8" />
+                </Border>
+
+                <!-- 1. Acceptance of Terms -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="📝" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="1. Acceptance of Terms" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="By creating an account you agree to these Terms of Service. If you do not agree, please do not use Workout Logger." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 2. User Account -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="👤" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="2. User Account" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="You must be 16 years or older to use this service. You are responsible for maintaining the confidentiality of your account credentials and all activity under your account." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 3. Permitted Use -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="✅" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="3. Permitted Use" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="Workout Logger is for personal fitness tracking. You may not reverse-engineer, scrape, or use the service to build competing products. Automated access without prior written consent is prohibited." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 4. Health Disclaimer -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="⚕️" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="4. Health Disclaimer" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="Workout Logger does not provide medical advice. Always consult a qualified healthcare professional before starting a new exercise or nutrition program. Use the app at your own risk." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 5. Premium Subscription -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="⭐" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="5. Premium Subscription" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="Premium plans are billed monthly or annually. Subscriptions auto-renew unless cancelled at least 24 hours before the renewal date. Refunds follow the App Store / Google Play policies." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 6. Content Ownership -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="©️" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="6. Content Ownership" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="Your workout data belongs to you. You grant us a limited licence to process it to provide the service. We grant you a non-exclusive licence to use our app content for personal use only." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 7. Termination -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="🚫" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="7. Termination" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="We may suspend or terminate accounts that violate these terms. You may delete your account at any time via Settings → Account → Delete Account." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 8. Governing Law -->
+                <Border Margin="0,0,0,12" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="⚖️" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="8. Governing Law" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="These terms are governed by the laws of the European Union. Disputes will be resolved in the courts of Germany unless local consumer laws require otherwise." TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 9. Contact -->
+                <Border Margin="0,0,0,0" BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontSize="20" Text="✉️" VerticalOptions="Center" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="9. Contact" TextColor="#111827" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label FontSize="14" LineBreakMode="WordWrap" Text="Questions about these terms:&#10;legal@workoutlogger.app" TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Modules.Common.Grpc.Contacts": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

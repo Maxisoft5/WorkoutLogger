@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.CreateAccount"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="28,60,28,40" Spacing="0">
+
+            <!-- App Icon -->
+            <Border
+                Margin="0,0,0,24"
+                BackgroundColor="#7C3AED"
+                HorizontalOptions="Center"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                HeightRequest="100"
+                WidthRequest="100">
+                <Label FontSize="36" HorizontalOptions="Center" Text="🚀" VerticalOptions="Center" />
+            </Border>
+
+            <!-- Title -->
+            <Label
+                FontAttributes="Bold"
+                FontSize="28"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,0,0,6"
+                Text="Create account"
+                TextColor="#111827" />
+
+            <Label
+                FontSize="14"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,0,0,32"
+                Text="Start your fitness journey today"
+                TextColor="#9CA3AF" />
+
+            <!-- FULL NAME -->
+            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="FULL NAME" TextColor="#6B7280" />
+            <Border x:Name="FullNameBorder" Margin="0,0,0,16" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                <Entry x:Name="FullNameEntry" BackgroundColor="Transparent" FontSize="15" Margin="14,0" Placeholder="Alex Petrov" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Next" />
+            </Border>
+            <Label x:Name="FullNameError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+
+
+            <!-- EMAIL -->
+            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="EMAIL" TextColor="#6B7280" />
+            <Border x:Name="EmailBorder" Margin="0,0,0,16" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                <Entry x:Name="EmailEntry" BackgroundColor="Transparent" FontSize="15" Keyboard="Email" Margin="14,0" Placeholder="alex@gmail.com" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Next" />
+            </Border>
+            <Label x:Name="EmailError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+
+
+            <!-- PASSWORD -->
+            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="PASSWORD" TextColor="#6B7280" />
+            <Border x:Name="PasswordBorder" Margin="0,0,0,16" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" FontSize="15" IsPassword="True" Margin="14,0" Placeholder="••••••••" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Next" />
+            </Border>
+            <Label x:Name="PasswordError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+
+
+            <!-- CONFIRM PASSWORD -->
+            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="CONFIRM PASSWORD" TextColor="#6B7280" />
+            <Border x:Name="ConfirmPasswordBorder" Margin="0,0,0,20" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                <Entry x:Name="ConfirmPasswordEntry" BackgroundColor="Transparent" FontSize="15" IsPassword="True" Margin="14,0" Placeholder="••••••••" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Done" />
+            </Border>
+            <Label x:Name="ConfirmPasswordError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+
+            <!-- Terms Checkbox -->
+            <HorizontalStackLayout Margin="0,0,0,28" Spacing="10" VerticalOptions="Center">
+                <CheckBox x:Name="TermsCheckBox" Color="#7C3AED" VerticalOptions="Center" CheckedChanged="OnTermsCheckedChanged" />
+                <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                    <Label FontSize="13" Text="I agree to the" TextColor="#6B7280" VerticalOptions="Center" />
+                    <Label FontAttributes="Bold" FontSize="13" Text="Terms of Service" TextColor="#7C3AED" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTermsTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label FontSize="13" Text="and" TextColor="#6B7280" VerticalOptions="Center" />
+                    <Label FontAttributes="Bold" FontSize="13" Text="Privacy Policy" TextColor="#7C3AED" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPrivacyTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+            </HorizontalStackLayout>
+            <Label x:Name="TermsCheckBoxError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+
+            <!-- Create Account Button -->
+            <Border Margin="0,0,0,24" StrokeShape="RoundRectangle 14" StrokeThickness="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop x:Name="CreateAccountGradient1" Color="#cacdd9" Offset="0" />
+                        <GradientStop x:Name="CreateAccountGradient2" Color="#94969c" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Button x:Name="CreateAccountButton" BackgroundColor="Transparent" Clicked="OnCreateAccountClicked" 
+                        IsEnabled="True"
+                        FontAttributes="Bold" FontSize="16" Text="Create Account" TextColor="White" />
+            </Border>
+
+            <!-- Divider -->
+            <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="12" Margin="0,0,0,20" VerticalOptions="Center">
+                <BoxView Grid.Column="0" BackgroundColor="#D1D5DB" HeightRequest="1" VerticalOptions="Center" />
+                <Label Grid.Column="1" FontSize="13" Text="or" TextColor="#9CA3AF" VerticalOptions="Center" />
+                <BoxView Grid.Column="2" BackgroundColor="#D1D5DB" HeightRequest="1" VerticalOptions="Center" />
+            </Grid>
+
+            <!-- Social Buttons -->
+            <Grid ColumnDefinitions="*,12,*" Margin="0,0,0,28">
+                <Border Grid.Column="0" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                    <Button BackgroundColor="Transparent" Clicked="OnAppleSignInClicked" FontAttributes="Bold" FontSize="14" ImageSource="apple_icon.png" Text="  Apple" TextColor="#111827" />
+                </Border>
+                <Border Grid.Column="2" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                    <Button BackgroundColor="Transparent" Clicked="OnGoogleSignInClicked" FontAttributes="Bold" FontSize="14" ImageSource="google_icon.png" Text="  Google" TextColor="#111827" />
+                </Border>
+            </Grid>
+
+            <!-- Sign In Link -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                <Label FontSize="14" Text="Already have an account?" TextColor="#9CA3AF" VerticalOptions="Center" />
+                <Label FontAttributes="Bold" FontSize="14" Text="Sign In" TextColor="#7C3AED" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSignInTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

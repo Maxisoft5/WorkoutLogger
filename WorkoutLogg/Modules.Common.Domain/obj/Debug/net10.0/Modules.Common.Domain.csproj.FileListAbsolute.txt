@@ -1,0 +1,11 @@
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\bin\Debug\net10.0\Modules.Common.Domain.deps.json
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\bin\Debug\net10.0\Modules.Common.Domain.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\bin\Debug\net10.0\Modules.Common.Domain.pdb
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\obj\Debug\net10.0\Modules.Common.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\obj\Debug\net10.0\Modules.Common.Domain.AssemblyInfoInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\obj\Debug\net10.0\Modules.Common.Domain.AssemblyInfo.cs
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\obj\Debug\net10.0\Modules.Common.Domain.csproj.CoreCompileInputs.cache
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\obj\Debug\net10.0\Modules.Common.Domain.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\obj\Debug\net10.0\refint\Modules.Common.Domain.dll
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\obj\Debug\net10.0\Modules.Common.Domain.pdb
+C:\Users\maxis\source\repos\WorkoutLogg\Modules.Common.Domain\obj\Debug\net10.0\ref\Modules.Common.Domain.dll

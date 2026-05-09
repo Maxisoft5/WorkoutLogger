@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.OnboardingBodyStatsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="0">
+
+        <!-- Step indicator -->
+        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" Margin="0,52,0,32" Spacing="6">
+            <BoxView CornerRadius="3" HeightRequest="6" WidthRequest="10" Color="#D1D5DB" />
+            <BoxView CornerRadius="3" HeightRequest="6" WidthRequest="28" Color="#7C3AED" />
+            <BoxView CornerRadius="3" HeightRequest="6" WidthRequest="10" Color="#D1D5DB" />
+        </HorizontalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="28,0" Spacing="0">
+
+                <!-- Step label -->
+                <Label CharacterSpacing="1" FontAttributes="Bold" FontSize="11" Margin="0,0,0,10" Text="STEP 2 OF 3" TextColor="#9CA3AF" />
+                <Label FontAttributes="Bold" FontSize="28" Margin="0,0,0,8" Text="Body stats" TextColor="#111827" />
+                <Label FontSize="14" Margin="0,0,0,28" Text="Used to calculate volume and progress" TextColor="#9CA3AF" />
+
+                <!-- Weight / Height Cards -->
+                <Grid ColumnDefinitions="*,12,*" Margin="0,0,0,20">
+
+                    <!-- Weight Card -->
+                    <Border Grid.Column="0" BackgroundColor="White" Padding="16,20" Stroke="#E5E7EB" StrokeShape="RoundRectangle 16" StrokeThickness="1.5">
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="4">
+                            <Label CharacterSpacing="1" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="WEIGHT" TextColor="#9CA3AF" />
+                            <!-- Up arrow -->
+                            <Label FontSize="18" HorizontalOptions="Center" Text="▲" TextColor="#9CA3AF">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnWeightUpTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="WeightLabel" FontAttributes="Bold" FontSize="40" HorizontalOptions="Center" Text="82" TextColor="#111827" />
+                            <Label x:Name="WeightUnitLabel" FontAttributes="Bold" FontSize="13" HorizontalOptions="Center" Text="kg" TextColor="#7C3AED" />
+                            <!-- Down arrow -->
+                            <Label FontSize="18" HorizontalOptions="Center" Text="▼" TextColor="#9CA3AF">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnWeightDownTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Height Card -->
+                    <Border Grid.Column="2" BackgroundColor="White" Padding="16,20" Stroke="#E5E7EB" StrokeShape="RoundRectangle 16" StrokeThickness="1.5">
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="4">
+                            <Label CharacterSpacing="1" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="HEIGHT" TextColor="#9CA3AF" />
+                            <Label FontSize="18" HorizontalOptions="Center" Text="▲" TextColor="#9CA3AF">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnHeightUpTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="HeightLabel" FontAttributes="Bold" FontSize="40" HorizontalOptions="Center" Text="183" TextColor="#111827" />
+                            <Label x:Name="HeightUnitLabel" FontAttributes="Bold" FontSize="13" HorizontalOptions="Center" Text="cm" TextColor="#7C3AED" />
+                            <Label FontSize="18" HorizontalOptions="Center" Text="▼" TextColor="#9CA3AF">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnHeightDownTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+
+                <!-- Body Fat % -->
+                <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="CURRENT BODY FAT % (OPTIONAL)" TextColor="#6B7280" />
+                <Border Margin="0,0,0,16" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                    <Entry x:Name="BodyFatEntry" BackgroundColor="Transparent" FontSize="15" Keyboard="Numeric" Margin="14,0" Placeholder="22%" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" />
+                </Border>
+
+                <!-- Info Box -->
+                <Border Margin="0,0,0,8" BackgroundColor="#F3F0FF" Padding="16,14" Stroke="#DDD6FE" StrokeShape="RoundRectangle 12" StrokeThickness="1">
+                    <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                        <Label FontSize="18" Text="📋" VerticalOptions="Start" />
+                        <Label
+                            FontSize="13"
+                            LineBreakMode="WordWrap"
+                            Text="Your weight history will be tracked over time. You can update it anytime from your Profile."
+                            TextColor="#6B7280" />
+                    </HorizontalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Back / Continue -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,12,*" Margin="28,16,28,40">
+            <Border Grid.Column="0" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 14" StrokeThickness="1.5">
+                <Button BackgroundColor="Transparent" Clicked="OnBackClicked" FontAttributes="Bold" FontSize="15" Text="← Back" TextColor="#374151" />
+            </Border>
+            <Border Grid.Column="2" StrokeShape="RoundRectangle 14" StrokeThickness="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#7C3AED" Offset="0" />
+                        <GradientStop Color="#9333EA" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Button BackgroundColor="Transparent" Clicked="OnContinueClicked" FontAttributes="Bold" FontSize="15" Text="Continue →" TextColor="White" />
+            </Border>
+        </Grid>
+
+    </Grid>
+</ContentPage>

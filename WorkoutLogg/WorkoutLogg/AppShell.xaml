@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="WorkoutLogg.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:WorkoutLogg.Pages"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <!-- ═══════════════════════════════════════════
+         AUTH FLOW  (без TabBar)
+    ═══════════════════════════════════════════ -->
+    <ShellContent Route="Login"            Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:LoginPage}" />
+    <ShellContent Route="CreateAccount"         Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:CreateAccount}" />
+    <ShellContent Route="OnboardingProfile"    Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:OnboardingProfilePage}" />
+    <ShellContent Route="OnboardingBodyStats"  Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:OnboardingBodyStatsPage}" />
+    <ShellContent Route="OnboardingGoals"      Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:OnboardingGoalsPage}" />
+
+    <!-- ═══════════════════════════════════════════
+         MAIN APP  (с кастомным TabBar внутри каждой страницы)
+    ═══════════════════════════════════════════ -->
+    <ShellContent Route="Dashboard" Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:DashboardPage}" />
+    <ShellContent Route="Workouts"  Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:WorkoutsPage}" />
+    <ShellContent Route="Logger"    Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:LoggerPage}" />
+    <ShellContent Route="Profile"   Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:ProfilePage}" />
+
+</Shell>

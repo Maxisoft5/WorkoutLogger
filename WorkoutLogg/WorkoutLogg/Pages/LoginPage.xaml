@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#EEEEF6"
+    NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="28,60,28,40"
+            Spacing="0">
+
+            <!-- App Icon -->
+            <Border
+                Margin="0,0,0,28"
+                BackgroundColor="#7C3AED"
+                HeightRequest="100"
+                WidthRequest="100"
+                HorizontalOptions="Center"
+                StrokeShape="RoundRectangle 22"
+                StrokeThickness="0">
+                <Label
+                    FontSize="40"
+                    HorizontalOptions="Center"
+                    Text="💪"
+                    VerticalOptions="Center" />
+            </Border>
+
+            <!-- Title -->
+            <Label
+                FontAttributes="Bold"
+                FontFamily="OpenSansBold"
+                FontSize="32"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,0,0,8"
+                Text="Welcome back"
+                TextColor="#111827" />
+
+            <!-- Subtitle -->
+            <Label
+                FontFamily="OpenSans"
+                FontSize="15"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,0,0,40"
+                Text="Sign in to continue your journey"
+                TextColor="#9CA3AF" />
+
+            <!-- EMAIL Label -->
+            <Label
+                CharacterSpacing="1.5"
+                FontAttributes="Bold"
+                FontFamily="OpenSans"
+                FontSize="11"
+                Margin="4,0,0,8"
+                Text="EMAIL"
+                TextColor="#6B7280" />
+
+            <!-- Email Entry -->
+            <Border
+                x:Name="EmailBorder"
+                Margin="0,0,0,20"
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeShape="RoundRectangle 14"
+                StrokeThickness="1.5">
+                <Entry
+                    x:Name="EmailEntry"
+                    FontFamily="OpenSans"
+                    FontSize="16"
+                    Keyboard="Email"
+                    Margin="16,0"
+                    Placeholder="alex@gmail.com"
+                    PlaceholderColor="Black"
+                    ReturnType="Next"
+                    TextColor="#111827"
+                    VerticalOptions="Center" />
+            </Border>
+            <Label x:Name="EmailError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+
+            <!-- PASSWORD Label -->
+            <Label
+                CharacterSpacing="1.5"
+                FontAttributes="Bold"
+                FontFamily="OpenSans"
+                FontSize="11"
+                Margin="4,0,0,8"
+                Text="PASSWORD"
+                TextColor="#6B7280" />
+
+            <!-- Password Entry -->
+            <Border
+                x:Name="PasswordBorder"
+                Margin="0,0,0,12"
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeShape="RoundRectangle 14"
+                StrokeThickness="1.5">
+                <Entry
+                    x:Name="PasswordEntry"
+                    BackgroundColor="Transparent"
+                    FontFamily="OpenSans"
+                    FontSize="16"
+                    IsPassword="True"
+                    Margin="16,0"
+                    Placeholder="••••••••"
+                    PlaceholderColor="#D1D5DB"
+                    ReturnType="Done"
+                    TextColor="#111827"
+                    VerticalOptions="Center" />
+            </Border>
+            <Label x:Name="PasswordError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+
+            <!-- Forgot Password -->
+            <Label
+                FontAttributes="Bold"
+                FontFamily="OpenSans"
+                FontSize="14"
+                HorizontalOptions="End"
+                Margin="0,0,4,32"
+                Text="Forgot password?"
+                TextColor="#7C3AED">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnForgotPasswordTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <!-- Sign In Button -->
+            <Border
+                Margin="0,0,0,28"
+                StrokeShape="RoundRectangle 16"
+                StrokeThickness="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#7C3AED" Offset="0" />
+                        <GradientStop Color="#9333EA" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Button
+                    x:Name="SignInButton"
+                    BackgroundColor="Transparent"
+                    Clicked="OnSignInClicked"
+                    FontAttributes="Bold"
+                    FontFamily="OpenSans"
+                    FontSize="17"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    Text="Sign In"
+                    TextColor="White" />
+            </Border>
+
+            <!-- Divider: or continue with -->
+            <Grid
+                Margin="0,0,0,20"
+                ColumnDefinitions="*,Auto,*"
+                ColumnSpacing="12"
+                VerticalOptions="Center">
+                <BoxView
+                    Grid.Column="0"
+                    BackgroundColor="#D1D5DB"
+                    HeightRequest="1"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    FontFamily="OpenSans"
+                    FontSize="13"
+                    Text="or continue with"
+                    TextColor="#9CA3AF"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Column="2"
+                    BackgroundColor="#D1D5DB"
+                    HeightRequest="1"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <!-- Social Buttons Row -->
+            <Grid
+                ColumnDefinitions="*,12,*"
+                Margin="0,0,0,32">
+
+                <!-- Apple Button -->
+                <Border
+                    Grid.Column="0"
+                    BackgroundColor="White"
+                    Stroke="#E5E7EB"
+                    StrokeShape="RoundRectangle 14"
+                    StrokeThickness="1.5">
+                    <Button
+                        x:Name="AppleButton"
+                        BackgroundColor="Transparent"
+                        Clicked="OnAppleSignInClicked"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans"
+                        FontSize="15"
+                        ImageSource="apple_icon.png"
+                        Text="Apple"
+                        TextColor="#111827" />
+                </Border>
+
+                <!-- Google Button -->
+                <Border
+                    Grid.Column="2"
+                    BackgroundColor="White"
+                    Stroke="#E5E7EB"
+                    StrokeShape="RoundRectangle 14"
+                    StrokeThickness="1.5">
+                    <Button
+                        x:Name="GoogleButton"
+                        BackgroundColor="Transparent"
+                        Clicked="OnGoogleSignInClicked"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans"
+                        FontSize="15"
+                        ImageSource="google_icon.png"
+                        Text="  Google"
+                        TextColor="#111827" />
+                </Border>
+            </Grid>
+
+            <!-- Sign Up Link -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                <Label
+                    FontFamily="OpenSans"
+                    FontSize="14"
+                    Text="Don't have an account?"
+                    TextColor="#9CA3AF"
+                    VerticalOptions="Center" />
+                <Label
+                    FontAttributes="Bold"
+                    FontFamily="OpenSans"
+                    FontSize="14"
+                    Text="Sign Up"
+                    TextColor="#7C3AED"
+                    VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSignUpTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "WorkoutLogger.Grpc.Contracts";
+
+package workouts;
+
+import "google/protobuf/timestamp.proto";
+
+service WorkoutsService {
+  // Server streaming: подписка на обновления активной тренировки
+  rpc WatchWorkout (WatchWorkoutRequest) returns (stream WorkoutUpdate);
+}
+
+message WatchWorkoutRequest {
+  string workout_id = 1;
+}
+
+message WorkoutUpdate {
+  string workout_id = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  oneof update {
+    SetCompleted set_completed = 3;
+    WorkoutFinished workout_finished = 4;
+  }
+}
+
+message SetCompleted {
+  string exercise_id = 1;
+  int32 reps = 2;
+  double weight_kg = 3;
+}
+
+message WorkoutFinished {
+  int32 total_sets = 1;
+  int32 duration_seconds = 2;
+}
