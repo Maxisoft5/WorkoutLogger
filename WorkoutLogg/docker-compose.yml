@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: workoutLogger
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 051099
+      POSTGRES_PASSWORD: 
     ports:
       - "5432:5432"
     volumes:
