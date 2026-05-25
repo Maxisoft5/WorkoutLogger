@@ -39,17 +39,27 @@ public partial class App : Application
                 step = user.Content?.UserRegistrationStep;
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    Page targetPage = step switch
+                    if (step == UserRegistrationStep.Finished)
                     {
-                        UserRegistrationStep.Email => new LoginPage(),
-                        UserRegistrationStep.Profile => new OnboardingProfilePage(),
-                        UserRegistrationStep.Body => new OnboardingBodyStatsPage(),
-                        UserRegistrationStep.Goals => new OnboardingGoalsPage(),
-                        UserRegistrationStep.Finished => new DashboardPage(),
-                        _ => CreateAppShellWithDashboard()
-                    };
+                        Application.Current!.Windows[0].Page = new AppShell();
+                        Application.Current!.Windows[0].Page.Loaded += async (_, _) =>
+                        {
+                            await Shell.Current.GoToAsync("//Dashboard");
+                        };
+                    }
+                    else
+                    {
+                        Page targetPage = step switch
+                        {
+                            UserRegistrationStep.Email => new LoginPage(),
+                            UserRegistrationStep.Profile => new OnboardingProfilePage(),
+                            UserRegistrationStep.Body => new OnboardingBodyStatsPage(),
+                            UserRegistrationStep.Goals => new OnboardingGoalsPage(),
+                            _ => CreateAppShellWithDashboard()
+                        };
 
-                    window.Page = targetPage;
+                        window.Page = targetPage;
+                    }
                 });
             } 
             else 

@@ -5,6 +5,7 @@ using Modules.Users.Infrastructure.Api;
 using Modules.Users.Infrastructure.Authorization;
 using Refit;
 using Syncfusion.Maui.Toolkit.Hosting;
+using WorkoutLogg.Database;
 using AuthService = Modules.Users.Infrastructure.Authorization.AuthService;
 
 namespace WorkoutLogg;
@@ -63,6 +64,14 @@ public static class MauiProgram
         builder.Services.AddTransient<IAuthService, AuthService>();
 		builder.Services.AddTransient<AuthHeaderHandler>();
 
+		builder.Services.AddSingleton<WorkoutDatabase>();
+        builder.Services.AddSingleton<WorkoutLogg.PageModels.WorkoutsPageModel>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.WorkoutsPage>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.AddWorkoutPage>();
+        builder.Services.AddSingleton<WorkoutLogg.PageModels.LoggerPageModel>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.LoggerPage>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.AddLogPage>();
+
         const string baseUrl = "https://localhost:5001";
         builder.Services.AddRefitClient<IAuthApi>()
               .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
@@ -70,6 +79,11 @@ public static class MauiProgram
 
         builder.Services.AddRefitClient<IAuthRefreshApi>()
 				.ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl));
+
+        builder.Services.AddRefitClient<WorkoutLogg.Services.IWorkoutsApi>()
+            .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl));
+
+        builder.Services.AddSingleton<WorkoutLogg.Services.WorkoutSyncService>();
 
         builder.Services.AddSingleton(_ =>
         {

@@ -1,0 +1,139 @@
+[
+  {
+    "ContainingType": "WorkoutLogger.WebApi.Controllers.AuthController",
+    "Method": "CreateAccount",
+    "RelativePath": "Auth/CreateAccount",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "Modules.Users.DTO.Auth.UserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorkoutLogger.WebApi.Controllers.AuthController",
+    "Method": "GetCurrentUser",
+    "RelativePath": "Auth/CurrentUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorkoutLogger.WebApi.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "Auth/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "Modules.Users.DTO.Auth.UserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorkoutLogger.WebApi.Controllers.AuthController",
+    "Method": "Refresh",
+    "RelativePath": "Auth/Refresh",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "Modules.Users.Domain.Authentication.RefreshTokenRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorkoutLogger.WebApi.Controllers.AuthController",
+    "Method": "UpdateAccount",
+    "RelativePath": "Auth/UpdateAccount",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "Modules.Users.DTO.Auth.UserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorkoutLogger.WebApi.Controllers.WorkoutsController",
+    "Method": "CreateWorkout",
+    "RelativePath": "Workouts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Moduels.Workouts.DTO.Requests.CreateWorkoutRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorkoutLogger.WebApi.Controllers.WorkoutsController",
+    "Method": "GetWorkouts",
+    "RelativePath": "Workouts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorkoutLogger.WebApi.Controllers.WorkoutsController",
+    "Method": "UpdateWorkout",
+    "RelativePath": "Workouts/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "Moduels.Workouts.DTO.Requests.UpdateWorkoutRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorkoutLogger.WebApi.Controllers.WorkoutsController",
+    "Method": "DeleteWorkout",
+    "RelativePath": "Workouts/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

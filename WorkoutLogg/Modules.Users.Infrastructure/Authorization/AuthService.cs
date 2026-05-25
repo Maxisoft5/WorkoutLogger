@@ -309,9 +309,14 @@ namespace Modules.Users.Infrastructure.Authorization
         {
             if (httpContextAccessor?.HttpContext?.User == null)
             {
-                return new Result<User>(new Error("403", "403", ErrorType.Forbidden));
+                return new Result<User>(new Error("401", "401", ErrorType.Unauthorized));
             }
             var userId = httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "userid");
+
+            if (userId == null)
+            {
+                return new Result<User>(new Error("401", "401", ErrorType.Unauthorized));
+            }
 
             var user = await cacheService.GetOrCreateAsync(
                 $"user:{userId}",
@@ -321,7 +326,7 @@ namespace Modules.Users.Infrastructure.Authorization
                 TimeSpan.FromMinutes(5));
 
 
-            if(user == null) return new Result<User>(new Error("403", "403", ErrorType.Forbidden));
+            if(user == null) return new Result<User>(new Error("401", "401", ErrorType.Unauthorized));
             return new Result<User>(user);
         }
 

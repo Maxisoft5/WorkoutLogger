@@ -55,6 +55,7 @@ namespace WorkoutLogger.WebApi.Extensions
             services.AddJwtAuthentication(configuration);
             services.AddClaimsAuthorization();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddMemoryCache();
             services.AddHttpContextAccessor();
             return services;

@@ -51,18 +51,6 @@ namespace Modules.Users.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<int>("NumberRepetition")
-                        .HasColumnType("integer")
-                        .HasColumnName("repetition_number");
-
-                    b.Property<int>("NumberSets")
-                        .HasColumnType("integer")
-                        .HasColumnName("sets_number");
-
-                    b.Property<int>("RestSeconds")
-                        .HasColumnType("integer")
-                        .HasColumnName("rest_seconds");
-
                     b.Property<DateTime?>("UpdatedAtUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
@@ -77,6 +65,60 @@ namespace Modules.Users.Infrastructure.Migrations
                     b.HasIndex("WorkoutId");
 
                     b.ToTable("users_exercises", "users");
+                });
+
+            modelBuilder.Entity("Modules.Users.Domain.Exercies.ExerciseSet", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now() at time zone 'utc'");
+
+                    b.Property<Guid>("ExerciseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsWarmup")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_warmup");
+
+                    b.Property<int>("Reps")
+                        .HasColumnType("integer")
+                        .HasColumnName("reps");
+
+                    b.Property<int>("RestSeconds")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(60)
+                        .HasColumnName("rest_seconds");
+
+                    b.Property<int>("SetNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("set_number");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("now() at time zone 'utc'");
+
+                    b.Property<double>("WeightKg")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("double precision")
+                        .HasDefaultValue(0.0)
+                        .HasColumnName("weight_kg");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.ToTable("exercise_sets", "users");
                 });
 
             modelBuilder.Entity("Modules.Users.Domain.Logs.WorkoutLog", b =>
@@ -494,6 +536,17 @@ namespace Modules.Users.Infrastructure.Migrations
                     b.Navigation("Workout");
                 });
 
+            modelBuilder.Entity("Modules.Users.Domain.Exercies.ExerciseSet", b =>
+                {
+                    b.HasOne("Modules.Users.Domain.Exercies.Exercise", "Exercise")
+                        .WithMany("Sets")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+                });
+
             modelBuilder.Entity("Modules.Users.Domain.Logs.WorkoutLog", b =>
                 {
                     b.HasOne("Modules.Users.Domain.Exercies.Exercise", "Exercise")
@@ -604,6 +657,8 @@ namespace Modules.Users.Infrastructure.Migrations
             modelBuilder.Entity("Modules.Users.Domain.Exercies.Exercise", b =>
                 {
                     b.Navigation("Logs");
+
+                    b.Navigation("Sets");
                 });
 
             modelBuilder.Entity("Modules.Users.Domain.Users.Role", b =>

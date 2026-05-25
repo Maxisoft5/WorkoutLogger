@@ -9,6 +9,7 @@ namespace Modules.Users.Domain.Mappers
         {
             return new UserDto()
             {
+                Id = user.Id,
                 Email = user.Email,
                 FullName = user.UserName,
                 BodyStats = new UserBodyStatsDto()

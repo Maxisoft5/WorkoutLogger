@@ -10,8 +10,11 @@ namespace Modules.Users.Infrastructure.Database
         RoleClaim, UserToken>
     {
         public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
-
         public DbSet<UserGoal> UserGoals { get; set; } = null!;
+        public DbSet<Modules.Users.Domain.Workout.WorkoutModel> Workouts { get; set; } = null!;
+        public DbSet<Modules.Users.Domain.Exercies.Exercise> Exercises { get; set; } = null!;
+        public DbSet<Modules.Users.Domain.Exercies.ExerciseSet> ExerciseSets { get; set; } = null!;
+        public DbSet<Modules.Users.Domain.Logs.WorkoutLog> WorkoutLogs { get; set; } = null!;
 
         public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options)
         {

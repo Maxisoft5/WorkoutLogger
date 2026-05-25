@@ -14,7 +14,7 @@
             <Shadow Brush="#000000" Offset="0,-2" Radius="12" Opacity="0.06" />
         </Border.Shadow>
 
-        <Grid ColumnDefinitions="*,*,68,*,*" HeightRequest="72" Padding="0,8,0,12">
+        <Grid ColumnDefinitions="*,*,*,*" HeightRequest="72" Padding="0,8,0,12">
 
             <!-- Dashboard -->
             <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
@@ -34,24 +34,8 @@
                 <Label x:Name="WorkoutsLabel" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Workouts" TextColor="#9CA3AF" />
             </VerticalStackLayout>
 
-            <!-- Center FAB -->
-            <Border
-                Grid.Column="2"
-                BackgroundColor="#7C3AED"
-                HeightRequest="52"
-                HorizontalOptions="Center"
-                StrokeShape="RoundRectangle 18"
-                StrokeThickness="0"
-                VerticalOptions="Center"
-                WidthRequest="52">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnNewWorkoutTapped" />
-                </Border.GestureRecognizers>
-                <Label FontAttributes="Bold" FontSize="28" HorizontalOptions="Center" Text="+" TextColor="White" VerticalOptions="Center" />
-            </Border>
-
             <!-- Logger (placeholder col) -->
-            <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
+            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
                 <VerticalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLoggerTapped" />
                 </VerticalStackLayout.GestureRecognizers>
@@ -60,11 +44,11 @@
             </VerticalStackLayout>
 
             <!-- Profile -->
-            <VerticalStackLayout Grid.Column="4" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
+            <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
                 <VerticalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnProfileTapped" />
                 </VerticalStackLayout.GestureRecognizers>
-                <Label x:Name="ProfileIcon" FontSize="22" HorizontalOptions="Center" Text="○" TextColor="#9CA3AF" />
+                <Label x:Name="ProfileIcon" FontSize="22" HorizontalOptions="Center" Text="🪪" TextColor="#9CA3AF" />
                 <Label x:Name="ProfileLabel" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Profile" TextColor="#9CA3AF" />
             </VerticalStackLayout>
 

@@ -1,4 +1,5 @@
 ﻿using Modules.Users.Domain.Constants;
+using Modules.Users.DTO.Auth;
 
 namespace WorkoutLogg.Services
 {
@@ -39,5 +40,6 @@ namespace WorkoutLogg.Services
         {
             SecureStorage.Remove(UsersContants.RefreshToken);
         }
+
     }
 }

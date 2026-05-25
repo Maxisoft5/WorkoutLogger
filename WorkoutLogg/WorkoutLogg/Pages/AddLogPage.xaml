@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.AddLogPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <Border Grid.Row="0"
+                BackgroundColor="White"
+                Padding="20,52,20,16"
+                StrokeThickness="0">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Label Grid.Column="0"
+                       FontSize="24"
+                       Text="‹"
+                       TextColor="#7C3AED"
+                       VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBackTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label x:Name="PageTitle"
+                       Grid.Column="1"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       HorizontalOptions="Center"
+                       Text="Log Workout"
+                       TextColor="#111827"
+                       VerticalOptions="Center" />
+                <Label Grid.Column="2"
+                       FontAttributes="Bold"
+                       FontSize="15"
+                       Text="Save"
+                       TextColor="#7C3AED"
+                       VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSaveClicked" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Border>
+
+        <!-- Scrollable content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,16" Spacing="16">
+
+                <!-- Workout plan selector -->
+                <Border x:Name="WorkoutSelectorBorder"
+                        BackgroundColor="White"
+                        Padding="16,14"
+                        Stroke="#E5E7EB"
+                        StrokeShape="RoundRectangle 14"
+                        StrokeThickness="1">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Grid.Column="0" Spacing="3">
+                            <Label FontAttributes="Bold"
+                                   FontSize="10"
+                                   Text="WORKOUT PLAN"
+                                   TextColor="#9CA3AF"
+                                   CharacterSpacing="1" />
+                            <Label x:Name="WorkoutSelectorLabel"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   Text="— Custom (no plan)"
+                                   TextColor="#111827" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1"
+                               FontSize="18"
+                               Text="›"
+                               TextColor="#9CA3AF"
+                               VerticalOptions="Center" />
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnWorkoutSelectorTapped" />
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <!-- Exercises container (populated in code-behind) -->
+                <VerticalStackLayout x:Name="ExercisesList" Spacing="12" />
+
+                <!-- Add exercise button -->
+                <Border BackgroundColor="White"
+                        Padding="14,14"
+                        Stroke="#E5E7EB"
+                        StrokeShape="RoundRectangle 14"
+                        StrokeThickness="1.5">
+                    <Label FontAttributes="Bold"
+                           FontSize="14"
+                           HorizontalOptions="Center"
+                           Text="+ Add Exercise"
+                           TextColor="#7C3AED">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAddExerciseTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

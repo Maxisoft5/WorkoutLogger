@@ -8,5 +8,6 @@ namespace Modules.Users.Domain.Constants
     {
         public static string CurrentToken = "CurrentToken";
         public static string RefreshToken = "RefreshToken";
+        public static string CurrentUser = "CurrentUser";
     }
 }

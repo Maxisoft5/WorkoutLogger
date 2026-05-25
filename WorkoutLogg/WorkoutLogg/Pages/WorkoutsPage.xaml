@@ -4,6 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
+    xmlns:pagemodels="clr-namespace:WorkoutLogg.PageModels"
+    xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
     BackgroundColor="#EEEEF6"
     Shell.NavBarIsVisible="False">
 
@@ -13,8 +15,28 @@
             <VerticalStackLayout Padding="20,52,20,12" Spacing="16">
 
                 <!-- Header -->
-                <Label FontAttributes="Bold" FontSize="28" Text="Workouts" TextColor="#111827" />
-                <Label FontSize="14" Margin="0,-12,0,0" Text="124 sessions logged" TextColor="#9CA3AF" />
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                        <Label FontAttributes="Bold" FontSize="28" Text="Workouts" TextColor="#111827" />
+                        <Label x:Name="SessionCountLabel" FontSize="14" Text="0 sessions logged" TextColor="#9CA3AF" />
+                    </VerticalStackLayout>
+                    <Border Grid.Column="1"
+                            BackgroundColor="#7C3AED"
+                            Padding="14,10"
+                            StrokeShape="RoundRectangle 14"
+                            StrokeThickness="0"
+                            VerticalOptions="Center">
+                        <Label FontAttributes="Bold"
+                               FontSize="22"
+                               Text="+"
+                               TextColor="White"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAddWorkoutTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Border>
+                </Grid>
 
                 <!-- Filter chips -->
                 <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
@@ -52,96 +74,87 @@
 
                 <!-- Calendar -->
                 <controls:CalendarPicker
-                        x:Name="Calendar"
-                        SelectedDate="{Binding SelectedDate}"
-                        AccentColor="#7C3AED"
-                        DateSelected="OnDateSelected" />
+                    x:Name="Calendar"
+                    AccentColor="#7C3AED"
+                    DateSelected="OnDateSelected" />
 
                 <!-- Workout list -->
-                <!-- Upper Body Push -->
-                <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
-                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
-                        <Border Grid.Column="0" BackgroundColor="#7C3AED" StrokeShape="RoundRectangle 14" StrokeThickness="0" VerticalOptions="Center">
-                            <Label FontSize="22" HorizontalOptions="Center" Text="🏋️" VerticalOptions="Center" />
-                        </Border>
-                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                            <Label FontAttributes="Bold" FontSize="15" Text="Upper Body Push" TextColor="#111827" />
-                            <Label FontSize="12" Text="Yesterday · 52 min · 8 exercises" TextColor="#9CA3AF" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
-                            <Label FontAttributes="Bold" FontSize="13" HorizontalOptions="End" Text="1 280 kg" TextColor="#7C3AED" />
-                            <Label FontSize="11" HorizontalOptions="End" Text="Strength" TextColor="#9CA3AF" />
-                        </VerticalStackLayout>
-                    </Grid>
-                </Border>
+                <CollectionView x:Name="WorkoutsList" ItemsSource="{Binding Workouts}" SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:WorkoutDisplayItem">
+                            <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                                <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                                    <!-- Icon -->
+                                    <Border Grid.Column="0"
+                                            BackgroundColor="{Binding IconBackground}"
+                                            HeightRequest="68"
+                                            WidthRequest="68"
+                                            StrokeShape="RoundRectangle 14"
+                                            StrokeThickness="0"
+                                            VerticalOptions="Center">
+                                        <Label FontSize="22"
+                                               HorizontalOptions="Center"
+                                               Text="{Binding Emoji}"
+                                               VerticalOptions="Center" />
+                                    </Border>
+                                    <!-- Name + subtitle -->
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                        <Label FontAttributes="Bold" FontSize="15" Text="{Binding TypeLabel}" TextColor="#111827" />
+                                        <Label FontSize="12" Text="{Binding SubLabel}" TextColor="#9CA3AF" />
+                                    </VerticalStackLayout>
+                                    <!-- Weight + type -->
+                                    <VerticalStackLayout Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
+                                        <Label FontAttributes="Bold"
+                                               FontSize="13"
+                                               HorizontalOptions="End"
+                                               Text="{Binding WeightLabel}"
+                                               TextColor="{Binding WeightColor}" />
+                                        <Label FontSize="11"
+                                               HorizontalOptions="End"
+                                               Text="{Binding TypeLabel}"
+                                               TextColor="#9CA3AF" />
+                                    </VerticalStackLayout>
+                                    <!-- Options ⋮ -->
+                                    <Label Grid.Column="3"
+                                           FontAttributes="Bold"
+                                           FontSize="20"
+                                           HorizontalOptions="End"
+                                           Text="⋮"
+                                           TextColor="#9CA3AF"
+                                           VerticalOptions="Center"
+                                           Padding="4,0">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Tapped="OnWorkoutOptionsTapped"
+                                                CommandParameter="{Binding Id}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-                <!-- Morning Run -->
-                <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
-                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
-                        <Border Grid.Column="0" BackgroundColor="#EDE9FE" StrokeShape="RoundRectangle 14" StrokeThickness="0" VerticalOptions="Center">
-                            <Label FontSize="22" HorizontalOptions="Center" Text="🏃" VerticalOptions="Center" />
-                        </Border>
-                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                            <Label FontAttributes="Bold" FontSize="15" Text="Morning Run" TextColor="#111827" />
-                            <Label FontSize="12" Text="Mon, 21 Apr · 35 min · 1 exercises" TextColor="#9CA3AF" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
-                            <Label FontAttributes="Bold" FontSize="13" HorizontalOptions="End" Text="6.2 km" TextColor="#7C3AED" />
-                            <Label FontSize="11" HorizontalOptions="End" Text="Cardio" TextColor="#9CA3AF" />
-                        </VerticalStackLayout>
-                    </Grid>
-                </Border>
-
-                <!-- Leg Day -->
-                <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
-                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
-                        <Border Grid.Column="0" BackgroundColor="#7C3AED" StrokeShape="RoundRectangle 14" StrokeThickness="0" VerticalOptions="Center">
-                            <Label FontSize="22" HorizontalOptions="Center" Text="🦵" VerticalOptions="Center" />
-                        </Border>
-                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                            <Label FontAttributes="Bold" FontSize="15" Text="Leg Day" TextColor="#111827" />
-                            <Label FontSize="12" Text="Sun, 20 Apr · 65 min · 7 exercises" TextColor="#9CA3AF" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
-                            <Label FontAttributes="Bold" FontSize="13" HorizontalOptions="End" Text="2 440 kg" TextColor="#7C3AED" />
-                            <Label FontSize="11" HorizontalOptions="End" Text="Strength" TextColor="#9CA3AF" />
-                        </VerticalStackLayout>
-                    </Grid>
-                </Border>
-
-                <!-- Yoga Flow -->
-                <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
-                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
-                        <Border Grid.Column="0" BackgroundColor="#FDE8FF" StrokeShape="RoundRectangle 14" StrokeThickness="0" VerticalOptions="Center">
-                            <Label FontSize="22" HorizontalOptions="Center" Text="🧘" VerticalOptions="Center" />
-                        </Border>
-                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                            <Label FontAttributes="Bold" FontSize="15" Text="Yoga Flow" TextColor="#111827" />
-                            <Label FontSize="12" Text="Sat, 19 Apr · 40 min · 12 exercises" TextColor="#9CA3AF" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
-                            <Label FontAttributes="Bold" FontSize="13" HorizontalOptions="End" Text="—" TextColor="#9CA3AF" />
-                            <Label FontSize="11" HorizontalOptions="End" Text="Stretch" TextColor="#9CA3AF" />
-                        </VerticalStackLayout>
-                    </Grid>
-                </Border>
-
-                <!-- Back & Biceps -->
-                <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
-                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
-                        <Border Grid.Column="0" BackgroundColor="#7C3AED" StrokeShape="RoundRectangle 14" StrokeThickness="0" VerticalOptions="Center">
-                            <Label FontSize="22" HorizontalOptions="Center" Text="💪" VerticalOptions="Center" />
-                        </Border>
-                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                            <Label FontAttributes="Bold" FontSize="15" Text="Back &amp; Biceps" TextColor="#111827" />
-                            <Label FontSize="12" Text="Fri, 18 Apr · 48 min · 6 exercises" TextColor="#9CA3AF" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
-                            <Label FontAttributes="Bold" FontSize="13" HorizontalOptions="End" Text="1 060 kg" TextColor="#7C3AED" />
-                            <Label FontSize="11" HorizontalOptions="End" Text="Strength" TextColor="#9CA3AF" />
-                        </VerticalStackLayout>
-                    </Grid>
-                </Border>
+                <!-- Empty state (shown when no workouts match the current filter) -->
+                <VerticalStackLayout
+                    IsVisible="{Binding IsEmpty}"
+                    Padding="0,32"
+                    Spacing="10"
+                    HorizontalOptions="Center">
+                    <Label FontSize="40" HorizontalOptions="Center" Text="🏋️" />
+                    <Label FontAttributes="Bold"
+                           FontSize="16"
+                           HorizontalOptions="Center"
+                           Text="No workouts yet"
+                           TextColor="#111827" />
+                    <Label FontSize="14"
+                           HorizontalOptions="Center"
+                           Text="Tap + to add your first workout"
+                           TextColor="#9CA3AF" />
+                </VerticalStackLayout>
 
             </VerticalStackLayout>
         </ScrollView>

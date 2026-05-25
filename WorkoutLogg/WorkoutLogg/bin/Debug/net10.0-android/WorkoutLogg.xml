@@ -1,0 +1,1102 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WorkoutLogg</name>
+    </assembly>
+    <members>
+        <member name="T:WorkoutLogg.Data.CategoryRepository">
+            <summary>
+            Repository class for managing categories in the database.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Data.CategoryRepository.#ctor(Microsoft.Extensions.Logging.ILogger{WorkoutLogg.Data.CategoryRepository})">
+            <summary>
+            Initializes a new instance of the <see cref="T:WorkoutLogg.Data.CategoryRepository"/> class.
+            </summary>
+            <param name="logger">The logger instance.</param>
+        </member>
+        <member name="M:WorkoutLogg.Data.CategoryRepository.Init">
+            <summary>
+            Initializes the database connection and creates the Category table if it does not exist.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Data.CategoryRepository.ListAsync">
+            <summary>
+            Retrieves a list of all categories from the database.
+            </summary>
+            <returns>A list of <see cref="T:WorkoutLogg.Models.Category"/> objects.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.CategoryRepository.GetAsync(System.Int32)">
+            <summary>
+            Retrieves a specific category by its ID.
+            </summary>
+            <param name="id">The ID of the category.</param>
+            <returns>A <see cref="T:WorkoutLogg.Models.Category"/> object if found; otherwise, null.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.CategoryRepository.SaveItemAsync(WorkoutLogg.Models.Category)">
+            <summary>
+            Saves a category to the database. If the category ID is 0, a new category is created; otherwise, the existing category is updated.
+            </summary>
+            <param name="item">The category to save.</param>
+            <returns>The ID of the saved category.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.CategoryRepository.DeleteItemAsync(WorkoutLogg.Models.Category)">
+            <summary>
+            Deletes a category from the database.
+            </summary>
+            <param name="item">The category to delete.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.CategoryRepository.DropTableAsync">
+            <summary>
+            Drops the Category table from the database.
+            </summary>
+        </member>
+        <member name="T:WorkoutLogg.Data.ProjectRepository">
+            <summary>
+            Repository class for managing projects in the database.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Data.ProjectRepository.#ctor(WorkoutLogg.Data.TaskRepository,WorkoutLogg.Data.TagRepository,Microsoft.Extensions.Logging.ILogger{WorkoutLogg.Data.ProjectRepository})">
+            <summary>
+            Initializes a new instance of the <see cref="T:WorkoutLogg.Data.ProjectRepository"/> class.
+            </summary>
+            <param name="taskRepository">The task repository instance.</param>
+            <param name="tagRepository">The tag repository instance.</param>
+            <param name="logger">The logger instance.</param>
+        </member>
+        <member name="M:WorkoutLogg.Data.ProjectRepository.Init">
+            <summary>
+            Initializes the database connection and creates the Project table if it does not exist.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Data.ProjectRepository.ListAsync">
+            <summary>
+            Retrieves a list of all projects from the database.
+            </summary>
+            <returns>A list of <see cref="T:WorkoutLogg.Models.Project"/> objects.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.ProjectRepository.GetAsync(System.Int32)">
+            <summary>
+            Retrieves a specific project by its ID.
+            </summary>
+            <param name="id">The ID of the project.</param>
+            <returns>A <see cref="T:WorkoutLogg.Models.Project"/> object if found; otherwise, null.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.ProjectRepository.SaveItemAsync(WorkoutLogg.Models.Project)">
+            <summary>
+            Saves a project to the database. If the project ID is 0, a new project is created; otherwise, the existing project is updated.
+            </summary>
+            <param name="item">The project to save.</param>
+            <returns>The ID of the saved project.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.ProjectRepository.DeleteItemAsync(WorkoutLogg.Models.Project)">
+            <summary>
+            Deletes a project from the database.
+            </summary>
+            <param name="item">The project to delete.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.ProjectRepository.DropTableAsync">
+            <summary>
+            Drops the Project table from the database.
+            </summary>
+        </member>
+        <member name="T:WorkoutLogg.Data.TagRepository">
+            <summary>
+            Repository class for managing tags in the database.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.#ctor(Microsoft.Extensions.Logging.ILogger{WorkoutLogg.Data.TagRepository})">
+            <summary>
+            Initializes a new instance of the <see cref="T:WorkoutLogg.Data.TagRepository"/> class.
+            </summary>
+            <param name="logger">The logger instance.</param>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.Init">
+            <summary>
+            Initializes the database connection and creates the Tag and ProjectsTags tables if they do not exist.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.ListAsync">
+            <summary>
+            Retrieves a list of all tags from the database.
+            </summary>
+            <returns>A list of <see cref="T:WorkoutLogg.Models.Tag"/> objects.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.ListAsync(System.Int32)">
+            <summary>
+            Retrieves a list of tags associated with a specific project.
+            </summary>
+            <param name="projectID">The ID of the project.</param>
+            <returns>A list of <see cref="T:WorkoutLogg.Models.Tag"/> objects.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.GetAsync(System.Int32)">
+            <summary>
+            Retrieves a specific tag by its ID.
+            </summary>
+            <param name="id">The ID of the tag.</param>
+            <returns>A <see cref="T:WorkoutLogg.Models.Tag"/> object if found; otherwise, null.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.SaveItemAsync(WorkoutLogg.Models.Tag)">
+            <summary>
+            Saves a tag to the database. If the tag ID is 0, a new tag is created; otherwise, the existing tag is updated.
+            </summary>
+            <param name="item">The tag to save.</param>
+            <returns>The ID of the saved tag.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.SaveItemAsync(WorkoutLogg.Models.Tag,System.Int32)">
+            <summary>
+            Saves a tag to the database and associates it with a specific project.
+            </summary>
+            <param name="item">The tag to save.</param>
+            <param name="projectID">The ID of the project.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.IsAssociated(WorkoutLogg.Models.Tag,System.Int32)">
+            <summary>
+            Checks if a tag is already associated with a specific project.
+            </summary>
+            <param name="item">The tag to save.</param>
+            <param name="projectID">The ID of the project.</param>
+            <returns>If tag is already associated with this project</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.DeleteItemAsync(WorkoutLogg.Models.Tag)">
+            <summary>
+            Deletes a tag from the database.
+            </summary>
+            <param name="item">The tag to delete.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.DeleteItemAsync(WorkoutLogg.Models.Tag,System.Int32)">
+            <summary>
+            Deletes a tag from a specific project in the database.
+            </summary>
+            <param name="item">The tag to delete.</param>
+            <param name="projectID">The ID of the project.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TagRepository.DropTableAsync">
+            <summary>
+            Drops the Tag and ProjectsTags tables from the database.
+            </summary>
+        </member>
+        <member name="T:WorkoutLogg.Data.TaskRepository">
+            <summary>
+            Repository class for managing tasks in the database.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Data.TaskRepository.#ctor(Microsoft.Extensions.Logging.ILogger{WorkoutLogg.Data.TaskRepository})">
+            <summary>
+            Initializes a new instance of the <see cref="T:WorkoutLogg.Data.TaskRepository"/> class.
+            </summary>
+            <param name="logger">The logger instance.</param>
+        </member>
+        <member name="M:WorkoutLogg.Data.TaskRepository.Init">
+            <summary>
+            Initializes the database connection and creates the Task table if it does not exist.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Data.TaskRepository.ListAsync">
+            <summary>
+            Retrieves a list of all tasks from the database.
+            </summary>
+            <returns>A list of <see cref="T:WorkoutLogg.Models.ProjectTask"/> objects.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TaskRepository.ListAsync(System.Int32)">
+            <summary>
+            Retrieves a list of tasks associated with a specific project.
+            </summary>
+            <param name="projectId">The ID of the project.</param>
+            <returns>A list of <see cref="T:WorkoutLogg.Models.ProjectTask"/> objects.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TaskRepository.GetAsync(System.Int32)">
+            <summary>
+            Retrieves a specific task by its ID.
+            </summary>
+            <param name="id">The ID of the task.</param>
+            <returns>A <see cref="T:WorkoutLogg.Models.ProjectTask"/> object if found; otherwise, null.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TaskRepository.SaveItemAsync(WorkoutLogg.Models.ProjectTask)">
+            <summary>
+            Saves a task to the database. If the task ID is 0, a new task is created; otherwise, the existing task is updated.
+            </summary>
+            <param name="item">The task to save.</param>
+            <returns>The ID of the saved task.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TaskRepository.DeleteItemAsync(WorkoutLogg.Models.ProjectTask)">
+            <summary>
+            Deletes a task from the database.
+            </summary>
+            <param name="item">The task to delete.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:WorkoutLogg.Data.TaskRepository.DropTableAsync">
+            <summary>
+            Drops the Task table from the database.
+            </summary>
+        </member>
+        <member name="T:WorkoutLogg.PageModels.LoggerPageModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.LoggerPageModel.SelectedDate">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.LoggerPageModel.selectedDate"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.LoggerPageModel.DateLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.LoggerPageModel.dateLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.LoggerPageModel.Sessions">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.LoggerPageModel.sessions"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.LoggerPageModel.IsEmpty">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.LoggerPageModel.isEmpty"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.LoggerPageModel.MarkedDates">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.LoggerPageModel.markedDates"/>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.LoggerPageModel.loadCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.LoggerPageModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.LoggerPageModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.LoggerPageModel.LoadAsync"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.LoggerPageModel.deleteSessionCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.LoggerPageModel.DeleteSessionCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.LoggerPageModel.DeleteSessionCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.LoggerPageModel.DeleteSessionAsync(System.Guid)"/>.</summary>
+        </member>
+        <member name="T:WorkoutLogg.PageModels.MainPageModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.TodoCategoryData">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.MainPageModel._todoCategoryData"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.TodoCategoryColors">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.MainPageModel._todoCategoryColors"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.Tasks">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.MainPageModel._tasks"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.Projects">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.MainPageModel._projects"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.IsBusy">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.MainPageModel._isBusy"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.IsRefreshing">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.MainPageModel._isRefreshing"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.Today">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.MainPageModel._today"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.SelectedProject">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.MainPageModel.selectedProject"/>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.MainPageModel.refreshCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.MainPageModel.RefreshCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.RefreshCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.MainPageModel.Refresh"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.MainPageModel.navigatedToCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.MainPageModel.NavigatedToCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.NavigatedToCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.MainPageModel.NavigatedTo"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.MainPageModel.navigatedFromCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.MainPageModel.NavigatedFromCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.NavigatedFromCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.MainPageModel.NavigatedFrom"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.MainPageModel.appearingCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.MainPageModel.AppearingCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.AppearingCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.MainPageModel.Appearing"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.MainPageModel.taskCompletedCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.MainPageModel.TaskCompletedCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.TaskCompletedCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.MainPageModel.TaskCompleted(WorkoutLogg.Models.ProjectTask)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.MainPageModel.addTaskCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.MainPageModel.AddTaskCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.AddTaskCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.MainPageModel.AddTask"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.MainPageModel.navigateToProjectCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.MainPageModel.NavigateToProjectCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.NavigateToProjectCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.MainPageModel.NavigateToProject(WorkoutLogg.Models.Project)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.MainPageModel.navigateToTaskCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.MainPageModel.NavigateToTaskCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.NavigateToTaskCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.MainPageModel.NavigateToTask(WorkoutLogg.Models.ProjectTask)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.MainPageModel.cleanTasksCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.MainPageModel.CleanTasksCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.MainPageModel.CleanTasksCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.MainPageModel.CleanTasks"/>.</summary>
+        </member>
+        <member name="T:WorkoutLogg.PageModels.ManageMetaPageModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.Categories">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ManageMetaPageModel._categories"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.Tags">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ManageMetaPageModel._tags"/>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ManageMetaPageModel.appearingCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ManageMetaPageModel.AppearingCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.AppearingCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ManageMetaPageModel.Appearing"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ManageMetaPageModel.saveCategoriesCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ManageMetaPageModel.SaveCategoriesCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.SaveCategoriesCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ManageMetaPageModel.SaveCategories"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ManageMetaPageModel.deleteCategoryCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ManageMetaPageModel.DeleteCategoryCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.DeleteCategoryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ManageMetaPageModel.DeleteCategory(WorkoutLogg.Models.Category)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ManageMetaPageModel.addCategoryCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ManageMetaPageModel.AddCategoryCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.AddCategoryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ManageMetaPageModel.AddCategory"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ManageMetaPageModel.saveTagsCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ManageMetaPageModel.SaveTagsCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.SaveTagsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ManageMetaPageModel.SaveTags"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ManageMetaPageModel.deleteTagCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ManageMetaPageModel.DeleteTagCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.DeleteTagCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ManageMetaPageModel.DeleteTag(WorkoutLogg.Models.Tag)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ManageMetaPageModel.addTagCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ManageMetaPageModel.AddTagCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.AddTagCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ManageMetaPageModel.AddTag"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ManageMetaPageModel.resetCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ManageMetaPageModel.ResetCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.ResetCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ManageMetaPageModel.Reset"/>.</summary>
+        </member>
+        <member name="T:WorkoutLogg.PageModels.ProjectDetailPageModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.Name">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectDetailPageModel._name"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.Description">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectDetailPageModel._description"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.Tasks">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectDetailPageModel._tasks"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.Categories">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectDetailPageModel._categories"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.Category">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectDetailPageModel._category"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.CategoryIndex">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectDetailPageModel._categoryIndex"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.AllTags">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectDetailPageModel._allTags"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.Icon">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectDetailPageModel._icon"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.IsBusy">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectDetailPageModel._isBusy"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.Icons">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectDetailPageModel._icons"/>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectDetailPageModel.taskCompletedCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectDetailPageModel.TaskCompletedCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.TaskCompletedCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectDetailPageModel.TaskCompleted(WorkoutLogg.Models.ProjectTask)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectDetailPageModel.saveCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectDetailPageModel.SaveCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.SaveCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectDetailPageModel.Save"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectDetailPageModel.addTaskCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectDetailPageModel.AddTaskCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.AddTaskCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectDetailPageModel.AddTask"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectDetailPageModel.deleteCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectDetailPageModel.DeleteCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.DeleteCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectDetailPageModel.Delete"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectDetailPageModel.navigateToTaskCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectDetailPageModel.NavigateToTaskCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.NavigateToTaskCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectDetailPageModel.NavigateToTask(WorkoutLogg.Models.ProjectTask)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectDetailPageModel.toggleTagCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectDetailPageModel.ToggleTagCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.ToggleTagCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectDetailPageModel.ToggleTag(WorkoutLogg.Models.Tag)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectDetailPageModel.iconSelectedCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectDetailPageModel.IconSelectedCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.IconSelectedCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectDetailPageModel.IconSelected(WorkoutLogg.Models.IconData)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectDetailPageModel.cleanTasksCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectDetailPageModel.CleanTasksCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.CleanTasksCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectDetailPageModel.CleanTasks"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectDetailPageModel.selectionChangedCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectDetailPageModel.SelectionChangedCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectDetailPageModel.SelectionChangedCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectDetailPageModel.SelectionChanged(System.Object)"/>.</summary>
+        </member>
+        <member name="T:WorkoutLogg.PageModels.ProjectListPageModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectListPageModel.Projects">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectListPageModel._projects"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectListPageModel.SelectedProject">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProjectListPageModel.selectedProject"/>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectListPageModel.appearingCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectListPageModel.AppearingCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectListPageModel.AppearingCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectListPageModel.Appearing"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectListPageModel.navigateToProjectCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectListPageModel.NavigateToProjectCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectListPageModel.NavigateToProjectCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectListPageModel.NavigateToProject(WorkoutLogg.Models.Project)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProjectListPageModel.addProjectCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProjectListPageModel.AddProjectCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProjectListPageModel.AddProjectCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProjectListPageModel.AddProject"/>.</summary>
+        </member>
+        <member name="T:WorkoutLogg.PageModels.TaskDetailPageModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.TaskDetailPageModel.Title">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.TaskDetailPageModel._title"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.TaskDetailPageModel.IsCompleted">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.TaskDetailPageModel._isCompleted"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.TaskDetailPageModel.Projects">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.TaskDetailPageModel._projects"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.TaskDetailPageModel.Project">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.TaskDetailPageModel._project"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.TaskDetailPageModel.SelectedProjectIndex">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.TaskDetailPageModel._selectedProjectIndex"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.TaskDetailPageModel.IsExistingProject">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.TaskDetailPageModel._isExistingProject"/>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.TaskDetailPageModel.saveCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.TaskDetailPageModel.SaveCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.TaskDetailPageModel.SaveCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.TaskDetailPageModel.Save"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.TaskDetailPageModel.deleteCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.TaskDetailPageModel.DeleteCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.TaskDetailPageModel.DeleteCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.TaskDetailPageModel.Delete"/>.</summary>
+        </member>
+        <member name="T:WorkoutLogg.PageModels.WorkoutsPageModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.WorkoutsPageModel.Workouts">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.WorkoutsPageModel.workouts"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.WorkoutsPageModel.SelectedDate">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.WorkoutsPageModel.selectedDate"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.WorkoutsPageModel.ActiveFilter">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.WorkoutsPageModel.activeFilter"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.WorkoutsPageModel.SessionCount">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.WorkoutsPageModel.sessionCount"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.WorkoutsPageModel.MarkedDates">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.WorkoutsPageModel.markedDates"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.WorkoutsPageModel.IsEmpty">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.WorkoutsPageModel.isEmpty"/>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.WorkoutsPageModel.loadCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.WorkoutsPageModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.WorkoutsPageModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.WorkoutsPageModel.LoadAsync"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.WorkoutsPageModel.setFilterCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.WorkoutsPageModel.SetFilterCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.WorkoutsPageModel.SetFilterCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.WorkoutsPageModel.SetFilter(Moduels.Workouts.DTO.Enums.WorkoutType)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.WorkoutsPageModel.selectDateCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.WorkoutsPageModel.SelectDateCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.WorkoutsPageModel.SelectDateCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.WorkoutsPageModel.SelectDate(System.DateTime)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.WorkoutsPageModel.deleteWorkoutCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.WorkoutsPageModel.DeleteWorkoutCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.WorkoutsPageModel.DeleteWorkoutCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.WorkoutsPageModel.DeleteWorkoutAsync(System.Guid)"/>.</summary>
+        </member>
+        <member name="F:WorkoutLogg.Pages.Controls.CalendarPicker.MarkedDatesProperty">
+            <summary>Даты с точкой-индикатором тренировки</summary>
+        </member>
+        <member name="T:WorkoutLogg.Services.IErrorHandler">
+            <summary>
+            Error Handler Service.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Services.IErrorHandler.HandleError(System.Exception)">
+            <summary>
+            Handle error in UI.
+            </summary>
+            <param name="ex">Exception being thrown.</param>
+        </member>
+        <member name="T:WorkoutLogg.Services.ModalErrorHandler">
+            <summary>
+            Modal Error Handler.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Services.ModalErrorHandler.HandleError(System.Exception)">
+            <summary>
+            Handle error in UI.
+            </summary>
+            <param name="ex">Exception.</param>
+        </member>
+        <member name="T:WorkoutLogg.Utilities.ProjectExtensions">
+            <summary>
+            Project Model Extensions
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Utilities.ProjectExtensions.IsNullOrNew(WorkoutLogg.Models.Project)">
+            <summary>
+            Check if the project is null or new.
+            </summary>
+            <param name="project"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WorkoutLogg.Utilities.TaskUtilities">
+            <summary>
+            Task Utilities.
+            </summary>
+        </member>
+        <member name="M:WorkoutLogg.Utilities.TaskUtilities.FireAndForgetSafeAsync(System.Threading.Tasks.Task,WorkoutLogg.Services.IErrorHandler)">
+            <summary>
+            Fire and Forget Safe Async.
+            </summary>
+            <param name="task">Task to Fire and Forget.</param>
+            <param name="handler">Error Handler.</param>
+        </member>
+        <member name="T:WorkoutLogg.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="P:JsonContext.Boolean">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.ListProject">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.ListProjectTask">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.ListTag">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.Category">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.Project">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.ProjectsJson">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.ProjectTask">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.Tag">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.Int32">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.String">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:JsonContext.Default">
+            <summary>
+            The default <see cref="T:System.Text.Json.Serialization.JsonSerializerContext"/> associated with a default <see cref="T:System.Text.Json.JsonSerializerOptions"/> instance.
+            </summary>
+        </member>
+        <member name="P:JsonContext.GeneratedSerializerOptions">
+            <summary>
+            The source-generated options associated with this context.
+            </summary>
+        </member>
+        <member name="M:JsonContext.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:JsonContext.#ctor(System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc/>
+        </member>
+        <member name="M:JsonContext.GetTypeInfo(System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Button.TextColorTo(Microsoft.Maui.Controls.Button,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_DatePicker.TextColorTo(Microsoft.Maui.Controls.DatePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Editor.TextColorTo(Microsoft.Maui.Controls.Editor,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Entry.TextColorTo(Microsoft.Maui.Controls.Entry,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_InputView.TextColorTo(Microsoft.Maui.Controls.InputView,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Label.TextColorTo(Microsoft.Maui.Controls.Label,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Picker.TextColorTo(Microsoft.Maui.Controls.Picker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_RadioButton.TextColorTo(Microsoft.Maui.Controls.RadioButton,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_SearchBar.TextColorTo(Microsoft.Maui.Controls.SearchBar,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_TimePicker.TextColorTo(Microsoft.Maui.Controls.TimePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DateLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DateLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Sessions">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Sessions" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsEmpty">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsEmpty" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MarkedDates">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MarkedDates" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TodoCategoryData">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TodoCategoryData" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TodoCategoryColors">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TodoCategoryColors" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Tasks">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Tasks" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Projects">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Projects" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Today">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Today" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedProject">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedProject" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Categories">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Categories" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Tags">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Tags" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Name">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Name" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Category">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Category" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CategoryIndex">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CategoryIndex" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AllTags">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AllTags" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Icon">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Icon" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Icons">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Icons" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsCompleted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsCompleted" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Project">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Project" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedProjectIndex">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedProjectIndex" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsExistingProject">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsExistingProject" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Workouts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Workouts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ActiveFilter">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ActiveFilter" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SessionCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SessionCount" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DateLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DateLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Sessions">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Sessions" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsEmpty">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsEmpty" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MarkedDates">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MarkedDates" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TodoCategoryData">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TodoCategoryData" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TodoCategoryColors">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TodoCategoryColors" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Tasks">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Tasks" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Projects">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Projects" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Today">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Today" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedProject">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedProject" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Categories">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Categories" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Tags">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Tags" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Name">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Name" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Category">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Category" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CategoryIndex">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CategoryIndex" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AllTags">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AllTags" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Icon">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Icon" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Icons">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Icons" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsCompleted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsCompleted" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Project">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Project" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedProjectIndex">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedProjectIndex" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsExistingProject">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsExistingProject" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Workouts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Workouts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ActiveFilter">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ActiveFilter" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SessionCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SessionCount" generated properties.</summary>
+        </member>
+        <member name="T:Refit.Implementation.Generated">
+            <inheritdoc />
+        </member>
+        <member name="T:Refit.Implementation.Generated.WorkoutLoggServicesIWorkoutsApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Refit.Implementation.Generated.WorkoutLoggServicesIWorkoutsApi.Client">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.WorkoutLoggServicesIWorkoutsApi.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.WorkoutLoggServicesIWorkoutsApi.CreateWorkoutAsync(System.String,Moduels.Workouts.DTO.Requests.CreateWorkoutRequest,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.WorkoutLoggServicesIWorkoutsApi.UpdateWorkoutAsync(System.String,System.Guid,Moduels.Workouts.DTO.Requests.UpdateWorkoutRequest,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.WorkoutLoggServicesIWorkoutsApi.DeleteWorkoutAsync(System.String,System.Guid,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.WorkoutLoggServicesIWorkoutsApi.GetWorkoutsAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

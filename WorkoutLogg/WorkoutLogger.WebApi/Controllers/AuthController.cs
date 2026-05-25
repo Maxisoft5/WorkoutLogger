@@ -4,8 +4,6 @@ using Modules.Common.Domain.Events;
 using Modules.Common.Infrastructure.Messaging;
 using Modules.Users.Domain.Authentication;
 using Modules.Users.Domain.Mappers;
-using Modules.Users.Domain.Tokens;
-using Modules.Users.Domain.Users;
 using Modules.Users.DTO.Auth;
 
 namespace WorkoutLogger.WebApi.Controllers;
@@ -13,6 +11,7 @@ namespace WorkoutLogger.WebApi.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class AuthController(IAuthService authService,
+    IUserService userService,
     IHttpContextAccessor httpContextAccessor,
     IEventPublisher eventPublisher,
     KafkaSettings kafkaSettings) : ControllerBase
@@ -34,26 +33,28 @@ public class AuthController(IAuthService authService,
     public async Task<IActionResult> Login([FromBody] UserDto user)
     {
         var login = await authService.LoginAsync(user.Email, user.Password);
-         
+
         var ctx = httpContextAccessor.HttpContext;
         if (login.IsSuccess)
         {
-            var current = await authService.GetCurrent();
-            await eventPublisher.PublishAsync(kafkaSettings.Topics.AuthEvents, new AuthEvent
+            var logined = await userService.GetUserByEmail(user.Email);
+            if (logined.IsSuccess)
             {
-                EventType = "user.login",
-                UserId = current.Value?.Id ?? "",
-                Email = user.Email ?? "unknown",
-                IpAddress = ctx?.Connection.RemoteIpAddress?.ToString(),
-                UserAgent = ctx?.Request.Headers.UserAgent.ToString()
-            });
-        } 
+                await eventPublisher.PublishAsync(kafkaSettings.Topics.AuthEvents, new AuthEvent
+                {
+                    EventType = "user.login",
+                    Email = user.Email ?? "unknown",
+                    UserId = logined.Value?.Id ?? "",
+                    IpAddress = ctx?.Connection.RemoteIpAddress?.ToString(),
+                    UserAgent = ctx?.Request.Headers.UserAgent.ToString()
+                });
+            }
+        }
         else
         {
             await eventPublisher.PublishAsync(kafkaSettings.Topics.AuthEvents, new AuthEvent
             {
                 EventType = "user.login_failed",
-                UserId = "unknown",
                 Email = user.Email ?? "unknown",
                 IpAddress = ctx?.Connection.RemoteIpAddress?.ToString(),
                 UserAgent = ctx?.Request.Headers.UserAgent.ToString()

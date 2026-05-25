@@ -4,204 +4,146 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
+    xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
     BackgroundColor="#EEEEF6"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="*,Auto">
 
-        <!-- Весь контент в одном ScrollView → один VerticalStackLayout -->
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout Padding="20,52,20,20" Spacing="16">
+            <VerticalStackLayout Padding="20,52,20,12" Spacing="16">
 
                 <!-- Header -->
                 <Grid ColumnDefinitions="*,Auto">
                     <VerticalStackLayout Grid.Column="0" Spacing="2">
                         <Label FontAttributes="Bold" FontSize="28" Text="Logger" TextColor="#111827" />
-                        <Label FontSize="13" Text="Today · 22 Apr 2026" TextColor="#9CA3AF" />
+                        <Label x:Name="DateLabel" FontSize="14" Text="Today" TextColor="#9CA3AF" />
                     </VerticalStackLayout>
                     <Border Grid.Column="1"
                             BackgroundColor="#7C3AED"
                             Padding="14,10"
-                            StrokeShape="RoundRectangle 12"
+                            StrokeShape="RoundRectangle 14"
                             StrokeThickness="0"
                             VerticalOptions="Center">
-                        <Label FontAttributes="Bold" FontSize="14" Text="+ New" TextColor="White" />
+                        <Label FontAttributes="Bold"
+                               FontSize="22"
+                               Text="+"
+                               TextColor="White"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAddLogTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </Border>
                 </Grid>
 
-                <!-- Calendar -->
+                <!-- Calendar for day selection -->
                 <controls:CalendarPicker
                     x:Name="Calendar"
                     AccentColor="#7C3AED"
                     DateSelected="OnDateSelected" />
 
-                <!-- Category chips -->
-                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                    <HorizontalStackLayout Spacing="8">
-                        <Border BackgroundColor="#7C3AED" Padding="16,8" StrokeShape="RoundRectangle 20" StrokeThickness="0">
-                            <Label FontAttributes="Bold" FontSize="13" Text="Strength" TextColor="White" />
-                        </Border>
-                        <Border BackgroundColor="White" Padding="16,8" Stroke="#E5E7EB" StrokeShape="RoundRectangle 20" StrokeThickness="1.5">
-                            <Label FontAttributes="Bold" FontSize="13" Text="Cardio" TextColor="#6B7280" />
-                        </Border>
-                        <Border BackgroundColor="White" Padding="16,8" Stroke="#E5E7EB" StrokeShape="RoundRectangle 20" StrokeThickness="1.5">
-                            <Label FontAttributes="Bold" FontSize="13" Text="HIIT" TextColor="#6B7280" />
-                        </Border>
-                        <Border BackgroundColor="White" Padding="16,8" Stroke="#E5E7EB" StrokeShape="RoundRectangle 20" StrokeThickness="1.5">
-                            <Label FontAttributes="Bold" FontSize="13" Text="Stretch" TextColor="#6B7280" />
-                        </Border>
-                    </HorizontalStackLayout>
-                </ScrollView>
+                <!-- Sessions list -->
+                <CollectionView x:Name="SessionsList"
+                                ItemsSource="{Binding Sessions}"
+                                SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:LogSessionDisplayItem">
+                            <Border BackgroundColor="White"
+                                    Padding="16,14"
+                                    Stroke="#F3F4F6"
+                                    StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="1">
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
 
-                <!-- Exercise: Bench Press -->
-                <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
-                    <VerticalStackLayout Spacing="10">
-                        <Grid ColumnDefinitions="*,Auto">
-                            <Label Grid.Column="0" FontAttributes="Bold" FontSize="16" Text="Bench Press" TextColor="#111827" />
-                            <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="+ Set" TextColor="#7C3AED">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnAddSetTapped" CommandParameter="BenchPress" />
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </Grid>
-                        <Grid ColumnDefinitions="40,*,*,30" ColumnSpacing="8">
-                            <Label Grid.Column="0" CharacterSpacing="1" FontAttributes="Bold" FontSize="10" Text="SET" TextColor="#9CA3AF" />
-                            <Label Grid.Column="1" CharacterSpacing="1" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="KG" TextColor="#9CA3AF" />
-                            <Label Grid.Column="2" CharacterSpacing="1" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="REPS" TextColor="#9CA3AF" />
-                        </Grid>
-                        <Grid ColumnDefinitions="40,*,*,30" ColumnSpacing="8">
-                            <Border Grid.Column="0" BackgroundColor="#7C3AED" HeightRequest="28" StrokeShape="RoundRectangle 8" StrokeThickness="0" WidthRequest="28" HorizontalOptions="Center">
-                                <Label FontAttributes="Bold" FontSize="13" HorizontalOptions="Center" Text="1" TextColor="White" VerticalOptions="Center" />
-                            </Border>
-                            <Border Grid.Column="1" BackgroundColor="#F9FAFB" HeightRequest="40" Stroke="#E5E7EB" StrokeShape="RoundRectangle 10" StrokeThickness="1">
-                                <Entry BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="80" TextColor="#111827" VerticalOptions="Center" />
-                            </Border>
-                            <Border Grid.Column="2" BackgroundColor="#F9FAFB" HeightRequest="40" Stroke="#E5E7EB" StrokeShape="RoundRectangle 10" StrokeThickness="1">
-                                <Entry BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="10" TextColor="#111827" VerticalOptions="Center" />
-                            </Border>
-                            <Label Grid.Column="3" FontSize="18" HorizontalOptions="Center" Text="×" TextColor="#D1D5DB" VerticalOptions="Center" />
-                        </Grid>
-                        <Grid ColumnDefinitions="40,*,*,30" ColumnSpacing="8">
-                            <Border Grid.Column="0" BackgroundColor="#7C3AED" HeightRequest="28" StrokeShape="RoundRectangle 8" StrokeThickness="0" WidthRequest="28" HorizontalOptions="Center">
-                                <Label FontAttributes="Bold" FontSize="13" HorizontalOptions="Center" Text="2" TextColor="White" VerticalOptions="Center" />
-                            </Border>
-                            <Border Grid.Column="1" BackgroundColor="#F9FAFB" HeightRequest="40" Stroke="#E5E7EB" StrokeShape="RoundRectangle 10" StrokeThickness="1">
-                                <Entry BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="85" TextColor="#111827" VerticalOptions="Center" />
-                            </Border>
-                            <Border Grid.Column="2" BackgroundColor="#F9FAFB" HeightRequest="40" Stroke="#E5E7EB" StrokeShape="RoundRectangle 10" StrokeThickness="1">
-                                <Entry BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="8" TextColor="#111827" VerticalOptions="Center" />
-                            </Border>
-                            <Label Grid.Column="3" FontSize="18" HorizontalOptions="Center" Text="×" TextColor="#D1D5DB" VerticalOptions="Center" />
-                        </Grid>
-                        <Grid ColumnDefinitions="40,*,*,30" ColumnSpacing="8">
-                            <Border Grid.Column="0" BackgroundColor="#7C3AED" HeightRequest="28" StrokeShape="RoundRectangle 8" StrokeThickness="0" WidthRequest="28" HorizontalOptions="Center">
-                                <Label FontAttributes="Bold" FontSize="13" HorizontalOptions="Center" Text="3" TextColor="White" VerticalOptions="Center" />
-                            </Border>
-                            <Border Grid.Column="1" BackgroundColor="#F9FAFB" HeightRequest="40" Stroke="#E5E7EB" StrokeShape="RoundRectangle 10" StrokeThickness="1">
-                                <Entry BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="85" TextColor="#111827" VerticalOptions="Center" />
-                            </Border>
-                            <Border Grid.Column="2" BackgroundColor="#F9FAFB" HeightRequest="40" Stroke="#E5E7EB" StrokeShape="RoundRectangle 10" StrokeThickness="1">
-                                <Entry BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="7" TextColor="#111827" VerticalOptions="Center" />
-                            </Border>
-                            <Label Grid.Column="3" FontSize="18" HorizontalOptions="Center" Text="×" TextColor="#D1D5DB" VerticalOptions="Center" />
-                        </Grid>
-                    </VerticalStackLayout>
-                </Border>
+                                    <!-- Icon -->
+                                    <Border Grid.Column="0"
+                                            BackgroundColor="{Binding BadgeColor}"
+                                            HeightRequest="68"
+                                            WidthRequest="68"
+                                            StrokeShape="RoundRectangle 14"
+                                            StrokeThickness="0"
+                                            VerticalOptions="Center">
+                                        <Label FontSize="22"
+                                               HorizontalOptions="Center"
+                                               Text="{Binding Emoji}"
+                                               VerticalOptions="Center" />
+                                    </Border>
 
-                <!-- Exercise: Incline DB Press -->
-                <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
-                    <VerticalStackLayout Spacing="10">
-                        <Grid ColumnDefinitions="*,Auto">
-                            <Label Grid.Column="0" FontAttributes="Bold" FontSize="16" Text="Incline DB Press" TextColor="#111827" />
-                            <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="+ Set" TextColor="#7C3AED">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnAddSetTapped" CommandParameter="InclineDB" />
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </Grid>
-                        <Grid ColumnDefinitions="40,*,*,30" ColumnSpacing="8">
-                            <Label Grid.Column="0" CharacterSpacing="1" FontAttributes="Bold" FontSize="10" Text="SET" TextColor="#9CA3AF" />
-                            <Label Grid.Column="1" CharacterSpacing="1" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="KG" TextColor="#9CA3AF" />
-                            <Label Grid.Column="2" CharacterSpacing="1" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="REPS" TextColor="#9CA3AF" />
-                        </Grid>
-                        <Grid ColumnDefinitions="40,*,*,30" ColumnSpacing="8">
-                            <Border Grid.Column="0" BackgroundColor="#7C3AED" HeightRequest="28" StrokeShape="RoundRectangle 8" StrokeThickness="0" WidthRequest="28" HorizontalOptions="Center">
-                                <Label FontAttributes="Bold" FontSize="13" HorizontalOptions="Center" Text="1" TextColor="White" VerticalOptions="Center" />
-                            </Border>
-                            <Border Grid.Column="1" BackgroundColor="#F9FAFB" HeightRequest="40" Stroke="#E5E7EB" StrokeShape="RoundRectangle 10" StrokeThickness="1">
-                                <Entry BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="30" TextColor="#111827" VerticalOptions="Center" />
-                            </Border>
-                            <Border Grid.Column="2" BackgroundColor="#F9FAFB" HeightRequest="40" Stroke="#E5E7EB" StrokeShape="RoundRectangle 10" StrokeThickness="1">
-                                <Entry BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="12" TextColor="#111827" VerticalOptions="Center" />
-                            </Border>
-                            <Label Grid.Column="3" FontSize="18" HorizontalOptions="Center" Text="×" TextColor="#D1D5DB" VerticalOptions="Center" />
-                        </Grid>
-                        <Grid ColumnDefinitions="40,*,*,30" ColumnSpacing="8">
-                            <Border Grid.Column="0" BackgroundColor="#7C3AED" HeightRequest="28" StrokeShape="RoundRectangle 8" StrokeThickness="0" WidthRequest="28" HorizontalOptions="Center">
-                                <Label FontAttributes="Bold" FontSize="13" HorizontalOptions="Center" Text="2" TextColor="White" VerticalOptions="Center" />
-                            </Border>
-                            <Border Grid.Column="1" BackgroundColor="#F9FAFB" HeightRequest="40" Stroke="#E5E7EB" StrokeShape="RoundRectangle 10" StrokeThickness="1">
-                                <Entry BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="32" TextColor="#111827" VerticalOptions="Center" />
-                            </Border>
-                            <Border Grid.Column="2" BackgroundColor="#F9FAFB" HeightRequest="40" Stroke="#E5E7EB" StrokeShape="RoundRectangle 10" StrokeThickness="1">
-                                <Entry BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="10" TextColor="#111827" VerticalOptions="Center" />
-                            </Border>
-                            <Label Grid.Column="3" FontSize="18" HorizontalOptions="Center" Text="×" TextColor="#D1D5DB" VerticalOptions="Center" />
-                        </Grid>
-                    </VerticalStackLayout>
-                </Border>
+                                    <!-- Title + sub -->
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                        <Label FontAttributes="Bold"
+                                               FontSize="15"
+                                               Text="{Binding Title}"
+                                               TextColor="#111827" />
+                                        <Label FontSize="12"
+                                               Text="{Binding SubLabel}"
+                                               TextColor="#9CA3AF" />
+                                        <Border BackgroundColor="{Binding BadgeColor}"
+                                                Padding="6,3"
+                                                StrokeShape="RoundRectangle 6"
+                                                StrokeThickness="0"
+                                                HorizontalOptions="Start">
+                                            <Label FontAttributes="Bold"
+                                                   FontSize="10"
+                                                   Text="{Binding BadgeText}"
+                                                   TextColor="{Binding BadgeTextColor}" />
+                                        </Border>
+                                    </VerticalStackLayout>
 
-                <!-- Add Exercise -->
-                <Border BackgroundColor="Transparent"
-                        Padding="0,2"
-                        Stroke="#C4B5FD"
-                        StrokeShape="RoundRectangle 16"
-                        StrokeThickness="1.5"
-                        StrokeDashArray="6,3">
-                    <Button BackgroundColor="Transparent"
-                            Clicked="OnAddExerciseClicked"
-                            FontAttributes="Bold"
-                            FontSize="15"
-                            HeightRequest="52"
-                            Text="+ Add Exercise"
-                            TextColor="#7C3AED" />
-                </Border>
+                                    <!-- Weight + options -->
+                                    <VerticalStackLayout Grid.Column="2"
+                                                         HorizontalOptions="End"
+                                                         VerticalOptions="Center"
+                                                         Spacing="6">
+                                        <Label FontAttributes="Bold"
+                                               FontSize="13"
+                                               HorizontalOptions="End"
+                                               Text="{Binding WeightLabel}"
+                                               TextColor="#7C3AED" />
+                                        <Label FontAttributes="Bold"
+                                               FontSize="20"
+                                               HorizontalOptions="End"
+                                               Text="⋮"
+                                               TextColor="#9CA3AF"
+                                               Padding="4,0">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Tapped="OnSessionOptionsTapped"
+                                                    CommandParameter="{Binding Id}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </VerticalStackLayout>
 
-                <!-- Rest Timer -->
-                <Border BackgroundColor="#1F1335"
-                        Padding="18,14"
-                        StrokeShape="RoundRectangle 16"
-                        StrokeThickness="0">
-                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                        <HorizontalStackLayout Grid.Column="0" Spacing="8" VerticalOptions="Center">
-                            <Label FontSize="18" Text="⏱" TextColor="White" VerticalOptions="Center" />
-                            <Label FontAttributes="Bold" FontSize="14" Text="Rest Timer" TextColor="White" VerticalOptions="Center" />
-                        </HorizontalStackLayout>
-                        <Label x:Name="TimerLabel"
-                               Grid.Column="1"
-                               FontAttributes="Bold"
-                               FontSize="22"
-                               HorizontalOptions="Center"
-                               Text="01:30"
-                               TextColor="White"
-                               VerticalOptions="Center" />
-                        <Button x:Name="TimerButton"
-                                Grid.Column="2"
-                                BackgroundColor="Transparent"
-                                Clicked="OnTimerToggled"
-                                FontAttributes="Bold"
-                                FontSize="14"
-                                Padding="0"
-                                Text="▶ Start"
-                                TextColor="White"
-                                VerticalOptions="Center" />
-                    </Grid>
-                </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Empty state -->
+                <VerticalStackLayout IsVisible="{Binding IsEmpty}"
+                                     Padding="0,32"
+                                     Spacing="10"
+                                     HorizontalOptions="Center">
+                    <Label FontSize="40" HorizontalOptions="Center" Text="📓" />
+                    <Label FontAttributes="Bold"
+                           FontSize="16"
+                           HorizontalOptions="Center"
+                           Text="No workouts logged"
+                           TextColor="#111827" />
+                    <Label FontSize="14"
+                           HorizontalOptions="Center"
+                           Text="Tap + to log your workout"
+                           TextColor="#9CA3AF" />
+                </VerticalStackLayout>
 
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- TabBar всегда внизу, не скроллируется -->
         <controls:MainTabBar Grid.Row="1" ActiveTab="Logger" />
 
     </Grid>
