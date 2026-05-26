@@ -19,7 +19,7 @@ namespace WorkoutLogg.PageModels
         private ObservableCollection<WorkoutDisplayItem> workouts = [];
 
         [ObservableProperty]
-        private DateTime? selectedDate;
+        private DateTime? selectedDate = DateTime.Today;
 
         [ObservableProperty]
         private WorkoutType activeFilter = WorkoutType.All;

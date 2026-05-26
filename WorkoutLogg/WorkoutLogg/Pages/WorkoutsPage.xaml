@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     xmlns:pagemodels="clr-namespace:WorkoutLogg.PageModels"
     xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
     BackgroundColor="#EEEEF6"
@@ -17,7 +18,7 @@
                 <!-- Header -->
                 <Grid ColumnDefinitions="*,Auto">
                     <VerticalStackLayout Grid.Column="0" Spacing="2">
-                        <Label FontAttributes="Bold" FontSize="28" Text="Workouts" TextColor="#111827" />
+                        <Label FontAttributes="Bold" FontSize="28" Text="{loc:Translate Workouts_Title}" TextColor="#111827" />
                         <Label x:Name="SessionCountLabel" FontSize="14" Text="0 sessions logged" TextColor="#9CA3AF" />
                     </VerticalStackLayout>
                     <Border Grid.Column="1"
@@ -42,28 +43,28 @@
                 <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
                     <HorizontalStackLayout Spacing="8">
                         <Border x:Name="FilterAll" BackgroundColor="#7C3AED" Padding="16,8" StrokeShape="RoundRectangle 20" StrokeThickness="0">
-                            <Label FontAttributes="Bold" FontSize="13" Text="All" TextColor="White">
+                            <Label FontAttributes="Bold" FontSize="13" Text="{loc:Translate Workouts_Filter_All}" TextColor="White">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnFilterTapped" CommandParameter="All" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
                         <Border x:Name="FilterStrength" BackgroundColor="White" Padding="16,8" Stroke="#E5E7EB" StrokeShape="RoundRectangle 20" StrokeThickness="1.5">
-                            <Label FontAttributes="Bold" FontSize="13" Text="Strength" TextColor="#6B7280">
+                            <Label FontAttributes="Bold" FontSize="13" Text="{loc:Translate Workouts_Filter_Strength}" TextColor="#6B7280">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnFilterTapped" CommandParameter="Strength" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
                         <Border x:Name="FilterCardio" BackgroundColor="White" Padding="16,8" Stroke="#E5E7EB" StrokeShape="RoundRectangle 20" StrokeThickness="1.5">
-                            <Label FontAttributes="Bold" FontSize="13" Text="Cardio" TextColor="#6B7280">
+                            <Label FontAttributes="Bold" FontSize="13" Text="{loc:Translate Workouts_Filter_Cardio}" TextColor="#6B7280">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnFilterTapped" CommandParameter="Cardio" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
                         <Border x:Name="FilterStretch" BackgroundColor="White" Padding="16,8" Stroke="#E5E7EB" StrokeShape="RoundRectangle 20" StrokeThickness="1.5">
-                            <Label FontAttributes="Bold" FontSize="13" Text="Stretch" TextColor="#6B7280">
+                            <Label FontAttributes="Bold" FontSize="13" Text="{loc:Translate Workouts_Filter_Stretch}" TextColor="#6B7280">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnFilterTapped" CommandParameter="Stretch" />
                                 </Label.GestureRecognizers>
@@ -148,11 +149,11 @@
                     <Label FontAttributes="Bold"
                            FontSize="16"
                            HorizontalOptions="Center"
-                           Text="No workouts yet"
+                           Text="{loc:Translate Workouts_Empty}"
                            TextColor="#111827" />
                     <Label FontSize="14"
                            HorizontalOptions="Center"
-                           Text="Tap + to add your first workout"
+                           Text="{loc:Translate Workouts_EmptySubtitle}"
                            TextColor="#9CA3AF" />
                 </VerticalStackLayout>
 

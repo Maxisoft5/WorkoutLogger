@@ -402,3 +402,5 @@ C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-ios\iossim
 C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-ios\iossimulator-x64\Modules.Common.Grpc.Contacts.pdb
 C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-ios\iossimulator-x64\Confluent.Kafka.dll
 C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-ios\iossimulator-x64\SQLite-net.dll
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-ios\iossimulator-x64\AKSoftware.Localization.MultiLanguages.dll
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-ios\iossimulator-x64\YamlDotNet.dll

@@ -3,6 +3,7 @@
     x:Class="WorkoutLogg.Pages.OnboardingGoalsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     BackgroundColor="#EEEEF6"
     Shell.NavBarIsVisible="False">
 
@@ -19,21 +20,21 @@
             <VerticalStackLayout Padding="28,0" Spacing="0">
 
                 <!-- Step label -->
-                <Label CharacterSpacing="1" FontAttributes="Bold" FontSize="11" Margin="0,0,0,10" Text="STEP 3 OF 3" TextColor="#9CA3AF" />
-                <Label FontAttributes="Bold" FontSize="28" Margin="0,0,0,8" Text="What are your goals?" TextColor="#111827" />
-                <Label FontSize="14" Margin="0,0,0,28" Text="Pick one or more — we'll tailor your plan" TextColor="#9CA3AF" />
+                <Label CharacterSpacing="1" FontAttributes="Bold" FontSize="11" Margin="0,0,0,10" Text="{loc:Translate Onboarding_Step3}" TextColor="#9CA3AF" />
+                <Label FontAttributes="Bold" FontSize="28" Margin="0,0,0,8" Text="{loc:Translate Onboarding_GoalsTitle}" TextColor="#111827" />
+                <Label FontSize="14" Margin="0,0,0,28" Text="{loc:Translate Onboarding_GoalsSubtitle}" TextColor="#9CA3AF" />
 
-                <!-- Goal: Lose Fat (initially selected) -->
-                <Border x:Name="LoseFatBorder" Margin="0,0,0,12" BackgroundColor="White" 
+                <!-- Goal: Lose Fat -->
+                <Border x:Name="LoseFatBorder" Margin="0,0,0,12" BackgroundColor="White"
                         Padding="16,14" Stroke="#E5E7EB" StrokeShape="RoundRectangle 16" StrokeThickness="1.5">
                     <Grid ColumnDefinitions="100,*,82">
-                        <Border Grid.Column="0" BackgroundColor="#FEF3C7" HeightRequest="100" 
+                        <Border Grid.Column="0" BackgroundColor="#FEF3C7" HeightRequest="100"
                                 StrokeShape="RoundRectangle 12" StrokeThickness="0" WidthRequest="100" VerticalOptions="Center">
                             <Label FontSize="22" HorizontalOptions="Center" Text="🔥" VerticalOptions="Center" />
                         </Border>
                         <VerticalStackLayout Grid.Column="1" Margin="14,0,0,0" VerticalOptions="Center">
-                            <Label FontAttributes="Bold" FontSize="16" Text="Lose Fat" TextColor="#111827" />
-                            <Label FontSize="12" Text="Reduce body fat percentage" TextColor="#9CA3AF" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Onboarding_GoalLoseFat}" TextColor="#111827" />
+                            <Label FontSize="12" Text="{loc:Translate Onboarding_GoalLoseFatSub}" TextColor="#9CA3AF" />
                         </VerticalStackLayout>
                         <Border Grid.Column="2" BackgroundColor="#7C3AED" HeightRequest="70"
                                 StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" WidthRequest="70">
@@ -46,20 +47,19 @@
                 </Border>
 
                 <!-- Goal: Build Muscle -->
-                <Border x:Name="BuildMuscleBorder" Margin="0,0,0,12" BackgroundColor="White" Padding="16,14" 
+                <Border x:Name="BuildMuscleBorder" Margin="0,0,0,12" BackgroundColor="White" Padding="16,14"
                         Stroke="#E5E7EB" StrokeShape="RoundRectangle 16" StrokeThickness="1.5">
                     <Grid ColumnDefinitions="100,*,82">
-                        <Border Grid.Column="0" BackgroundColor="#FEF3C7" HeightRequest="100" 
-                                StrokeShape="RoundRectangle 12" StrokeThickness="0" WidthRequest="100" 
-                                VerticalOptions="Center">
+                        <Border Grid.Column="0" BackgroundColor="#FEF3C7" HeightRequest="100"
+                                StrokeShape="RoundRectangle 12" StrokeThickness="0" WidthRequest="100" VerticalOptions="Center">
                             <Label FontSize="22" HorizontalOptions="Center" Text="💪" VerticalOptions="Center" />
                         </Border>
                         <VerticalStackLayout Grid.Column="1" Margin="14,0,0,0" VerticalOptions="Center">
-                            <Label FontAttributes="Bold" FontSize="16" Text="Build Muscle" TextColor="#111827" />
-                            <Label FontSize="14" Text="Increase muscle mass &amp; strength" TextColor="#9CA3AF" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Onboarding_GoalBuildMuscle}" TextColor="#111827" />
+                            <Label FontSize="14" Text="{loc:Translate Onboarding_GoalBuildMuscleSub}" TextColor="#9CA3AF" />
                         </VerticalStackLayout>
-                        <Border Grid.Column="2" BackgroundColor="#7C3AED" HeightRequest="70" 
-                                    StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" WidthRequest="70">
+                        <Border Grid.Column="2" BackgroundColor="#7C3AED" HeightRequest="70"
+                                StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" WidthRequest="70">
                             <Label x:Name="BuildMuscleGoal" FontSize="14" HorizontalOptions="Center" Text="" TextColor="White" VerticalOptions="Center" />
                         </Border>
                     </Grid>
@@ -71,17 +71,17 @@
                 <!-- Goal: Improve Endurance -->
                 <Border x:Name="EnduranceBorder" Margin="0,0,0,12" BackgroundColor="White" Padding="16,14" Stroke="#E5E7EB" StrokeShape="RoundRectangle 16" StrokeThickness="1.5">
                     <Grid ColumnDefinitions="100,*,82">
-                        <Border Grid.Column="0" BackgroundColor="#E0F2FE" HeightRequest="100" StrokeShape="RoundRectangle 12" 
+                        <Border Grid.Column="0" BackgroundColor="#E0F2FE" HeightRequest="100" StrokeShape="RoundRectangle 12"
                                 StrokeThickness="0" WidthRequest="100" VerticalOptions="Center">
                             <Label FontSize="22" HorizontalOptions="Center" Text="🏃" VerticalOptions="Center" />
                         </Border>
                         <VerticalStackLayout Grid.Column="1" Margin="14,0,0,0" VerticalOptions="Center">
-                            <Label FontAttributes="Bold" FontSize="16" Text="Improve Endurance" TextColor="#111827" />
-                            <Label FontSize="12" Text="Cardio &amp; stamina training" TextColor="#9CA3AF" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Onboarding_GoalEndurance}" TextColor="#111827" />
+                            <Label FontSize="12" Text="{loc:Translate Onboarding_GoalEnduranceSub}" TextColor="#9CA3AF" />
                         </VerticalStackLayout>
-                        <Border Grid.Column="2" BackgroundColor="#7C3AED" HeightRequest="70" 
+                        <Border Grid.Column="2" BackgroundColor="#7C3AED" HeightRequest="70"
                                 StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" WidthRequest="70">
-                            <Label x:Name="EnduranceGoal" FontSize="14" HorizontalOptions="Center" Text="" 
+                            <Label x:Name="EnduranceGoal" FontSize="14" HorizontalOptions="Center" Text=""
                                    TextColor="White" VerticalOptions="Center" />
                         </Border>
                     </Grid>
@@ -93,17 +93,17 @@
                 <!-- Goal: Increase Strength -->
                 <Border x:Name="StrengthBorder" Margin="0,0,0,12" BackgroundColor="White" Padding="16,14" Stroke="#E5E7EB" StrokeShape="RoundRectangle 16" StrokeThickness="1.5">
                     <Grid ColumnDefinitions="100,*,82">
-                        <Border Grid.Column="0" BackgroundColor="#FEF9C3" HeightRequest="100" 
+                        <Border Grid.Column="0" BackgroundColor="#FEF9C3" HeightRequest="100"
                                 StrokeShape="RoundRectangle 12" StrokeThickness="0" WidthRequest="100" VerticalOptions="Center">
                             <Label FontSize="22" HorizontalOptions="Center" Text="⚡" VerticalOptions="Center" />
                         </Border>
                         <VerticalStackLayout Grid.Column="1" Margin="14,0,0,0" VerticalOptions="Center">
-                            <Label FontAttributes="Bold" FontSize="16" Text="Increase Strength" TextColor="#111827" />
-                            <Label FontSize="12" Text="Hit new personal records" TextColor="#9CA3AF" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Onboarding_GoalStrength}" TextColor="#111827" />
+                            <Label FontSize="12" Text="{loc:Translate Onboarding_GoalStrengthSub}" TextColor="#9CA3AF" />
                         </VerticalStackLayout>
                         <Border Grid.Column="2" BackgroundColor="#7C3AED" HeightRequest="70"
                                 StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" WidthRequest="70">
-                            <Label x:Name="StrengthCheckGoal" FontSize="14" HorizontalOptions="Center" Text="" 
+                            <Label x:Name="StrengthCheckGoal" FontSize="14" HorizontalOptions="Center" Text=""
                                    TextColor="White" VerticalOptions="Center" />
                         </Border>
                     </Grid>
@@ -115,18 +115,18 @@
                 <!-- Goal: Flexibility -->
                 <Border x:Name="FlexibilityBorder" Margin="0,0,0,12" BackgroundColor="White" Padding="16,14" Stroke="#E5E7EB" StrokeShape="RoundRectangle 16" StrokeThickness="1.5">
                     <Grid ColumnDefinitions="100,*,82">
-                        <Border Grid.Column="0" BackgroundColor="#FCE7F3" HeightRequest="100" 
+                        <Border Grid.Column="0" BackgroundColor="#FCE7F3" HeightRequest="100"
                                 StrokeShape="RoundRectangle 12" StrokeThickness="0" WidthRequest="100" VerticalOptions="Center">
                             <Label FontSize="22" HorizontalOptions="Center" Text="🧘" VerticalOptions="Center" />
                         </Border>
                         <VerticalStackLayout Grid.Column="1" Margin="14,0,0,0" VerticalOptions="Center">
-                            <Label FontAttributes="Bold" FontSize="16" Text="Flexibility" TextColor="#111827" />
-                            <Label FontSize="12" Text="Yoga, mobility &amp; stretching" TextColor="#9CA3AF" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Onboarding_GoalFlexibility}" TextColor="#111827" />
+                            <Label FontSize="12" Text="{loc:Translate Onboarding_GoalFlexibilitySub}" TextColor="#9CA3AF" />
                         </VerticalStackLayout>
-                        <Border Grid.Column="2" BackgroundColor="#7C3AED" HeightRequest="70" 
-          StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" WidthRequest="70">
-                            <Label x:Name="FlexibilityCheckGoal" FontSize="14" HorizontalOptions="Center" Text="" 
-             TextColor="White" VerticalOptions="Center" />
+                        <Border Grid.Column="2" BackgroundColor="#7C3AED" HeightRequest="70"
+                                StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" WidthRequest="70">
+                            <Label x:Name="FlexibilityCheckGoal" FontSize="14" HorizontalOptions="Center" Text=""
+                                   TextColor="White" VerticalOptions="Center" />
                         </Border>
                     </Grid>
                     <Border.GestureRecognizers>
@@ -137,18 +137,18 @@
                 <!-- Goal: Stay Active -->
                 <Border x:Name="StayActiveBorder" Margin="0,0,0,28" BackgroundColor="White" Padding="16,14" Stroke="#E5E7EB" StrokeShape="RoundRectangle 16" StrokeThickness="1.5">
                     <Grid ColumnDefinitions="100,*,82">
-                        <Border Grid.Column="0" BackgroundColor="#FEF3C7" HeightRequest="100" 
+                        <Border Grid.Column="0" BackgroundColor="#FEF3C7" HeightRequest="100"
                                 StrokeShape="RoundRectangle 12" StrokeThickness="0" WidthRequest="100" VerticalOptions="Center">
                             <Label FontSize="22" HorizontalOptions="Center" Text="🌟" VerticalOptions="Center" />
                         </Border>
                         <VerticalStackLayout Grid.Column="1" Margin="14,0,0,0" VerticalOptions="Center">
-                            <Label FontAttributes="Bold" FontSize="16" Text="Stay Active" TextColor="#111827" />
-                            <Label FontSize="12" Text="General fitness &amp; health" TextColor="#9CA3AF" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Onboarding_GoalStayActive}" TextColor="#111827" />
+                            <Label FontSize="12" Text="{loc:Translate Onboarding_GoalStayActiveSub}" TextColor="#9CA3AF" />
                         </VerticalStackLayout>
-                        <Border Grid.Column="2" BackgroundColor="#7C3AED" HeightRequest="70" 
-StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" WidthRequest="70">
-                            <Label x:Name="StayActiveCheckGoal" FontSize="14" HorizontalOptions="Center" Text="" 
-   TextColor="White" VerticalOptions="Center" />
+                        <Border Grid.Column="2" BackgroundColor="#7C3AED" HeightRequest="70"
+                                StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" WidthRequest="70">
+                            <Label x:Name="StayActiveCheckGoal" FontSize="14" HorizontalOptions="Center" Text=""
+                                   TextColor="White" VerticalOptions="Center" />
                         </Border>
                     </Grid>
                     <Border.GestureRecognizers>
@@ -157,8 +157,8 @@ StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" Widt
                 </Border>
 
                 <!-- Workouts per week -->
-                <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" 
-                       Margin="4,0,0,14" Text="WORKOUTS PER WEEK" TextColor="#6B7280" />
+                <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11"
+                       Margin="4,0,0,14" Text="{loc:Translate Onboarding_WorkoutsPerWeek}" TextColor="#6B7280" />
                 <HorizontalStackLayout Margin="0,0,0,12" Spacing="10">
                     <Border x:Name="W1Border" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
                         <Button x:Name="W1Button" BackgroundColor="Transparent" Clicked="OnWorkoutFreqTapped" CommandParameter="1" FontAttributes="Bold" FontSize="14" Text="1×" TextColor="#374151" />
@@ -191,7 +191,7 @@ StrokeShape="RoundRectangle 8" StrokeThickness="0" VerticalOptions="Center" Widt
                     <GradientStop Color="#9333EA" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
-            <Button BackgroundColor="Transparent" Clicked="OnFinishClicked" FontAttributes="Bold" FontSize="16" Text="Finish →" TextColor="White" />
+            <Button BackgroundColor="Transparent" Clicked="OnFinishClicked" FontAttributes="Bold" FontSize="16" Text="{loc:Translate Common_Finish}" TextColor="White" />
         </Border>
 
     </Grid>

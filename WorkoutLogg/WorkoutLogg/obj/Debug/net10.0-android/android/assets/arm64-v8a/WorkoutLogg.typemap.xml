@@ -1,0 +1,10 @@
+<api type="debug" assembly-name="WorkoutLogg" mvid="f4e6a277bc0440e7a0118e6533af5f41">
+  <java-to-managed>
+    <entry java-name="crc6482c51dbe8cb2eb7d/MainActivity" managed-name="WorkoutLogg.MainActivity, WorkoutLogg" managed-type-token-id="33554458" />
+    <entry java-name="crc6482c51dbe8cb2eb7d/MainApplication" managed-name="WorkoutLogg.MainApplication, WorkoutLogg" managed-type-token-id="33554459" />
+  </java-to-managed>
+  <managed-to-java>
+    <entry java-name="crc6482c51dbe8cb2eb7d/MainActivity" managed-name="WorkoutLogg.MainActivity, WorkoutLogg" managed-type-token-id="33554458" />
+    <entry java-name="crc6482c51dbe8cb2eb7d/MainApplication" managed-name="WorkoutLogg.MainApplication, WorkoutLogg" managed-type-token-id="33554459" />
+  </managed-to-java>
+</api>

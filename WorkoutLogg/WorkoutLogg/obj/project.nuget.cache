@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "wCRN9OKGxsY=",
+  "dgSpecHash": "ntMliAmb+ds=",
   "success": true,
   "projectFilePath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\maxis\\.nuget\\packages\\aksoftware.localization.multilanguages\\5.1.0\\aksoftware.localization.multilanguages.5.1.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\communitytoolkit.maui\\12.3.0\\communitytoolkit.maui.12.3.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\communitytoolkit.maui.core\\12.3.0\\communitytoolkit.maui.core.12.3.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\communitytoolkit.mvvm\\8.3.2\\communitytoolkit.mvvm.8.3.2.nupkg.sha512",
@@ -89,7 +90,7 @@
     "C:\\Users\\maxis\\.nuget\\packages\\microsoft.web.webview2\\1.0.3179.45\\microsoft.web.webview2.1.0.3179.45.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.22621.756\\microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\microsoft.windowsappsdk\\1.7.250909003\\microsoft.windowsappsdk.1.7.250909003.nupkg.sha512",
-    "C:\\Users\\maxis\\.nuget\\packages\\newtonsoft.json\\9.0.1\\newtonsoft.json.9.0.1.nupkg.sha512",
+    "C:\\Users\\maxis\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\npgsql\\10.0.2\\npgsql.10.0.2.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\10.0.1\\npgsql.entityframeworkcore.postgresql.10.0.1.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
@@ -104,6 +105,7 @@
     "C:\\Users\\maxis\\.nuget\\packages\\sqlitepclraw.provider.sqlite3\\2.1.10\\sqlitepclraw.provider.sqlite3.2.1.10.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\stackexchange.redis\\2.7.27\\stackexchange.redis.2.7.27.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\syncfusion.maui.toolkit\\1.0.8\\syncfusion.maui.toolkit.1.0.8.nupkg.sha512",
+    "C:\\Users\\maxis\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.17.0\\system.identitymodel.tokens.jwt.8.17.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\system.runtime.interopservices.nfloat.internal\\6.0.1\\system.runtime.interopservices.nfloat.internal.6.0.1.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\system.security.cryptography.pkcs\\10.0.7\\system.security.cryptography.pkcs.10.0.7.nupkg.sha512",
@@ -201,13 +203,14 @@
     "C:\\Users\\maxis\\.nuget\\packages\\xamarin.kotlinx.coroutines.core.jvm\\1.10.2.1\\xamarin.kotlinx.coroutines.core.jvm.1.10.2.1.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\xamarin.kotlinx.serialization.core\\1.9.0.1\\xamarin.kotlinx.serialization.core.1.9.0.1.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\xamarin.kotlinx.serialization.core.jvm\\1.9.0.1\\xamarin.kotlinx.serialization.core.jvm.1.9.0.1.nupkg.sha512",
+    "C:\\Users\\maxis\\.nuget\\packages\\yamldotnet\\9.1.0\\yamldotnet.9.1.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512"
   ],
   "logs": [
     {
       "code": "NU1903",
       "level": "Warning",
-      "message": "У пакета \"Newtonsoft.Json\" 9.0.1 есть известная уязвимость https://github.com/advisories/GHSA-5crp-9r3c-p9vr (уровень серьезности: высокий уровень)",
+      "message": "У пакета \"Newtonsoft.Json\" 12.0.3 есть известная уязвимость https://github.com/advisories/GHSA-5crp-9r3c-p9vr (уровень серьезности: высокий уровень)",
       "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj",

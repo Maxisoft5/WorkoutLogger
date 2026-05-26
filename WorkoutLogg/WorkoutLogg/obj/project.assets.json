@@ -2,6 +2,21 @@
   "version": 3,
   "targets": {
     "net10.0-android36.0": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -1554,15 +1569,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -1748,6 +1763,15 @@
         },
         "build": {
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
+        }
+      },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/MonoAndroid10/_._": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/_._": {}
         }
       },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
@@ -3796,6 +3820,19 @@
         "runtime": {
           "lib/net10.0-android36.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -3901,6 +3938,21 @@
       }
     },
     "net10.0-android36.0/android-arm64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -5355,15 +5407,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -5549,6 +5601,15 @@
         },
         "build": {
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
+        }
+      },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/MonoAndroid10/_._": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/_._": {}
         }
       },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
@@ -7594,6 +7655,19 @@
           }
         }
       },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Moduels.Workouts.DTO/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -7696,6 +7770,21 @@
       }
     },
     "net10.0-android36.0/android-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -9151,15 +9240,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -9345,6 +9434,15 @@
         },
         "build": {
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
+        }
+      },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/MonoAndroid10/_._": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/_._": {}
         }
       },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
@@ -11387,6 +11485,19 @@
         "runtime": {
           "lib/net10.0-android36.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -11492,6 +11603,21 @@
       }
     },
     "net10.0-android36.0/iossimulator-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -12942,15 +13068,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -13136,6 +13262,15 @@
         },
         "build": {
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
+        }
+      },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/MonoAndroid10/_._": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/_._": {}
         }
       },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
@@ -15178,6 +15313,19 @@
         "runtime": {
           "lib/net10.0-android36.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -15283,6 +15431,21 @@
       }
     },
     "net10.0-android36.0/maccatalyst-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -16733,15 +16896,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -16927,6 +17090,15 @@
         },
         "build": {
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
+        }
+      },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/MonoAndroid10/_._": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/_._": {}
         }
       },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
@@ -18972,6 +19144,19 @@
           }
         }
       },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Moduels.Workouts.DTO/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -19074,6 +19259,21 @@
       }
     },
     "net10.0-android36.0/win-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -20535,15 +20735,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -20729,6 +20929,15 @@
         },
         "build": {
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
+        }
+      },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/MonoAndroid10/_._": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/_._": {}
         }
       },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
@@ -22774,6 +22983,19 @@
           }
         }
       },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Moduels.Workouts.DTO/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -22876,6 +23098,21 @@
       }
     },
     "net10.0-ios26.2": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -24399,15 +24636,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -24578,6 +24815,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -24642,6 +24892,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -24746,6 +25009,21 @@
       }
     },
     "net10.0-ios26.2/android-arm64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -26171,15 +26449,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -26350,6 +26628,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -26408,6 +26699,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -26512,6 +26816,21 @@
       }
     },
     "net10.0-ios26.2/android-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -27938,15 +28257,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -28117,6 +28436,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -28175,6 +28507,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -28279,6 +28624,21 @@
       }
     },
     "net10.0-ios26.2/iossimulator-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -29700,15 +30060,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -29879,6 +30239,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -29937,6 +30310,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -30041,6 +30427,21 @@
       }
     },
     "net10.0-ios26.2/maccatalyst-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -31462,15 +31863,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -31641,6 +32042,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -31699,6 +32113,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -31803,6 +32230,21 @@
       }
     },
     "net10.0-ios26.2/win-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -33235,15 +33677,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -33414,6 +33856,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -33472,6 +33927,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -33576,6 +34044,21 @@
       }
     },
     "net10.0-maccatalyst26.2": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -35099,15 +35582,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -35376,6 +35859,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -35432,6 +35928,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -35536,6 +36045,21 @@
       }
     },
     "net10.0-maccatalyst26.2/android-arm64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -36961,15 +37485,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -37155,6 +37679,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -37205,6 +37742,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -37309,6 +37859,21 @@
       }
     },
     "net10.0-maccatalyst26.2/android-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -38735,15 +39300,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -38929,6 +39494,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -38979,6 +39557,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -39083,6 +39674,21 @@
       }
     },
     "net10.0-maccatalyst26.2/iossimulator-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -40504,15 +41110,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -40695,6 +41301,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -40745,6 +41364,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -40849,6 +41481,21 @@
       }
     },
     "net10.0-maccatalyst26.2/maccatalyst-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -42270,15 +42917,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -42464,6 +43111,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -42514,6 +43174,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -42618,6 +43291,21 @@
       }
     },
     "net10.0-maccatalyst26.2/win-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -44050,15 +44738,15 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -44244,6 +44932,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -44294,6 +44995,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -44398,6 +45112,21 @@
       }
     },
     "net10.0-windows10.0.19041": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -46173,15 +46902,15 @@
           }
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -46453,6 +47182,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -46530,6 +47272,19 @@
           "runtimes/win/lib/net9.0/System.Speech.dll": {
             "assetType": "runtime",
             "rid": "win"
+          }
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -46635,6 +47390,21 @@
       }
     },
     "net10.0-windows10.0.19041/android-arm64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -48250,15 +49020,15 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -48447,6 +49217,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -48513,6 +49296,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -48617,6 +49413,21 @@
       }
     },
     "net10.0-windows10.0.19041/android-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -50233,15 +51044,15 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -50430,6 +51241,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -50496,6 +51320,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -50600,6 +51437,21 @@
       }
     },
     "net10.0-windows10.0.19041/iossimulator-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -52211,15 +53063,15 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -52405,6 +53257,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -52471,6 +53336,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -52575,6 +53453,21 @@
       }
     },
     "net10.0-windows10.0.19041/maccatalyst-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -54186,15 +55079,15 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -54383,6 +55276,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -54449,6 +55355,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -54553,6 +55472,21 @@
       }
     },
     "net10.0-windows10.0.19041/win-x64": {
+      "AKSoftware.Localization.MultiLanguages/5.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "YamlDotNet": "9.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll": {}
+        }
+      },
       "CommunityToolkit.Maui/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -56185,15 +57119,15 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -56382,6 +57316,19 @@
           "buildTransitive/Syncfusion.Maui.Toolkit.props": {}
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.17.0": {
         "type": "package",
         "dependencies": {
@@ -56448,6 +57395,19 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "YamlDotNet/9.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/YamlDotNet.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Moduels.Workouts.DTO/1.0.0": {
@@ -56553,6 +57513,20 @@
     }
   },
   "libraries": {
+    "AKSoftware.Localization.MultiLanguages/5.1.0": {
+      "sha512": "kEHfol+sgGRPdrwUoVqX6h6aR5XsSjw1v+9KYJORv+o3j52WfoXJOMH9afr0mo1gGYrIBom6sf+mBedulfczNg==",
+      "type": "package",
+      "path": "aksoftware.localization.multilanguages/5.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "AkMultiLanguages.png",
+        "LICENSE",
+        "aksoftware.localization.multilanguages.5.1.0.nupkg.sha512",
+        "aksoftware.localization.multilanguages.nuspec",
+        "lib/netstandard2.0/AKSoftware.Localization.MultiLanguages.dll"
+      ]
+    },
     "CommunityToolkit.Maui/12.3.0": {
       "sha512": "/hA6qFy/tBTu0d++6tWwOTKDVOBzvzFWcaSS/uX3sWJdibM4SMV8lFhRUexp/1H0PrQXLCqUuJyKxq/TH8L7yw==",
       "type": "package",
@@ -59766,14 +60740,14 @@
         "tools/x86/GenXbf.dll"
       ]
     },
-    "Newtonsoft.Json/9.0.1": {
-      "sha512": "U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw==",
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
-      "path": "newtonsoft.json/9.0.1",
-      "hasTools": true,
+      "path": "newtonsoft.json/12.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "LICENSE.md",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -59784,13 +60758,17 @@
         "lib/net45/Newtonsoft.Json.xml",
         "lib/netstandard1.0/Newtonsoft.Json.dll",
         "lib/netstandard1.0/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.9.0.1.nupkg.sha512",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.12.0.3.nupkg.sha512",
         "newtonsoft.json.nuspec",
-        "tools/install.ps1"
+        "packageIcon.png"
       ]
     },
     "Npgsql/10.0.2": {
@@ -60129,6 +61107,96 @@
         "syncfusion.maui.toolkit.1.0.8.nupkg.sha512",
         "syncfusion.maui.toolkit.nuspec",
         "syncfusion_logo.png"
+      ]
+    },
+    "System.ComponentModel.Annotations/5.0.0": {
+      "sha512": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg==",
+      "type": "package",
+      "path": "system.componentmodel.annotations/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net461/System.ComponentModel.Annotations.dll",
+        "lib/netcore50/System.ComponentModel.Annotations.dll",
+        "lib/netstandard1.4/System.ComponentModel.Annotations.dll",
+        "lib/netstandard2.0/System.ComponentModel.Annotations.dll",
+        "lib/netstandard2.1/System.ComponentModel.Annotations.dll",
+        "lib/netstandard2.1/System.ComponentModel.Annotations.xml",
+        "lib/portable-net45+win8/_._",
+        "lib/win8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net461/System.ComponentModel.Annotations.dll",
+        "ref/net461/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/System.ComponentModel.Annotations.dll",
+        "ref/netcore50/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/de/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/es/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/fr/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/it/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/ja/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/ko/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/ru/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/zh-hans/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/zh-hant/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/System.ComponentModel.Annotations.dll",
+        "ref/netstandard1.1/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/de/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/es/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/fr/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/it/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/ja/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/ko/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/ru/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/zh-hans/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/zh-hant/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/System.ComponentModel.Annotations.dll",
+        "ref/netstandard1.3/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/de/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/es/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/fr/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/it/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/ja/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/ko/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/ru/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/zh-hans/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/zh-hant/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/System.ComponentModel.Annotations.dll",
+        "ref/netstandard1.4/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/de/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/es/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/fr/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/it/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/ja/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/ko/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/ru/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/zh-hans/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/zh-hant/System.ComponentModel.Annotations.xml",
+        "ref/netstandard2.0/System.ComponentModel.Annotations.dll",
+        "ref/netstandard2.0/System.ComponentModel.Annotations.xml",
+        "ref/netstandard2.1/System.ComponentModel.Annotations.dll",
+        "ref/netstandard2.1/System.ComponentModel.Annotations.xml",
+        "ref/portable-net45+win8/_._",
+        "ref/win8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.componentmodel.annotations.5.0.0.nupkg.sha512",
+        "system.componentmodel.annotations.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.IdentityModel.Tokens.Jwt/8.17.0": {
@@ -62645,6 +63713,30 @@
         "xamarin.kotlinx.serialization.core.jvm.nuspec"
       ]
     },
+    "YamlDotNet/9.1.0": {
+      "sha512": "fuvGXU4Ec5HrsmEc+BiFTNPCRf1cGBI2kh/3RzMWgddM2M4ALhbSPoI3X3mhXZUD1qqQd9oSkFAtWjpz8z9eRg==",
+      "type": "package",
+      "path": "yamldotnet/9.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/net20/YamlDotNet.dll",
+        "lib/net20/YamlDotNet.xml",
+        "lib/net35-client/YamlDotNet.dll",
+        "lib/net35-client/YamlDotNet.xml",
+        "lib/net35/YamlDotNet.dll",
+        "lib/net35/YamlDotNet.xml",
+        "lib/net45/YamlDotNet.dll",
+        "lib/net45/YamlDotNet.xml",
+        "lib/netstandard1.3/YamlDotNet.dll",
+        "lib/netstandard1.3/YamlDotNet.xml",
+        "lib/netstandard2.1/YamlDotNet.dll",
+        "lib/netstandard2.1/YamlDotNet.xml",
+        "yamldotnet.9.1.0.nupkg.sha512",
+        "yamldotnet.nuspec"
+      ]
+    },
     "Moduels.Workouts.DTO/1.0.0": {
       "type": "project",
       "path": "../Moduels.Workouts.DTO/Moduels.Workouts.DTO.csproj",
@@ -62683,6 +63775,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0-android36.0": [
+      "AKSoftware.Localization.MultiLanguages >= 5.1.0",
       "CommunityToolkit.Maui >= 12.3.0",
       "CommunityToolkit.Mvvm >= 8.3.2",
       "FluentValidation >= 12.1.1",
@@ -62702,6 +63795,7 @@
       "sqlite-net-pcl >= 1.9.172"
     ],
     "net10.0-ios26.2": [
+      "AKSoftware.Localization.MultiLanguages >= 5.1.0",
       "CommunityToolkit.Maui >= 12.3.0",
       "CommunityToolkit.Mvvm >= 8.3.2",
       "FluentValidation >= 12.1.1",
@@ -62721,6 +63815,7 @@
       "sqlite-net-pcl >= 1.9.172"
     ],
     "net10.0-maccatalyst26.2": [
+      "AKSoftware.Localization.MultiLanguages >= 5.1.0",
       "CommunityToolkit.Maui >= 12.3.0",
       "CommunityToolkit.Mvvm >= 8.3.2",
       "FluentValidation >= 12.1.1",
@@ -62740,6 +63835,7 @@
       "sqlite-net-pcl >= 1.9.172"
     ],
     "net10.0-windows10.0.19041": [
+      "AKSoftware.Localization.MultiLanguages >= 5.1.0",
       "CommunityToolkit.Maui >= 12.3.0",
       "CommunityToolkit.Mvvm >= 8.3.2",
       "FluentValidation >= 12.1.1",
@@ -62870,6 +63966,10 @@
         "framework": "net10.0-android36.0",
         "targetAlias": "net10.0-android",
         "dependencies": {
+          "AKSoftware.Localization.MultiLanguages": {
+            "target": "Package",
+            "version": "[5.1.0, )"
+          },
           "CommunityToolkit.Maui": {
             "target": "Package",
             "version": "[12.3.0, )"
@@ -63231,6 +64331,10 @@
         "framework": "net10.0-ios26.2",
         "targetAlias": "net10.0-ios",
         "dependencies": {
+          "AKSoftware.Localization.MultiLanguages": {
+            "target": "Package",
+            "version": "[5.1.0, )"
+          },
           "CommunityToolkit.Maui": {
             "target": "Package",
             "version": "[12.3.0, )"
@@ -63592,6 +64696,10 @@
         "framework": "net10.0-maccatalyst26.2",
         "targetAlias": "net10.0-maccatalyst",
         "dependencies": {
+          "AKSoftware.Localization.MultiLanguages": {
+            "target": "Package",
+            "version": "[5.1.0, )"
+          },
           "CommunityToolkit.Maui": {
             "target": "Package",
             "version": "[12.3.0, )"
@@ -63954,6 +65062,10 @@
         "framework": "net10.0-windows10.0.19041",
         "targetAlias": "net10.0-windows10.0.19041.0",
         "dependencies": {
+          "AKSoftware.Localization.MultiLanguages": {
+            "target": "Package",
+            "version": "[5.1.0, )"
+          },
           "CommunityToolkit.Maui": {
             "target": "Package",
             "version": "[12.3.0, )"
@@ -64332,7 +65444,7 @@
       "code": "NU1903",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "У пакета \"Newtonsoft.Json\" 9.0.1 есть известная уязвимость https://github.com/advisories/GHSA-5crp-9r3c-p9vr (уровень серьезности: высокий уровень)",
+      "message": "У пакета \"Newtonsoft.Json\" 12.0.3 есть известная уязвимость https://github.com/advisories/GHSA-5crp-9r3c-p9vr (уровень серьезности: высокий уровень)",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net10.0-android",

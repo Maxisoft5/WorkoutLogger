@@ -246,6 +246,37 @@ namespace WorkoutLogg.Database
             }
         }
 
+        public async Task<int> GetTotalLogSessionCountAsync()
+        {
+            var db = await GetConnection();
+            return await db.Table<WorkoutLogSessionEntity>().CountAsync();
+        }
+
+        public async Task<List<WorkoutLogSessionEntity>> GetLogSessionsForWeekAsync(DateTime weekStart)
+        {
+            var db = await GetConnection();
+            var weekEnd = weekStart.AddDays(7);
+            var sessions = await db.Table<WorkoutLogSessionEntity>()
+                .Where(s => s.Date >= weekStart && s.Date < weekEnd)
+                .ToListAsync();
+
+            foreach (var s in sessions)
+                s.Exercises = await GetLogExercisesWithSetsAsync(s.Id);
+
+            return sessions;
+        }
+
+        public async Task<WorkoutLogSessionEntity?> GetLastLogSessionAsync()
+        {
+            var db = await GetConnection();
+            var session = await db.Table<WorkoutLogSessionEntity>()
+                .OrderByDescending(s => s.Date)
+                .FirstOrDefaultAsync();
+            if (session is null) return null;
+            session.Exercises = await GetLogExercisesWithSetsAsync(session.Id);
+            return session;
+        }
+
         public async Task DeleteLogSessionAsync(Guid sessionId)
         {
             var db = await GetConnection();
@@ -274,6 +305,67 @@ namespace WorkoutLogg.Database
                     .ToListAsync();
 
             return exercises;
+        }
+
+        // ── Profile stats ─────────────────────────────────────────────────────
+
+        public async Task<ProfileStats> GetProfileStatsAsync()
+        {
+            var db = await GetConnection();
+
+            var sessions  = await db.Table<WorkoutLogSessionEntity>().ToListAsync();
+            var exercises = await db.Table<LogExerciseEntity>().ToListAsync();
+            var sets      = await db.Table<LogSetEntity>().ToListAsync();
+
+            var exIdToName = exercises.ToDictionary(e => e.Id, e => e.ExerciseName.Trim());
+
+            var uniqueNames = exercises
+                .Select(e => e.ExerciseName.Trim())
+                .Where(n => !string.IsNullOrEmpty(n))
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            var topPRs = sets
+                .Where(s => !s.IsWarmup && s.WeightKg > 0 && exIdToName.ContainsKey(s.ExerciseLogId))
+                .GroupBy(s => exIdToName[s.ExerciseLogId], StringComparer.OrdinalIgnoreCase)
+                .Select(g => new PersonalRecordEntry(g.Key, g.Max(s => s.WeightKg)))
+                .OrderByDescending(pr => pr.MaxWeightKg)
+                .Take(4)
+                .ToList();
+
+            var logDates = sessions
+                .Select(s => s.Date.Date)
+                .Distinct()
+                .OrderByDescending(d => d)
+                .ToList();
+
+            int streak = 0;
+            if (logDates.Count > 0 && (DateTime.Today - logDates[0]).Days <= 1)
+            {
+                var baseDate = logDates[0];
+                for (int i = 0; i < logDates.Count; i++)
+                {
+                    if (logDates[i] == baseDate.AddDays(-i)) streak++;
+                    else break;
+                }
+            }
+
+            var maxWeekSessions = logDates.Count > 0
+                ? logDates
+                    .GroupBy(d => (d.Year, System.Globalization.ISOWeek.GetWeekOfYear(d)))
+                    .Max(g => g.Count())
+                : 0;
+
+            return new ProfileStats(
+                TotalSessions:        sessions.Count,
+                TotalSets:            sets.Count,
+                UniqueExerciseCount:  uniqueNames.Count,
+                PlanBasedSessions:    sessions.Count(s => !s.IsCustom),
+                HasHeavySet:          sets.Any(s => !s.IsWarmup && s.WeightKg >= 100),
+                CurrentStreak:        streak,
+                MaxWeekSessions:      maxWeekSessions,
+                TopPRs:               topPRs,
+                HasEarlySession:      sessions.Any(s => s.Date.TimeOfDay.TotalHours < 8)
+            );
         }
 
         // ── Sync ─────────────────────────────────────────────────────────────

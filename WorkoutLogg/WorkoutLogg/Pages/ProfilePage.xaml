@@ -4,6 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
+    xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
     BackgroundColor="#EEEEF6"
     Shell.NavBarIsVisible="False">
 
@@ -13,160 +15,185 @@
             <VerticalStackLayout Spacing="0">
 
                 <!-- Purple header card -->
-                <Border BackgroundColor="#7C3AED" Padding="20,52,20,24" StrokeShape="RoundRectangle 0,0,28,28" StrokeThickness="0">
-                    <!-- Avatar + name -->
-                    <VerticalStackLayout Spacing="16">
+                <Border BackgroundColor="#7C3AED"
+                        Padding="20,52,20,24"
+                        StrokeShape="RoundRectangle 0,0,28,28"
+                        StrokeThickness="0">
+                    <VerticalStackLayout Spacing="20">
+
+                        <!-- Avatar + name -->
                         <HorizontalStackLayout Spacing="16" VerticalOptions="Center">
-                            <Border BackgroundColor="#9333EA" HeightRequest="64" StrokeShape="RoundRectangle 20" StrokeThickness="0" WidthRequest="64" VerticalOptions="Center">
-                                <Label FontAttributes="Bold" FontSize="28" HorizontalOptions="Center" Text="A" TextColor="White" VerticalOptions="Center" />
+                            <Border BackgroundColor="#9333EA"
+                                    HeightRequest="64"
+                                    StrokeShape="RoundRectangle 20"
+                                    StrokeThickness="0"
+                                    WidthRequest="64"
+                                    VerticalOptions="Center">
+                                <Label FontAttributes="Bold"
+                                       FontSize="24"
+                                       HorizontalOptions="Center"
+                                       Text="{Binding UserInitials}"
+                                       TextColor="White"
+                                       VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout VerticalOptions="Center" Spacing="4">
-                                <Label FontAttributes="Bold" FontSize="22" Text="Alex Petrov" TextColor="White" />
+                                <Label FontAttributes="Bold"
+                                       FontSize="22"
+                                       Text="{Binding UserName}"
+                                       TextColor="White" />
                                 <HorizontalStackLayout Spacing="6">
-                                    <Label FontSize="13" Text="Member since Jan 2024" TextColor="#DDD6FE" />
-                                    <Label FontSize="13" Text="·" TextColor="#DDD6FE" />
-                                    <Border BackgroundColor="#9333EA" Padding="8,3" StrokeShape="RoundRectangle 8" StrokeThickness="0">
-                                        <Label FontAttributes="Bold" FontSize="11" Text="⭐ Premium" TextColor="White" />
+                                    <Label FontSize="13"
+                                           Text="{Binding MemberSinceLabel}"
+                                           TextColor="#DDD6FE" />
+                                    <Border IsVisible="{Binding IsPremium}"
+                                            BackgroundColor="#9333EA"
+                                            Padding="8,3"
+                                            StrokeShape="RoundRectangle 8"
+                                            StrokeThickness="0">
+                                        <Label FontAttributes="Bold"
+                                               FontSize="11"
+                                               Text="⭐ Premium"
+                                               TextColor="White" />
                                     </Border>
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </HorizontalStackLayout>
 
-                        <!-- Stats row -->
+                        <!-- Body stats row -->
                         <Grid ColumnDefinitions="*,1,*,1,*" ColumnSpacing="0">
                             <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="2">
-                                <Label FontAttributes="Bold" FontSize="22" HorizontalOptions="Center" Text="82 kg" TextColor="White" />
-                                <Label FontSize="12" HorizontalOptions="Center" Text="Weight" TextColor="#DDD6FE" />
+                                <Label FontAttributes="Bold" FontSize="22" HorizontalOptions="Center"
+                                       Text="{Binding WeightLabel}" TextColor="White" />
+                                <Label FontSize="12" HorizontalOptions="Center" Text="{loc:Translate Profile_Weight}" TextColor="#DDD6FE" />
                             </VerticalStackLayout>
                             <BoxView Grid.Column="1" BackgroundColor="#9333EA" WidthRequest="1" />
                             <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="2">
-                                <Label FontAttributes="Bold" FontSize="22" HorizontalOptions="Center" Text="183 cm" TextColor="White" />
-                                <Label FontSize="12" HorizontalOptions="Center" Text="Height" TextColor="#DDD6FE" />
+                                <Label FontAttributes="Bold" FontSize="22" HorizontalOptions="Center"
+                                       Text="{Binding HeightLabel}" TextColor="White" />
+                                <Label FontSize="12" HorizontalOptions="Center" Text="{loc:Translate Profile_Height}" TextColor="#DDD6FE" />
                             </VerticalStackLayout>
                             <BoxView Grid.Column="3" BackgroundColor="#9333EA" WidthRequest="1" />
                             <VerticalStackLayout Grid.Column="4" HorizontalOptions="Center" Spacing="2">
-                                <Label FontAttributes="Bold" FontSize="22" HorizontalOptions="Center" Text="22%" TextColor="White" />
-                                <Label FontSize="12" HorizontalOptions="Center" Text="Body Fat" TextColor="#DDD6FE" />
+                                <Label FontAttributes="Bold" FontSize="22" HorizontalOptions="Center"
+                                       Text="{Binding BodyFatLabel}" TextColor="White" />
+                                <Label FontSize="12" HorizontalOptions="Center" Text="{loc:Translate Profile_BodyFat}" TextColor="#DDD6FE" />
                             </VerticalStackLayout>
                         </Grid>
+
+                        <!-- Activity pills -->
+                        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                            <Border BackgroundColor="#9333EA" Padding="14,8" StrokeShape="RoundRectangle 20" StrokeThickness="0">
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label Text="🔥" FontSize="14" VerticalOptions="Center" />
+                                    <Label VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding StreakLabel}" FontAttributes="Bold" TextColor="White" FontSize="13" />
+                                                <Span Text="{loc:Translate Common_DayStreak}" TextColor="#DDD6FE" FontSize="12" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </HorizontalStackLayout>
+                            </Border>
+                            <Border BackgroundColor="#9333EA" Padding="14,8" StrokeShape="RoundRectangle 20" StrokeThickness="0">
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label Text="📓" FontSize="14" VerticalOptions="Center" />
+                                    <Label VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding TotalSessionsLabel}" FontAttributes="Bold" TextColor="White" FontSize="13" />
+                                                <Span Text="{loc:Translate Common_Sessions}" TextColor="#DDD6FE" FontSize="12" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </HorizontalStackLayout>
+                            </Border>
+                        </HorizontalStackLayout>
+
                     </VerticalStackLayout>
                 </Border>
 
                 <VerticalStackLayout Padding="20,20,20,12" Spacing="16">
 
                     <!-- Personal Records -->
-                    <Border BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6"
+                            StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <VerticalStackLayout Spacing="14">
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" FontAttributes="Bold" FontSize="16" Text="Personal Records" TextColor="#111827" />
-                                <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="History ›" TextColor="#7C3AED" />
-                            </Grid>
-                            <Grid ColumnDefinitions="*,12,*" RowDefinitions="Auto,12,Auto" RowSpacing="0">
-                                <!-- Bench Press -->
-                                <Border Grid.Row="0" Grid.Column="0" BackgroundColor="#F9FAFB" Padding="14,12" Stroke="#F3F4F6" StrokeShape="RoundRectangle 12" StrokeThickness="1">
-                                    <VerticalStackLayout Spacing="2">
-                                        <Label FontSize="12" Text="Bench Press" TextColor="#9CA3AF" />
-                                        <Label FontAttributes="Bold" FontSize="20" Text="105 kg" TextColor="#111827" />
-                                    </VerticalStackLayout>
-                                </Border>
-                                <!-- Squat -->
-                                <Border Grid.Row="0" Grid.Column="2" BackgroundColor="#F9FAFB" Padding="14,12" Stroke="#F3F4F6" StrokeShape="RoundRectangle 12" StrokeThickness="1">
-                                    <VerticalStackLayout Spacing="2">
-                                        <Label FontSize="12" Text="Squat" TextColor="#9CA3AF" />
-                                        <Label FontAttributes="Bold" FontSize="20" Text="140 kg" TextColor="#111827" />
-                                    </VerticalStackLayout>
-                                </Border>
-                                <!-- Deadlift -->
-                                <Border Grid.Row="2" Grid.Column="0" BackgroundColor="#F9FAFB" Padding="14,12" Stroke="#F3F4F6" StrokeShape="RoundRectangle 12" StrokeThickness="1">
-                                    <VerticalStackLayout Spacing="2">
-                                        <Label FontSize="12" Text="Deadlift" TextColor="#9CA3AF" />
-                                        <Label FontAttributes="Bold" FontSize="20" Text="180 kg" TextColor="#111827" />
-                                    </VerticalStackLayout>
-                                </Border>
-                                <!-- 5K Run -->
-                                <Border Grid.Row="2" Grid.Column="2" BackgroundColor="#F9FAFB" Padding="14,12" Stroke="#F3F4F6" StrokeShape="RoundRectangle 12" StrokeThickness="1">
-                                    <VerticalStackLayout Spacing="2">
-                                        <Label FontSize="12" Text="5K Run" TextColor="#9CA3AF" />
-                                        <Label FontAttributes="Bold" FontSize="20" Text="22:14" TextColor="#111827" />
-                                    </VerticalStackLayout>
-                                </Border>
-                            </Grid>
+                            <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Profile_PersonalRecords}" TextColor="#111827" />
+
+                            <CollectionView ItemsSource="{Binding PersonalRecords}"
+                                            SelectionMode="None"
+                                            HeightRequest="186">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="2"
+                                                     HorizontalItemSpacing="12" VerticalItemSpacing="12" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:PersonalRecordVM">
+                                        <Border BackgroundColor="#F9FAFB" Padding="14,12"
+                                                Stroke="#F3F4F6" StrokeShape="RoundRectangle 12" StrokeThickness="1">
+                                            <VerticalStackLayout Spacing="3">
+                                                <Label FontSize="12" Text="{Binding ExerciseName}"
+                                                       TextColor="#9CA3AF" LineBreakMode="TailTruncation" MaxLines="1" />
+                                                <Label FontAttributes="Bold" FontSize="20"
+                                                       Text="{Binding WeightLabel}" TextColor="{Binding ValueColor}" />
+                                            </VerticalStackLayout>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </VerticalStackLayout>
                     </Border>
 
                     <!-- Achievements -->
-                    <Border BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6"
+                            StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <VerticalStackLayout Spacing="14">
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" FontAttributes="Bold" FontSize="16" Text="Achievements" TextColor="#111827" />
-                                <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="All 18 ›" TextColor="#7C3AED" />
+                                <Label Grid.Column="0" FontAttributes="Bold" FontSize="16"
+                                       Text="{loc:Translate Profile_Achievements}" TextColor="#111827" />
+                                <Label Grid.Column="1" FontAttributes="Bold" FontSize="13"
+                                       Text="{Binding UnlockedLabel}" TextColor="#7C3AED" />
                             </Grid>
-                            <HorizontalStackLayout Spacing="10">
-                                <Border BackgroundColor="#FEF3C7" HeightRequest="48" StrokeShape="RoundRectangle 14" StrokeThickness="0" WidthRequest="48">
-                                    <Label FontSize="24" HorizontalOptions="Center" Text="🔥" VerticalOptions="Center" />
-                                </Border>
-                                <Border BackgroundColor="#EDE9FE" HeightRequest="48" StrokeShape="RoundRectangle 14" StrokeThickness="0" WidthRequest="48">
-                                    <Label FontSize="24" HorizontalOptions="Center" Text="💪" VerticalOptions="Center" />
-                                </Border>
-                                <Border BackgroundColor="#FEF3C7" HeightRequest="48" StrokeShape="RoundRectangle 14" StrokeThickness="0" WidthRequest="48">
-                                    <Label FontSize="24" HorizontalOptions="Center" Text="🏆" VerticalOptions="Center" />
-                                </Border>
-                                <Border BackgroundColor="#EDE9FE" HeightRequest="48" StrokeShape="RoundRectangle 14" StrokeThickness="0" WidthRequest="48">
-                                    <Label FontSize="24" HorizontalOptions="Center" Text="⚡" VerticalOptions="Center" />
-                                </Border>
-                                <Border BackgroundColor="#F3F4F6" HeightRequest="48" StrokeShape="RoundRectangle 14" StrokeThickness="0" WidthRequest="48">
-                                    <Label FontSize="24" HorizontalOptions="Center" Text="🎯" VerticalOptions="Center" />
-                                </Border>
-                                <Border BackgroundColor="#F3F4F6" HeightRequest="48" StrokeShape="RoundRectangle 14" StrokeThickness="0" WidthRequest="48">
-                                    <Label FontSize="24" HorizontalOptions="Center" Text="⭐" VerticalOptions="Center" />
-                                </Border>
-                            </HorizontalStackLayout>
+
+                            <CollectionView ItemsSource="{Binding Achievements}"
+                                            SelectionMode="None"
+                                            HeightRequest="90">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:AchievementVM">
+                                        <VerticalStackLayout Spacing="5" WidthRequest="58" Opacity="{Binding Opacity}">
+                                            <Border BackgroundColor="{Binding DisplayColor}"
+                                                    HeightRequest="82" WidthRequest="82"
+                                                    StrokeShape="RoundRectangle 16" StrokeThickness="0">
+                                                <Label FontSize="26" HorizontalOptions="Center"
+                                                       Text="{Binding Emoji}" VerticalOptions="Center" />
+                                            </Border>
+                                            <Label FontSize="9" FontAttributes="Bold"
+                                                   Text="{Binding Title}" TextColor="{Binding TitleColor}"
+                                                   HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                                                   LineBreakMode="WordWrap" MaxLines="2" />
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </VerticalStackLayout>
                     </Border>
 
-                    <!-- Settings list -->
-                    <Border BackgroundColor="White" Padding="4,8" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <!-- Settings -->
+                    <Border BackgroundColor="White" Padding="4,8" Stroke="#F3F4F6"
+                            StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <VerticalStackLayout>
-
-                            <!-- Notifications -->
-                            <Grid Padding="16,14" ColumnDefinitions="*,Auto">
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnNotificationsTapped" />
-                                </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" FontSize="15" Text="Notifications" TextColor="#111827" VerticalOptions="Center" />
-                                <Label Grid.Column="1" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
-                            </Grid>
-                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
-
-                            <!-- Units -->
-                            <Grid Padding="16,14" ColumnDefinitions="*,Auto">
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnUnitsTapped" />
-                                </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" FontSize="15" Text="Units (kg / lbs)" TextColor="#111827" VerticalOptions="Center" />
-                                <Label Grid.Column="1" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
-                            </Grid>
-                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
-
-                            <!-- Language -->
                             <Grid Padding="16,14" ColumnDefinitions="*,Auto">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnLanguageTapped" />
                                 </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" FontSize="15" Text="Language" TextColor="#111827" VerticalOptions="Center" />
+                                <Label Grid.Column="0" FontSize="15" Text="{loc:Translate Profile_Language}" TextColor="#111827" VerticalOptions="Center" />
                                 <Label Grid.Column="1" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
                             </Grid>
                             <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
-
-                            <!-- Privacy -->
-                            <Grid Padding="16,14" ColumnDefinitions="*,Auto">
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnPrivacyTapped" />
-                                </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" FontSize="15" Text="Privacy" TextColor="#111827" VerticalOptions="Center" />
-                                <Label Grid.Column="1" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
-                            </Grid>
-
                         </VerticalStackLayout>
                     </Border>
 

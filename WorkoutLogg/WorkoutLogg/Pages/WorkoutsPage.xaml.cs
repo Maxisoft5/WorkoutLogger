@@ -1,4 +1,5 @@
 using Moduels.Workouts.DTO.Enums;
+using WorkoutLogg.Localization;
 using WorkoutLogg.PageModels;
 
 namespace WorkoutLogg.Pages;
@@ -32,17 +33,21 @@ public partial class WorkoutsPage : ContentPage
     {
         if (e.Parameter is not Guid workoutId) return;
 
-        var action = await DisplayActionSheet(null, "Cancel", null, "Edit", "Delete");
+        var edit   = Loc.Get("Common_Edit");
+        var delete = Loc.Get("Common_Delete");
+        var action = await DisplayActionSheet(null, Loc.Get("Common_Cancel"), null, edit, delete);
 
-        if (action == "Edit")
+        if (action == edit)
             await Shell.Current.GoToAsync($"AddWorkout?workoutId={workoutId}");
-        else if (action == "Delete")
+        else if (action == delete)
             await ConfirmAndDeleteAsync(workoutId);
     }
 
     private async Task ConfirmAndDeleteAsync(Guid workoutId)
     {
-        bool confirmed = await DisplayAlert("Delete Workout", "Are you sure you want to delete this workout?", "Delete", "Cancel");
+        bool confirmed = await DisplayAlert(
+            Loc.Get("Workouts_DeleteTitle"), Loc.Get("Workouts_DeleteMsg"),
+            Loc.Get("Common_Delete"), Loc.Get("Common_Cancel"));
         if (!confirmed) return;
 
         await _vm.DeleteWorkoutCommand.ExecuteAsync(workoutId);

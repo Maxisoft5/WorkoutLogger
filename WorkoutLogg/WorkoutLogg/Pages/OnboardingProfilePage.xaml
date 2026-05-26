@@ -3,6 +3,7 @@
     x:Class="WorkoutLogg.Pages.OnboardingProfilePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     BackgroundColor="#EEEEF6"
     Shell.NavBarIsVisible="False">
 
@@ -19,11 +20,11 @@
             <VerticalStackLayout Padding="28,0" Spacing="0">
 
                 <!-- Step label -->
-                <Label CharacterSpacing="1" FontAttributes="Bold" FontSize="11" Margin="0,0,0,10" Text="STEP 1 OF 3" TextColor="#9CA3AF" />
+                <Label CharacterSpacing="1" FontAttributes="Bold" FontSize="11" Margin="0,0,0,10" Text="{loc:Translate Onboarding_Step1}" TextColor="#9CA3AF" />
 
                 <!-- Title -->
-                <Label FontAttributes="Bold" FontSize="28" Margin="0,0,0,8" Text="Tell us about you" TextColor="#111827" />
-                <Label FontSize="14" Margin="0,0,0,36" Text="This helps personalise your experience" TextColor="#9CA3AF" />
+                <Label FontAttributes="Bold" FontSize="28" Margin="0,0,0,8" Text="{loc:Translate Onboarding_ProfileTitle}" TextColor="#111827" />
+                <Label FontSize="14" Margin="0,0,0,36" Text="{loc:Translate Onboarding_ProfileSubtitle}" TextColor="#9CA3AF" />
 
                 <!-- Avatar -->
                 <Grid HorizontalOptions="Center" Margin="0,0,0,36" WidthRequest="150" HeightRequest="150">
@@ -62,7 +63,7 @@
                 </Grid>
 
                 <!-- DATE OF BIRTH -->
-                <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="DATE OF BIRTH" TextColor="#6B7280" />
+                <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Onboarding_DateOfBirth}" TextColor="#6B7280" />
                 <Border Margin="0,0,0,16" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
                     <DatePicker
                         x:Name="BirthDatePicker"
@@ -76,14 +77,13 @@
                 </Border>
 
                 <!-- BIOLOGICAL SEX -->
-                <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,12" Text="BIOLOGICAL SEX" 
-                       TextColor="#6B7280" />
+                <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,12" Text="{loc:Translate Onboarding_BiologicalSex}" TextColor="#6B7280" />
                 <HorizontalStackLayout Margin="0,0,0,8" Spacing="10">
                     <Border x:Name="MaleBorder" BackgroundColor="#7C3AED" StrokeShape="RoundRectangle 12" StrokeThickness="0" WidthRequest="100">
-                        <Button x:Name="MaleButton" BackgroundColor="Transparent" Clicked="OnMaleSelected" FontAttributes="Bold" FontSize="14" Text="Male" TextColor="White" />
+                        <Button x:Name="MaleButton" BackgroundColor="Transparent" Clicked="OnMaleSelected" FontAttributes="Bold" FontSize="14" Text="{loc:Translate Onboarding_Male}" TextColor="White" />
                     </Border>
                     <Border x:Name="FemaleBorder" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5" WidthRequest="100">
-                        <Button x:Name="FemaleButton" BackgroundColor="Transparent" Clicked="OnFemaleSelected" FontAttributes="Bold" FontSize="14" Text="Female" TextColor="#374151" />
+                        <Button x:Name="FemaleButton" BackgroundColor="Transparent" Clicked="OnFemaleSelected" FontAttributes="Bold" FontSize="14" Text="{loc:Translate Onboarding_Female}" TextColor="#374151" />
                     </Border>
                 </HorizontalStackLayout>
 
@@ -98,7 +98,7 @@
                     <GradientStop Color="#9333EA" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
-            <Button BackgroundColor="Transparent" Clicked="OnContinueClicked" FontAttributes="Bold" FontSize="16" Text="Continue →" TextColor="White" />
+            <Button BackgroundColor="Transparent" Clicked="OnContinueClicked" FontAttributes="Bold" FontSize="16" Text="{loc:Translate Common_Continue}" TextColor="White" />
         </Border>
 
     </Grid>

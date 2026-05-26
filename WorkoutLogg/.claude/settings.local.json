@@ -4,7 +4,22 @@
       "PowerShell(Get-ChildItem \"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\" | ForEach-Object { \"$\\($_.Attributes\\) $\\($_.Name\\)\" })",
       "PowerShell(Get-ChildItem \"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\\\\WorkoutLogger.WebApi\" | ForEach-Object { $_.Name })",
       "PowerShell(Get-ChildItem \"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\\\\WorkoutLogger.WebApi\\\\Controllers\" | ForEach-Object { $_.Name })",
-      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\\\\Modules.Users.Infrastructure\" -Recurse | Where-Object { !$_.PSIsContainer } | ForEach-Object { $_.FullName.Replace\\(\"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\\\\\", \"\"\\) })"
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\\\\Modules.Users.Infrastructure\" -Recurse | Where-Object { !$_.PSIsContainer } | ForEach-Object { $_.FullName.Replace\\(\"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\\\\\", \"\"\\) })",
+      "Bash(dotnet build *)",
+      "Bash(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\\\\WorkoutLogg\\\\Resources\\\\Languages\")",
+      "Bash(Out-Null)",
+      "Bash(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\\\\WorkoutLogg\\\\Localization\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\\\\WorkoutLogg\\\\Resources\\\\Languages\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\maxis\\\\source\\\\repos\\\\WorkoutLogg\\\\WorkoutLogg\\\\Localization\")",
+      "Bash(dotnet package *)",
+      "Bash(dotnet nuget *)",
+      "Bash(ls \"C:\\\\Users\\\\maxis\\\\.nuget\\\\packages\\\\aksoftware.localization.multilanguages\" 2>&1)",
+      "Read(//c/Users/maxis/.nuget/packages/aksoftware.localization.multilanguages/**)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\maxis\\\\.nuget\\\\packages\\\\aksoftware.localization.multilanguages\\\\5.1.0\" -Recurse -Force | ForEach-Object { $_.FullName })",
+      "PowerShell(Get-Command ildasm 2>&1)",
+      "PowerShell(Get-Command ilspycmd 2>&1)",
+      "PowerShell(dotnet tool list -g 2>&1)",
+      "Bash(xargs grep -l \"AppShell\\\\|Shell\")"
     ]
   }
 }

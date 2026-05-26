@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui;
+﻿using AKSoftware.Localization.MultiLanguages;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Modules.Users.Domain.Authentication;
 using Modules.Users.Infrastructure.Api;
@@ -6,6 +7,8 @@ using Modules.Users.Infrastructure.Authorization;
 using Refit;
 using Syncfusion.Maui.Toolkit.Hosting;
 using WorkoutLogg.Database;
+using WorkoutLogg.Localization;
+using WorkoutLogg.Services;
 using AuthService = Modules.Users.Infrastructure.Authorization.AuthService;
 
 namespace WorkoutLogg;
@@ -71,17 +74,47 @@ public static class MauiProgram
         builder.Services.AddSingleton<WorkoutLogg.PageModels.LoggerPageModel>();
         builder.Services.AddTransient<WorkoutLogg.Pages.LoggerPage>();
         builder.Services.AddTransient<WorkoutLogg.Pages.AddLogPage>();
+        builder.Services.AddSingleton<WorkoutLogg.PageModels.DashboardPageModel>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.DashboardPage>();
+        builder.Services.AddSingleton<WorkoutLogg.Services.UserProfileService>();
+        builder.Services.AddSingleton<WorkoutLogg.PageModels.ProfilePageModel>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.ProfilePage>();
+        builder.Services.AddTransient<AppShell>();
 
-        const string baseUrl = "https://localhost:5001";
+        // On Android emulator the host machine is 10.0.2.2, not localhost.
+        // Dev HTTPS certificate is not trusted by Android, so bypass validation in Debug.
+        var baseUrl = DeviceInfo.Platform == DevicePlatform.Android
+            ? "https://10.0.2.2:5001"
+            : "https://localhost:5001";
+
+#if DEBUG
+        static HttpMessageHandler DevHandler() => new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+        };
+#endif
+
         builder.Services.AddRefitClient<IAuthApi>()
               .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
-			  .AddHttpMessageHandler<AuthHeaderHandler>();
+#if DEBUG
+              .ConfigurePrimaryHttpMessageHandler(DevHandler)
+#endif
+              .AddHttpMessageHandler<AuthHeaderHandler>();
 
         builder.Services.AddRefitClient<IAuthRefreshApi>()
-				.ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl));
+              .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+#if DEBUG
+              .ConfigurePrimaryHttpMessageHandler(DevHandler)
+#endif
+              ;
 
         builder.Services.AddRefitClient<WorkoutLogg.Services.IWorkoutsApi>()
-            .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl));
+            .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+#if DEBUG
+            .ConfigurePrimaryHttpMessageHandler(DevHandler)
+#endif
+            ;
 
         builder.Services.AddSingleton<WorkoutLogg.Services.WorkoutSyncService>();
 
@@ -97,6 +130,21 @@ public static class MauiProgram
         builder.Services.AddFluentValidation();
 
 
-        return builder.Build();
+        // Localization — scans embedded *.yml resources in the app assembly
+        builder.Services.AddSingleton<ILanguageContainerService>(_ =>
+        {
+            var keysProvider = new EmbeddedResourceKeysProvider(
+                typeof(App).Assembly, "Resources.Languages");
+            return new LanguageContainerInAssembly(keysProvider);
+        });
+        builder.Services.AddSingleton<LanguageService>();
+
+        var mauiApp = builder.Build();
+
+        // Initialise static Loc accessor and apply saved/detected language
+        var langService = mauiApp.Services.GetRequiredService<LanguageService>();
+        langService.ApplyPreferred();
+
+        return mauiApp;
 	}
 }

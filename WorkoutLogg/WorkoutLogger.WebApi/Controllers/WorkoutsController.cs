@@ -69,11 +69,19 @@ public class WorkoutsController(UsersDbContext dbContext) : ControllerBase
         workout.EndDate = DateTime.SpecifyKind(request.EndDate, DateTimeKind.Utc);
         workout.UpdatedAtUtc = DateTime.UtcNow;
 
-        foreach (var ex in workout.Exercises)
-            dbContext.ExerciseSets.RemoveRange(ex.Sets);
-        dbContext.Exercises.RemoveRange(workout.Exercises);
+        // Remove old exercises one-by-one so EF cascade-deletes their Sets automatically.
+        // Calling RemoveRange on Sets separately causes a double-delete concurrency exception
+        // because DeleteBehavior.Cascade already marks Sets as Deleted when their Exercise is removed.
+        foreach (var ex in workout.Exercises.ToList())
+            dbContext.Remove(ex);
 
-        workout.Exercises = request.Exercises.Select(MapExercise).ToList();
+        foreach (var req in request.Exercises)
+        {
+            var ex = MapExercise(req);
+            ex.WorkoutId = workout.Id;
+            dbContext.Exercises.Add(ex);
+        }
+
         await dbContext.SaveChangesAsync(ct);
 
         return Ok(ToResponse(workout, Guid.Empty));
@@ -91,9 +99,6 @@ public class WorkoutsController(UsersDbContext dbContext) : ControllerBase
 
         if (workout is null) return NotFound();
 
-        foreach (var ex in workout.Exercises)
-            dbContext.ExerciseSets.RemoveRange(ex.Sets);
-        dbContext.Exercises.RemoveRange(workout.Exercises);
         dbContext.Workouts.Remove(workout);
         await dbContext.SaveChangesAsync(ct);
 

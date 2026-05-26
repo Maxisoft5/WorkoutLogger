@@ -50,7 +50,7 @@
             <!-- Days grid populated from code-behind -->
             <Grid x:Name="DaysGrid"
                   ColumnDefinitions="*,*,*,*,*,*,*"
-                  RowDefinitions="*,*,*,*,*,*"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
                   ColumnSpacing="4"
                   RowSpacing="4" />
 

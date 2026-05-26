@@ -1,3 +1,5 @@
+using WorkoutLogg.Localization;
+
 namespace WorkoutLogg.Pages.Controls;
 
 public partial class MainTabBar : ContentView
@@ -15,6 +17,10 @@ public partial class MainTabBar : ContentView
     public MainTabBar()
     {
         InitializeComponent();
+        DashboardLabel.Text = Loc.Get("Tab_Dashboard");
+        WorkoutsLabel.Text  = Loc.Get("Tab_Workouts");
+        LoggerLabel.Text    = Loc.Get("Tab_Logger");
+        ProfileLabel.Text   = Loc.Get("Tab_Profile");
         UpdateActiveTab("Dashboard");
     }
 

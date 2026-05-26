@@ -5,7 +5,7 @@ public partial class CalendarPicker : ContentView
     // ── Bindable Properties ───────────────────────────────────────────────
 
     public static readonly BindableProperty SelectedDateProperty =
-        BindableProperty.Create(nameof(SelectedDate), typeof(DateTime?), typeof(CalendarPicker), null,
+        BindableProperty.Create(nameof(SelectedDate), typeof(DateTime?), typeof(CalendarPicker), DateTime.Today,
             propertyChanged: (b, _, _) => ((CalendarPicker)b).Rebuild());
 
     public DateTime? SelectedDate
@@ -88,8 +88,6 @@ public partial class CalendarPicker : ContentView
             var cell = BuildCell(day, isSel, isTod, isMark, date);
             Grid.SetColumn(cell, col);
             Grid.SetRow(cell, row);
-            cell.HorizontalOptions = LayoutOptions.Center;
-            cell.VerticalOptions = LayoutOptions.Center;
             DaysGrid.Children.Add(cell);
 
             if (++col > 6) { col = 0; row++; }
@@ -101,58 +99,58 @@ public partial class CalendarPicker : ContentView
         var accent = AccentColor;
         var accentLight = Color.FromArgb("#EDE9FE");
 
-        var label = new Label
-        {
-            Text = day.ToString(),
-            FontSize = 14,
-            FontAttributes = isSel || isTod ? FontAttributes.Bold : FontAttributes.None,
-            HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.Center,
-            TextColor = isSel ? Colors.White
-                              : isTod ? accent
-                              : Color.FromArgb("#111827"),
-        };
+        // Размер квадрата-индикатора выделения (не самой ячейки)
+        double bgSize = DeviceInfo.Idiom == DeviceIdiom.Desktop ? 44 : 38;
 
-        var dot = new Microsoft.Maui.Controls.Shapes.Ellipse
-        {
-            Fill = isSel ? Colors.White : accent,
-            HeightRequest = 15,
-            WidthRequest = 15,
-            HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.End,
-            Margin = new Thickness(0, 2, 0, 0),
-            IsVisible = isMark,
-        };
-
-        // Grid вместо VerticalStackLayout — он всегда занимает всю ячейку
-        var inner = new Grid
-        {
-            RowDefinitions = new RowDefinitionCollection
-        {
-            new RowDefinition { Height = GridLength.Star },
-            new RowDefinition { Height = 8 },
-        },
-            HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.Center,
-            WidthRequest = 50,
-            HeightRequest = 50,
-        };
-        Grid.SetRow(label, 0);
-        Grid.SetRow(dot, 1);
-        inner.Children.Add(label);
-        inner.Children.Add(dot);
-
-        var bg = new Border
+        // Индикатор выделения — фиксированный квадрат, наложен поверх
+        var selBg = new Border
         {
             BackgroundColor = isSel ? accent : isTod ? accentLight : Colors.Transparent,
             StrokeThickness = 0,
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 10 },
-            HeightRequest = 100,
-            WidthRequest = 100,
+            HeightRequest = bgSize,
+            WidthRequest = bgSize,
             HorizontalOptions = LayoutOptions.Center,
             VerticalOptions = LayoutOptions.Center,
-            Content = inner,
         };
+
+        // Число — свободно центрируется в ячейке, не зажато в bgSize
+        var label = new Label
+        {
+            Text = day.ToString(),
+            FontSize = DeviceInfo.Idiom == DeviceIdiom.Desktop ? 15 : 14,
+            FontAttributes = isSel || isTod ? FontAttributes.Bold : FontAttributes.None,
+            HorizontalOptions = LayoutOptions.Center,
+            VerticalOptions = LayoutOptions.Center,
+            TextColor = isSel ? Colors.White : isTod ? accent : Color.FromArgb("#111827"),
+        };
+
+        // Точка-индикатор залоггированного дня
+        var dot = new Microsoft.Maui.Controls.Shapes.Ellipse
+        {
+            Fill = isSel ? Colors.White : accent,
+            HeightRequest = 5,
+            WidthRequest = 5,
+            HorizontalOptions = LayoutOptions.Center,
+            IsVisible = isMark,
+        };
+
+        // Контейнер заполняет всю колонку; selBg и label в одной строке (overlay)
+        var container = new Grid
+        {
+            HorizontalOptions = LayoutOptions.Fill,
+            RowDefinitions = new RowDefinitionCollection(
+                new RowDefinition(new GridLength(bgSize)),
+                new RowDefinition(new GridLength(8))),
+        };
+
+        Grid.SetRow(selBg, 0);
+        Grid.SetRow(label, 0);
+        Grid.SetRow(dot, 1);
+
+        container.Children.Add(selBg);
+        container.Children.Add(label);
+        container.Children.Add(dot);
 
         var tap = new TapGestureRecognizer();
         tap.Tapped += (_, _) =>
@@ -160,8 +158,8 @@ public partial class CalendarPicker : ContentView
             SelectedDate = date;
             DateSelected?.Invoke(this, date);
         };
-        bg.GestureRecognizers.Add(tap);
+        container.GestureRecognizers.Add(tap);
 
-        return bg;
+        return container;
     }
 }

@@ -611,3 +611,5 @@ C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-windows10.
 C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-windows10.0.19041.0\win-x64\zlib1.dll
 C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-windows10.0.19041.0\win-x64\zstd.dll
 C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-windows10.0.19041.0\win-x64\SQLite-net.dll
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-windows10.0.19041.0\win-x64\AKSoftware.Localization.MultiLanguages.dll
+C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-windows10.0.19041.0\win-x64\YamlDotNet.dll

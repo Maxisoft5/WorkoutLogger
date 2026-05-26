@@ -1,6 +1,6 @@
 [
   {
-    "Name": "Новый профиль",
+    "Name": "desktop",
     "Projects": [
       {
         "Path": "WorkoutLogger.WebApi\\WorkoutLogger.WebApi.csproj",

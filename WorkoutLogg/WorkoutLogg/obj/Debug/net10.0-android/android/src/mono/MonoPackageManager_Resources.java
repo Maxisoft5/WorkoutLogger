@@ -3,6 +3,7 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "WorkoutLogg.dll" comes first in this list. */
 		"WorkoutLogg.dll",
+		"AKSoftware.Localization.MultiLanguages.dll",
 		"CommunityToolkit.Maui.dll",
 		"CommunityToolkit.Maui.Core.dll",
 		"CommunityToolkit.Mvvm.dll",
@@ -185,6 +186,7 @@ public class MonoPackageManager_Resources {
 		"Xamarin.KotlinX.Coroutines.Core.Jvm.dll",
 		"Xamarin.KotlinX.Serialization.Core.dll",
 		"Xamarin.KotlinX.Serialization.Core.Jvm.dll",
+		"YamlDotNet.dll",
 		"Microsoft.Maui.Controls.resources.dll",
 		"Microsoft.Maui.Controls.resources.dll",
 		"Microsoft.Maui.Controls.resources.dll",
@@ -219,6 +221,10 @@ public class MonoPackageManager_Resources {
 		"Microsoft.Maui.Controls.resources.dll",
 		"Microsoft.Maui.Controls.resources.dll",
 		"Microsoft.Maui.Controls.resources.dll",
+		"Microsoft.Maui.Controls.HotReload.Forms.dll",
+		"Microsoft.VisualStudio.DesignTools.MobileTapContracts.dll",
+		"Microsoft.VisualStudio.DesignTools.TapContract.dll",
+		"Microsoft.VisualStudio.DesignTools.XamlTapContract.dll",
 		"Moduels.Workouts.DTO.dll",
 		"Modules.Common.Domain.dll",
 		"Modules.Common.Grpc.Contacts.dll",

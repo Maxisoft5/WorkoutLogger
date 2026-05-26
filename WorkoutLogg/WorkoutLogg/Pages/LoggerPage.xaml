@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
     BackgroundColor="#EEEEF6"
     Shell.NavBarIsVisible="False">
@@ -16,7 +17,7 @@
                 <!-- Header -->
                 <Grid ColumnDefinitions="*,Auto">
                     <VerticalStackLayout Grid.Column="0" Spacing="2">
-                        <Label FontAttributes="Bold" FontSize="28" Text="Logger" TextColor="#111827" />
+                        <Label FontAttributes="Bold" FontSize="28" Text="{loc:Translate Logger_Title}" TextColor="#111827" />
                         <Label x:Name="DateLabel" FontSize="14" Text="Today" TextColor="#9CA3AF" />
                     </VerticalStackLayout>
                     <Border Grid.Column="1"
@@ -133,11 +134,11 @@
                     <Label FontAttributes="Bold"
                            FontSize="16"
                            HorizontalOptions="Center"
-                           Text="No workouts logged"
+                           Text="{loc:Translate Logger_Empty}"
                            TextColor="#111827" />
                     <Label FontSize="14"
                            HorizontalOptions="Center"
-                           Text="Tap + to log your workout"
+                           Text="{loc:Translate Logger_EmptySubtitle}"
                            TextColor="#9CA3AF" />
                 </VerticalStackLayout>
 

@@ -3,6 +3,7 @@
     x:Class="WorkoutLogg.Pages.LoginPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     BackgroundColor="#EEEEF6"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">
@@ -36,7 +37,7 @@
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
                 Margin="0,0,0,8"
-                Text="Welcome back"
+                Text="{loc:Translate Login_Welcome}"
                 TextColor="#111827" />
 
             <!-- Subtitle -->
@@ -46,7 +47,7 @@
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
                 Margin="0,0,0,40"
-                Text="Sign in to continue your journey"
+                Text="{loc:Translate Login_Subtitle}"
                 TextColor="#9CA3AF" />
 
             <!-- EMAIL Label -->
@@ -56,7 +57,7 @@
                 FontFamily="OpenSans"
                 FontSize="11"
                 Margin="4,0,0,8"
-                Text="EMAIL"
+                Text="{loc:Translate Login_EmailLabel}"
                 TextColor="#6B7280" />
 
             <!-- Email Entry -->
@@ -88,7 +89,7 @@
                 FontFamily="OpenSans"
                 FontSize="11"
                 Margin="4,0,0,8"
-                Text="PASSWORD"
+                Text="{loc:Translate Login_PasswordLabel}"
                 TextColor="#6B7280" />
 
             <!-- Password Entry -->
@@ -121,7 +122,7 @@
                 FontSize="14"
                 HorizontalOptions="End"
                 Margin="0,0,4,32"
-                Text="Forgot password?"
+                Text="{loc:Translate Login_ForgotPassword}"
                 TextColor="#7C3AED">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnForgotPasswordTapped" />
@@ -148,7 +149,7 @@
                     FontSize="17"
                     HorizontalOptions="Fill"
                     VerticalOptions="Fill"
-                    Text="Sign In"
+                    Text="{loc:Translate Login_SignIn}"
                     TextColor="White" />
             </Border>
 
@@ -167,7 +168,7 @@
                     Grid.Column="1"
                     FontFamily="OpenSans"
                     FontSize="13"
-                    Text="or continue with"
+                    Text="{loc:Translate Login_OrContinueWith}"
                     TextColor="#9CA3AF"
                     VerticalOptions="Center" />
                 <BoxView
@@ -226,14 +227,14 @@
                 <Label
                     FontFamily="OpenSans"
                     FontSize="14"
-                    Text="Don't have an account?"
+                    Text="{loc:Translate Login_NoAccount}"
                     TextColor="#9CA3AF"
                     VerticalOptions="Center" />
                 <Label
                     FontAttributes="Bold"
                     FontFamily="OpenSans"
                     FontSize="14"
-                    Text="Sign Up"
+                    Text="{loc:Translate Login_SignUp}"
                     TextColor="#7C3AED"
                     VerticalOptions="Center">
                     <Label.GestureRecognizers>

@@ -1,3 +1,4 @@
+using WorkoutLogg.Localization;
 using WorkoutLogg.PageModels;
 
 namespace WorkoutLogg.Pages;
@@ -38,13 +39,17 @@ public partial class LoggerPage : ContentPage
     {
         if (e.Parameter is not Guid sessionId) return;
 
-        var action = await DisplayActionSheet(null, "Cancel", null, "Edit", "Delete");
+        var edit   = Loc.Get("Common_Edit");
+        var delete = Loc.Get("Common_Delete");
+        var action = await DisplayActionSheet(null, Loc.Get("Common_Cancel"), null, edit, delete);
 
-        if (action == "Edit")
+        if (action == edit)
             await Shell.Current.GoToAsync($"AddLog?sessionId={sessionId}");
-        else if (action == "Delete")
+        else if (action == delete)
         {
-            bool ok = await DisplayAlert("Delete", "Remove this log entry?", "Delete", "Cancel");
+            bool ok = await DisplayAlert(
+                Loc.Get("Logger_DeleteTitle"), Loc.Get("Logger_DeleteMsg"),
+                Loc.Get("Common_Delete"), Loc.Get("Common_Cancel"));
             if (ok)
             {
                 await _vm.DeleteSessionCommand.ExecuteAsync(sessionId);

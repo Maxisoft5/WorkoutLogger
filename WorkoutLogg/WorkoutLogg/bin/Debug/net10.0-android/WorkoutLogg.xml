@@ -236,6 +236,74 @@
             Drops the Task table from the database.
             </summary>
         </member>
+        <member name="T:WorkoutLogg.Localization.Loc">
+            <summary>Static accessor — initialized once from MauiProgram after DI build.</summary>
+        </member>
+        <member name="M:WorkoutLogg.Localization.Loc.Get(System.String)">
+            <summary>Returns the translated string for <paramref name="key"/>, or the key itself if missing.</summary>
+        </member>
+        <member name="T:WorkoutLogg.Localization.TranslateExtension">
+            <summary>
+            XAML markup extension: Text="{loc:Translate Dashboard_Title}"
+            Reads the value at XAML inflation time — the shell is reloaded on language change
+            so all markup extensions re-evaluate automatically.
+            </summary>
+        </member>
+        <member name="T:WorkoutLogg.PageModels.DashboardPageModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.TotalWorkoutsLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.totalWorkoutsLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.WeeklyChangeLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.weeklyChangeLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.StreakDaysLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.streakDaysLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.WeekVolumeLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.weekVolumeLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.WorkoutsGoalPct">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.workoutsGoalPct"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.VolumeGoalPct">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.volumeGoalPct"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.ConsistencyGoalPct">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.consistencyGoalPct"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.WorkoutsGoalSub">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.workoutsGoalSub"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.VolumeGoalSub">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.volumeGoalSub"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.ConsistencyGoalSub">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.consistencyGoalSub"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.LastTitle">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.lastTitle"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.LastSubLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.lastSubLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.LastVolumeLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.lastVolumeLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.LastEmoji">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.lastEmoji"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.HasLastWorkout">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.DashboardPageModel.hasLastWorkout"/>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.DashboardPageModel.loadCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.DashboardPageModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.DashboardPageModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.DashboardPageModel.LoadAsync"/>.</summary>
+        </member>
         <member name="T:WorkoutLogg.PageModels.LoggerPageModel">
             <inheritdoc/>
             <inheritdoc/>
@@ -422,6 +490,55 @@
         </member>
         <member name="P:WorkoutLogg.PageModels.ManageMetaPageModel.ResetCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ManageMetaPageModel.Reset"/>.</summary>
+        </member>
+        <member name="T:WorkoutLogg.PageModels.ProfilePageModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.UserInitials">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.userInitials"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.UserName">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.userName"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.UserEmail">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.userEmail"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.WeightLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.weightLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.HeightLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.heightLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.BodyFatLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.bodyFatLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.MemberSinceLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.memberSinceLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.IsPremium">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.isPremium"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.StreakLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.streakLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.TotalSessionsLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.totalSessionsLabel"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.PersonalRecords">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.personalRecords"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.Achievements">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.achievements"/>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.UnlockedLabel">
+            <inheritdoc cref="F:WorkoutLogg.PageModels.ProfilePageModel.unlockedLabel"/>
+        </member>
+        <member name="F:WorkoutLogg.PageModels.ProfilePageModel.loadCommand">
+            <summary>The backing field for <see cref="P:WorkoutLogg.PageModels.ProfilePageModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:WorkoutLogg.PageModels.ProfilePageModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:WorkoutLogg.PageModels.ProfilePageModel.LoadAsync"/>.</summary>
         </member>
         <member name="T:WorkoutLogg.PageModels.ProjectDetailPageModel">
             <inheritdoc/>
@@ -646,6 +763,15 @@
             Handle error in UI.
             </summary>
             <param name="ex">Exception being thrown.</param>
+        </member>
+        <member name="P:WorkoutLogg.Services.LanguageService.CurrentCode">
+            <summary>Returns the saved language code, or "auto" if not set.</summary>
+        </member>
+        <member name="M:WorkoutLogg.Services.LanguageService.ApplyPreferred">
+            <summary>Apply the user's saved preference (or detect from device).</summary>
+        </member>
+        <member name="M:WorkoutLogg.Services.LanguageService.SetLanguageAsync(System.String)">
+            <summary>Switch language, persist choice, and reload the shell.</summary>
         </member>
         <member name="T:WorkoutLogg.Services.ModalErrorHandler">
             <summary>
@@ -888,6 +1014,51 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalWorkoutsLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalWorkoutsLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.WeeklyChangeLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "WeeklyChangeLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StreakDaysLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StreakDaysLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.WeekVolumeLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "WeekVolumeLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.WorkoutsGoalPct">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "WorkoutsGoalPct" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.VolumeGoalPct">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "VolumeGoalPct" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConsistencyGoalPct">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConsistencyGoalPct" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.WorkoutsGoalSub">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "WorkoutsGoalSub" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.VolumeGoalSub">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "VolumeGoalSub" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConsistencyGoalSub">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConsistencyGoalSub" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LastTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LastTitle" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LastSubLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LastSubLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LastVolumeLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LastVolumeLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LastEmoji">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LastEmoji" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasLastWorkout">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasLastWorkout" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedDate">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
         </member>
@@ -932,6 +1103,45 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Tags">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Tags" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserInitials">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserInitials" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserEmail">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserEmail" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.WeightLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "WeightLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HeightLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HeightLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BodyFatLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BodyFatLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MemberSinceLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MemberSinceLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsPremium">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsPremium" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StreakLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StreakLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalSessionsLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalSessionsLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PersonalRecords">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PersonalRecords" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Achievements">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Achievements" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UnlockedLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UnlockedLabel" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Name">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Name" generated properties.</summary>
@@ -984,6 +1194,51 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalWorkoutsLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalWorkoutsLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.WeeklyChangeLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "WeeklyChangeLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StreakDaysLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StreakDaysLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.WeekVolumeLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "WeekVolumeLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.WorkoutsGoalPct">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "WorkoutsGoalPct" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.VolumeGoalPct">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "VolumeGoalPct" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConsistencyGoalPct">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConsistencyGoalPct" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.WorkoutsGoalSub">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "WorkoutsGoalSub" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.VolumeGoalSub">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "VolumeGoalSub" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConsistencyGoalSub">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConsistencyGoalSub" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LastTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LastTitle" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LastSubLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LastSubLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LastVolumeLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LastVolumeLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LastEmoji">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LastEmoji" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasLastWorkout">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasLastWorkout" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedDate">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
         </member>
@@ -1028,6 +1283,45 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Tags">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Tags" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserInitials">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserInitials" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserEmail">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserEmail" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.WeightLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "WeightLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HeightLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HeightLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BodyFatLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BodyFatLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MemberSinceLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MemberSinceLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsPremium">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsPremium" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StreakLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StreakLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalSessionsLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalSessionsLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PersonalRecords">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PersonalRecords" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Achievements">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Achievements" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UnlockedLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UnlockedLabel" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Name">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Name" generated properties.</summary>
