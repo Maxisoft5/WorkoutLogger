@@ -1,29 +1,31 @@
-# См. статью по ссылке https://aka.ms/customizecontainer, чтобы узнать как настроить контейнер отладки и как Visual Studio использует этот Dockerfile для создания образов для ускорения отладки.
-
-# Этот этап используется при запуске из VS в быстром режиме (по умолчанию для конфигурации отладки)
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 5000
 
-
-# Этот этап используется для сборки проекта службы
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
 COPY ["WorkoutLogger.WebApi/WorkoutLogger.WebApi.csproj", "WorkoutLogger.WebApi/"]
+COPY ["Modules.Common.Grpc.Contacts/Modules.Common.Grpc.Contacts.csproj", "Modules.Common.Grpc.Contacts/"]
+COPY ["Modules.Common.Infrastructure/Modules.Common.Infrastructure.csproj", "Modules.Common.Infrastructure/"]
+COPY ["Modules.Common.Domain/Modules.Common.Domain.csproj", "Modules.Common.Domain/"]
+COPY ["Modules.Users.Domain/Modules.Users.Domain.csproj", "Modules.Users.Domain/"]
+COPY ["Modules.Users.Infrastructure/Modules.Users.Infrastructure.csproj", "Modules.Users.Infrastructure/"]
+COPY ["Modules.Users.DTO/Modules.Users.DTO.csproj", "Modules.Users.DTO/"]
+COPY ["Moduels.Workouts.DTO/Moduels.Workouts.DTO.csproj", "Moduels.Workouts.DTO/"]
+COPY ["WorkoutLogg.ServiceDefaults/WorkoutLogg.ServiceDefaults.csproj", "WorkoutLogg.ServiceDefaults/"]
+
 RUN dotnet restore "./WorkoutLogger.WebApi/WorkoutLogger.WebApi.csproj"
 COPY . .
 WORKDIR "/src/WorkoutLogger.WebApi"
 RUN dotnet build "./WorkoutLogger.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-# Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./WorkoutLogger.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# Этот этап используется в рабочей среде или при запуске из VS в обычном режиме (по умолчанию, когда конфигурация отладки не используется)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .

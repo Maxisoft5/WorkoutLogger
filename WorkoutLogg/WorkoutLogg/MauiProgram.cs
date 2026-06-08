@@ -123,7 +123,7 @@ public static class MauiProgram
             // На Android эмуляторе хост машины — 10.0.2.2
             var address = DeviceInfo.Platform == DevicePlatform.Android
                 ? "https://10.0.2.2:5001"
-                : "https://localhost:5001";
+                : "http://202.148.55.20:5000";
             return new ExercisesGrpcClient(address);
         });
 

@@ -214,7 +214,7 @@ namespace Modules.Users.Infrastructure.Authorization
                 issuer: authConfiguration.Issuer,
                 audience: authConfiguration.Audience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(15),
+                expires: DateTime.UtcNow.AddMinutes(authConfiguration.TokenExpiryMinutes),
                 signingCredentials: credentials
             );
 

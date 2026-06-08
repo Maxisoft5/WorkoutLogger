@@ -3232,7 +3232,3 @@ C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\obj\Debug\net10.0-android\an
 C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\obj\Debug\net10.0-android\android\assets\arm64-v8a\_Microsoft.Android.Resource.Designer.dll
 C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\obj\Debug\net10.0-android\android\assets\arm64-v8a\_Microsoft.Android.Resource.Designer.jlo.xml
 C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\obj\Debug\net10.0-android\android\assets\arm64-v8a\_Microsoft.Android.Resource.Designer.typemap.xml
-C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-android\Microsoft.Maui.Controls.HotReload.Forms.dll
-C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-android\Microsoft.VisualStudio.DesignTools.MobileTapContracts.dll
-C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-android\Microsoft.VisualStudio.DesignTools.TapContract.dll
-C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\bin\Debug\net10.0-android\Microsoft.VisualStudio.DesignTools.XamlTapContract.dll

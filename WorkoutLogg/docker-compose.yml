@@ -2,6 +2,7 @@ services:
   postgres:
     image: postgres:17-alpine
     container_name: workoutlogger-postgres
+    restart: unless-stopped
     environment:
       POSTGRES_DB: workoutLogger
       POSTGRES_USER: postgres
@@ -19,6 +20,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: workoutlogger-redis
+    restart: unless-stopped
     ports:
       - "6379:6379"
     volumes:
@@ -33,6 +35,7 @@ services:
   redis-commander:
     image: rediscommander/redis-commander:latest
     container_name: workoutlogger-redis-ui
+    restart: unless-stopped
     environment:
       REDIS_HOSTS: local:redis:6379
     ports:
@@ -44,6 +47,7 @@ services:
   kafka:
     image: apache/kafka:3.8.0
     container_name: workoutlogger-kafka
+    restart: unless-stopped
     ports:
       - "9092:9092"
       - "9093:9093"
@@ -52,7 +56,7 @@ services:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,EXTERNAL://0.0.0.0:9094
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://202.148.55.20:9094
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
@@ -62,6 +66,9 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+      KAFKA_MESSAGE_MAX_BYTES: 10485760        # 10 MB (broker max incoming message)
+      KAFKA_REPLICA_FETCH_MAX_BYTES: 10485760  # 10 MB (replication fetch, должен >= MESSAGE_MAX_BYTES)
+      KAFKA_MAX_REQUEST_SIZE: 10485760         # 10 MB (producer request size)
     volumes:
       - kafka-data:/var/lib/kafka/data
     healthcheck:
@@ -73,6 +80,7 @@ services:
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     container_name: workoutlogger-kafka-ui
+    restart: unless-stopped
     ports:
       - "8082:8080"
     environment:
@@ -86,6 +94,7 @@ services:
   opensearch:
     image: opensearchproject/opensearch:2.17.1
     container_name: workoutlogger-opensearch
+    restart: unless-stopped
     environment:
       - discovery.type=single-node
       - DISABLE_SECURITY_PLUGIN=true
@@ -103,6 +112,7 @@ services:
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:2.17.1
     container_name: workoutlogger-opensearch-ui
+    restart: unless-stopped
     ports:
       - "5601:5601"
     environment:
@@ -116,6 +126,7 @@ services:
   grafana:
     image: grafana/grafana:11.3.0
     container_name: workoutlogger-grafana
+    restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
@@ -126,6 +137,31 @@ services:
       - grafana-data:/var/lib/grafana
     depends_on:
       - opensearch
+
+  api:
+    build:
+      context: .
+      dockerfile: WorkoutLogger.WebApi/Dockerfile
+    container_name: workoutlogger-api
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:5000
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=workoutLogger;Username=postgres;Password=051099"
+      ConnectionStrings__Redis: "redis:6379"
+      Kafka__BootstrapServers: "kafka:9092"
+      AuthConfiguration__Key: "your_secret_key_here_change_it_please"
+      AuthConfiguration__Issuer: "DevTips"
+      AuthConfiguration__Audience: "DevTips"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
 
 volumes:
   postgres-data:
