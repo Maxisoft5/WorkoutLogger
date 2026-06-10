@@ -25,7 +25,7 @@ builder.Host.UseSerilog((ctx, _, config) =>
         {
             AutoRegisterTemplate = true,
             AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
-            OverwriteTemplate = false,
+            TypeName = null,
             IndexFormat = "workoutlogger-logs-{0:yyyy.MM.dd}",
             NumberOfShards = 1,
             NumberOfReplicas = 0,
