@@ -99,6 +99,6 @@ public partial class OnboardingBodyStatsPage : ContentPage
         if (upd.IsSuccessStatusCode)
         {
             Application.Current!.Windows[0].Page = new OnboardingGoalsPage();
-        }
+        } 
     }
 }

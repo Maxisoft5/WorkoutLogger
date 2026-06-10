@@ -332,65 +332,73 @@ namespace Modules.Users.Infrastructure.Authorization
 
         public async Task<Result<User>> UpdateUser(UserDto user)
         {
-            if (httpContextAccessor?.HttpContext?.User == null)
-                return new Result<User>(new Error("401", "401", ErrorType.Unauthorized));
+            try
+            {
+                if (httpContextAccessor?.HttpContext?.User == null)
+                    return new Result<User>(new Error("401", "401", ErrorType.Unauthorized));
 
-            var userIdClaim = httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "userid");
-            if (userIdClaim == null)
-                return new Result<User>(new Error("401", "401", ErrorType.Unauthorized));
+                var userIdClaim = httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "userid");
+                if (userIdClaim == null)
+                    return new Result<User>(new Error("401", "401", ErrorType.Unauthorized));
 
-            var userCurrent = await dbContext.Users
-                .Include(x => x.UserGoals)
-                .FirstOrDefaultAsync(x => x.Id == userIdClaim.Value);
+                var userCurrent = await dbContext.Users
+                    .Include(x => x.UserGoals)
+                    .FirstOrDefaultAsync(x => x.Id == userIdClaim.Value);
 
-            if (userCurrent == null) return new Result<User>(new Error("404", "", ErrorType.NotFound));
-            if (!string.IsNullOrWhiteSpace(user.FullName))
-            {
-                userCurrent.UserName = user.FullName;
-            }
-            if (user.DateOfBirth.HasValue)
-            {
-                userCurrent.DateOfBirth = user.DateOfBirth.Value;
-                userCurrent.DateOfBirth = DateTime.SpecifyKind(
-                        user.DateOfBirth.Value, DateTimeKind.Utc);
-            }
-            if (!string.IsNullOrWhiteSpace(user.Email))
-            {
-                userCurrent.Email = user.Email;
-            }
-            if(user.BodyStats != null)
-            {
-                userCurrent.BodyStats = new()
+                if (userCurrent == null) return new Result<User>(new Error("404", "", ErrorType.NotFound));
+                if (!string.IsNullOrWhiteSpace(user.FullName))
                 {
-                    Kg = user.BodyStats.Kg,
-                    Cm = user.BodyStats.Cm,
-                    Fat = user.BodyStats.Fat
-                };
+                    userCurrent.UserName = user.FullName;
+                }
+                if (user.DateOfBirth.HasValue)
+                {
+                    userCurrent.DateOfBirth = user.DateOfBirth.Value;
+                    userCurrent.DateOfBirth = DateTime.SpecifyKind(
+                            user.DateOfBirth.Value, DateTimeKind.Utc);
+                }
+                if (!string.IsNullOrWhiteSpace(user.Email))
+                {
+                    userCurrent.Email = user.Email;
+                }
+                if (user.BodyStats != null)
+                {
+                    userCurrent.BodyStats = new()
+                    {
+                        Kg = user.BodyStats.Kg,
+                        Cm = user.BodyStats.Cm,
+                        Fat = user.BodyStats.Fat
+                    };
+                }
+                if (user.Identity.HasValue)
+                {
+                    userCurrent.Identity = user.Identity.Value;
+                }
+                if (user.WorkOutCount.HasValue)
+                {
+                    userCurrent.WorkOutCount = user.WorkOutCount.Value;
+                }
+                if (user.IsPremium.HasValue)
+                {
+                    userCurrent.IsPremium = user.IsPremium.Value;
+                }
+                if (user.UserRegistrationStep.HasValue)
+                {
+                    userCurrent.UserRegistrationStep = user.UserRegistrationStep.Value;
+                }
+                if (user.Goals != null)
+                {
+                    await SyncGoals(userCurrent, user.Goals);
+                }
+                userCurrent.UpdatedAtUtc = DateTime.UtcNow;
+                await dbContext.SaveChangesAsync();
+                await cacheService.RemoveAsync($"user:{userIdClaim}");
+                return new Result<User>(userCurrent);
             }
-            if (user.Identity.HasValue)
+            catch(Exception ex)
             {
-                userCurrent.Identity = user.Identity.Value;
+                return new Result<User>(new Error("500", ex.Message, ErrorType.Failure));
             }
-            if (user.WorkOutCount.HasValue)
-            {
-                userCurrent.WorkOutCount = user.WorkOutCount.Value;
-            }
-            if (user.IsPremium.HasValue)
-            {
-                userCurrent.IsPremium = user.IsPremium.Value;
-            }
-            if (user.UserRegistrationStep.HasValue)
-            {
-                userCurrent.UserRegistrationStep = user.UserRegistrationStep.Value;
-            }
-            if (user.Goals != null)
-            {
-                await SyncGoals(userCurrent, user.Goals);
-            }
-            userCurrent.UpdatedAtUtc = DateTime.UtcNow;
-            await dbContext.SaveChangesAsync();
-            await cacheService.RemoveAsync($"user:{userIdClaim}");
-            return new Result<User>(userCurrent);
+            return new Result<User>(new Error("500", "not saved",ErrorType.Failure));
         }
 
         private async Task SyncGoals(User userCurrent, List<UserGoalDto> incoming)

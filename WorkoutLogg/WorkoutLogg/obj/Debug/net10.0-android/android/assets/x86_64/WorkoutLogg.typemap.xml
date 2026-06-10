@@ -1,4 +1,4 @@
-<api type="debug" assembly-name="WorkoutLogg" mvid="f6a8383f1daa411f9931dab6738994f1">
+<api type="debug" assembly-name="WorkoutLogg" mvid="918e80eb0be540e780c2615d516c7fe0">
   <java-to-managed>
     <entry java-name="crc6482c51dbe8cb2eb7d/MainActivity" managed-name="WorkoutLogg.MainActivity, WorkoutLogg" managed-type-token-id="33554458" />
     <entry java-name="crc6482c51dbe8cb2eb7d/MainApplication" managed-name="WorkoutLogg.MainApplication, WorkoutLogg" managed-type-token-id="33554459" />
