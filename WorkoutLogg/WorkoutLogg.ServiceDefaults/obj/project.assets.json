@@ -1091,11 +1091,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg.ServiceDefaults\\WorkoutLogg.ServiceDefaults.csproj",
+      "projectUniqueName": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg.ServiceDefaults\\WorkoutLogg.ServiceDefaults.csproj",
       "projectName": "WorkoutLogg.ServiceDefaults",
-      "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg.ServiceDefaults\\WorkoutLogg.ServiceDefaults.csproj",
+      "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg.ServiceDefaults\\WorkoutLogg.ServiceDefaults.csproj",
       "packagesPath": "C:\\Users\\maxis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg.ServiceDefaults\\obj\\",
+      "outputPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg.ServiceDefaults\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

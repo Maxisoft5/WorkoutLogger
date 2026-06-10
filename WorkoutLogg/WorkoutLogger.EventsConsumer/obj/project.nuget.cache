@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mJmh8Xwb+AQ=",
+  "dgSpecHash": "blQLIYuWGn8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogger.EventsConsumer\\WorkoutLogger.EventsConsumer.csproj",
+  "projectFilePath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogger.EventsConsumer\\WorkoutLogger.EventsConsumer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maxis\\.nuget\\packages\\confluent.kafka\\2.14.0\\confluent.kafka.2.14.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\librdkafka.redist\\2.14.0\\librdkafka.redist.2.14.0.nupkg.sha512",

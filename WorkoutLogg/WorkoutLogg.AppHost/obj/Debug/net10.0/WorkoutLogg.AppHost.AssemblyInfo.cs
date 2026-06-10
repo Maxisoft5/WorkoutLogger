@@ -18,15 +18,16 @@ using System.Reflection;
     "ext\\")]
 [assembly: System.Reflection.AssemblyMetadata("dcpbinpath", "C:\\Users\\maxis\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.1.0\\tools\\" +
     "ext\\bin\\")]
-[assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg.AppHost")]
+[assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg.AppHost")]
 [assembly: System.Reflection.AssemblyMetadata("apphostprojectname", "WorkoutLogg.AppHost.csproj")]
 [assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", "C:\\Users\\maxis\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\13.1.0\\tools\\Aspire.D" +
     "ashboard.exe")]
-[assembly: System.Reflection.AssemblyMetadataAttribute("apphostprojectbaseintermediateoutputpath", "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg.AppHost\\obj\\")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("apphostprojectbaseintermediateoutputpath", "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg.AppHost\\obj" +
+    "\\")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("WorkoutLogg.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90b17622b17e726f81b4cde5aa1ecf2ea4289f7f")]
 [assembly: System.Reflection.AssemblyProductAttribute("WorkoutLogg.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WorkoutLogg.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

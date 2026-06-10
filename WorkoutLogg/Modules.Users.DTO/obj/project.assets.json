@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj",
+      "projectUniqueName": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj",
       "projectName": "Modules.Users.DTO",
-      "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj",
+      "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj",
       "packagesPath": "C:\\Users\\maxis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.DTO\\obj\\",
+      "outputPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

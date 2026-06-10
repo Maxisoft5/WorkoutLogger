@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gt2nh6atQn4=",
+  "dgSpecHash": "5E3uCesIbrs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maxis\\.nuget\\packages\\confluent.kafka\\2.14.0\\confluent.kafka.2.14.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -97,9 +97,9 @@
       "code": "NU1603",
       "level": "Warning",
       "message": "Modules.Users.Infrastructure зависит от Refit (>= 10.1.9), но версия Refit 10.1.9 не найдена. Использовалась версия Refit 10.2.0.",
-      "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
+      "filePath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
       "libraryId": "Refit",
       "targetGraphs": [
         "net10.0"
@@ -109,9 +109,9 @@
       "code": "NU1603",
       "level": "Warning",
       "message": "Modules.Users.Infrastructure зависит от Refit.HttpClientFactory (>= 10.1.9), но версия Refit.HttpClientFactory 10.1.9 не найдена. Использовалась версия Refit.HttpClientFactory 10.2.0.",
-      "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
+      "filePath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
       "libraryId": "Refit.HttpClientFactory",
       "targetGraphs": [
         "net10.0"

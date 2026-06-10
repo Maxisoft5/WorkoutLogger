@@ -15,7 +15,7 @@ public class WorkoutLogg : global::Aspire.Hosting.IProjectMetadata
     /// <summary>
     /// The path to the WorkoutLogg project.
     /// </summary>
-    public string ProjectPath => """C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\WorkoutLogg.csproj""";
+    public string ProjectPath => """C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogg\WorkoutLogg.csproj""";
 
     /// <summary>
     /// Gets a value indicating whether building the project before running it should be suppressed.

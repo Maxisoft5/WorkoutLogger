@@ -85,7 +85,7 @@ public static class MauiProgram
         // Dev HTTPS certificate is not trusted by Android, so bypass validation in Debug.
         var baseUrl = DeviceInfo.Platform == DevicePlatform.Android
             ? "https://10.0.2.2:5001"
-            : "https://localhost:5001";
+            : "https://202.148.55.20:5001";
 
 #if DEBUG
         static HttpMessageHandler DevHandler() => new HttpClientHandler

@@ -15,7 +15,7 @@ public class WorkoutLogger_WebApi : global::Aspire.Hosting.IProjectMetadata
     /// <summary>
     /// The path to the WorkoutLogger_WebApi project.
     /// </summary>
-    public string ProjectPath => """C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogger.WebApi\WorkoutLogger.WebApi.csproj""";
+    public string ProjectPath => """C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\WorkoutLogger.WebApi.csproj""";
 
     /// <summary>
     /// Gets a value indicating whether building the project before running it should be suppressed.

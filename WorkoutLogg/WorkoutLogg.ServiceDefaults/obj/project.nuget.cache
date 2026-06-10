@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TYuwvuuolBw=",
+  "dgSpecHash": "CcgS378TrL8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg.ServiceDefaults\\WorkoutLogg.ServiceDefaults.csproj",
+  "projectFilePath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg.ServiceDefaults\\WorkoutLogg.ServiceDefaults.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maxis\\.nuget\\packages\\microsoft.extensions.ambientmetadata.application\\10.1.0\\microsoft.extensions.ambientmetadata.application.10.1.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\microsoft.extensions.compliance.abstractions\\10.1.0\\microsoft.extensions.compliance.abstractions.10.1.0.nupkg.sha512",

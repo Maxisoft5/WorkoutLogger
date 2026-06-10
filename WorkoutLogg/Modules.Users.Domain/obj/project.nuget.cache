@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eRvDqPychEI=",
+  "dgSpecHash": "hTB8EglX4Bc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj",
+  "projectFilePath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maxis\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.3.0\\microsoft.aspnetcore.authentication.2.3.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.3.0\\microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",

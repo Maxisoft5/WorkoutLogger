@@ -22,13 +22,13 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WorkoutLogg
-build_property.ProjectDir = C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg\
+build_property.ProjectDir = C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogg\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/App.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
@@ -38,7 +38,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/AppShell.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/AppShell.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
@@ -48,7 +48,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/AddLogPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/AddLogPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.AddLogPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\AddLogPage.xaml
@@ -58,7 +58,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/AddWorkoutPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/AddWorkoutPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.AddWorkoutPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\AddWorkoutPage.xaml
@@ -68,7 +68,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/Controls/AddButton.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/Controls/AddButton.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.Controls.AddButton.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\Controls\AddButton.xaml
@@ -78,7 +78,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/Controls/CalendarPicker.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/Controls/CalendarPicker.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.Controls.CalendarPicker.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\Controls\CalendarPicker.xaml
@@ -88,7 +88,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/Controls/CategoryChart.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/Controls/CategoryChart.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.Controls.CategoryChart.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\Controls\CategoryChart.xaml
@@ -98,7 +98,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/Controls/MainTabBar.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/Controls/MainTabBar.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.Controls.MainTabBar.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\Controls\MainTabBar.xaml
@@ -108,7 +108,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/Controls/ProjectCardView.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/Controls/ProjectCardView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.Controls.ProjectCardView.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\Controls\ProjectCardView.xaml
@@ -118,7 +118,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/Controls/TagView.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/Controls/TagView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.Controls.TagView.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\Controls\TagView.xaml
@@ -128,7 +128,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/Controls/TaskView.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/Controls/TaskView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.Controls.TaskView.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\Controls\TaskView.xaml
@@ -138,7 +138,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/CreateAccount.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/CreateAccount.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.CreateAccount.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\CreateAccount.xaml
@@ -148,7 +148,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/DashboardPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/DashboardPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.DashboardPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\DashboardPage.xaml
@@ -158,7 +158,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/EnterPasswordCode.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/EnterPasswordCode.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.EnterPasswordCode.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\EnterPasswordCode.xaml
@@ -168,7 +168,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/ForgotPassword.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/ForgotPassword.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.ForgotPassword.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\ForgotPassword.xaml
@@ -178,7 +178,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/LoadingPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/LoadingPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.LoadingPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\LoadingPage.xaml
@@ -188,7 +188,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/LoggerPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/LoggerPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.LoggerPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\LoggerPage.xaml
@@ -198,7 +198,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/LoginPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/LoginPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.LoginPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\LoginPage.xaml
@@ -208,7 +208,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/MainPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\MainPage.xaml
@@ -218,7 +218,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/NewPasswordPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/NewPasswordPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.NewPasswordPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\NewPasswordPage.xaml
@@ -228,7 +228,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/OnboardingBodyStatsPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/OnboardingBodyStatsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.OnboardingBodyStatsPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\OnboardingBodyStatsPage.xaml
@@ -238,7 +238,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/OnboardingGoalsPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/OnboardingGoalsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.OnboardingGoalsPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\OnboardingGoalsPage.xaml
@@ -248,7 +248,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/OnboardingProfilePage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/OnboardingProfilePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.OnboardingProfilePage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\OnboardingProfilePage.xaml
@@ -258,7 +258,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/PasswordSuccess.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/PasswordSuccess.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.PasswordSuccess.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\PasswordSuccess.xaml
@@ -268,7 +268,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/PrivacyPolicy.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/PrivacyPolicy.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.PrivacyPolicy.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\PrivacyPolicy.xaml
@@ -278,7 +278,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/ProfilePage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/ProfilePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.ProfilePage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\ProfilePage.xaml
@@ -288,7 +288,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/TermsOfServicePage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/TermsOfServicePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.TermsOfServicePage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\TermsOfServicePage.xaml
@@ -298,7 +298,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Pages/WorkoutsPage.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Pages/WorkoutsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Pages.WorkoutsPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\WorkoutsPage.xaml
@@ -308,7 +308,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Resources/Styles/AppStyles.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Resources/Styles/AppStyles.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Resources.Styles.AppStyles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\AppStyles.xaml
@@ -318,7 +318,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Resources/Styles/Colors.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Resources.Styles.Colors.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
@@ -328,7 +328,7 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/maxis/source/repos/WorkoutLogg/WorkoutLogg/Resources/Styles/Styles.xaml]
+[C:/Users/maxis/Documents/GitHub/WorkoutLogger/WorkoutLogg/WorkoutLogg/Resources/Styles/Styles.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WorkoutLogg.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml

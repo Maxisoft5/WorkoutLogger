@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VQntEdNRCbE=",
+  "dgSpecHash": "v+14W7PLIfY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj",
+  "projectFilePath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maxis\\.nuget\\packages\\google.protobuf\\3.34.1\\google.protobuf.3.34.1.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\grpc.core.api\\2.80.0\\grpc.core.api.2.80.0.nupkg.sha512",

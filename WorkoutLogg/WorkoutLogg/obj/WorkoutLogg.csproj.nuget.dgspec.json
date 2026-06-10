@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj": {}
+    "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj": {}
   },
   "projects": {
-    "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Moduels.Workouts.DTO\\Moduels.Workouts.DTO.csproj": {
+    "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Moduels.Workouts.DTO\\Moduels.Workouts.DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Moduels.Workouts.DTO\\Moduels.Workouts.DTO.csproj",
+        "projectUniqueName": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Moduels.Workouts.DTO\\Moduels.Workouts.DTO.csproj",
         "projectName": "Moduels.Workouts.DTO",
-        "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Moduels.Workouts.DTO\\Moduels.Workouts.DTO.csproj",
+        "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Moduels.Workouts.DTO\\Moduels.Workouts.DTO.csproj",
         "packagesPath": "C:\\Users\\maxis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Moduels.Workouts.DTO\\obj\\",
+        "outputPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Moduels.Workouts.DTO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -346,14 +346,14 @@
         }
       }
     },
-    "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Domain\\Modules.Common.Domain.csproj": {
+    "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Domain\\Modules.Common.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Domain\\Modules.Common.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Domain\\Modules.Common.Domain.csproj",
         "projectName": "Modules.Common.Domain",
-        "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Domain\\Modules.Common.Domain.csproj",
+        "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Domain\\Modules.Common.Domain.csproj",
         "packagesPath": "C:\\Users\\maxis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Domain\\obj\\",
+        "outputPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -688,14 +688,14 @@
         }
       }
     },
-    "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj": {
+    "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj",
+        "projectUniqueName": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj",
         "projectName": "Modules.Common.Grpc.Contacts",
-        "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj",
+        "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj",
         "packagesPath": "C:\\Users\\maxis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\obj\\",
+        "outputPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1046,14 +1046,14 @@
         }
       }
     },
-    "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Infrastructure\\Modules.Common.Infrastructure.csproj": {
+    "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Infrastructure\\Modules.Common.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Infrastructure\\Modules.Common.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Infrastructure\\Modules.Common.Infrastructure.csproj",
         "projectName": "Modules.Common.Infrastructure",
-        "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Infrastructure\\Modules.Common.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Infrastructure\\Modules.Common.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\maxis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1410,14 +1410,14 @@
         }
       }
     },
-    "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
+    "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj",
         "projectName": "Modules.Users.Domain",
-        "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj",
+        "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj",
         "packagesPath": "C:\\Users\\maxis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\obj\\",
+        "outputPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1440,14 +1440,14 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Moduels.Workouts.DTO\\Moduels.Workouts.DTO.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Moduels.Workouts.DTO\\Moduels.Workouts.DTO.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Moduels.Workouts.DTO\\Moduels.Workouts.DTO.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Moduels.Workouts.DTO\\Moduels.Workouts.DTO.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Domain\\Modules.Common.Domain.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Domain\\Modules.Common.Domain.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Domain\\Modules.Common.Domain.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Domain\\Modules.Common.Domain.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj"
               }
             }
           }
@@ -1776,14 +1776,14 @@
         }
       }
     },
-    "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj": {
+    "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj",
+        "projectUniqueName": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj",
         "projectName": "Modules.Users.DTO",
-        "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj",
+        "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj",
         "packagesPath": "C:\\Users\\maxis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.DTO\\obj\\",
+        "outputPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2118,14 +2118,14 @@
         }
       }
     },
-    "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
+    "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
         "projectName": "Modules.Users.Infrastructure",
-        "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\maxis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2148,11 +2148,11 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Infrastructure\\Modules.Common.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Infrastructure\\Modules.Common.Infrastructure.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Infrastructure\\Modules.Common.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Infrastructure\\Modules.Common.Infrastructure.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
               }
             }
           }
@@ -2509,14 +2509,14 @@
         }
       }
     },
-    "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj": {
+    "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj",
+        "projectUniqueName": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj",
         "projectName": "WorkoutLogg",
-        "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj",
+        "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg\\WorkoutLogg.csproj",
         "packagesPath": "C:\\Users\\maxis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg\\obj\\",
+        "outputPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogg\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
@@ -2543,14 +2543,14 @@
             "framework": "net10.0-android36.0",
             "targetAlias": "net10.0-android",
             "projectReferences": {
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
               }
             }
           },
@@ -2558,14 +2558,14 @@
             "framework": "net10.0-ios26.2",
             "targetAlias": "net10.0-ios",
             "projectReferences": {
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
               }
             }
           },
@@ -2573,14 +2573,14 @@
             "framework": "net10.0-maccatalyst26.2",
             "targetAlias": "net10.0-maccatalyst",
             "projectReferences": {
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
               }
             }
           },
@@ -2588,14 +2588,14 @@
             "framework": "net10.0-windows10.0.19041",
             "targetAlias": "net10.0-windows10.0.19041.0",
             "projectReferences": {
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Common.Grpc.Contacts\\Modules.Common.Grpc.Contacts.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
               },
-              "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
+              "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
               }
             }
           }

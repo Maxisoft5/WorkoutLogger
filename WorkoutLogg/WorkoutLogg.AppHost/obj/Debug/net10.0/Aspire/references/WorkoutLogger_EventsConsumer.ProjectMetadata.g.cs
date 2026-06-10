@@ -15,7 +15,7 @@ public class WorkoutLogger_EventsConsumer : global::Aspire.Hosting.IProjectMetad
     /// <summary>
     /// The path to the WorkoutLogger_EventsConsumer project.
     /// </summary>
-    public string ProjectPath => """C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogger.EventsConsumer\WorkoutLogger.EventsConsumer.csproj""";
+    public string ProjectPath => """C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.EventsConsumer\WorkoutLogger.EventsConsumer.csproj""";
 
     /// <summary>
     /// Gets a value indicating whether building the project before running it should be suppressed.

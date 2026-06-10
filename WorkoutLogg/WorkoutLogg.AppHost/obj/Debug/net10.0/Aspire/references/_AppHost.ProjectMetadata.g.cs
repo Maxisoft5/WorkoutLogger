@@ -17,5 +17,5 @@ public class WorkoutLogg_AppHost
     /// <summary>
     /// The path to the Aspire Host project.
     /// </summary>
-    public static string ProjectPath => """C:\Users\maxis\source\repos\WorkoutLogg\WorkoutLogg.AppHost""";
+    public static string ProjectPath => """C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogg.AppHost""";
 }

@@ -15,8 +15,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.6",
-          "Refit.HttpClientFactory": "10.1.6",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "runtime": {
@@ -1205,23 +1205,23 @@
           }
         }
       },
-      "Refit/10.1.6": {
+      "Refit/10.2.0": {
         "runtime": {
           "lib/net10.0/Refit.dll": {
-            "assemblyVersion": "10.1.0.0",
-            "fileVersion": "10.1.6.54201"
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.2.0.0"
           }
         }
       },
-      "Refit.HttpClientFactory/10.1.6": {
+      "Refit.HttpClientFactory/10.2.0": {
         "dependencies": {
           "Microsoft.Extensions.Http": "9.0.3",
-          "Refit": "10.1.6"
+          "Refit": "10.2.0"
         },
         "runtime": {
           "lib/net10.0/Refit.HttpClientFactory.dll": {
-            "assemblyVersion": "10.1.0.0",
-            "fileVersion": "10.1.6.54201"
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.2.0.0"
           }
         }
       },
@@ -1904,19 +1904,19 @@
       "path": "pipelines.sockets.unofficial/2.2.8",
       "hashPath": "pipelines.sockets.unofficial.2.2.8.nupkg.sha512"
     },
-    "Refit/10.1.6": {
+    "Refit/10.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-j82mHFcXJpiJiaLqQgiikmLAu+oYKcIM8ZafipX2s2b2soOS0OGN+Oc+BXkhsG8x6j2M1J23Eac3068yOKLPFA==",
-      "path": "refit/10.1.6",
-      "hashPath": "refit.10.1.6.nupkg.sha512"
+      "sha512": "sha512-zwPmA4p0ZDCeg0/z0hRUXj4aS0y0mlJ8TSri4pz4e0MWmRXAtjSVeQdnkyRah2f6+I0JlP14UqMQW4N8u/hVeg==",
+      "path": "refit/10.2.0",
+      "hashPath": "refit.10.2.0.nupkg.sha512"
     },
-    "Refit.HttpClientFactory/10.1.6": {
+    "Refit.HttpClientFactory/10.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-brVgMXHX2pp6pMji7tJijygbMwxccIy2vSsPurPmOZ7jSChBjYpiT9bBbJkBDc0hhnNyzvLkkbx0uiHhJuTTEQ==",
-      "path": "refit.httpclientfactory/10.1.6",
-      "hashPath": "refit.httpclientfactory.10.1.6.nupkg.sha512"
+      "sha512": "sha512-pDd73YQWLFxqwP01H4vpXqu6BJAPKJrci7+Nmlhx+Xg5asklGhmoAUVAeGeEKAqyOMQeN7wl5tCKcihus+Gzmw==",
+      "path": "refit.httpclientfactory/10.2.0",
+      "hashPath": "refit.httpclientfactory.10.2.0.nupkg.sha512"
     },
     "StackExchange.Redis/2.7.27": {
       "type": "package",
