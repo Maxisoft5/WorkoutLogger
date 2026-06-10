@@ -319,7 +319,7 @@ namespace Modules.Users.Infrastructure.Authorization
             }
 
             var user = await cacheService.GetOrCreateAsync(
-                $"user:{userId}",
+                $"user:{userId.Value}",
                 async ct => await dbContext.Users
                     .Include(x => x.UserGoals)
                     .FirstOrDefaultAsync(x => x.Id == userId.Value),

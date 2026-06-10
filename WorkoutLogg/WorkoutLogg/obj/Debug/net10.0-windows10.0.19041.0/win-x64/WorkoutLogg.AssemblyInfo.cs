@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WorkoutLogg")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+4911719b1646801940e7ce281b1d557a0baa731a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+f61bfb6701f63cfd18729e7a3b8767dcb51185f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("WorkoutLogg")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WorkoutLogg")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
