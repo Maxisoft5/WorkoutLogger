@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Modules.Common.Infrastructure.Extensions;
 using Modules.Users.Infrastructure.Database;
 using System.Text.Json.Serialization;
