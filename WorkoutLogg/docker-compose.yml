@@ -146,15 +146,19 @@ services:
     restart: unless-stopped
     ports:
       - "5000:5000"
+      - "5001:5001"
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ASPNETCORE_URLS: http://+:5000
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      ASPNETCORE_Kestrel__Certificates__Default__Password: CertPassword123
       ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=workoutLogger;Username=postgres;Password=051099"
       ConnectionStrings__Redis: "redis:6379"
       Kafka__BootstrapServers: "kafka:9092"
       AuthConfiguration__Key: "your_secret_key_here_change_it_please"
       AuthConfiguration__Issuer: "DevTips"
       AuthConfiguration__Audience: "DevTips"
+    volumes:
+      - ~/.aspnet/https:/https:ro
     depends_on:
       postgres:
         condition: service_healthy
