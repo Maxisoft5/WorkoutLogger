@@ -844,8 +844,7 @@
               "ViewState": "AgIAAB4AAAAAAAAAAAAowCAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-19T15:38:54.562Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -858,8 +857,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-19T15:39:10.903Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -872,8 +870,7 @@
               "ViewState": "AgIAAAUAAAAAAAAAAADwvwkAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-04T16:33:11.26Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -885,8 +882,7 @@
               "RelativeToolTip": "Modules.Users.Infrastructure\\Authorization\\AuthService.cs",
               "ViewState": "AgIAAH0BAAAAAAAAAAAMwI8BAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-28T15:41:08.882Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-28T15:41:08.882Z"
             },
             {
               "$type": "Document",
@@ -896,7 +892,7 @@
               "RelativeDocumentMoniker": "WorkoutLogg\\Pages\\OnboardingGoalsPage.xaml.cs",
               "ToolTip": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg\\Pages\\OnboardingGoalsPage.xaml.cs",
               "RelativeToolTip": "WorkoutLogg\\Pages\\OnboardingGoalsPage.xaml.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAtwDsAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwC8AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-28T20:26:22.795Z",
               "EditorCaption": ""
@@ -911,8 +907,7 @@
               "RelativeToolTip": "WorkoutLogger.WebApi\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAD4vxkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T18:32:17.569Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T18:32:17.569Z"
             },
             {
               "$type": "Document",
@@ -924,8 +919,7 @@
               "RelativeToolTip": "WorkoutLogg\\Services\\AuthHeaderHandler.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAD4vxwAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T12:17:11.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T12:17:11.322Z"
             },
             {
               "$type": "Document",
@@ -937,8 +931,7 @@
               "RelativeToolTip": "WorkoutLogg\\MauiProgram.cs",
               "ViewState": "AgIAAD8AAAAAAAAAAAAjwFUAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-28T10:38:07.908Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-28T10:38:07.908Z"
             },
             {
               "$type": "Document",
@@ -950,8 +943,7 @@
               "RelativeToolTip": "WorkoutLogger.WebApi\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T18:32:13.908Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T18:32:13.908Z"
             },
             {
               "$type": "Document",
@@ -963,8 +955,7 @@
               "RelativeToolTip": "WorkoutLogg\\Pages\\LoginPage.xaml.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAYwCsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-25T10:34:51.834Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-25T10:34:51.834Z"
             },
             {
               "$type": "Document",
@@ -976,8 +967,7 @@
               "RelativeToolTip": "Modules.Common.Infrastructure\\Messaging\\KafkaEventPublisher.cs",
               "ViewState": "AgIAACYAAAAAAAAAAAAiwDgAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-09T13:44:50.111Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-09T13:44:50.111Z"
             },
             {
               "$type": "Document",
@@ -989,8 +979,7 @@
               "RelativeToolTip": "WorkoutLogg\\Services\\AuthFlow.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-09T12:49:06.643Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-09T12:49:06.643Z"
             },
             {
               "$type": "Document",
@@ -1002,8 +991,7 @@
               "RelativeToolTip": "Modules.Users.Infrastructure\\Api\\IAuthApi.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T17:24:08.814Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-29T17:24:08.814Z"
             },
             {
               "$type": "Document",
@@ -1015,8 +1003,7 @@
               "RelativeToolTip": "WorkoutLogg\\Services\\CurrentUserStore.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAuwCgAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T15:15:24.325Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-19T15:15:24.325Z"
             },
             {
               "$type": "Document",
@@ -1028,8 +1015,7 @@
               "RelativeToolTip": "WorkoutLogg\\Services\\LoginService.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAWwBcAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T18:11:55.514Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T18:11:55.514Z"
             },
             {
               "$type": "Document",
@@ -1041,8 +1027,7 @@
               "RelativeToolTip": "WorkoutLogger.WebApi\\Extensions\\ServiceCollectionExtensions.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAwwDgAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-28T22:01:50.458Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-28T22:01:50.458Z"
             },
             {
               "$type": "Document",
@@ -1054,8 +1039,7 @@
               "RelativeToolTip": "WorkoutLogger.WebApi\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-04T17:40:43.569Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-04T17:40:43.569Z"
             },
             {
               "$type": "Document",
@@ -1067,8 +1051,7 @@
               "RelativeToolTip": "WorkoutLogger.WebApi\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-29T17:54:55.515Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-29T17:54:55.515Z"
             },
             {
               "$type": "Document",
@@ -1080,8 +1063,7 @@
               "RelativeToolTip": "WorkoutLogger.WebApi\\Controllers\\WorkoutsController.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAqwB4AAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T12:16:43.23Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T12:16:43.23Z"
             },
             {
               "$type": "Document",
@@ -1093,8 +1075,7 @@
               "RelativeToolTip": "WorkoutLogg\\Pages\\CreateAccount.xaml.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAWwDAAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T19:51:38.544Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T19:51:38.544Z"
             },
             {
               "$type": "Document",
@@ -1106,8 +1087,7 @@
               "RelativeToolTip": "WorkoutLogger.WebApi\\Dockerfile",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-05-09T11:02:30.566Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-09T11:02:30.566Z"
             },
             {
               "$type": "Document",
@@ -1119,8 +1099,7 @@
               "RelativeToolTip": "Modules.Users.Domain\\Authentication\\IAuthService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-28T15:21:04.199Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-28T15:21:04.199Z"
             },
             {
               "$type": "Document",
@@ -1132,8 +1111,7 @@
               "RelativeToolTip": "WorkoutLogg\\Pages\\LoginPage.xaml",
               "ViewState": "AgIAABIAAAAAAAAAAAAAACMAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-04-23T11:14:00.198Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-23T11:14:00.198Z"
             },
             {
               "$type": "Document",
@@ -1145,8 +1123,7 @@
               "RelativeToolTip": "WorkoutLogg\\Pages\\DashboardPage.xaml.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwBAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T16:20:32.677Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T16:20:32.677Z"
             },
             {
               "$type": "Document",
@@ -1158,8 +1135,7 @@
               "RelativeToolTip": "WorkoutLogg\\Pages\\LoggerPage.xaml",
               "ViewState": "AgIAACUAAAAAAAAAAADwv0gAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-05-07T16:30:04.169Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T16:30:04.169Z"
             },
             {
               "$type": "Document",

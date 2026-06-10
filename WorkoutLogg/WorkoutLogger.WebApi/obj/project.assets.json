@@ -1347,7 +1347,7 @@
           }
         }
       },
-      "Refit/10.1.6": {
+      "Refit/10.2.0": {
         "type": "package",
         "compile": {
           "lib/net10.0/Refit.dll": {
@@ -1364,10 +1364,10 @@
           "buildTransitive/netstandard2.0/refit.targets": {}
         }
       },
-      "Refit.HttpClientFactory/10.1.6": {
+      "Refit.HttpClientFactory/10.2.0": {
         "type": "package",
         "dependencies": {
-          "Refit": "10.1.6"
+          "Refit": "10.2.0"
         },
         "compile": {
           "lib/net10.0/Refit.HttpClientFactory.dll": {
@@ -1638,8 +1638,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.6",
-          "Refit.HttpClientFactory": "10.1.6",
+          "Refit": "10.1.9",
+          "Refit.HttpClientFactory": "10.1.9",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -4221,10 +4221,10 @@
         "polly.ratelimiting.nuspec"
       ]
     },
-    "Refit/10.1.6": {
-      "sha512": "j82mHFcXJpiJiaLqQgiikmLAu+oYKcIM8ZafipX2s2b2soOS0OGN+Oc+BXkhsG8x6j2M1J23Eac3068yOKLPFA==",
+    "Refit/10.2.0": {
+      "sha512": "zwPmA4p0ZDCeg0/z0hRUXj4aS0y0mlJ8TSri4pz4e0MWmRXAtjSVeQdnkyRah2f6+I0JlP14UqMQW4N8u/hVeg==",
       "type": "package",
-      "path": "refit/10.1.6",
+      "path": "refit/10.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4246,15 +4246,15 @@
         "lib/net9.0/Refit.xml",
         "lib/netstandard2.0/Refit.dll",
         "lib/netstandard2.0/Refit.xml",
-        "refit.10.1.6.nupkg.sha512",
+        "refit.10.2.0.nupkg.sha512",
         "refit.nuspec",
         "refit_logo.png"
       ]
     },
-    "Refit.HttpClientFactory/10.1.6": {
-      "sha512": "brVgMXHX2pp6pMji7tJijygbMwxccIy2vSsPurPmOZ7jSChBjYpiT9bBbJkBDc0hhnNyzvLkkbx0uiHhJuTTEQ==",
+    "Refit.HttpClientFactory/10.2.0": {
+      "sha512": "pDd73YQWLFxqwP01H4vpXqu6BJAPKJrci7+Nmlhx+Xg5asklGhmoAUVAeGeEKAqyOMQeN7wl5tCKcihus+Gzmw==",
       "type": "package",
-      "path": "refit.httpclientfactory/10.1.6",
+      "path": "refit.httpclientfactory/10.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4270,7 +4270,7 @@
         "lib/net9.0/Refit.HttpClientFactory.xml",
         "lib/netstandard2.0/Refit.HttpClientFactory.dll",
         "lib/netstandard2.0/Refit.HttpClientFactory.xml",
-        "refit.httpclientfactory.10.1.6.nupkg.sha512",
+        "refit.httpclientfactory.10.2.0.nupkg.sha512",
         "refit.httpclientfactory.nuspec",
         "refit_logo.png"
       ]
@@ -5158,5 +5158,27 @@
         }
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Modules.Users.Infrastructure зависит от Refit (>= 10.1.9), но версия Refit 10.1.9 не найдена. Использовалась версия Refit 10.2.0.",
+      "libraryId": "Refit",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Modules.Users.Infrastructure зависит от Refit.HttpClientFactory (>= 10.1.9), но версия Refit.HttpClientFactory 10.1.9 не найдена. Использовалась версия Refit.HttpClientFactory 10.2.0.",
+      "libraryId": "Refit.HttpClientFactory",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

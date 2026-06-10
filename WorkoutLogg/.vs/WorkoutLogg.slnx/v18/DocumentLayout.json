@@ -892,7 +892,7 @@
               "RelativeDocumentMoniker": "WorkoutLogg\\Pages\\OnboardingGoalsPage.xaml.cs",
               "ToolTip": "C:\\Users\\maxis\\source\\repos\\WorkoutLogg\\WorkoutLogg\\Pages\\OnboardingGoalsPage.xaml.cs",
               "RelativeToolTip": "WorkoutLogg\\Pages\\OnboardingGoalsPage.xaml.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAYwCYAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwC8AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-28T20:26:22.795Z",
               "EditorCaption": ""
@@ -907,7 +907,8 @@
               "RelativeToolTip": "WorkoutLogger.WebApi\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAD4vxkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T18:32:17.569Z"
+              "WhenOpened": "2026-04-27T18:32:17.569Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -955,7 +956,8 @@
               "RelativeToolTip": "WorkoutLogg\\Pages\\LoginPage.xaml.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAYwCsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-25T10:34:51.834Z"
+              "WhenOpened": "2026-04-25T10:34:51.834Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -967,7 +969,8 @@
               "RelativeToolTip": "Modules.Common.Infrastructure\\Messaging\\KafkaEventPublisher.cs",
               "ViewState": "AgIAACYAAAAAAAAAAAAiwDgAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-09T13:44:50.111Z"
+              "WhenOpened": "2026-05-09T13:44:50.111Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1075,7 +1078,8 @@
               "RelativeToolTip": "WorkoutLogg\\Pages\\CreateAccount.xaml.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAWwDAAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T19:51:38.544Z"
+              "WhenOpened": "2026-04-27T19:51:38.544Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
