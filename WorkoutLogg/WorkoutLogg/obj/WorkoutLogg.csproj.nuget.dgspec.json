@@ -2204,11 +2204,11 @@
             },
             "Refit": {
               "target": "Package",
-              "version": "[10.1.9, )"
+              "version": "[10.2.0, )"
             },
             "Refit.HttpClientFactory": {
               "target": "Package",
-              "version": "[10.1.9, )"
+              "version": "[10.2.0, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",

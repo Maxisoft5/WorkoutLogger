@@ -3925,8 +3925,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -7757,8 +7757,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -11590,8 +11590,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -15418,8 +15418,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -19246,8 +19246,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -23085,8 +23085,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -24996,8 +24996,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -26803,8 +26803,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -28611,8 +28611,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -30414,8 +30414,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -32217,8 +32217,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -34031,8 +34031,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -36032,8 +36032,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -37846,8 +37846,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -39661,8 +39661,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -41468,8 +41468,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -43278,8 +43278,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -45099,8 +45099,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -47377,8 +47377,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -49400,8 +49400,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -51424,8 +51424,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -53440,8 +53440,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -55459,8 +55459,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -57499,8 +57499,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0eHp6WIsB2E=",
+  "dgSpecHash": "s/buLW6cwaQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogger.WebApi\\WorkoutLogger.WebApi.csproj",
   "expectedPackageFiles": [
@@ -83,30 +83,5 @@
     "C:\\Users\\maxis\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.17.0\\system.identitymodel.tokens.jwt.8.17.0.nupkg.sha512",
     "C:\\Users\\maxis\\.nuget\\packages\\system.io.hashing\\10.0.2\\system.io.hashing.10.0.2.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "message": "Modules.Users.Infrastructure зависит от Refit (>= 10.1.9), но версия Refit 10.1.9 не найдена. Использовалась версия Refit 10.2.0.",
-      "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogger.WebApi\\WorkoutLogger.WebApi.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogger.WebApi\\WorkoutLogger.WebApi.csproj",
-      "libraryId": "Refit",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "message": "Modules.Users.Infrastructure зависит от Refit.HttpClientFactory (>= 10.1.9), но версия Refit.HttpClientFactory 10.1.9 не найдена. Использовалась версия Refit.HttpClientFactory 10.2.0.",
-      "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogger.WebApi\\WorkoutLogger.WebApi.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\WorkoutLogger.WebApi\\WorkoutLogger.WebApi.csproj",
-      "libraryId": "Refit.HttpClientFactory",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  "logs": []
 }

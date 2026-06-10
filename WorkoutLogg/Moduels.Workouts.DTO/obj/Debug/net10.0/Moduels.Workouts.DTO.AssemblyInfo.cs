@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Moduels.Workouts.DTO")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90b17622b17e726f81b4cde5aa1ecf2ea4289f7f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4911719b1646801940e7ce281b1d557a0baa731a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Moduels.Workouts.DTO")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Moduels.Workouts.DTO")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

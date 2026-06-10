@@ -391,7 +391,7 @@ namespace Modules.Users.Infrastructure.Authorization
                 }
                 userCurrent.UpdatedAtUtc = DateTime.UtcNow;
                 await dbContext.SaveChangesAsync();
-                await cacheService.RemoveAsync($"user:{userIdClaim}");
+                await cacheService.RemoveAsync($"user:{userIdClaim.Value}");
                 return new Result<User>(userCurrent);
             }
             catch(Exception ex)

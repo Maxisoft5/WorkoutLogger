@@ -412,10 +412,10 @@ C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\o
 C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\WorkoutL.403A7262.Up2Date
 C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\WorkoutLogger.WebApi.dll
 C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\refint\WorkoutLogger.WebApi.dll
 C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\WorkoutLogger.WebApi.pdb
 C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\WorkoutLogger.WebApi.genruntimeconfig.cache
 C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\ref\WorkoutLogger.WebApi.dll
+C:\Users\maxis\Documents\GitHub\WorkoutLogger\WorkoutLogg\WorkoutLogger.WebApi\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

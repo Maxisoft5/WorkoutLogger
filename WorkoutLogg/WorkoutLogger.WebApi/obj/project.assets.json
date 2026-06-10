@@ -1638,8 +1638,8 @@
           "Modules.Common.Infrastructure": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Refit": "10.1.9",
-          "Refit.HttpClientFactory": "10.1.9",
+          "Refit": "10.2.0",
+          "Refit.HttpClientFactory": "10.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.17.0"
         },
         "compile": {
@@ -5158,27 +5158,5 @@
         }
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Modules.Users.Infrastructure зависит от Refit (>= 10.1.9), но версия Refit 10.1.9 не найдена. Использовалась версия Refit 10.2.0.",
-      "libraryId": "Refit",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Modules.Users.Infrastructure зависит от Refit.HttpClientFactory (>= 10.1.9), но версия Refit.HttpClientFactory 10.1.9 не найдена. Использовалась версия Refit.HttpClientFactory 10.2.0.",
-      "libraryId": "Refit.HttpClientFactory",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  }
 }
