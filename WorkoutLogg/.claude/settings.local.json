@@ -19,7 +19,9 @@
       "PowerShell(Get-Command ildasm 2>&1)",
       "PowerShell(Get-Command ilspycmd 2>&1)",
       "PowerShell(dotnet tool list -g 2>&1)",
-      "Bash(xargs grep -l \"AppShell\\\\|Shell\")"
+      "Bash(xargs grep -l \"AppShell\\\\|Shell\")",
+      "Bash(Get-ChildItem -Path . -Recurse -Directory)",
+      "Bash(Select-Object -ExpandProperty FullName)"
     ]
   }
 }

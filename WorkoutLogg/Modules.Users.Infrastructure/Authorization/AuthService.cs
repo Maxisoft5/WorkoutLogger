@@ -332,8 +332,17 @@ namespace Modules.Users.Infrastructure.Authorization
 
         public async Task<Result<User>> UpdateUser(UserDto user)
         {
-            var current = await GetCurrent();
-            var userCurrent = current.Value;
+            if (httpContextAccessor?.HttpContext?.User == null)
+                return new Result<User>(new Error("401", "401", ErrorType.Unauthorized));
+
+            var userIdClaim = httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "userid");
+            if (userIdClaim == null)
+                return new Result<User>(new Error("401", "401", ErrorType.Unauthorized));
+
+            var userCurrent = await dbContext.Users
+                .Include(x => x.UserGoals)
+                .FirstOrDefaultAsync(x => x.Id == userIdClaim.Value);
+
             if (userCurrent == null) return new Result<User>(new Error("404", "", ErrorType.NotFound));
             if (!string.IsNullOrWhiteSpace(user.FullName))
             {
@@ -380,6 +389,7 @@ namespace Modules.Users.Infrastructure.Authorization
             }
             userCurrent.UpdatedAtUtc = DateTime.UtcNow;
             await dbContext.SaveChangesAsync();
+            await cacheService.RemoveAsync($"user:{userIdClaim}");
             return new Result<User>(userCurrent);
         }
 
