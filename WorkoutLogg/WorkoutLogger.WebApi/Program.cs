@@ -1,4 +1,5 @@
 using Modules.Common.Infrastructure.Extensions;
+using Modules.Users.Infrastructure.Database;
 using System.Text.Json.Serialization;
 using WorkoutLogger.WebApi.Extensions;
 using WorkoutLogger.WebApi.Grpc;
@@ -28,6 +29,12 @@ builder.Services.AddKafkaMessaging(configration);
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
+    await db.Database.MigrateAsync();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
