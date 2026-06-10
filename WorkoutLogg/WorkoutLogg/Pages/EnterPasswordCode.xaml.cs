@@ -1,3 +1,6 @@
+using Modules.Users.Infrastructure.Api;
+using Modules.Users.DTO.Auth;
+
 namespace WorkoutLogg.Pages;
 
 [QueryProperty(nameof(Email), "email")]
@@ -21,9 +24,12 @@ public partial class EnterPasswordCode : ContentPage
         }
     }
 
+    private readonly IAuthApi _authApi;
+
     public EnterPasswordCode()
     {
         InitializeComponent();
+        _authApi = Application.Current!.Handler.MauiContext!.Services.GetRequiredService<IAuthApi>();
 
         _boxes = new[] { Box0, Box1, Box2, Box3, Box4, Box5 };
         _labels = new[] { Lbl0, Lbl1, Lbl2, Lbl3, Lbl4, Lbl5 };
@@ -102,8 +108,18 @@ public partial class EnterPasswordCode : ContentPage
         var code = HiddenEntry.Text?.Trim();
         if (code?.Length != 6) return;
 
-        // TODO: await _authService.VerifyCodeAsync(_email, code);
-        Application.Current!.Windows[0].Page = new NewPasswordPage() { Email = Email };
+        try
+        {
+            var result = await _authApi.VerifyResetCode(new VerifyResetCodeRequest(_email, code));
+            if (result.IsSuccessStatusCode)
+                Application.Current!.Windows[0].Page = new NewPasswordPage() { Email = _email, Code = code };
+            else
+                await DisplayAlertAsync("Error", "Invalid or expired code", "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", ex.Message, "OK");
+        }
     }
 
     private async void OnBackTapped(object sender, EventArgs e)

@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
+    xmlns:fonts="clr-namespace:Fonts"
     BackgroundColor="#EEEEF6"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">
@@ -74,7 +75,7 @@
                     FontSize="16"
                     Keyboard="Email"
                     Margin="16,0"
-                    Placeholder="alex@gmail.com"
+                    Placeholder=""
                     PlaceholderColor="Black"
                     ReturnType="Next"
                     TextColor="#111827"
@@ -100,18 +101,38 @@
                 Stroke="#E5E7EB"
                 StrokeShape="RoundRectangle 14"
                 StrokeThickness="1.5">
-                <Entry
-                    x:Name="PasswordEntry"
-                    BackgroundColor="Transparent"
-                    FontFamily="OpenSans"
-                    FontSize="16"
-                    IsPassword="True"
-                    Margin="16,0"
-                    Placeholder="••••••••"
-                    PlaceholderColor="#D1D5DB"
-                    ReturnType="Done"
-                    TextColor="#111827"
-                    VerticalOptions="Center" />
+                <Grid ColumnDefinitions="*,44">
+                    <Entry
+                        x:Name="PasswordEntry"
+                        BackgroundColor="Transparent"
+                        FontFamily="OpenSans"
+                        FontSize="16"
+                        IsPassword="True"
+                        Margin="16,0,0,0"
+                        Placeholder="••••••••"
+                        PlaceholderColor="#D1D5DB"
+                        ReturnType="Done"
+                        TextColor="#111827"
+                        VerticalOptions="Center" />
+                    <Image
+                        x:Name="PasswordEyeImage"
+                        Grid.Column="1"
+                        HeightRequest="20"
+                        WidthRequest="20"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        <Image.Source>
+                            <FontImageSource
+                                Glyph="{x:Static fonts:FluentUI.eye_20_regular}"
+                                FontFamily="{x:Static fonts:FluentUI.FontFamily}"
+                                Color="#9CA3AF"
+                                Size="20"/>
+                        </Image.Source>
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTogglePasswordVisibility" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
             </Border>
             <Label x:Name="PasswordError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
 
@@ -152,75 +173,6 @@
                     Text="{loc:Translate Login_SignIn}"
                     TextColor="White" />
             </Border>
-
-            <!-- Divider: or continue with -->
-            <Grid
-                Margin="0,0,0,20"
-                ColumnDefinitions="*,Auto,*"
-                ColumnSpacing="12"
-                VerticalOptions="Center">
-                <BoxView
-                    Grid.Column="0"
-                    BackgroundColor="#D1D5DB"
-                    HeightRequest="1"
-                    VerticalOptions="Center" />
-                <Label
-                    Grid.Column="1"
-                    FontFamily="OpenSans"
-                    FontSize="13"
-                    Text="{loc:Translate Login_OrContinueWith}"
-                    TextColor="#9CA3AF"
-                    VerticalOptions="Center" />
-                <BoxView
-                    Grid.Column="2"
-                    BackgroundColor="#D1D5DB"
-                    HeightRequest="1"
-                    VerticalOptions="Center" />
-            </Grid>
-
-            <!-- Social Buttons Row -->
-            <Grid
-                ColumnDefinitions="*,12,*"
-                Margin="0,0,0,32">
-
-                <!-- Apple Button -->
-                <Border
-                    Grid.Column="0"
-                    BackgroundColor="White"
-                    Stroke="#E5E7EB"
-                    StrokeShape="RoundRectangle 14"
-                    StrokeThickness="1.5">
-                    <Button
-                        x:Name="AppleButton"
-                        BackgroundColor="Transparent"
-                        Clicked="OnAppleSignInClicked"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans"
-                        FontSize="15"
-                        ImageSource="apple_icon.png"
-                        Text="Apple"
-                        TextColor="#111827" />
-                </Border>
-
-                <!-- Google Button -->
-                <Border
-                    Grid.Column="2"
-                    BackgroundColor="White"
-                    Stroke="#E5E7EB"
-                    StrokeShape="RoundRectangle 14"
-                    StrokeThickness="1.5">
-                    <Button
-                        x:Name="GoogleButton"
-                        BackgroundColor="Transparent"
-                        Clicked="OnGoogleSignInClicked"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans"
-                        FontSize="15"
-                        ImageSource="google_icon.png"
-                        Text="  Google"
-                        TextColor="#111827" />
-                </Border>
-            </Grid>
 
             <!-- Sign Up Link -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">

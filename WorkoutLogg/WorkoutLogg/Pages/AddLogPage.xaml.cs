@@ -67,7 +67,7 @@ public partial class AddLogPage : ContentPage, IQueryAttributable
         foreach (var w in _availableWorkouts)
             options.Add($"{w.MuscleGroup} · {w.StartDate:d MMM yyyy}");
 
-        var result = await DisplayActionSheet("Link to workout plan?", "Cancel", null, [.. options]);
+        var result = await DisplayActionSheetAsync("Link to workout plan?", "Cancel", null, [.. options]);
 
         if (result is null || result == "Cancel") return;
 
@@ -119,7 +119,7 @@ public partial class AddLogPage : ContentPage, IQueryAttributable
                 .ToList();
             planOptions.Add("⚡ Custom exercise");
 
-            var pick = await DisplayActionSheet("Add exercise", "Cancel", null, [.. planOptions]);
+            var pick = await DisplayActionSheetAsync("Add exercise", "Cancel", null, [.. planOptions]);
             if (pick is null || pick == "Cancel") return;
 
             if (pick == "⚡ Custom exercise")

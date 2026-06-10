@@ -1,10 +1,16 @@
+using Modules.Users.Infrastructure.Api;
+using Modules.Users.DTO.Auth;
+
 namespace WorkoutLogg.Pages;
 
 public partial class ForgotPassword : ContentPage
 {
+    private readonly IAuthApi _authApi;
+
     public ForgotPassword()
     {
         InitializeComponent();
+        _authApi = Application.Current!.Handler.MauiContext!.Services.GetRequiredService<IAuthApi>();
     }
 
     private async void OnBackTapped(object sender, EventArgs e)
@@ -14,10 +20,21 @@ public partial class ForgotPassword : ContentPage
 
     private async void OnSendResetCodeClicked(object sender, EventArgs e)
     {
-        // TODO: await _authService.SendResetCodeAsync(email);
+        var email = EmailEntry.Text?.Trim();
+        if (string.IsNullOrWhiteSpace(email))
+        {
+            await DisplayAlertAsync("Error", "Please enter your email", "OK");
+            return;
+        }
 
-        // Передаём email на следующий экран через query parameter
-        //await Shell.Current.GoToAsync($"EnterCode?email={Uri.EscapeDataString(email ?? "")}");
-        Application.Current!.Windows[0].Page = new EnterPasswordCode() { Email = "maxisoft4@gmail.com" };
+        try
+        {
+            await _authApi.ForgotPassword(new ForgotPasswordRequest(email));
+            Application.Current!.Windows[0].Page = new EnterPasswordCode() { Email = email };
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", ex.Message, "OK");
+        }
     }
 }

@@ -41,13 +41,13 @@ public partial class LoggerPage : ContentPage
 
         var edit   = Loc.Get("Common_Edit");
         var delete = Loc.Get("Common_Delete");
-        var action = await DisplayActionSheet(null, Loc.Get("Common_Cancel"), null, edit, delete);
+        var action = await DisplayActionSheetAsync(null, Loc.Get("Common_Cancel"), null, edit, delete);
 
         if (action == edit)
             await Shell.Current.GoToAsync($"AddLog?sessionId={sessionId}");
         else if (action == delete)
         {
-            bool ok = await DisplayAlert(
+            bool ok = await DisplayAlertAsync(
                 Loc.Get("Logger_DeleteTitle"), Loc.Get("Logger_DeleteMsg"),
                 Loc.Get("Common_Delete"), Loc.Get("Common_Cancel"));
             if (ok)

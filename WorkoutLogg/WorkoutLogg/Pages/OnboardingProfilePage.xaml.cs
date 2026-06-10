@@ -26,7 +26,7 @@ public partial class OnboardingProfilePage : ContentPage
     private async void OnChangeAvatarTapped(object sender, EventArgs e)
     {
         // TODO: открыть ImagePicker для выбора аватара
-        await DisplayAlert("Avatar", "Image picker — coming soon", "OK");
+        await DisplayAlertAsync("Avatar", "Image picker — coming soon", "OK");
     }
 
     private void OnMaleSelected(object sender, EventArgs e) => SetSex("Male");

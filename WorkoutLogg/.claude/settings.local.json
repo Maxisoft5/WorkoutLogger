@@ -22,7 +22,9 @@
       "Bash(xargs grep -l \"AppShell\\\\|Shell\")",
       "Bash(Get-ChildItem -Path . -Recurse -Directory)",
       "Bash(Select-Object -ExpandProperty FullName)",
-      "Bash(dotnet ef *)"
+      "Bash(dotnet ef *)",
+      "PowerShell(Get-ChildItem \"$env:LOCALAPPDATA\\\\Android\" -ErrorAction SilentlyContinue; Get-ChildItem \"C:\\\\Program Files \\(x86\\)\\\\Android\" -ErrorAction SilentlyContinue; Get-ChildItem \"C:\\\\Users\\\\maxis\\\\AppData\\\\Local\\\\Android\" -ErrorAction SilentlyContinue)",
+      "Bash(python3 -c ' *)"
     ]
   }
 }

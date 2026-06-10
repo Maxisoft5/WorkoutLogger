@@ -24,7 +24,7 @@ public partial class ProfilePage : ContentPage
     }
 
     private async void OnNotificationsTapped(object sender, TappedEventArgs e) =>
-        await DisplayAlert(Loc.Get("Profile_Notifications"), Loc.Get("Common_ComingSoon"), Loc.Get("Common_OK"));
+        await DisplayAlertAsync(Loc.Get("Profile_Notifications"), Loc.Get("Common_ComingSoon"), Loc.Get("Common_OK"));
 
     private async void OnLanguageTapped(object sender, TappedEventArgs e)
     {
@@ -37,7 +37,7 @@ public partial class ProfilePage : ContentPage
         };
         var codes = new[] { "en-US", "ru-RU", "auto" };
 
-        var chosen = await DisplayActionSheet(
+        var chosen = await DisplayActionSheetAsync(
             Loc.Get("Language_Title"), Loc.Get("Common_Cancel"), null, options);
 
         if (chosen is null || chosen == Loc.Get("Common_Cancel")) return;

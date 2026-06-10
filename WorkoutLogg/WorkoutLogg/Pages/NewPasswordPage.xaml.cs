@@ -1,13 +1,45 @@
+using Modules.Users.DTO.Auth;
+using Modules.Users.Infrastructure.Api;
+
 namespace WorkoutLogg.Pages;
 
 [QueryProperty(nameof(Email), "email")]
 public partial class NewPasswordPage : ContentPage
 {
     public string Email { get; set; } = "";
+    public string Code { get; set; } = "";
+
+    private readonly IAuthApi _authApi;
+
     public NewPasswordPage()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+        _authApi = Application.Current!.Handler.MauiContext!.Services.GetRequiredService<IAuthApi>();
+    }
+    private void OnToggleNewPasswordVisibility(object sender, EventArgs e)
+    {
+        NewPasswordEntry.IsPassword = !NewPasswordEntry.IsPassword;
+        NewPasswordEyeImage.Source = new FontImageSource
+        {
+            Glyph = NewPasswordEntry.IsPassword ? FluentUI.eye_20_regular : FluentUI.eye_off_20_regular,
+            FontFamily = FluentUI.FontFamily,
+            Color = Color.FromArgb("#9CA3AF"),
+            Size = 20
+        };
+    }
+
+    private void OnToggleConfirmPasswordVisibility(object sender, EventArgs e)
+    {
+        ConfirmPasswordEntry.IsPassword = !ConfirmPasswordEntry.IsPassword;
+        ConfirmPasswordEyeImage.Source = new FontImageSource
+        {
+            Glyph = ConfirmPasswordEntry.IsPassword ? FluentUI.eye_20_regular : FluentUI.eye_off_20_regular,
+            FontFamily = FluentUI.FontFamily,
+            Color = Color.FromArgb("#9CA3AF"),
+            Size = 20
+        };
+    }
+
     // ── Password strength ─────────────────────────
     private void OnPasswordTextChanged(object sender, TextChangedEventArgs e)
     {
@@ -51,12 +83,22 @@ public partial class NewPasswordPage : ContentPage
 
         if (pw != confirm)
         {
-            await DisplayAlert("Error", "Passwords do not match", "OK");
+            await DisplayAlertAsync("Error", "Passwords do not match", "OK");
             return;
         }
 
-        // TODO: await _authService.ResetPasswordAsync(Email, pw);
-        Application.Current!.Windows[0].Page = new PasswordSuccess();
+        try
+        {
+            var result = await _authApi.ResetPassword(new ResetPasswordRequest(Email, Code, pw));
+            if (result.IsSuccessStatusCode)
+                Application.Current!.Windows[0].Page = new PasswordSuccess();
+            else
+                await DisplayAlertAsync("Error", "Failed to reset password", "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", ex.Message, "OK");
+        }
     }
 
     private async void OnBackTapped(object sender, EventArgs e)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Modules.Common.Domain.Outbox;
 using Modules.Users.Domain.Tokens;
 using Modules.Users.Domain.Users;
 
@@ -10,6 +11,7 @@ namespace Modules.Users.Infrastructure.Database
         RoleClaim, UserToken>
     {
         public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
+        public DbSet<OutboxMessage> OutboxMessages { get; set; } = null!;
         public DbSet<UserGoal> UserGoals { get; set; } = null!;
         public DbSet<Modules.Users.Domain.Workout.WorkoutModel> Workouts { get; set; } = null!;
         public DbSet<Modules.Users.Domain.Exercies.Exercise> Exercises { get; set; } = null!;

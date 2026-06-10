@@ -35,7 +35,7 @@ public partial class WorkoutsPage : ContentPage
 
         var edit   = Loc.Get("Common_Edit");
         var delete = Loc.Get("Common_Delete");
-        var action = await DisplayActionSheet(null, Loc.Get("Common_Cancel"), null, edit, delete);
+        var action = await DisplayActionSheetAsync(null, Loc.Get("Common_Cancel"), null, edit, delete);
 
         if (action == edit)
             await Shell.Current.GoToAsync($"AddWorkout?workoutId={workoutId}");
@@ -45,7 +45,7 @@ public partial class WorkoutsPage : ContentPage
 
     private async Task ConfirmAndDeleteAsync(Guid workoutId)
     {
-        bool confirmed = await DisplayAlert(
+        bool confirmed = await DisplayAlertAsync(
             Loc.Get("Workouts_DeleteTitle"), Loc.Get("Workouts_DeleteMsg"),
             Loc.Get("Common_Delete"), Loc.Get("Common_Cancel"));
         if (!confirmed) return;

@@ -8,11 +8,13 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Modules.Common.Infrastructure.Configurations;
+using Modules.Common.Infrastructure.Email;
 using Modules.Common.Infrastructure.Messaging;
 using Modules.Users.Domain.Authentication;
 using Modules.Users.Domain.Users;
 using Modules.Users.Infrastructure.Authorization;
 using Modules.Users.Infrastructure.Database;
+using Modules.Users.Infrastructure.Outbox;
 using System.Text;
 
 namespace WorkoutLogger.WebApi.Extensions
@@ -58,6 +60,12 @@ namespace WorkoutLogger.WebApi.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddMemoryCache();
             services.AddHttpContextAccessor();
+
+            var smtpSettings = configuration.GetSection("Smtp").Get<SmtpSettings>() ?? new SmtpSettings();
+            services.AddSingleton(smtpSettings);
+            services.AddScoped<IEmailSender, SmtpEmailSender>();
+            services.AddHostedService<OutboxProcessorService>();
+
             return services;
         }
 

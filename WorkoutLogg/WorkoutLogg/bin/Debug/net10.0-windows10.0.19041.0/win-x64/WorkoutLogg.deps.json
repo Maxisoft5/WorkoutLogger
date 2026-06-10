@@ -19,6 +19,7 @@
           "Microsoft.Extensions.Logging.Debug": "10.0.0",
           "Microsoft.Maui.Controls": "10.0.20",
           "Modules.Common.Grpc.Contacts": "1.0.0",
+          "Modules.Users.DTO": "1.0.0",
           "Modules.Users.Domain": "1.0.0",
           "Modules.Users.Infrastructure": "1.0.0",
           "Refit": "10.2.0",

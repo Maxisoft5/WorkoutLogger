@@ -6,9 +6,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Modules.Common.Domain.Events;
+using Modules.Common.Domain.Outbox;
 using Modules.Common.Domain.Results;
 using Modules.Common.Infrastructure.Caching;
 using Modules.Common.Infrastructure.Configurations;
+using Modules.Common.Infrastructure.Email;
 using Modules.Common.Infrastructure.Messaging;
 using Modules.Users.Domain.Authentication;
 using Modules.Users.Domain.Tokens;
@@ -18,7 +20,9 @@ using Modules.Users.DTO.Users;
 using Modules.Users.Infrastructure.Database;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 
 
 namespace Modules.Users.Infrastructure.Authorization
@@ -399,6 +403,59 @@ namespace Modules.Users.Infrastructure.Authorization
                 return new Result<User>(new Error("500", ex.Message, ErrorType.Failure));
             }
             return new Result<User>(new Error("500", "not saved",ErrorType.Failure));
+        }
+
+        public async Task<Result> SendPasswordResetCodeAsync(string email, CancellationToken ct = default)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+                return Result.Success; // не раскрываем факт существования аккаунта
+
+            var code = RandomNumberGenerator.GetInt32(100000, 999999).ToString();
+            await cacheService.SetAsync($"reset:{email}", code, TimeSpan.FromMinutes(10), ct);
+
+            var payload = JsonSerializer.Serialize(new EmailPayload(
+                To: email,
+                Subject: "Password Reset Code",
+                Body: $"<h2>Your password reset code: <strong>{code}</strong></h2><p>Valid for 10 minutes.</p>"
+            ));
+
+            dbContext.OutboxMessages.Add(new OutboxMessage
+            {
+                Type = "PasswordReset",
+                Payload = payload
+            });
+            await dbContext.SaveChangesAsync(ct);
+
+            return Result.Success;
+        }
+
+        public async Task<Result> VerifyResetCodeAsync(string email, string code, CancellationToken ct = default)
+        {
+            var stored = await cacheService.GetAsync<string>($"reset:{email}", ct);
+            if (stored == null || stored != code)
+                return new Result(new Error("400", "Invalid or expired code", ErrorType.Validation));
+
+            return Result.Success;
+        }
+
+        public async Task<Result> ResetPasswordAsync(string email, string code, string newPassword, CancellationToken ct = default)
+        {
+            var stored = await cacheService.GetAsync<string>($"reset:{email}", ct);
+            if (stored == null || stored != code)
+                return new Result(new Error("400", "Invalid or expired code", ErrorType.Validation));
+
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+                return new Result(new Error("404", "User not found", ErrorType.NotFound));
+
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await userManager.ResetPasswordAsync(user, token, newPassword);
+            if (!result.Succeeded)
+                return new Result(new Error("400", string.Join("; ", result.Errors.Select(e => e.Description)), ErrorType.Validation));
+
+            await cacheService.RemoveAsync($"reset:{email}", ct);
+            return Result.Success;
         }
 
         private async Task SyncGoals(User userCurrent, List<UserGoalDto> incoming)

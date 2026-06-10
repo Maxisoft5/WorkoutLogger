@@ -11,7 +11,10 @@ namespace Modules.Users.Domain.Authentication
         Task<Result<UpdateRoleResponse>> UpdateUserRoleAsync(string userId, string newRole, CancellationToken cancellationToken);
         Task<Result<LoginUserResponse>> LoginAsync(string email, string password, CancellationToken cancellationToken = default);
         Task<Result<RegisterUserResponse>> RegisterAsync(UserDto user, CancellationToken cancellationToken);
-        Task<Result<RefreshTokenResponse>> RefreshTokenAsync(string token, string refreshToken, 
-            CancellationToken cancellationToken=default);
+        Task<Result<RefreshTokenResponse>> RefreshTokenAsync(string token, string refreshToken,
+            CancellationToken cancellationToken = default);
+        Task<Result> SendPasswordResetCodeAsync(string email, CancellationToken ct = default);
+        Task<Result> VerifyResetCodeAsync(string email, string code, CancellationToken ct = default);
+        Task<Result> ResetPasswordAsync(string email, string code, string newPassword, CancellationToken ct = default);
     }
 }

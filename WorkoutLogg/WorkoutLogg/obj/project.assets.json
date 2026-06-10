@@ -63786,6 +63786,7 @@
       "Microsoft.Maui.Controls >= 10.0.20",
       "Microsoft.NET.ILLink.Tasks >= 10.0.7",
       "Modules.Common.Grpc.Contacts >= 1.0.0",
+      "Modules.Users.DTO >= 1.0.0",
       "Modules.Users.Domain >= 1.0.0",
       "Modules.Users.Infrastructure >= 1.0.0",
       "Refit >= 10.1.9",
@@ -63806,6 +63807,7 @@
       "Microsoft.Maui.Controls >= 10.0.20",
       "Microsoft.NET.ILLink.Tasks >= 10.0.7",
       "Modules.Common.Grpc.Contacts >= 1.0.0",
+      "Modules.Users.DTO >= 1.0.0",
       "Modules.Users.Domain >= 1.0.0",
       "Modules.Users.Infrastructure >= 1.0.0",
       "Refit >= 10.1.9",
@@ -63826,6 +63828,7 @@
       "Microsoft.Maui.Controls >= 10.0.20",
       "Microsoft.NET.ILLink.Tasks >= 10.0.7",
       "Modules.Common.Grpc.Contacts >= 1.0.0",
+      "Modules.Users.DTO >= 1.0.0",
       "Modules.Users.Domain >= 1.0.0",
       "Modules.Users.Infrastructure >= 1.0.0",
       "Refit >= 10.1.9",
@@ -63845,6 +63848,7 @@
       "Microsoft.Extensions.Logging.Debug >= 10.0.0",
       "Microsoft.Maui.Controls >= 10.0.20",
       "Modules.Common.Grpc.Contacts >= 1.0.0",
+      "Modules.Users.DTO >= 1.0.0",
       "Modules.Users.Domain >= 1.0.0",
       "Modules.Users.Infrastructure >= 1.0.0",
       "Refit >= 10.1.9",
@@ -63898,6 +63902,9 @@
             "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
               "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
             },
+            "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj": {
+              "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj"
+            },
             "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
             }
@@ -63912,6 +63919,9 @@
             },
             "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
               "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
+            },
+            "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj": {
+              "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj"
             },
             "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
@@ -63928,6 +63938,9 @@
             "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
               "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
             },
+            "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj": {
+              "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj"
+            },
             "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"
             }
@@ -63942,6 +63955,9 @@
             },
             "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj": {
               "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Domain\\Modules.Users.Domain.csproj"
+            },
+            "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj": {
+              "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.DTO\\Modules.Users.DTO.csproj"
             },
             "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\maxis\\Documents\\GitHub\\WorkoutLogger\\WorkoutLogg\\Modules.Users.Infrastructure\\Modules.Users.Infrastructure.csproj"

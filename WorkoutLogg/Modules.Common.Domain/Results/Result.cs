@@ -5,6 +5,20 @@ using System.Text.Json.Serialization;
 
 namespace Modules.Common.Domain.Results
 {
+    public class Result
+    {
+        public static readonly Result Success = new();
+        public List<Error> Errors { get; set; } = [];
+        public bool IsSuccess => Errors is null or [];
+
+        public Result() { }
+
+        public Result(Error error)
+        {
+            Errors = [error];
+        }
+    }
+
     public class Result<TValue> : IResult<TValue>
     {
         private readonly TValue? _value = default;

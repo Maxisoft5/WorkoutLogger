@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
+    xmlns:fonts="clr-namespace:Fonts"
     BackgroundColor="#EEEEF6"
     Shell.NavBarIsVisible="False">
 
@@ -57,14 +58,34 @@
             <!-- PASSWORD -->
             <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Register_Password}" TextColor="#6B7280" />
             <Border x:Name="PasswordBorder" Margin="0,0,0,16" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
-                <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" FontSize="15" IsPassword="True" Margin="14,0" Placeholder="••••••••" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Next" />
+                <Grid ColumnDefinitions="*,44">
+                    <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" FontSize="15" IsPassword="True" Margin="14,0,0,0" Placeholder="••••••••" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Next" />
+                    <Image x:Name="PasswordEyeImage" Grid.Column="1" HeightRequest="20" WidthRequest="20" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Image.Source>
+                            <FontImageSource Glyph="{x:Static fonts:FluentUI.eye_20_regular}" FontFamily="{x:Static fonts:FluentUI.FontFamily}" Color="#9CA3AF" Size="20"/>
+                        </Image.Source>
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTogglePasswordVisibility" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
             </Border>
             <Label x:Name="PasswordError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
 
             <!-- CONFIRM PASSWORD -->
             <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Register_ConfirmPassword}" TextColor="#6B7280" />
             <Border x:Name="ConfirmPasswordBorder" Margin="0,0,0,20" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
-                <Entry x:Name="ConfirmPasswordEntry" BackgroundColor="Transparent" FontSize="15" IsPassword="True" Margin="14,0" Placeholder="••••••••" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Done" />
+                <Grid ColumnDefinitions="*,44">
+                    <Entry x:Name="ConfirmPasswordEntry" BackgroundColor="Transparent" FontSize="15" IsPassword="True" Margin="14,0,0,0" Placeholder="••••••••" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Done" />
+                    <Image x:Name="ConfirmPasswordEyeImage" Grid.Column="1" HeightRequest="20" WidthRequest="20" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Image.Source>
+                            <FontImageSource Glyph="{x:Static fonts:FluentUI.eye_20_regular}" FontFamily="{x:Static fonts:FluentUI.FontFamily}" Color="#9CA3AF" Size="20"/>
+                        </Image.Source>
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnToggleConfirmPasswordVisibility" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
             </Border>
             <Label x:Name="ConfirmPasswordError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
 
@@ -100,23 +121,6 @@
                         IsEnabled="True"
                         FontAttributes="Bold" FontSize="16" Text="{loc:Translate Register_CreateAccount}" TextColor="White" />
             </Border>
-
-            <!-- Divider -->
-            <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="12" Margin="0,0,0,20" VerticalOptions="Center">
-                <BoxView Grid.Column="0" BackgroundColor="#D1D5DB" HeightRequest="1" VerticalOptions="Center" />
-                <Label Grid.Column="1" FontSize="13" Text="{loc:Translate Common_Or}" TextColor="#9CA3AF" VerticalOptions="Center" />
-                <BoxView Grid.Column="2" BackgroundColor="#D1D5DB" HeightRequest="1" VerticalOptions="Center" />
-            </Grid>
-
-            <!-- Social Buttons -->
-            <Grid ColumnDefinitions="*,12,*" Margin="0,0,0,28">
-                <Border Grid.Column="0" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
-                    <Button BackgroundColor="Transparent" Clicked="OnAppleSignInClicked" FontAttributes="Bold" FontSize="14" ImageSource="apple_icon.png" Text="  Apple" TextColor="#111827" />
-                </Border>
-                <Border Grid.Column="2" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
-                    <Button BackgroundColor="Transparent" Clicked="OnGoogleSignInClicked" FontAttributes="Bold" FontSize="14" ImageSource="google_icon.png" Text="  Google" TextColor="#111827" />
-                </Border>
-            </Grid>
 
             <!-- Sign In Link -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">

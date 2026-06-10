@@ -46,12 +46,12 @@ public partial class LoginPage : ContentPage
             {
                 await CurrentUserStore.SetCurrentUser(currentUser.Content);
             }
-            if (currentUser.IsSuccessful && currentUser.Content.UserRegistrationStep 
+            if (currentUser.IsSuccessful && currentUser.Content.UserRegistrationStep
                 == Modules.Users.DTO.Users.UserRegistrationStep.Profile)
             {
                 Application.Current!.Windows[0].Page = new OnboardingProfilePage();
             }
-            if (currentUser.IsSuccessful && currentUser.Content.UserRegistrationStep 
+            if (currentUser.IsSuccessful && currentUser.Content.UserRegistrationStep
                 == Modules.Users.DTO.Users.UserRegistrationStep.Body)
             {
                 Application.Current!.Windows[0].Page = new OnboardingBodyStatsPage();
@@ -112,25 +112,23 @@ public partial class LoginPage : ContentPage
 
     private async void OnForgotPasswordTapped(object sender, EventArgs e)
     {
-        // TODO: навигация на ForgotPasswordPage
         Application.Current!.Windows[0].Page = new ForgotPassword();
     }
 
-    private async void OnAppleSignInClicked(object sender, EventArgs e)
+    private void OnTogglePasswordVisibility(object sender, EventArgs e)
     {
-        // TODO: Apple Sign-In через AppleSignInAuthenticator
-        await DisplayAlert("Apple", "Apple Sign-In — coming soon", "OK");
-    }
-
-    private async void OnGoogleSignInClicked(object sender, EventArgs e)
-    {
-        // TODO: Google Sign-In через WebAuthenticator / Google Auth
-        await DisplayAlert("Google", "Google Sign-In — coming soon", "OK");
+        PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
+        PasswordEyeImage.Source = new FontImageSource
+        {
+            Glyph = PasswordEntry.IsPassword ? FluentUI.eye_20_regular : FluentUI.eye_off_20_regular,
+            FontFamily = FluentUI.FontFamily,
+            Color = Color.FromArgb("#9CA3AF"),
+            Size = 20
+        };
     }
 
     private async void OnSignUpTapped(object sender, EventArgs e)
     {
-        // TODO: навигация на RegisterPage
         Application.Current!.Windows[0].Page = new CreateAccount();
     }
 }

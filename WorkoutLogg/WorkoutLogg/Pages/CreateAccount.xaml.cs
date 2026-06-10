@@ -49,7 +49,7 @@ public partial class CreateAccount : ContentPage
         } 
         else
         {
-            await DisplayAlert("Error", string.Join(";", res.Errors.Select(s => s.Description)), "Ok");
+            await DisplayAlertAsync("Error", string.Join(";", res.Errors.Select(s => s.Description)), "Ok");
         }
     }
 
@@ -129,16 +129,28 @@ public partial class CreateAccount : ContentPage
         Application.Current!.Windows[0].Page = new PrivacyPolicy();
     }
 
-    private async void OnAppleSignInClicked(object sender, EventArgs e)
+    private void OnTogglePasswordVisibility(object sender, EventArgs e)
     {
-        // TODO: Apple Sign-In
-        await DisplayAlert("Apple", "Apple Sign-In — coming soon", "OK");
+        PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
+        PasswordEyeImage.Source = new FontImageSource
+        {
+            Glyph = PasswordEntry.IsPassword ? FluentUI.eye_20_regular : FluentUI.eye_off_20_regular,
+            FontFamily = FluentUI.FontFamily,
+            Color = Color.FromArgb("#9CA3AF"),
+            Size = 20
+        };
     }
 
-    private async void OnGoogleSignInClicked(object sender, EventArgs e)
+    private void OnToggleConfirmPasswordVisibility(object sender, EventArgs e)
     {
-        // TODO: Google Sign-In
-        await DisplayAlert("Google", "Google Sign-In — coming soon", "OK");
+        ConfirmPasswordEntry.IsPassword = !ConfirmPasswordEntry.IsPassword;
+        ConfirmPasswordEyeImage.Source = new FontImageSource
+        {
+            Glyph = ConfirmPasswordEntry.IsPassword ? FluentUI.eye_20_regular : FluentUI.eye_off_20_regular,
+            FontFamily = FluentUI.FontFamily,
+            Color = Color.FromArgb("#9CA3AF"),
+            Size = 20
+        };
     }
 
     private async void OnSignInTapped(object sender, EventArgs e)

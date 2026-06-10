@@ -85,4 +85,25 @@ public class AuthController(IAuthService authService,
         var upd = await authService.UpdateUser(user);
         return Ok(UserMapper.MapUser(upd.Value));
     }
+
+    [HttpPost("ForgotPassword")]
+    public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
+    {
+        var result = await authService.SendPasswordResetCodeAsync(request.Email);
+        return Ok(result);
+    }
+
+    [HttpPost("VerifyResetCode")]
+    public async Task<IActionResult> VerifyResetCode([FromBody] VerifyResetCodeRequest request)
+    {
+        var result = await authService.VerifyResetCodeAsync(request.Email, request.Code);
+        return Ok(result);
+    }
+
+    [HttpPost("ResetPassword")]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+    {
+        var result = await authService.ResetPasswordAsync(request.Email, request.Code, request.NewPassword);
+        return Ok(result);
+    }
 }

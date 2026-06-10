@@ -144,7 +144,7 @@ AddWorkout_Complexity: "Сложность"
 AddWorkout_AddSet: "+ Добавить сет"
 
 # Logger page
-Logger_Title: "Дневник"
+Logger_Title: "Записи"
 Logger_Empty: "Тренировок не записано"
 Logger_EmptySubtitle: "Нажмите + чтобы записать тренировку"
 Logger_DeleteTitle: "Удалить"
