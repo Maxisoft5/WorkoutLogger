@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Modules.Common.Infrastructure.Extensions;
 using Modules.Users.Infrastructure.Database;
 using Serilog;
-using Serilog.Sinks.OpenSearch;
+using Serilog.Sinks.Elasticsearch;
 using System.Text.Json.Serialization;
 using WorkoutLogger.WebApi.Extensions;
 using WorkoutLogger.WebApi.Grpc;
@@ -19,7 +19,7 @@ builder.Host.UseSerilog((ctx, _, config) =>
         .Enrich.WithMachineName()
         .Enrich.WithEnvironmentName()
         .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
-        .WriteTo.OpenSearch(new OpenSearchSinkOptions(new Uri(openSearchUrl))
+        .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(openSearchUrl))
         {
             AutoRegisterTemplate = true,
             IndexFormat = "workoutlogger-logs-{0:yyyy.MM.dd}",
