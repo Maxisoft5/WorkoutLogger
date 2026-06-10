@@ -9,6 +9,8 @@ using WorkoutLogger.WebApi.Grpc;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Serilog.Debugging.SelfLog.Enable(msg => Console.Error.WriteLine($"[Serilog] {msg}"));
+
 builder.Host.UseSerilog((ctx, _, config) =>
 {
     var openSearchUrl = ctx.Configuration["OpenSearch:Url"] ?? "http://opensearch:9200";
@@ -22,10 +24,14 @@ builder.Host.UseSerilog((ctx, _, config) =>
         .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(openSearchUrl))
         {
             AutoRegisterTemplate = true,
+            AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
+            OverwriteTemplate = false,
             IndexFormat = "workoutlogger-logs-{0:yyyy.MM.dd}",
             NumberOfShards = 1,
             NumberOfReplicas = 0,
             EmitEventFailure = EmitEventFailureHandling.WriteToSelfLog
+                             | EmitEventFailureHandling.RaiseCallback,
+            FailureCallback = e => Console.Error.WriteLine($"[Serilog] Failed: {e.MessageTemplate}")
         });
 });
 
