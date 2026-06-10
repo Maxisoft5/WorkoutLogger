@@ -61,9 +61,9 @@ namespace WorkoutLogger.WebApi.Extensions
             services.AddMemoryCache();
             services.AddHttpContextAccessor();
 
-            var smtpSettings = configuration.GetSection("Smtp").Get<SmtpSettings>() ?? new SmtpSettings();
-            services.AddSingleton(smtpSettings);
-            services.AddScoped<IEmailSender, SmtpEmailSender>();
+            var mailtrapSettings = configuration.GetSection("Mailtrap").Get<MailtrapSettings>() ?? new MailtrapSettings();
+            services.AddSingleton(mailtrapSettings);
+            services.AddHttpClient<IEmailSender, MailtrapHttpEmailSender>();
             services.AddHostedService<OutboxProcessorService>();
 
             return services;

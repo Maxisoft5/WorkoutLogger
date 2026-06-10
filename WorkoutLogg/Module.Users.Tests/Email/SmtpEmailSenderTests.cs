@@ -1,6 +1,7 @@
 using Modules.Common.Infrastructure.Email;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
+using System.Net.Http;
 
 namespace Module.Users.Tests.Email;
 
@@ -82,47 +83,23 @@ public class SmtpEmailSenderTests
     // ── Integration: реальная отправка (запускать вручную через Test Explorer) ──
     // Requires: правильный app password в appsettings.json
 
-    [Test, Explicit("Port 587 + Auto — run manually")]
-    public async Task SendAsync_RealGmail_Port587_DeliversEmail()
+    [Test, Explicit("Mailtrap HTTP API — run manually to verify")]
+    public async Task SendAsync_MailtrapHttpApi_DeliversEmail()
     {
-        var settings = new SmtpSettings
+        var settings = new MailtrapSettings
         {
-            Host = "smtp.gmail.com",
-            Port = 587,
-            EnableSsl = true,
-            UserName = "maxisoft4@gmail.com",
-            Password = "bjjn haxv fuus qxqi",
-            From = "maxisoft4@gmail.com"
+            ApiUrl = "https://send.api.mailtrap.io/api/send",
+            ApiToken = "6f260234f8416f0b75218227621d5be5",
+            From = "hello@demomailtrap.co",
+            FromName = "WorkoutLogger Test"
         };
 
-        var sender = new SmtpEmailSender(settings);
+        var sender = new MailtrapHttpEmailSender(settings, new HttpClient());
 
         Assert.DoesNotThrowAsync(() =>
             sender.SendAsync(
                 to: "maxisoft4@gmail.com",
-                subject: "WorkoutLogger — SMTP Test 587",
-                body: "<h2>SMTP работает (587)!</h2>"));
-    }
-
-    [Test, Explicit("Port 465 SSL — run manually if 587 fails")]
-    public async Task SendAsync_RealGmail_Port465_DeliversEmail()
-    {
-        var settings = new SmtpSettings
-        {
-            Host = "smtp.gmail.com",
-            Port = 465,
-            EnableSsl = true,
-            UserName = "maxisoft4@gmail.com",
-            Password = "bjjn haxv fuus qxqi",
-            From = "maxisoft4@gmail.com"
-        };
-
-        var sender = new SmtpEmailSender(settings);
-
-        Assert.DoesNotThrowAsync(() =>
-            sender.SendAsync(
-                to: "maxisoft4@gmail.com",
-                subject: "WorkoutLogger — SMTP Test 465",
-                body: "<h2>SMTP работает (465)!</h2>"));
+                subject: "WorkoutLogger — HTTP API Test",
+                body: "<h2>Email через HTTP API работает!</h2>"));
     }
 }
