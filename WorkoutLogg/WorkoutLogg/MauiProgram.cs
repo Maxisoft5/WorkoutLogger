@@ -80,6 +80,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<WorkoutLogg.Services.UserProfileService>();
         builder.Services.AddSingleton<WorkoutLogg.PageModels.ProfilePageModel>();
         builder.Services.AddTransient<WorkoutLogg.Pages.ProfilePage>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.StandardsPage>();
         builder.Services.AddTransient<AppShell>();
 
         // On Android emulator the host machine is 10.0.2.2, not localhost.

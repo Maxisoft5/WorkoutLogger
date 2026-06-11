@@ -23,35 +23,39 @@
 
                         <!-- Avatar + name -->
                         <HorizontalStackLayout Spacing="16" VerticalOptions="Center">
-                            <Grid WidthRequest="64" HeightRequest="64" VerticalOptions="Center">
+                            <Grid WidthRequest="84" HeightRequest="84" VerticalOptions="Center">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnChangeAvatarTapped" />
                                 </Grid.GestureRecognizers>
                                 <!-- Initials fallback -->
                                 <Border BackgroundColor="#9333EA"
-                                        HeightRequest="64"
-                                        StrokeShape="RoundRectangle 20"
+                                        HeightRequest="84"
+                                        StrokeShape="Ellipse"
                                         StrokeThickness="0"
-                                        WidthRequest="64"
+                                        WidthRequest="84"
                                         IsVisible="{Binding HasNoProfilePicture}">
                                     <Label FontAttributes="Bold"
-                                           FontSize="24"
+                                           FontSize="28"
                                            HorizontalOptions="Center"
                                            Text="{Binding UserInitials}"
                                            TextColor="White"
                                            VerticalOptions="Center" />
                                 </Border>
                                 <!-- Profile photo -->
-                                <Border HeightRequest="64"
-                                        StrokeShape="RoundRectangle 20"
-                                        StrokeThickness="0"
-                                        WidthRequest="64"
-                                        IsVisible="{Binding HasProfilePicture}">
+                                <Grid HeightRequest="84" WidthRequest="84"
+                                      IsVisible="{Binding HasProfilePicture}">
                                     <Image Source="{Binding AvatarImageSource}"
                                            Aspect="AspectFill"
-                                           HeightRequest="64"
-                                           WidthRequest="64" />
-                                </Border>
+                                           HeightRequest="84"
+                                           WidthRequest="84">
+                                        <Image.Clip>
+                                            <EllipseGeometry Center="42,42" RadiusX="42" RadiusY="42" />
+                                        </Image.Clip>
+                                    </Image>
+                                    <Ellipse Stroke="#9333EA" StrokeThickness="2"
+                                             HeightRequest="84" WidthRequest="84"
+                                             Fill="Transparent" />
+                                </Grid>
                             </Grid>
                             <VerticalStackLayout VerticalOptions="Center" Spacing="4">
                                 <Label FontAttributes="Bold"
@@ -186,7 +190,7 @@
                     <!-- Achievements -->
                     <Border BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6"
                             StrokeShape="RoundRectangle 16" StrokeThickness="1">
-                        <VerticalStackLayout Spacing="14">
+                        <VerticalStackLayout Spacing="12">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0" FontAttributes="Bold" FontSize="16"
                                        Text="{loc:Translate Profile_Achievements}" TextColor="#111827" />
@@ -196,24 +200,52 @@
 
                             <CollectionView ItemsSource="{Binding Achievements}"
                                             SelectionMode="None"
-                                            HeightRequest="90">
+                                            HeightRequest="{Binding AchievementsGridHeight}">
                                 <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                    <GridItemsLayout Orientation="Vertical" Span="2"
+                                                     HorizontalItemSpacing="8" VerticalItemSpacing="8" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="vm:AchievementVM">
-                                        <VerticalStackLayout Spacing="5" WidthRequest="58" Opacity="{Binding Opacity}">
-                                            <Border BackgroundColor="{Binding DisplayColor}"
-                                                    HeightRequest="82" WidthRequest="82"
-                                                    StrokeShape="RoundRectangle 16" StrokeThickness="0">
-                                                <Label FontSize="26" HorizontalOptions="Center"
-                                                       Text="{Binding Emoji}" VerticalOptions="Center" />
-                                            </Border>
-                                            <Label FontSize="9" FontAttributes="Bold"
-                                                   Text="{Binding Title}" TextColor="{Binding TitleColor}"
-                                                   HorizontalOptions="Center" HorizontalTextAlignment="Center"
-                                                   LineBreakMode="WordWrap" MaxLines="2" />
-                                        </VerticalStackLayout>
+                                        <Border BackgroundColor="{Binding CardBg}"
+                                                Padding="10,10"
+                                                StrokeShape="RoundRectangle 14"
+                                                StrokeThickness="0"
+                                                Opacity="{Binding Opacity}">
+                                            <Grid ColumnDefinitions="78,*" ColumnSpacing="8"
+                                                  RowDefinitions="Auto,Auto,Auto" RowSpacing="2">
+                                                <!-- Emoji circle -->
+                                                <Border Grid.Column="0" Grid.RowSpan="3"
+                                                        BackgroundColor="{Binding EmojiCircleColor}"
+                                                        HeightRequest="78" WidthRequest="78"
+                                                        StrokeShape="RoundRectangle 10"
+                                                        StrokeThickness="0"
+                                                        VerticalOptions="Start">
+                                                    <Label FontSize="16"
+                                                           HorizontalOptions="Center"
+                                                           Text="{Binding Emoji}"
+                                                           VerticalOptions="Center" />
+                                                </Border>
+                                                <!-- Title -->
+                                                <Label Grid.Column="1" Grid.Row="0"
+                                                       FontAttributes="Bold" FontSize="11"
+                                                       Text="{Binding Title}"
+                                                       TextColor="{Binding TitleColor}"
+                                                       LineBreakMode="TailTruncation" MaxLines="1" />
+                                                <!-- Description -->
+                                                <Label Grid.Column="1" Grid.Row="1"
+                                                       FontSize="9"
+                                                       Text="{Binding Description}"
+                                                       TextColor="#9CA3AF"
+                                                       LineBreakMode="WordWrap" MaxLines="2" />
+                                                <!-- Progress -->
+                                                <Label Grid.Column="1" Grid.Row="2"
+                                                       FontSize="9" FontAttributes="Bold"
+                                                       Text="{Binding ProgressText}"
+                                                       TextColor="{Binding ProgressColor}"
+                                                       IsVisible="{Binding HasProgress}" />
+                                            </Grid>
+                                        </Border>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
@@ -232,6 +264,21 @@
                                 <Label Grid.Column="1" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
                             </Grid>
                             <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                            <Grid Padding="16,14" ColumnDefinitions="*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnStandardsTapped" />
+                                </Grid.GestureRecognizers>
+                                <Label Grid.Column="0" FontSize="15" Text="{loc:Translate Profile_Standards}" TextColor="#111827" VerticalOptions="Center" />
+                                <Label Grid.Column="1" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
+                            </Grid>
+                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                            <Grid Padding="16,14" ColumnDefinitions="*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnLogoutTapped" />
+                                </Grid.GestureRecognizers>
+                                <Label Grid.Column="0" FontSize="15" Text="{loc:Translate Profile_Logout}" TextColor="#EF4444" VerticalOptions="Center" />
+                                <Label Grid.Column="1" FontSize="18" Text="›" TextColor="#FCA5A5" VerticalOptions="Center" />
+                            </Grid>
                         </VerticalStackLayout>
                     </Border>
 

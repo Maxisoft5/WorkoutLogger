@@ -79,6 +79,7 @@ namespace WorkoutLogg.Services
                     {
                         var json = JsonSerializer.Serialize(resp.Content);
                         await SecureStorage.SetAsync(CacheKey, json);
+                        await CurrentUserStore.SetCurrentUser(resp.Content);
 
                         // Record first-time joined date
                         var existing = await SecureStorage.GetAsync(JoinedKey);
@@ -115,6 +116,7 @@ namespace WorkoutLogg.Services
                     {
                         cached.ProfilePicture = dataUrl;
                         await SecureStorage.SetAsync(CacheKey, JsonSerializer.Serialize(cached));
+                        await CurrentUserStore.SetCurrentUser(cached);
                     }
                     return true;
                 }

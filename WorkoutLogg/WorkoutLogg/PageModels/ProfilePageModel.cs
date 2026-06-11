@@ -29,6 +29,7 @@ namespace WorkoutLogg.PageModels
         [ObservableProperty] bool hasProfilePicture = false;
         [ObservableProperty] bool hasNoProfilePicture = true;
         [ObservableProperty] ImageSource? avatarImageSource;
+        [ObservableProperty] int achievementsGridHeight = 400;
 
         // ── Personal Records (always 4 slots) ─────────────────────────────────
         [ObservableProperty] ObservableCollection<PersonalRecordVM> personalRecords = [];
@@ -103,39 +104,82 @@ namespace WorkoutLogg.PageModels
             StreakLabel = stats.CurrentStreak.ToString();
             TotalSessionsLabel = stats.TotalSessions.ToString();
 
-            // Personal Records — always 4 slots
             var prs = stats.TopPRs;
             PersonalRecords = new ObservableCollection<PersonalRecordVM>(
                 Enumerable.Range(0, 4).Select(i => i < prs.Count
                     ? new PersonalRecordVM(prs[i].ExerciseName, $"{prs[i].MaxWeightKg:0.#} {Loc.Get("Common_Kg")}")
                     : new PersonalRecordVM(Loc.Get("Common_NoRecordYet"), "—")));
 
-            // Achievements
-            var unlocked = BuildAchievements(stats, user);
-            Achievements = new ObservableCollection<AchievementVM>(unlocked);
-            var count = unlocked.Count(a => a.IsUnlocked);
-            UnlockedLabel = $"{count}/{unlocked.Count} ›";
+            var list = BuildAchievements(stats, user);
+            Achievements = new ObservableCollection<AchievementVM>(list);
+            var count = list.Count(a => a.IsUnlocked);
+            UnlockedLabel = $"{count}/{list.Count} ›";
+            AchievementsGridHeight = (int)Math.Ceiling(list.Count / 2.0) * 118;
         }
+
+        private static double ExercisePR(List<PersonalRecordEntry> prs, params string[] keywords)
+            => prs.Where(p => keywords.Any(k =>
+                    p.ExerciseName.Contains(k, StringComparison.OrdinalIgnoreCase)))
+               .Select(p => p.MaxWeightKg)
+               .DefaultIfEmpty(0).Max();
 
         private static List<AchievementVM> BuildAchievements(ProfileStats stats, UserDto? user)
         {
-            var all = new[]
-            {
-                new AchievementVM("🎯", "First Step",      "Log your first workout",      stats.TotalSessions >= 1,            "#EDE9FE", "#7C3AED"),
-                new AchievementVM("🦾", "Dedicated",       "10 workouts logged",          stats.TotalSessions >= 10,           "#EDE9FE", "#7C3AED"),
-                new AchievementVM("💪", "Iron Will",       "30 workouts logged",          stats.TotalSessions >= 30,           "#EDE9FE", "#7C3AED"),
-                new AchievementVM("🏆", "Legend",          "100 workouts logged",         stats.TotalSessions >= 100,          "#FEF3C7", "#D97706"),
-                new AchievementVM("🔥", "On Fire",         "5+ workouts in one week",     stats.MaxWeekSessions >= 5,          "#FEE2E2", "#DC2626"),
-                new AchievementVM("📅", "Week Streak",     "7 consecutive days",          stats.CurrentStreak >= 7,            "#DCFCE7", "#16A34A"),
-                new AchievementVM("📅", "Month Streak",    "30 consecutive days",         stats.CurrentStreak >= 30,           "#DCFCE7", "#15803D"),
-                new AchievementVM("⚡", "Power",           "Lift 100+ kg in one set",     stats.HasHeavySet,                   "#FEF3C7", "#D97706"),
-                new AchievementVM("🌈", "Variety",         "Log 10 different exercises",  stats.UniqueExerciseCount >= 10,     "#EDE9FE", "#7C3AED"),
-                new AchievementVM("📋", "Plan Follower",   "10 plan-based sessions",      stats.PlanBasedSessions >= 10,       "#DBEAFE", "#2563EB"),
-                new AchievementVM("🚀", "Century Sets",    "100 total sets logged",       stats.TotalSets >= 100,              "#FEE2E2", "#DC2626"),
-                new AchievementVM("🌅", "Early Riser",     "Log a workout before 8 AM",   stats.HasEarlySession,               "#FEF3C7", "#D97706"),
-                new AchievementVM("⭐", "Premium",         "Premium member",              user?.IsPremium == true,             "#FEF3C7", "#D97706"),
-            };
-            return [.. all];
+            var all = stats.AllPRs;
+            var s = stats;
+
+            double bench    = ExercisePR(all, "bench", "жим лёж", "жим леж");
+            double squat    = ExercisePR(all, "squat", "присед");
+            double deadlift = ExercisePR(all, "deadlift", "становая", "dead lift");
+            double total    = bench + squat + deadlift;
+
+            string Kg(double v) => $"{v:0.#} {Loc.Get("Common_Kg")}";
+            string Prog(double cur, double target) =>
+                cur > 0 ? $"{Kg(cur)} / {Kg(target)}" : $"0 / {Kg(target)}";
+            string Cnt(int cur, int target) => $"{cur} / {target}";
+
+            return
+            [
+                // ── Общие ─────────────────────────────────────────────────────────
+                new("🎯", Loc.Get("Ach_FirstStep"),    Loc.Get("Ach_FirstStep_Desc"),    "",                              s.TotalSessions >= 1,   "#EDE9FE", "#7C3AED"),
+                new("💪", Loc.Get("Ach_10Sessions"),   Loc.Get("Ach_10Sessions_Desc"),   Cnt(s.TotalSessions,10),         s.TotalSessions >= 10,  "#EDE9FE", "#7C3AED"),
+                new("🏋️", Loc.Get("Ach_30Sessions"),   Loc.Get("Ach_30Sessions_Desc"),   Cnt(s.TotalSessions,30),         s.TotalSessions >= 30,  "#EDE9FE", "#7C3AED"),
+                new("🏆", Loc.Get("Ach_100Sessions"),  Loc.Get("Ach_100Sessions_Desc"),  Cnt(s.TotalSessions,100),        s.TotalSessions >= 100, "#FEF3C7", "#D97706"),
+
+                // ── Постоянство ───────────────────────────────────────────────────
+                new("🔥", Loc.Get("Ach_OnFire"),       Loc.Get("Ach_OnFire_Desc"),       Cnt(s.MaxWeekSessions,5),        s.MaxWeekSessions >= 5, "#FEE2E2", "#DC2626"),
+                new("📅", Loc.Get("Ach_Week7"),        Loc.Get("Ach_Week7_Desc"),        Cnt(s.CurrentStreak,7),          s.CurrentStreak >= 7,   "#DCFCE7", "#16A34A"),
+                new("🗓️", Loc.Get("Ach_Month30"),      Loc.Get("Ach_Month30_Desc"),      Cnt(s.CurrentStreak,30),         s.CurrentStreak >= 30,  "#DCFCE7", "#15803D"),
+                new("🌅", Loc.Get("Ach_EarlyRiser"),   Loc.Get("Ach_EarlyRiser_Desc"),   "",                              s.HasEarlySession,      "#FEF3C7", "#D97706"),
+
+                // ── Жим лёжа ──────────────────────────────────────────────────────
+                new("🫷", Loc.Get("Ach_Bench60"),      Loc.Get("Ach_Bench60_Desc"),      Prog(bench,60),                  bench >= 60,            "#EDE9FE", "#7C3AED"),
+                new("💪", Loc.Get("Ach_Bench100"),     Loc.Get("Ach_Bench100_Desc"),     Prog(bench,100),                 bench >= 100,           "#EDE9FE", "#7C3AED"),
+                new("🏅", Loc.Get("Ach_Bench120"),     Loc.Get("Ach_Bench120_Desc"),     Prog(bench,120),                 bench >= 120,           "#FEF3C7", "#D97706"),
+                new("👑", Loc.Get("Ach_Bench140"),     Loc.Get("Ach_Bench140_Desc"),     Prog(bench,140),                 bench >= 140,           "#FEF3C7", "#D97706"),
+
+                // ── Присед ────────────────────────────────────────────────────────
+                new("🦵", Loc.Get("Ach_Squat60"),      Loc.Get("Ach_Squat60_Desc"),      Prog(squat,60),                  squat >= 60,            "#DBEAFE", "#2563EB"),
+                new("🦾", Loc.Get("Ach_Squat100"),     Loc.Get("Ach_Squat100_Desc"),     Prog(squat,100),                 squat >= 100,           "#DBEAFE", "#2563EB"),
+                new("💫", Loc.Get("Ach_Squat140"),     Loc.Get("Ach_Squat140_Desc"),     Prog(squat,140),                 squat >= 140,           "#EDE9FE", "#7C3AED"),
+                new("🔱", Loc.Get("Ach_Squat180"),     Loc.Get("Ach_Squat180_Desc"),     Prog(squat,180),                 squat >= 180,           "#FEF3C7", "#D97706"),
+
+                // ── Становая ──────────────────────────────────────────────────────
+                new("⛏️", Loc.Get("Ach_Dead80"),       Loc.Get("Ach_Dead80_Desc"),       Prog(deadlift,80),               deadlift >= 80,         "#DBEAFE", "#2563EB"),
+                new("🪝", Loc.Get("Ach_Dead100"),      Loc.Get("Ach_Dead100_Desc"),      Prog(deadlift,100),              deadlift >= 100,        "#DBEAFE", "#2563EB"),
+                new("⚓", Loc.Get("Ach_Dead140"),      Loc.Get("Ach_Dead140_Desc"),      Prog(deadlift,140),              deadlift >= 140,        "#EDE9FE", "#7C3AED"),
+                new("🚀", Loc.Get("Ach_Dead200"),      Loc.Get("Ach_Dead200_Desc"),      Prog(deadlift,200),              deadlift >= 200,        "#FEF3C7", "#D97706"),
+
+                // ── Пауэрлифтинг тотал ────────────────────────────────────────────
+                new("⚡", Loc.Get("Ach_Total300"),     Loc.Get("Ach_Total300_Desc"),     Prog(total,300),                 total >= 300,           "#FEE2E2", "#DC2626"),
+                new("🔥", Loc.Get("Ach_Total500"),     Loc.Get("Ach_Total500_Desc"),     Prog(total,500),                 total >= 500,           "#FEE2E2", "#DC2626"),
+
+                // ── Разнообразие / прочее ─────────────────────────────────────────
+                new("🌈", Loc.Get("Ach_Variety"),      Loc.Get("Ach_Variety_Desc"),      Cnt(s.UniqueExerciseCount,10),   s.UniqueExerciseCount >= 10, "#EDE9FE", "#7C3AED"),
+                new("📋", Loc.Get("Ach_PlanPro"),      Loc.Get("Ach_PlanPro_Desc"),      Cnt(s.PlanBasedSessions,10),     s.PlanBasedSessions >= 10,   "#DBEAFE", "#2563EB"),
+                new("🚩", Loc.Get("Ach_100Sets"),      Loc.Get("Ach_100Sets_Desc"),      Cnt(s.TotalSets,100),            s.TotalSets >= 100,          "#FEE2E2", "#DC2626"),
+                new("⭐", Loc.Get("Ach_Premium"),      Loc.Get("Ach_Premium_Desc"),      "",                              user?.IsPremium == true,     "#FEF3C7", "#D97706"),
+            ];
         }
 
         private static string BuildInitials(string name)
@@ -161,21 +205,31 @@ namespace WorkoutLogg.PageModels
     }
 
     public class AchievementVM(string emoji, string title, string description,
-        bool isUnlocked, string unlockedBg, string unlockedFg)
+        string progressText, bool isUnlocked, string unlockedBg, string unlockedFg)
     {
         public string Emoji { get; } = emoji;
         public string Title { get; } = title;
         public string Description { get; } = description;
+        public string ProgressText { get; } = progressText;
+        public bool HasProgress { get; } = !string.IsNullOrEmpty(progressText);
         public bool IsUnlocked { get; } = isUnlocked;
 
-        public Color DisplayColor => IsUnlocked
+        public Color EmojiCircleColor => IsUnlocked
             ? Color.FromArgb(unlockedBg)
             : Color.FromArgb("#F3F4F6");
 
+        public Color CardBg => IsUnlocked
+            ? Color.FromArgb(unlockedBg).WithAlpha(0.35f)
+            : Color.FromArgb("#F9FAFB");
+
         public Color TitleColor => IsUnlocked
             ? Color.FromArgb(unlockedFg)
-            : Color.FromArgb("#D1D5DB");
+            : Color.FromArgb("#C9D1DB");
 
-        public double Opacity => IsUnlocked ? 1.0 : 0.5;
+        public Color ProgressColor => IsUnlocked
+            ? Color.FromArgb(unlockedFg)
+            : Color.FromArgb("#9CA3AF");
+
+        public double Opacity => IsUnlocked ? 1.0 : 0.65;
     }
 }

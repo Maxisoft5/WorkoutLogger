@@ -8,12 +8,16 @@ public partial class ProfilePage : ContentPage
 {
     private readonly ProfilePageModel _vm;
     private readonly LanguageService _lang;
+    private readonly IAuthFlow _authFlow;
+    private readonly UserProfileService _userService;
 
-    public ProfilePage(ProfilePageModel vm, LanguageService lang)
+    public ProfilePage(ProfilePageModel vm, LanguageService lang, IAuthFlow authFlow, UserProfileService userService)
     {
         InitializeComponent();
         _vm = vm;
         _lang = lang;
+        _authFlow = authFlow;
+        _userService = userService;
         BindingContext = vm;
         PageLoading.Preload();
     }
@@ -84,6 +88,24 @@ public partial class ProfilePage : ContentPage
 
     private async void OnEditStatsTapped(object sender, TappedEventArgs e) =>
         await Shell.Current.GoToAsync("EditBodyStats");
+
+    private async void OnStandardsTapped(object sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("Standards");
+
+    private async void OnLogoutTapped(object sender, TappedEventArgs e)
+    {
+        var confirmed = await DisplayAlertAsync(
+            Loc.Get("Profile_Logout"),
+            Loc.Get("Profile_LogoutConfirm"),
+            Loc.Get("Common_Yes"),
+            Loc.Get("Common_Cancel"));
+
+        if (!confirmed) return;
+
+        _userService.ClearCache();
+        CurrentUserStore.Clear();
+        _authFlow.SignOutAndRedirectToLogin();
+    }
 
     private async void OnPrivacyTapped(object sender, TappedEventArgs e) =>
         await Shell.Current.GoToAsync("Privacy");

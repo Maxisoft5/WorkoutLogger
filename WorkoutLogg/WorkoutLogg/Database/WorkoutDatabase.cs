@@ -324,13 +324,14 @@ namespace WorkoutLogg.Database
                 .Where(n => !string.IsNullOrEmpty(n))
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-            var topPRs = sets
+            var allPRs = sets
                 .Where(s => !s.IsWarmup && s.WeightKg > 0 && exIdToName.ContainsKey(s.ExerciseLogId))
                 .GroupBy(s => exIdToName[s.ExerciseLogId], StringComparer.OrdinalIgnoreCase)
                 .Select(g => new PersonalRecordEntry(g.Key, g.Max(s => s.WeightKg)))
                 .OrderByDescending(pr => pr.MaxWeightKg)
-                .Take(4)
                 .ToList();
+
+            var topPRs = allPRs.Take(4).ToList();
 
             var logDates = sessions
                 .Select(s => s.Date.Date)
@@ -364,6 +365,7 @@ namespace WorkoutLogg.Database
                 CurrentStreak:        streak,
                 MaxWeekSessions:      maxWeekSessions,
                 TopPRs:               topPRs,
+                AllPRs:               allPRs,
                 HasEarlySession:      sessions.Any(s => s.Date.TimeOfDay.TotalHours < 8)
             );
         }

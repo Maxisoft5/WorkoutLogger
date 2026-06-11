@@ -23,20 +23,40 @@
                                TextColor="#111827"
                                LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
-                    <Border Grid.Column="1"
-                            BackgroundColor="#7C3AED"
-                            HeightRequest="68"
-                            WidthRequest="68"
-                            StrokeShape="RoundRectangle 14"
-                            StrokeThickness="0"
-                            VerticalOptions="Center">
-                        <Label x:Name="AvatarLabel"
-                               FontAttributes="Bold"
-                               FontSize="18"
-                               HorizontalOptions="Center"
-                               TextColor="White"
-                               VerticalOptions="Center" />
-                    </Border>
+                    <Grid Grid.Column="1"
+                          WidthRequest="68" HeightRequest="68"
+                          VerticalOptions="Center">
+                        <!-- Initials -->
+                        <Border x:Name="DashAvatarInitialsBorder"
+                                BackgroundColor="#7C3AED"
+                                HeightRequest="68"
+                                WidthRequest="68"
+                                StrokeShape="Ellipse"
+                                StrokeThickness="0">
+                            <Label x:Name="AvatarLabel"
+                                   FontAttributes="Bold"
+                                   FontSize="18"
+                                   HorizontalOptions="Center"
+                                   TextColor="White"
+                                   VerticalOptions="Center" />
+                        </Border>
+                        <!-- Profile photo -->
+                        <Grid x:Name="DashAvatarPhotoBorder"
+                              HeightRequest="68" WidthRequest="68"
+                              IsVisible="False">
+                            <Image x:Name="DashAvatarImage"
+                                   Aspect="AspectFill"
+                                   HeightRequest="68"
+                                   WidthRequest="68">
+                                <Image.Clip>
+                                    <EllipseGeometry Center="34,34" RadiusX="34" RadiusY="34" />
+                                </Image.Clip>
+                            </Image>
+                            <Ellipse Stroke="#7C3AED" StrokeThickness="2"
+                                     HeightRequest="68" WidthRequest="68"
+                                     Fill="Transparent" />
+                        </Grid>
+                    </Grid>
                 </Grid>
 
                 <!-- Stats Cards Row -->

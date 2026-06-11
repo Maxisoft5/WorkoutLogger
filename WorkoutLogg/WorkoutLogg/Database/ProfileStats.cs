@@ -9,6 +9,7 @@ namespace WorkoutLogg.Database
         int CurrentStreak,
         int MaxWeekSessions,
         List<PersonalRecordEntry> TopPRs,
+        List<PersonalRecordEntry> AllPRs,
         bool HasEarlySession
     );
 

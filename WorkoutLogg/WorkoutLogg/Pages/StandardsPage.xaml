@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.StandardsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <!-- Header -->
+        <Border Grid.Row="0" BackgroundColor="#7C3AED"
+                Padding="20,52,20,20"
+                StrokeShape="RoundRectangle 0,0,28,28"
+                StrokeThickness="0">
+            <Grid ColumnDefinitions="Auto,*">
+                <Border Grid.Column="0" BackgroundColor="#9333EA" Padding="10,8"
+                        StrokeShape="RoundRectangle 10" StrokeThickness="0"
+                        VerticalOptions="Center">
+                    <Label Text="←" FontSize="18" TextColor="White" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <VerticalStackLayout Grid.Column="1" Margin="12,0,0,0" Spacing="2" VerticalOptions="Center">
+                    <Label Text="{loc:Translate Standards_Title}"
+                           FontAttributes="Bold" FontSize="20" TextColor="White" />
+                    <Label Text="{loc:Translate Standards_Subtitle}"
+                           FontSize="12" TextColor="#DDD6FE" />
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- Sex + Weight class picker -->
+        <VerticalStackLayout Grid.Row="1" Padding="20,16,20,0" Spacing="12">
+            <!-- Sex toggle -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <Border x:Name="MenBorder" BackgroundColor="#7C3AED"
+                        StrokeShape="RoundRectangle 12" StrokeThickness="0">
+                    <Label x:Name="MenLabel" Text="{loc:Translate Standards_Men}"
+                           FontAttributes="Bold" FontSize="14" TextColor="White"
+                           HorizontalOptions="Center" Padding="0,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnMenTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border x:Name="WomenBorder" Grid.Column="1" BackgroundColor="White"
+                        Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                    <Label x:Name="WomenLabel" Text="{loc:Translate Standards_Women}"
+                           FontAttributes="Bold" FontSize="14" TextColor="#374151"
+                           HorizontalOptions="Center" Padding="0,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnWomenTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+            </Grid>
+            <!-- Weight class chips -->
+            <ScrollView Orientation="Horizontal">
+                <HorizontalStackLayout x:Name="WeightChipsStack" Spacing="8" />
+            </ScrollView>
+        </VerticalStackLayout>
+
+        <!-- Standards table -->
+        <ScrollView Grid.Row="2" Padding="20,12,20,24">
+            <VerticalStackLayout Spacing="12">
+
+                <!-- Note -->
+                <Label Text="{loc:Translate Standards_Note}"
+                       FontSize="11" TextColor="#9CA3AF"
+                       HorizontalTextAlignment="Center" />
+
+                <!-- Table header -->
+                <Border BackgroundColor="#7C3AED" Padding="12,10"
+                        StrokeShape="RoundRectangle 12" StrokeThickness="0">
+                    <Grid ColumnDefinitions="*,*,*,*,*">
+                        <Label Grid.Column="0" Text="{loc:Translate Standards_Rank}"
+                               FontAttributes="Bold" FontSize="11" TextColor="White"
+                               HorizontalOptions="Center" />
+                        <Label Grid.Column="1" Text="{loc:Translate Standards_Squat}"
+                               FontAttributes="Bold" FontSize="11" TextColor="White"
+                               HorizontalOptions="Center" />
+                        <Label Grid.Column="2" Text="{loc:Translate Standards_Bench}"
+                               FontAttributes="Bold" FontSize="11" TextColor="White"
+                               HorizontalOptions="Center" />
+                        <Label Grid.Column="3" Text="{loc:Translate Standards_Deadlift}"
+                               FontAttributes="Bold" FontSize="11" TextColor="White"
+                               HorizontalOptions="Center" />
+                        <Label Grid.Column="4" Text="{loc:Translate Standards_Total}"
+                               FontAttributes="Bold" FontSize="11" TextColor="White"
+                               HorizontalOptions="Center" />
+                    </Grid>
+                </Border>
+
+                <!-- Table rows (filled from code-behind) -->
+                <VerticalStackLayout x:Name="TableRows" Spacing="6" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

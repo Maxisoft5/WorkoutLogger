@@ -39,11 +39,13 @@ public partial class DashboardPage : ContentPage
             {
                 HelloUserText.Text = $"{greeting}, {currentUser.FullName} 👋";
                 AvatarLabel.Text = currentUser.FullName?.ToUpper().First().ToString() ?? "?";
+                ApplyAvatar(currentUser.ProfilePicture);
             }
             else
             {
                 HelloUserText.Text = $"{greeting} 👋";
                 AvatarLabel.Text = "?";
+                ApplyAvatar(null);
             }
 
             await _vm.LoadAsync();
@@ -52,6 +54,23 @@ public partial class DashboardPage : ContentPage
         finally
         {
             PageLoading.Hide();
+        }
+    }
+
+    private void ApplyAvatar(string? profilePictureDataUrl)
+    {
+        if (!string.IsNullOrEmpty(profilePictureDataUrl) && profilePictureDataUrl.Contains(","))
+        {
+            var base64 = profilePictureDataUrl.Split(',')[1];
+            var bytes = Convert.FromBase64String(base64);
+            DashAvatarImage.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
+            DashAvatarInitialsBorder.IsVisible = false;
+            DashAvatarPhotoBorder.IsVisible = true;
+        }
+        else
+        {
+            DashAvatarInitialsBorder.IsVisible = true;
+            DashAvatarPhotoBorder.IsVisible = false;
         }
     }
 
