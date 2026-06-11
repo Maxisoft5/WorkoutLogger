@@ -81,6 +81,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<WorkoutLogg.PageModels.ProfilePageModel>();
         builder.Services.AddTransient<WorkoutLogg.Pages.ProfilePage>();
         builder.Services.AddTransient<WorkoutLogg.Pages.StandardsPage>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.PremiumPage>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.PremiumComparePage>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.PaymentPage>();
         builder.Services.AddTransient<AppShell>();
 
         // On Android emulator the host machine is 10.0.2.2, not localhost.
@@ -112,6 +115,13 @@ public static class MauiProgram
               ;
 
         builder.Services.AddRefitClient<WorkoutLogg.Services.IWorkoutsApi>()
+            .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+#if DEBUG
+            .ConfigurePrimaryHttpMessageHandler(DevHandler)
+#endif
+            ;
+
+        builder.Services.AddRefitClient<WorkoutLogg.Services.ISubscriptionsApi>()
             .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
 #if DEBUG
             .ConfigurePrimaryHttpMessageHandler(DevHandler)

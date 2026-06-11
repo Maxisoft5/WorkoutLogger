@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.PaymentPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20,52,20,16" Spacing="0">
+
+                <!-- Header: back + region pill -->
+                <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,24">
+                    <Border Grid.Column="0" BackgroundColor="White"
+                            HeightRequest="65" WidthRequest="65"
+                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 12" StrokeThickness="1">
+                        <Label Text="←" FontSize="16" TextColor="#111827"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Label Grid.Column="1"
+                           Text="{loc:Translate Payment_Title}"
+                           FontAttributes="Bold" FontSize="17" TextColor="#111827"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Border Grid.Column="2" x:Name="RegionPill"
+                            BackgroundColor="#EDE9FE" Padding="10,5"
+                            StrokeShape="RoundRectangle 99" StrokeThickness="0"
+                            VerticalOptions="Center">
+                        <Label x:Name="RegionLabel"
+                               FontSize="11" FontAttributes="Bold" TextColor="#7C3AED" />
+                    </Border>
+                </Grid>
+
+                <!-- Order summary card -->
+                <Border BackgroundColor="White" Padding="16,14"
+                        Stroke="#F3F4F6" StrokeShape="RoundRectangle 18" StrokeThickness="1"
+                        Margin="0,0,0,16">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="{loc:Translate Payment_OrderSummary}"
+                               FontAttributes="Bold" FontSize="13" TextColor="#9CA3AF" />
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" x:Name="PlanNameLabel"
+                                   FontAttributes="Bold" FontSize="16" TextColor="#111827"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1" x:Name="PriceLabel"
+                                   FontAttributes="Bold" FontSize="16" TextColor="#7C3AED"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" />
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" Text="{loc:Translate Payment_Trial_Label}"
+                                   FontSize="13" TextColor="#6B7280" VerticalOptions="Center" />
+                            <Label Grid.Column="1" x:Name="DueTodayLabel"
+                                   FontAttributes="Bold" FontSize="13" TextColor="#22C55E"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                        <Label x:Name="BilledAfterLabel"
+                               FontSize="11" TextColor="#9CA3AF" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Payment methods -->
+                <Label Text="{loc:Translate Payment_ChooseMethod}"
+                       FontAttributes="Bold" FontSize="13" TextColor="#6B7280"
+                       Margin="4,0,0,10" />
+
+                <!-- RU methods (YooKassa) -->
+                <VerticalStackLayout x:Name="RuMethods" Spacing="8">
+
+                    <!-- СБП — recommended -->
+                    <Border x:Name="SbpBorder" BackgroundColor="#EDE9FE"
+                            Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="2">
+                        <Border.Stroke>
+                            <SolidColorBrush Color="#7C3AED" />
+                        </Border.Stroke>
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label Grid.Column="0" Text="⚡" FontSize="20" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Text="{loc:Translate Payment_Method_SBP}"
+                                       FontAttributes="Bold" FontSize="14" TextColor="#111827" />
+                                <Border BackgroundColor="#7C3AED" Padding="6,2"
+                                        StrokeShape="RoundRectangle 99" StrokeThickness="0"
+                                        HorizontalOptions="Start">
+                                    <Label Text="{loc:Translate Payment_Rec}"
+                                           FontSize="9" FontAttributes="Bold" TextColor="White" />
+                                </Border>
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" x:Name="SbpCheck" Text="✓"
+                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSbpTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <!-- SberPay -->
+                    <Border x:Name="SberBorder" BackgroundColor="White"
+                            Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                        <Border.Stroke>
+                            <SolidColorBrush Color="#E5E7EB" />
+                        </Border.Stroke>
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label Grid.Column="0" Text="🏦" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{loc:Translate Payment_Method_SberPay}"
+                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2" x:Name="SberCheck" Text="✓"
+                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                                   IsVisible="False" VerticalOptions="Center" />
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSberTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <!-- T-Pay -->
+                    <Border x:Name="TpayBorder" BackgroundColor="White"
+                            Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                        <Border.Stroke>
+                            <SolidColorBrush Color="#E5E7EB" />
+                        </Border.Stroke>
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label Grid.Column="0" Text="💳" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{loc:Translate Payment_Method_TPay}"
+                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2" x:Name="TpayCheck" Text="✓"
+                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                                   IsVisible="False" VerticalOptions="Center" />
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTpayTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <!-- Card (RU) -->
+                    <Border x:Name="CardRuBorder" BackgroundColor="White"
+                            Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                        <Border.Stroke>
+                            <SolidColorBrush Color="#E5E7EB" />
+                        </Border.Stroke>
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label Grid.Column="0" Text="💳" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{loc:Translate Payment_Method_Card}"
+                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2" x:Name="CardRuCheck" Text="✓"
+                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                                   IsVisible="False" VerticalOptions="Center" />
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCardRuTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                </VerticalStackLayout>
+
+                <!-- EN methods (Stripe) -->
+                <VerticalStackLayout x:Name="EnMethods" Spacing="8" IsVisible="False">
+
+                    <!-- Apple Pay -->
+                    <Border x:Name="AppleBorder" BackgroundColor="#EDE9FE"
+                            Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="2">
+                        <Border.Stroke>
+                            <SolidColorBrush Color="#7C3AED" />
+                        </Border.Stroke>
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label Grid.Column="0" Text="🍎" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{loc:Translate Payment_Method_ApplePay}"
+                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2" x:Name="AppleCheck" Text="✓"
+                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAppleTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <!-- Google Pay -->
+                    <Border x:Name="GoogleBorder" BackgroundColor="White"
+                            Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                        <Border.Stroke>
+                            <SolidColorBrush Color="#E5E7EB" />
+                        </Border.Stroke>
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label Grid.Column="0" Text="🟢" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{loc:Translate Payment_Method_GooglePay}"
+                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2" x:Name="GoogleCheck" Text="✓"
+                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                                   IsVisible="False" VerticalOptions="Center" />
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnGoogleTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <!-- Card (EN) -->
+                    <Border x:Name="CardEnBorder" BackgroundColor="White"
+                            Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                        <Border.Stroke>
+                            <SolidColorBrush Color="#E5E7EB" />
+                        </Border.Stroke>
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label Grid.Column="0" Text="💳" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{loc:Translate Payment_Method_Card}"
+                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2" x:Name="CardEnCheck" Text="✓"
+                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                                   IsVisible="False" VerticalOptions="Center" />
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCardEnTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                </VerticalStackLayout>
+
+                <!-- Restore link -->
+                <Label Text="{loc:Translate Payment_Restore}"
+                       TextColor="#9CA3AF" FontSize="12"
+                       HorizontalOptions="Center" Margin="0,20,0,0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRestoreTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Sticky CTA -->
+        <VerticalStackLayout Grid.Row="1" Padding="20,12,20,28" BackgroundColor="#EEEEF6" Spacing="10">
+            <Border BackgroundColor="#7C3AED"
+                    Padding="16" StrokeShape="RoundRectangle 18" StrokeThickness="0">
+                <Label Text="{loc:Translate Payment_CTA}"
+                       FontAttributes="Bold" FontSize="15" TextColor="White"
+                       HorizontalOptions="Center" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnPayTapped" />
+                </Border.GestureRecognizers>
+            </Border>
+            <Label Text="{loc:Translate Payment_Legal}"
+                   TextColor="#9CA3AF" FontSize="10"
+                   HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                   LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

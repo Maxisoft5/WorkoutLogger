@@ -16,6 +16,9 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("AddLog", typeof(Pages.AddLogPage));
         Routing.RegisterRoute("EditBodyStats", typeof(Pages.EditBodyStatsPage));
         Routing.RegisterRoute("Standards", typeof(Pages.StandardsPage));
+        Routing.RegisterRoute("Premium", typeof(Pages.PremiumPage));
+        Routing.RegisterRoute("PremiumCompare", typeof(Pages.PremiumComparePage));
+        Routing.RegisterRoute("Payment", typeof(Pages.PaymentPage));
         Routing.RegisterRoute("Logger", typeof(LoggerPage));
         Routing.RegisterRoute("Profile", typeof(ProfilePage));
         var currentTheme = Application.Current!.RequestedTheme;		

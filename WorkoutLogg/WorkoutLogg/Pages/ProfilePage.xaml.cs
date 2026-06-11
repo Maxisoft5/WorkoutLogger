@@ -89,6 +89,9 @@ public partial class ProfilePage : ContentPage
     private async void OnEditStatsTapped(object sender, TappedEventArgs e) =>
         await Shell.Current.GoToAsync("EditBodyStats");
 
+    private async void OnPremiumTapped(object sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("Premium");
+
     private async void OnStandardsTapped(object sender, TappedEventArgs e) =>
         await Shell.Current.GoToAsync("Standards");
 

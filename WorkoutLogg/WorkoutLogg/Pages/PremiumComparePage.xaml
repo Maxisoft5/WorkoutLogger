@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.PremiumComparePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20,52,20,16" Spacing="0">
+
+                <!-- Back -->
+                <Border BackgroundColor="White" HeightRequest="36" WidthRequest="36"
+                        Stroke="#F3F4F6" StrokeShape="RoundRectangle 12" StrokeThickness="1"
+                        Margin="0,0,0,20">
+                    <Label Text="←" FontSize="16" TextColor="#111827"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBackTapped" />
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <!-- Title -->
+                <Label Text="{loc:Translate Premium_Compare_Title}"
+                       FontAttributes="Bold" FontSize="24" TextColor="#111827"
+                       Margin="0,0,0,4" />
+                <Label Text="{loc:Translate Premium_Compare_Subtitle}"
+                       FontSize="13" TextColor="#6B7280" Margin="0,0,0,20" />
+
+                <!-- Comparison table -->
+                <Border BackgroundColor="White"
+                        Stroke="#F3F4F6" StrokeShape="RoundRectangle 20" StrokeThickness="1"
+                        Margin="0,0,0,16">
+                    <VerticalStackLayout Spacing="0">
+
+                        <!-- Header -->
+                        <Grid ColumnDefinitions="*,64,84" Padding="16,12" ColumnSpacing="0">
+                            <Label Grid.Column="0"
+                                   Text="{loc:Translate Premium_Compare_Feature}"
+                                   FontSize="10" FontAttributes="Bold" TextColor="#9CA3AF"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Text="{loc:Translate Premium_Compare_Free}"
+                                   FontSize="10" FontAttributes="Bold" TextColor="#9CA3AF"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="⭐ PREMIUM"
+                                   FontSize="10" FontAttributes="Bold" TextColor="#7C3AED"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" />
+
+                        <!-- Row: Logging -->
+                        <Grid ColumnDefinitions="*,64,84" Padding="16,13" ColumnSpacing="0">
+                            <Label Grid.Column="0" Text="{loc:Translate Premium_Row_Logging}"
+                                   FontSize="12" FontAttributes="Bold" TextColor="#111827" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="✓" FontSize="15" FontAttributes="Bold"
+                                   TextColor="#22C55E" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="✓" FontSize="15" FontAttributes="Bold"
+                                   TextColor="#22C55E" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+
+                        <!-- Row: Plans -->
+                        <Grid ColumnDefinitions="*,64,84" Padding="16,13" ColumnSpacing="0">
+                            <Label Grid.Column="0" Text="{loc:Translate Premium_Row_Plans}"
+                                   FontSize="12" FontAttributes="Bold" TextColor="#111827" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="✓" FontSize="15" FontAttributes="Bold"
+                                   TextColor="#22C55E" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="✓" FontSize="15" FontAttributes="Bold"
+                                   TextColor="#22C55E" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+
+                        <!-- Row: Stats (text cells) -->
+                        <Grid ColumnDefinitions="*,64,84" Padding="16,13" ColumnSpacing="0">
+                            <Label Grid.Column="0" Text="{loc:Translate Premium_Row_Stats}"
+                                   FontSize="12" FontAttributes="Bold" TextColor="#111827" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{loc:Translate Premium_Row_Stats_Free}"
+                                   FontSize="10" FontAttributes="Bold" TextColor="#6B7280"
+                                   HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+                            <Label Grid.Column="2" Text="{loc:Translate Premium_Row_Stats_Prem}"
+                                   FontSize="10" FontAttributes="Bold" TextColor="#7C3AED"
+                                   HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+
+                        <!-- Row: Muscle analytics -->
+                        <Grid ColumnDefinitions="*,64,84" Padding="16,13" ColumnSpacing="0">
+                            <Label Grid.Column="0" Text="{loc:Translate Premium_Row_Muscles}"
+                                   FontSize="12" FontAttributes="Bold" TextColor="#111827" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="—" FontSize="14" TextColor="#9CA3AF"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="✓" FontSize="15" FontAttributes="Bold"
+                                   TextColor="#22C55E" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+
+                        <!-- Row: AI Coach -->
+                        <Grid ColumnDefinitions="*,64,84" Padding="16,13" ColumnSpacing="0">
+                            <Label Grid.Column="0" Text="{loc:Translate Premium_Row_AiCoach}"
+                                   FontSize="12" FontAttributes="Bold" TextColor="#111827" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="—" FontSize="14" TextColor="#9CA3AF"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="✓" FontSize="15" FontAttributes="Bold"
+                                   TextColor="#22C55E" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+
+                        <!-- Row: AI Forecast -->
+                        <Grid ColumnDefinitions="*,64,84" Padding="16,13" ColumnSpacing="0">
+                            <Label Grid.Column="0" Text="{loc:Translate Premium_Row_Forecast}"
+                                   FontSize="12" FontAttributes="Bold" TextColor="#111827" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="—" FontSize="14" TextColor="#9CA3AF"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="✓" FontSize="15" FontAttributes="Bold"
+                                   TextColor="#22C55E" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+
+                        <!-- Row: AI Plan Gen -->
+                        <Grid ColumnDefinitions="*,64,84" Padding="16,13" ColumnSpacing="0">
+                            <Label Grid.Column="0" Text="{loc:Translate Premium_Row_PlanGen}"
+                                   FontSize="12" FontAttributes="Bold" TextColor="#111827" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="—" FontSize="14" TextColor="#9CA3AF"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="✓" FontSize="15" FontAttributes="Bold"
+                                   TextColor="#22C55E" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+
+                        <!-- Row: Export -->
+                        <Grid ColumnDefinitions="*,64,84" Padding="16,13" ColumnSpacing="0">
+                            <Label Grid.Column="0" Text="{loc:Translate Premium_Row_Export}"
+                                   FontSize="12" FontAttributes="Bold" TextColor="#111827" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="—" FontSize="14" TextColor="#9CA3AF"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="✓" FontSize="15" FontAttributes="Bold"
+                                   TextColor="#22C55E" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- AI teaser card -->
+                <Border BackgroundColor="#7C3AED"
+                        Padding="16,14"
+                        StrokeShape="RoundRectangle 20" StrokeThickness="0">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Border Grid.Column="0" BackgroundColor="#9333EA"
+                                HeightRequest="55" WidthRequest="55"
+                                StrokeShape="RoundRectangle 12" StrokeThickness="0"
+                                VerticalOptions="Start">
+                            <Label Text="🤖" FontSize="18"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="{loc:Translate Premium_AI_Teaser_Title}"
+                                   FontAttributes="Bold" FontSize="13" TextColor="White" />
+                            <Label Text="{loc:Translate Premium_AI_Teaser_Desc}"
+                                   FontSize="11" TextColor="#DDD6FE" LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- CTA -->
+        <VerticalStackLayout Grid.Row="1" Padding="20,12,20,28" BackgroundColor="#EEEEF6">
+            <Border BackgroundColor="#7C3AED"
+                    Padding="16" StrokeShape="RoundRectangle 18" StrokeThickness="0">
+                <Label Text="{loc:Translate Premium_CTA_Upgrade}"
+                       FontAttributes="Bold" FontSize="15" TextColor="White"
+                       HorizontalOptions="Center" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnUpgradeTapped" />
+                </Border.GestureRecognizers>
+            </Border>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

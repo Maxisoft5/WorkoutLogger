@@ -12,16 +12,21 @@ namespace Modules.Users.Infrastructure.Authorization
         public async Task<Result<UserDto>> GetUserByEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
-            {
                 return new Result<UserDto>(new Error("400", "email not valid", ErrorType.Validation));
-            }
+
             var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);
             if (user == null)
-            {
                 return new Result<UserDto>(new Error("404", "user not found", ErrorType.NotFound));
-            }
-            var dto = user.MapUser();
-            return new Result<UserDto>(dto);
+
+            return new Result<UserDto>(user.MapUser());
+        }
+
+        public async Task SetPremiumAsync(string userId, bool isPremium)
+        {
+            var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            if (user is null) return;
+            user.IsPremium = isPremium;
+            await dbContext.SaveChangesAsync();
         }
     }
 }

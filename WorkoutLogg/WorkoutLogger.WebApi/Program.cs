@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Modules.Common.Infrastructure.Extensions;
+using Modules.Subscriptions.Infrastructure.Database;
 using Modules.Users.Infrastructure.Database;
 using Serilog;
 using Serilog.Sinks.OpenSearch;
@@ -49,6 +50,7 @@ builder.Services.AddOpenApi();
 
 var configration = builder.Configuration;
 builder.Services.AddAuthModule(configration);
+builder.Services.AddSubscriptionsModule(configration);
 builder.Services.AddHybridCache(configration);
 builder.Services.AddKafkaMessaging(configration);
 
@@ -59,8 +61,11 @@ app.MapDefaultEndpoints();
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
-    await db.Database.MigrateAsync();
+    var usersDb = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
+    await usersDb.Database.MigrateAsync();
+
+    var subsDb = scope.ServiceProvider.GetRequiredService<SubscriptionsDbContext>();
+    await subsDb.Database.MigrateAsync();
 }
 
 // Configure the HTTP request pipeline.

@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using Modules.Common.Infrastructure.Configurations;
 using Modules.Common.Infrastructure.Email;
 using Modules.Common.Infrastructure.Messaging;
+using Modules.Subscriptions.Infrastructure.Database;
+using Modules.Subscriptions.Infrastructure.Services;
 using Modules.Users.Domain.Authentication;
 using Modules.Users.Domain.Users;
 using Modules.Users.Infrastructure.Authorization;
@@ -65,6 +67,26 @@ namespace WorkoutLogger.WebApi.Extensions
             services.AddSingleton(mailtrapSettings);
             services.AddHttpClient<IEmailSender, MailtrapHttpEmailSender>();
             services.AddHostedService<OutboxProcessorService>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddSubscriptionsModule(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.AddDbContext<SubscriptionsDbContext>(options =>
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+            var settings = configuration.GetSection("SubscriptionSettings").Get<SubscriptionSettings>()
+                ?? new SubscriptionSettings();
+            services.AddSingleton(settings);
+
+            services.AddHttpClient<YooKassaProvider>();
+            services.AddHttpClient<StripeProvider>();
+            services.AddTransient<IPaymentProvider, YooKassaProvider>();
+            services.AddTransient<IPaymentProvider, StripeProvider>();
+            services.AddScoped<SubscriptionService>();
 
             return services;
         }
