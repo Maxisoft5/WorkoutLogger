@@ -1,10 +1,19 @@
-<!-- LoadingPage.xaml -->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WorkoutLogg.Pages.LoadingPage">
+             xmlns:loc="clr-namespace:WorkoutLogg.Localization"
+             x:Class="WorkoutLogg.Pages.LoadingPage"
+             BackgroundColor="#0C0C14">
     <Grid>
-        <ActivityIndicator IsRunning="True" 
-                          VerticalOptions="Center" 
+        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="28">
+            <GraphicsView x:Name="EcgView"
+                          WidthRequest="200" HeightRequest="70"
                           HorizontalOptions="Center" />
+            <Label Text="{loc:Translate Loading_Text}"
+                   FontSize="11"
+                   FontAttributes="Bold"
+                   CharacterSpacing="2"
+                   TextColor="#59596A"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>

@@ -13,6 +13,18 @@ Common_BackButton: "← Назад"
 Common_Continue: "Продолжить →"
 Common_Finish: "Завершить →"
 Common_Or: "или"
+Common_Set: "Сет"
+Common_Reps: "повт."
+Common_Rest: "отдых"
+Common_Sec: "сек"
+Common_Min: "мин"
+Common_KgX: "кг ×"
+Common_Exercises: "упр."
+Common_Sets: "сетов"
+Common_Yes: "Да"
+Common_No: "Нет"
+Common_Error: "Ошибка"
+Common_TryAgain: "Что-то пошло не так. Попробуйте ещё раз."
 
 # Auth — Login
 Login_Welcome: "С возвращением"
@@ -50,6 +62,10 @@ EnterCode_Title: "Введите код"
 EnterCode_VerificationCode: "КОД ПОДТВЕРЖДЕНИЯ"
 EnterCode_DidntReceive: "Не получили?"
 EnterCode_VerifyCode: "Подтвердить"
+EnterCode_Resend: "Отправить снова"
+EnterCode_DelayHint: "Код может прийти с задержкой 1–3 минуты"
+EnterCode_ResendSuccess: "Код отправлен! Проверьте почту."
+Login_InvalidCredentials: "Неверный email или пароль"
 
 # Auth — New Password
 NewPassword_Title: "Новый пароль"
@@ -110,12 +126,12 @@ Dashboard_VolumeKg: "Объём кг"
 Dashboard_ActiveDays: "Активных дней"
 Dashboard_LastWorkout: "Последняя тренировка"
 Dashboard_SeeAll: "Все ›"
-Dashboard_NoWorkouts: "Тренировок ещё нет — откройте Logger"
+Dashboard_NoWorkouts: "Тренировок ещё нет — откройте Записи"
 Dashboard_DayStreak: "дней подряд"
 
 # Workouts page
 Workouts_Title: "Тренировки"
-Workouts_SessionsLogged: "{0} тренировок записано"
+Workouts_SessionsLogged: "тренировок записано"
 Workouts_Filter_All: "Все"
 Workouts_Filter_Strength: "Сила"
 Workouts_Filter_Cardio: "Кардио"
@@ -160,6 +176,21 @@ AddLog_CustomExercise: "⚡ Своё упражнение"
 AddLog_ExercisePlaceholder: "Название упражнения"
 AddLog_FromPlan: "📋 По плану"
 AddLog_Custom: "⚡ Своё"
+AddLog_LinkToPlan: "Привязать к плану?"
+
+# Запись лога — отслеживание веса
+AddLog_TodayWeight: "Вес сегодня (необязательно)"
+AddLog_UpdateWeight: "Обновить вес в профиле"
+AddLog_UpdateWeightTitle: "Обновить вес?"
+AddLog_UpdateWeightMsg: "Установить вес профиля на"
+
+# Страница редактирования параметров тела
+EditStats_Title: "Параметры тела"
+EditStats_Weight: "ВЕС (КГ)"
+EditStats_Height: "РОСТ (СМ)"
+EditStats_BodyFat: "ЖИР (%)"
+EditStats_Saved: "Параметры обновлены"
+EditStats_Error: "Не удалось сохранить. Проверьте связь."
 
 # Profile page
 Profile_PersonalRecords: "Рекорды"
@@ -182,5 +213,46 @@ Language_Auto: "Системный"
 # Tab bar
 Tab_Dashboard: "Главная"
 Tab_Workouts: "Тренировки"
-Tab_Logger: "Дневник"
+Tab_Logger: "Записи"
 Tab_Profile: "Профиль"
+
+# Internal — код культуры для форматирования дат
+_Culture: "ru-RU"
+
+# Dashboard — приветствия по времени суток
+Dashboard_GoodMorning: "Доброе утро"
+Dashboard_GoodAfternoon: "Добрый день"
+Dashboard_GoodEvening: "Добрый вечер"
+Dashboard_GoodNight: "Доброй ночи"
+Dashboard_Days: "дней"
+Dashboard_Today: "Сегодня"
+Dashboard_Yesterday: "Вчера"
+Dashboard_CustomWorkout: "Своя тренировка"
+Dashboard_TapToStart: "Нажми + в Записях"
+
+# Единицы
+Common_Kg: "кг"
+Common_Cm: "см"
+
+# Экран загрузки
+Loading_Text: "ЗАГРУЗКА"
+
+# Заголовки дней календаря (с понедельника)
+Calendar_Mo: "Пн"
+Calendar_Tu: "Вт"
+Calendar_We: "Ср"
+Calendar_Th: "Чт"
+Calendar_Fr: "Пт"
+Calendar_Sa: "Сб"
+Calendar_Su: "Вс"
+
+# Типы тренировок
+WorkoutType_Strength: "Силовая"
+WorkoutType_Cardio: "Кардио"
+WorkoutType_BodyBuilding: "Бодибилдинг"
+WorkoutType_Running: "Бег"
+WorkoutType_Yoga: "Йога"
+WorkoutType_Stretch: "Растяжка"
+
+# Кнопка добавления
+AddWorkout_AddBtn: "+ Добавить"

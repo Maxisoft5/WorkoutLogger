@@ -1,8 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using WorkoutLogg.Database;
 using WorkoutLogg.Database.Entities;
+using WorkoutLogg.Localization;
 
 namespace WorkoutLogg.PageModels
 {
@@ -41,9 +43,9 @@ namespace WorkoutLogg.PageModels
 
         private static string FormatDate(DateTime d)
         {
-            if (d.Date == DateTime.Today) return "Today";
-            if (d.Date == DateTime.Today.AddDays(-1)) return "Yesterday";
-            return d.ToString("dddd, d MMMM");
+            if (d.Date == DateTime.Today) return Loc.Get("Dashboard_Today");
+            if (d.Date == DateTime.Today.AddDays(-1)) return Loc.Get("Dashboard_Yesterday");
+            return d.ToString("dddd, d MMMM", new CultureInfo(Loc.Get("_Culture")));
         }
     }
 
@@ -57,12 +59,12 @@ namespace WorkoutLogg.PageModels
         public double TotalWeightKg { get; set; }
 
         public string Emoji => IsCustom ? "⚡" : "📋";
-        public string Title => IsCustom ? "Custom workout" : WorkoutLabel;
-        public string SubLabel => $"{ExerciseCount} exercises · {TotalSets} sets";
+        public string Title => IsCustom ? Loc.Get("Dashboard_CustomWorkout") : WorkoutLabel;
+        public string SubLabel => $"{ExerciseCount} {Loc.Get("Common_Exercises")} · {TotalSets} {Loc.Get("Common_Sets")}";
 
-        public string WeightLabel => TotalWeightKg > 0 ? $"{TotalWeightKg:0} kg" : "—";
+        public string WeightLabel => TotalWeightKg > 0 ? $"{TotalWeightKg:0} {Loc.Get("Common_Kg")}" : "—";
 
-        public string BadgeText => IsCustom ? "⚡ Custom" : "📋 From plan";
+        public string BadgeText => IsCustom ? Loc.Get("AddLog_Custom") : Loc.Get("AddLog_FromPlan");
 
         public Color BadgeColor => IsCustom
             ? Color.FromArgb("#FEF3C7")

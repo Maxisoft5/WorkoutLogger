@@ -28,6 +28,10 @@
 		<MauiXamlInflator>SourceGen</MauiXamlInflator>
 		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
 
+		<!-- AOT for Release builds — faster startup and runtime on device -->
+		<RunAOTCompilation Condition="'$(Configuration)' == 'Release'">true</RunAOTCompilation>
+		<AndroidEnableProfiledAot Condition="'$(Configuration)' == 'Release'">true</AndroidEnableProfiledAot>
+
 		<!-- Display name -->
 		<ApplicationTitle>WorkoutLogg</ApplicationTitle>
 
@@ -100,6 +104,9 @@
 	  <MauiXaml Update="Pages\Controls\CalendarPicker.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Controls\LoadingOverlayView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Controls\MainTabBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -152,6 +159,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\AddLogPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\EditBodyStatsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

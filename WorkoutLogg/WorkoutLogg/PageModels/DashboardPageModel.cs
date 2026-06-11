@@ -1,7 +1,9 @@
+using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WorkoutLogg.Database;
 using WorkoutLogg.Database.Entities;
+using WorkoutLogg.Localization;
 
 namespace WorkoutLogg.PageModels
 {
@@ -47,7 +49,7 @@ namespace WorkoutLogg.PageModels
 
             // This-week sessions (full hierarchy for volume calculation)
             var weekSessions = await _db.GetLogSessionsForWeekAsync(weekStart);
-            WeeklyChangeLabel = $"+{weekSessions.Count} this week";
+            WeeklyChangeLabel = $"+{weekSessions.Count} {Loc.Get("Dashboard_ThisWeek")}";
 
             // Streak (from distinct logged dates)
             var allDates = await _db.GetLoggedDatesAsync();
@@ -69,9 +71,9 @@ namespace WorkoutLogg.PageModels
             VolumeGoalPct = $"{Math.Min(100, (int)(weekVol * 100 / volumeTarget))}%";
             ConsistencyGoalPct = $"{Math.Min(100, activeDays * 100 / daysTarget)}%";
 
-            WorkoutsGoalSub = $"{wCount} / {sessionsTarget} sessions";
-            VolumeGoalSub = $"{weekVol:0} / {volumeTarget:0} kg";
-            ConsistencyGoalSub = $"{activeDays} / {daysTarget} days";
+            WorkoutsGoalSub = $"{wCount} / {sessionsTarget} {Loc.Get("Common_Sessions")}";
+            VolumeGoalSub = $"{weekVol:0} / {volumeTarget:0} {Loc.Get("Common_Kg")}";
+            ConsistencyGoalSub = $"{activeDays} / {daysTarget} {Loc.Get("Dashboard_Days")}";
 
             // Weekly bar data
             WeekBars = BuildWeekBars(weekSessions, weekStart, today);
@@ -81,24 +83,25 @@ namespace WorkoutLogg.PageModels
             if (last is not null)
             {
                 HasLastWorkout = true;
-                LastTitle = last.IsCustom ? "Custom workout" : last.WorkoutLabel;
+                LastTitle = last.IsCustom ? Loc.Get("Dashboard_CustomWorkout") : last.WorkoutLabel;
                 LastEmoji = last.IsCustom ? "⚡" : "🏋️";
 
-                var dateStr = last.Date.Date == today ? "Today"
-                    : last.Date.Date == today.AddDays(-1) ? "Yesterday"
-                    : last.Date.ToString("d MMM");
+                var culture = new CultureInfo(Loc.Get("_Culture"));
+                var dateStr = last.Date.Date == today ? Loc.Get("Dashboard_Today")
+                    : last.Date.Date == today.AddDays(-1) ? Loc.Get("Dashboard_Yesterday")
+                    : last.Date.ToString("d MMM", culture);
 
                 var sets = last.Exercises.Sum(ex => ex.Sets.Count);
                 LastSubLabel = $"{dateStr} · {last.Exercises.Count} exercises · {sets} sets";
 
                 var vol = CalcVolume([last]);
-                LastVolumeLabel = vol > 0 ? $"{vol:0} kg" : "—";
+                LastVolumeLabel = vol > 0 ? $"{vol:0} {Loc.Get("Common_Kg")}" : "—";
             }
             else
             {
                 HasLastWorkout = false;
-                LastTitle = "No workouts logged yet";
-                LastSubLabel = "Tap + in Logger to start";
+                LastTitle = Loc.Get("Dashboard_NoWorkouts");
+                LastSubLabel = Loc.Get("Dashboard_TapToStart");
                 LastVolumeLabel = "";
             }
         }
@@ -111,7 +114,7 @@ namespace WorkoutLogg.PageModels
                     .Sum(set => set.WeightKg * set.Reps)));
 
         private static string FormatVolume(double kg) =>
-            kg >= 1000 ? $"{kg / 1000:0.#}t" : $"{kg:0} kg";
+            kg >= 1000 ? $"{kg / 1000:0.#}t" : $"{kg:0} {Loc.Get("Common_Kg")}";
 
         private static int CalculateStreak(List<DateTime> distinctDates)
         {
@@ -144,7 +147,12 @@ namespace WorkoutLogg.PageModels
                 counts[((int)s.Date.DayOfWeek + 6) % 7]++;
 
             double maxCount = counts.Max() is > 0 ? counts.Max() : 1;
-            string[] labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+            string[] labels =
+            [
+                Loc.Get("Calendar_Mo"), Loc.Get("Calendar_Tu"), Loc.Get("Calendar_We"),
+                Loc.Get("Calendar_Th"), Loc.Get("Calendar_Fr"), Loc.Get("Calendar_Sa"),
+                Loc.Get("Calendar_Su"),
+            ];
 
             var bars = new List<DayBarData>();
             for (int i = 0; i < 7; i++)

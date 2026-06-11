@@ -1,0 +1,12 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkoutLogg.Pages.Controls.LoadingOverlayView"
+             Opacity="0"
+             InputTransparent="True">
+    <Grid BackgroundColor="#E0000000">
+        <GraphicsView x:Name="EcgView"
+                      WidthRequest="200" HeightRequest="70"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center" />
+    </Grid>
+</ContentView>

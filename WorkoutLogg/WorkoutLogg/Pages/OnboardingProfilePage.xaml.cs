@@ -7,6 +7,7 @@ namespace WorkoutLogg.Pages;
 public partial class OnboardingProfilePage : ContentPage
 {
     private UserSex _selectedSex = UserSex.Male;
+    private string? _profilePictureDataUrl;
     public IAuthApi AuthApi { get; set; }
     public OnboardingProfilePage()
     {
@@ -18,15 +19,25 @@ public partial class OnboardingProfilePage : ContentPage
 
     private void OnFullNameChanged(object sender, TextChangedEventArgs e)
     {
-        // Обновить первую букву в аватаре
         var name = e.NewTextValue?.Trim();
         AvatarLabel.Text = string.IsNullOrEmpty(name) ? "A" : name[0].ToString().ToUpper();
     }
 
     private async void OnChangeAvatarTapped(object sender, EventArgs e)
     {
-        // TODO: открыть ImagePicker для выбора аватара
-        await DisplayAlertAsync("Avatar", "Image picker — coming soon", "OK");
+        var photo = await MediaPicker.PickPhotoAsync();
+        if (photo is null) return;
+
+        using var stream = await photo.OpenReadAsync();
+        using var ms = new MemoryStream();
+        await stream.CopyToAsync(ms);
+        var bytes = ms.ToArray();
+
+        _profilePictureDataUrl = $"data:image/jpeg;base64,{Convert.ToBase64String(bytes)}";
+
+        AvatarImage.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
+        AvatarInitialsBorder.IsVisible = false;
+        AvatarPhotoBorder.IsVisible = true;
     }
 
     private void OnMaleSelected(object sender, EventArgs e) => SetSex("Male");
@@ -59,16 +70,12 @@ public partial class OnboardingProfilePage : ContentPage
 
     private async void OnContinueClicked(object sender, EventArgs e)
     {
-        // TODO: сохранить в OnboardingViewModel / SharedState
-        // profile.FullName   = FullNameEntry.Text;
-        // profile.Username   = UsernameEntry.Text;
-        // profile.BirthDate  = BirthDatePicker.Date;
-        // profile.Sex        = _selectedSex;
         var user = new UserDto()
         {
             DateOfBirth = BirthDatePicker.Date,
             Identity = _selectedSex,
-            UserRegistrationStep = Modules.Users.DTO.Users.UserRegistrationStep.Body
+            UserRegistrationStep = Modules.Users.DTO.Users.UserRegistrationStep.Body,
+            ProfilePicture = _profilePictureDataUrl
         };
         var currentToken = await LoginService.GetActiveToken();
         var updated = await AuthApi.UpdateAccount($"Bearer {currentToken}", user);

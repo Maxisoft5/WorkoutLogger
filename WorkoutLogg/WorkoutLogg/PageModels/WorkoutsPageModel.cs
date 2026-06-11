@@ -2,8 +2,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Moduels.Workouts.DTO.Enums;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using WorkoutLogg.Database;
 using WorkoutLogg.Database.Entities;
+using WorkoutLogg.Localization;
 using WorkoutLogg.Services;
 
 namespace WorkoutLogg.PageModels
@@ -25,7 +27,7 @@ namespace WorkoutLogg.PageModels
         private WorkoutType activeFilter = WorkoutType.All;
 
         [ObservableProperty]
-        private string sessionCount = "0 sessions logged";
+        private string sessionCount = $"0 {Loc.Get("Workouts_SessionsLogged")}";
 
         [ObservableProperty]
         private ObservableCollection<DateTime> markedDates = [];
@@ -46,7 +48,7 @@ namespace WorkoutLogg.PageModels
 
             var dates = _allWorkouts.Select(w => w.StartDate.Date).Distinct();
             MarkedDates = new ObservableCollection<DateTime>(dates);
-            SessionCount = $"{_allWorkouts.Count} sessions logged";
+            SessionCount = $"{_allWorkouts.Count} {Loc.Get("Workouts_SessionsLogged")}";
 
             ApplyFilter();
             _ = _sync.TrySyncAsync();
@@ -119,7 +121,7 @@ namespace WorkoutLogg.PageModels
             _ => "🏋️",
         };
 
-        public string TypeLabel => WorkoutType.ToString();
+        public string TypeLabel => Loc.Get($"WorkoutType_{WorkoutType}");
 
         public string DateLabel
         {
@@ -127,19 +129,19 @@ namespace WorkoutLogg.PageModels
             {
                 var today = DateTime.Today;
                 var date = StartDate.Date;
-                if (date == today) return "Today";
-                if (date == today.AddDays(-1)) return "Yesterday";
-                return StartDate.ToString("ddd, d MMM");
+                if (date == today) return Loc.Get("Dashboard_Today");
+                if (date == today.AddDays(-1)) return Loc.Get("Dashboard_Yesterday");
+                return StartDate.ToString("ddd, d MMM", new CultureInfo(Loc.Get("_Culture")));
             }
         }
 
         public int DurationMinutes => (int)(EndDate - StartDate).TotalMinutes;
 
-        public string SubLabel => $"{DateLabel} · {DurationMinutes} min · {ExerciseCount} exercises";
+        public string SubLabel => $"{DateLabel} · {DurationMinutes} {Loc.Get("Common_Min")} · {ExerciseCount} {Loc.Get("Common_Exercises")}";
 
         public string WeightLabel => WorkoutType is WorkoutType.Cardio or WorkoutType.Running
             ? "—"
-            : TotalWeightKg > 0 ? $"{TotalWeightKg:0} kg" : "—";
+            : TotalWeightKg > 0 ? $"{TotalWeightKg:0} {Loc.Get("Common_Kg")}" : "—";
 
         public Color IconBackground => WorkoutType switch
         {

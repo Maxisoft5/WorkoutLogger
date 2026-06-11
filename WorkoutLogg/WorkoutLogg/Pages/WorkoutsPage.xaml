@@ -19,7 +19,7 @@
                 <Grid ColumnDefinitions="*,Auto">
                     <VerticalStackLayout Grid.Column="0" Spacing="2">
                         <Label FontAttributes="Bold" FontSize="28" Text="{loc:Translate Workouts_Title}" TextColor="#111827" />
-                        <Label x:Name="SessionCountLabel" FontSize="14" Text="0 sessions logged" TextColor="#9CA3AF" />
+                        <Label x:Name="SessionCountLabel" FontSize="14" TextColor="#9CA3AF" />
                     </VerticalStackLayout>
                     <Border Grid.Column="1"
                             BackgroundColor="#7C3AED"
@@ -161,5 +161,6 @@
         </ScrollView>
 
         <controls:MainTabBar Grid.Row="1" ActiveTab="Workouts" />
+        <controls:LoadingOverlayView x:Name="PageLoading" Grid.Row="0" Grid.RowSpan="2" />
     </Grid>
 </ContentPage>

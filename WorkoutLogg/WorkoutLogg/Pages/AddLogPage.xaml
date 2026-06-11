@@ -3,6 +3,7 @@
     x:Class="WorkoutLogg.Pages.AddLogPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     BackgroundColor="#EEEEF6"
     Shell.NavBarIsVisible="False">
 
@@ -28,13 +29,13 @@
                        FontAttributes="Bold"
                        FontSize="18"
                        HorizontalOptions="Center"
-                       Text="Log Workout"
+                       Text="{loc:Translate AddLog_Title}"
                        TextColor="#111827"
                        VerticalOptions="Center" />
                 <Label Grid.Column="2"
                        FontAttributes="Bold"
                        FontSize="15"
-                       Text="Save"
+                       Text="{loc:Translate Common_Save}"
                        TextColor="#7C3AED"
                        VerticalOptions="Center">
                     <Label.GestureRecognizers>
@@ -48,6 +49,49 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20,16" Spacing="16">
 
+                <!-- Today's weight -->
+                <Border BackgroundColor="White"
+                        Padding="16,14"
+                        Stroke="#E5E7EB"
+                        StrokeShape="RoundRectangle 14"
+                        StrokeThickness="1">
+                    <VerticalStackLayout Spacing="10">
+                        <Label FontAttributes="Bold"
+                               FontSize="10"
+                               CharacterSpacing="1"
+                               Text="{loc:Translate AddLog_TodayWeight}"
+                               TextColor="#9CA3AF" />
+                        <HorizontalStackLayout Spacing="10">
+                            <Entry x:Name="WeightEntry"
+                                   Keyboard="Numeric"
+                                   Placeholder="0.0"
+                                   PlaceholderColor="#D1D5DB"
+                                   TextColor="#111827"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   WidthRequest="120" />
+                            <Label Text="{loc:Translate Common_Kg}"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="#9CA3AF"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="UpdateWeightCheckBox"
+                                      Color="#7C3AED"
+                                      VerticalOptions="Center" />
+                            <Label Text="{loc:Translate AddLog_UpdateWeight}"
+                                   FontSize="13"
+                                   TextColor="#374151"
+                                   VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnUpdateWeightLabelTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
                 <!-- Workout plan selector -->
                 <Border x:Name="WorkoutSelectorBorder"
                         BackgroundColor="White"
@@ -59,13 +103,13 @@
                         <VerticalStackLayout Grid.Column="0" Spacing="3">
                             <Label FontAttributes="Bold"
                                    FontSize="10"
-                                   Text="WORKOUT PLAN"
+                                   Text="{loc:Translate AddLog_WorkoutPlan}"
                                    TextColor="#9CA3AF"
                                    CharacterSpacing="1" />
                             <Label x:Name="WorkoutSelectorLabel"
                                    FontAttributes="Bold"
                                    FontSize="14"
-                                   Text="— Custom (no plan)"
+                                   Text="{loc:Translate AddLog_CustomPlan}"
                                    TextColor="#111827" />
                         </VerticalStackLayout>
                         <Label Grid.Column="1"
@@ -91,7 +135,7 @@
                     <Label FontAttributes="Bold"
                            FontSize="14"
                            HorizontalOptions="Center"
-                           Text="+ Add Exercise"
+                           Text="{loc:Translate AddLog_AddExercise}"
                            TextColor="#7C3AED">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnAddExerciseTapped" />

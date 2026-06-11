@@ -23,19 +23,36 @@
 
                         <!-- Avatar + name -->
                         <HorizontalStackLayout Spacing="16" VerticalOptions="Center">
-                            <Border BackgroundColor="#9333EA"
-                                    HeightRequest="64"
-                                    StrokeShape="RoundRectangle 20"
-                                    StrokeThickness="0"
-                                    WidthRequest="64"
-                                    VerticalOptions="Center">
-                                <Label FontAttributes="Bold"
-                                       FontSize="24"
-                                       HorizontalOptions="Center"
-                                       Text="{Binding UserInitials}"
-                                       TextColor="White"
-                                       VerticalOptions="Center" />
-                            </Border>
+                            <Grid WidthRequest="64" HeightRequest="64" VerticalOptions="Center">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnChangeAvatarTapped" />
+                                </Grid.GestureRecognizers>
+                                <!-- Initials fallback -->
+                                <Border BackgroundColor="#9333EA"
+                                        HeightRequest="64"
+                                        StrokeShape="RoundRectangle 20"
+                                        StrokeThickness="0"
+                                        WidthRequest="64"
+                                        IsVisible="{Binding HasNoProfilePicture}">
+                                    <Label FontAttributes="Bold"
+                                           FontSize="24"
+                                           HorizontalOptions="Center"
+                                           Text="{Binding UserInitials}"
+                                           TextColor="White"
+                                           VerticalOptions="Center" />
+                                </Border>
+                                <!-- Profile photo -->
+                                <Border HeightRequest="64"
+                                        StrokeShape="RoundRectangle 20"
+                                        StrokeThickness="0"
+                                        WidthRequest="64"
+                                        IsVisible="{Binding HasProfilePicture}">
+                                    <Image Source="{Binding AvatarImageSource}"
+                                           Aspect="AspectFill"
+                                           HeightRequest="64"
+                                           WidthRequest="64" />
+                                </Border>
+                            </Grid>
                             <VerticalStackLayout VerticalOptions="Center" Spacing="4">
                                 <Label FontAttributes="Bold"
                                        FontSize="22"
@@ -80,6 +97,25 @@
                             </VerticalStackLayout>
                         </Grid>
 
+                        <!-- Edit stats button -->
+                        <Border BackgroundColor="#9333EA"
+                                Padding="14,6"
+                                StrokeShape="RoundRectangle 12"
+                                StrokeThickness="0"
+                                HorizontalOptions="Center">
+                            <Label FontAttributes="Bold"
+                                   FontSize="12"
+                                   Text="{loc:Translate Common_Edit}"
+                                   TextColor="#DDD6FE">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEditStatsTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnEditStatsTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+
                         <!-- Activity pills -->
                         <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                             <Border BackgroundColor="#9333EA" Padding="14,8" StrokeShape="RoundRectangle 20" StrokeThickness="0">
@@ -89,6 +125,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding StreakLabel}" FontAttributes="Bold" TextColor="White" FontSize="13" />
+                                                <Span Text=" " TextColor="White" FontSize="13" />
                                                 <Span Text="{loc:Translate Common_DayStreak}" TextColor="#DDD6FE" FontSize="12" />
                                             </FormattedString>
                                         </Label.FormattedText>
@@ -102,6 +139,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding TotalSessionsLabel}" FontAttributes="Bold" TextColor="White" FontSize="13" />
+                                                <Span Text=" " TextColor="White" FontSize="13" />
                                                 <Span Text="{loc:Translate Common_Sessions}" TextColor="#DDD6FE" FontSize="12" />
                                             </FormattedString>
                                         </Label.FormattedText>
@@ -202,5 +240,6 @@
         </ScrollView>
 
         <controls:MainTabBar Grid.Row="1" ActiveTab="Profile" />
+        <controls:LoadingOverlayView x:Name="PageLoading" Grid.Row="0" Grid.RowSpan="2" />
     </Grid>
 </ContentPage>

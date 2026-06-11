@@ -24,6 +24,10 @@ namespace Modules.Users.Infrastructure.Database.Configurations
                .HasColumnName("workout_count")
                .HasDefaultValue(WorkOutCountVariant.One);
 
+            builder.Property(e => e.ProfilePicture)
+                .HasColumnName("profile_picture")
+                .HasColumnType("text");
+
             builder.ComplexProperty(e => e.BodyStats, bs =>
             {
                 bs.Property(b => b.Kg).HasColumnName("kg");

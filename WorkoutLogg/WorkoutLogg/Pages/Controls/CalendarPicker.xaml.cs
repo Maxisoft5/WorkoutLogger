@@ -1,3 +1,6 @@
+using System.Globalization;
+using WorkoutLogg.Localization;
+
 namespace WorkoutLogg.Pages.Controls;
 
 public partial class CalendarPicker : ContentView
@@ -64,7 +67,7 @@ public partial class CalendarPicker : ContentView
     {
         if (MonthLabel == null || DaysGrid == null) return;
 
-        MonthLabel.Text = _viewMonth.ToString("MMMM yyyy");
+        MonthLabel.Text = _viewMonth.ToString("MMMM yyyy", new CultureInfo(Loc.Get("_Culture")));
         DaysGrid.Children.Clear();
 
         var marked = MarkedDates?.Select(d => d.Date).ToHashSet() ?? [];

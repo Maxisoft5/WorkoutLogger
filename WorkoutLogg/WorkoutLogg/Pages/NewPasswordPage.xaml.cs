@@ -89,11 +89,15 @@ public partial class NewPasswordPage : ContentPage
 
         try
         {
-            var result = await _authApi.ResetPassword(new ResetPasswordRequest(Email, Code, pw));
-            if (result.IsSuccessStatusCode)
+            var response = await _authApi.ResetPassword(new ResetPasswordRequest(Email, Code, pw));
+            var body = response.Content;
+            if (response.IsSuccessStatusCode && body?.IsSuccess == true)
                 Application.Current!.Windows[0].Page = new PasswordSuccess();
             else
-                await DisplayAlertAsync("Error", "Failed to reset password", "OK");
+            {
+                var error = body?.Errors?.FirstOrDefault()?.Description ?? "Failed to reset password";
+                await DisplayAlertAsync("Error", error, "OK");
+            }
         }
         catch (Exception ex)
         {

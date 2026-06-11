@@ -1,6 +1,7 @@
 using Moduels.Workouts.DTO.Enums;
 using WorkoutLogg.Database;
 using WorkoutLogg.Database.Entities;
+using WorkoutLogg.Localization;
 
 namespace WorkoutLogg.Pages;
 
@@ -12,14 +13,14 @@ public partial class AddWorkoutPage : ContentPage, IQueryAttributable
     private Guid _editingId = Guid.Empty;
     private readonly List<ExerciseFormRow> _exerciseRows = [];
 
-    private static readonly (WorkoutType Type, string Label, string Emoji)[] WorkoutTypes =
+    private static readonly (WorkoutType Type, string LabelKey, string Emoji)[] WorkoutTypes =
     [
-        (WorkoutType.Strength,    "Strength",    "🏋️"),
-        (WorkoutType.Cardio,      "Cardio",      "🏃"),
-        (WorkoutType.BodyBuilding,"Body Building","💪"),
-        (WorkoutType.Running,     "Running",     "🏃"),
-        (WorkoutType.Yoga,        "Yoga",        "🧘"),
-        (WorkoutType.Stretch,     "Stretch",     "🧘"),
+        (WorkoutType.Strength,    "WorkoutType_Strength",    "🏋️"),
+        (WorkoutType.Cardio,      "WorkoutType_Cardio",      "🏃"),
+        (WorkoutType.BodyBuilding,"WorkoutType_BodyBuilding","💪"),
+        (WorkoutType.Running,     "WorkoutType_Running",     "🏃"),
+        (WorkoutType.Yoga,        "WorkoutType_Yoga",        "🧘"),
+        (WorkoutType.Stretch,     "WorkoutType_Stretch",     "🧘"),
     ];
 
     public string? WorkoutIdParam { get; set; }
@@ -39,6 +40,9 @@ public partial class AddWorkoutPage : ContentPage, IQueryAttributable
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        PageTitle.Text = _editingId != Guid.Empty
+            ? Loc.Get("AddWorkout_EditTitle")
+            : Loc.Get("AddWorkout_Title");
 
         if (_editingId != Guid.Empty)
         {
@@ -81,8 +85,8 @@ public partial class AddWorkoutPage : ContentPage, IQueryAttributable
     private void BuildTypeChips()
     {
         TypeChips.Children.Clear();
-        foreach (var (type, label, emoji) in WorkoutTypes)
-            TypeChips.Children.Add(BuildChip(type, $"{emoji} {label}", type == _selectedType));
+        foreach (var (type, labelKey, emoji) in WorkoutTypes)
+            TypeChips.Children.Add(BuildChip(type, $"{emoji} {Loc.Get(labelKey)}", type == _selectedType));
     }
 
     private Border BuildChip(WorkoutType type, string text, bool active)
@@ -166,17 +170,17 @@ internal class ExerciseFormRow
 
     public ExerciseFormRow(WorkoutSetEntity? existing)
     {
-        _nameEntry = TextField("Exercise name", 15, FontAttributes.Bold);
-        _descEntry = TextField("Description (optional)", 13, FontAttributes.None);
+        _nameEntry = TextField(Loc.Get("AddWorkout_ExercisePlaceholder"), 15, FontAttributes.Bold);
+        _descEntry = TextField(Loc.Get("AddWorkout_DescPlaceholder"), 13, FontAttributes.None);
 
         _complexityPicker = new Picker
         {
-            Title = "Complexity", TextColor = Color.FromArgb("#111827"),
+            Title = Loc.Get("AddWorkout_Complexity"), TextColor = Color.FromArgb("#111827"),
             TitleColor = Color.FromArgb("#9CA3AF"),
         };
-        _complexityPicker.Items.Add("🟢  Low");
-        _complexityPicker.Items.Add("🟡  Middle");
-        _complexityPicker.Items.Add("🔴  High");
+        _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_Low"));
+        _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_Middle"));
+        _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_High"));
         _complexityPicker.SelectedIndex = 0;
 
         if (existing is not null)
@@ -206,7 +210,7 @@ internal class ExerciseFormRow
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 10 },
             StrokeThickness = 0,
             HorizontalOptions = LayoutOptions.Start,
-            Content = new Label { Text = "+ Add Set", FontSize = 13, FontAttributes = FontAttributes.Bold, TextColor = Color.FromArgb("#7C3AED") },
+            Content = new Label { Text = Loc.Get("AddWorkout_AddSet"), FontSize = 13, FontAttributes = FontAttributes.Bold, TextColor = Color.FromArgb("#7C3AED") },
         };
         addSetBtn.GestureRecognizers.Add(new TapGestureRecognizer
         {
@@ -311,20 +315,20 @@ internal class SetFormRow
 
         _numberLabel = new Label
         {
-            Text = $"Set {number}", FontSize = 12, FontAttributes = FontAttributes.Bold,
+            Text = $"{Loc.Get("Common_Set")} {number}", FontSize = 12, FontAttributes = FontAttributes.Bold,
             TextColor = Color.FromArgb("#9CA3AF"), VerticalOptions = LayoutOptions.Center, MinimumWidthRequest = 42,
         };
 
         _warmupBadge = BuildWarmupBadge();
 
-        _weightEntry = NumEntry("kg");
-        _repsEntry   = NumEntry("reps");
-        _restEntry   = NumEntry("rest");
+        _weightEntry = NumEntry(Loc.Get("Common_Kg"));
+        _repsEntry   = NumEntry(Loc.Get("Common_Reps"));
+        _restEntry   = NumEntry(Loc.Get("Common_Rest"));
 
         _useMinutes = false;
         _unitToggle = new Label
         {
-            Text = "sec", FontSize = 11, FontAttributes = FontAttributes.Bold,
+            Text = Loc.Get("Common_Sec"), FontSize = 11, FontAttributes = FontAttributes.Bold,
             TextColor = Color.FromArgb("#7C3AED"), VerticalOptions = LayoutOptions.Center,
             Padding = new Thickness(4, 2),
         };
@@ -356,7 +360,7 @@ internal class SetFormRow
             Padding = new Thickness(0, 4),
         };
 
-        var kgX = new Label { Text = "kg ×", FontSize = 12, TextColor = Color.FromArgb("#9CA3AF"), VerticalOptions = LayoutOptions.Center };
+        var kgX = new Label { Text = Loc.Get("Common_KgX"), FontSize = 12, TextColor = Color.FromArgb("#9CA3AF"), VerticalOptions = LayoutOptions.Center };
         var clock = new Label { Text = "⏱", FontSize = 13, VerticalOptions = LayoutOptions.Center };
 
         Grid.SetColumn(_numberLabel, 0);
@@ -426,8 +430,8 @@ internal class SetFormRow
             }
         }
         _useMinutes = !_useMinutes;
-        _unitToggle.Text = _useMinutes ? "min" : "sec";
-        _restEntry.Placeholder = _useMinutes ? "min" : "sec";
+        _unitToggle.Text = _useMinutes ? Loc.Get("Common_Min") : Loc.Get("Common_Sec");
+        _restEntry.Placeholder = _useMinutes ? Loc.Get("Common_Min") : Loc.Get("Common_Sec");
     }
 
     private void Fill(WorkoutSetDetailEntity s)
@@ -440,7 +444,7 @@ internal class SetFormRow
         _warmupBadge.Text = _isWarmup ? "🔥" : "○";
     }
 
-    public void UpdateNumber(int n) => _numberLabel.Text = $"Set {n}";
+    public void UpdateNumber(int n) => _numberLabel.Text = $"{Loc.Get("Common_Set")} {n}";
 
     private static Entry NumEntry(string placeholder) => new()
     {

@@ -24,9 +24,9 @@ namespace Modules.Users.Infrastructure.Api
         public Task<IApiResponse<object>> ForgotPassword([Body] ForgotPasswordRequest request);
 
         [Post("/Auth/VerifyResetCode")]
-        public Task<IApiResponse<object>> VerifyResetCode([Body] VerifyResetCodeRequest request);
+        public Task<IApiResponse<Result>> VerifyResetCode([Body] VerifyResetCodeRequest request);
 
         [Post("/Auth/ResetPassword")]
-        public Task<IApiResponse<object>> ResetPassword([Body] ResetPasswordRequest request);
+        public Task<IApiResponse<Result>> ResetPassword([Body] ResetPasswordRequest request);
     }
 }

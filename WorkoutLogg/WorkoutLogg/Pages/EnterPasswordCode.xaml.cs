@@ -1,5 +1,6 @@
 using Modules.Users.Infrastructure.Api;
 using Modules.Users.DTO.Auth;
+using WorkoutLogg.Localization;
 
 namespace WorkoutLogg.Pages;
 
@@ -12,7 +13,6 @@ public partial class EnterPasswordCode : ContentPage
 
     private readonly Border[] _boxes;
     private readonly Label[] _labels;
-    private readonly string[] _dots = { "·", "·", "·", "·", "·", "·" };
 
     public string Email
     {
@@ -36,7 +36,6 @@ public partial class EnterPasswordCode : ContentPage
 
         StartResendTimer();
 
-        // Показываем клавиатуру сразу
         Loaded += (_, _) =>
         {
             HiddenEntry.IsVisible = true;
@@ -73,33 +72,50 @@ public partial class EnterPasswordCode : ContentPage
     private void StartResendTimer()
     {
         _resendSeconds = 28;
-        ResendLabel.Text = $"Resend ({_resendSeconds}s)";
-        ResendLabel.TextColor = Color.FromArgb("#9CA3AF");
+        UpdateResendLabel();
 
+        _timer?.Stop();
         _timer = Dispatcher.CreateTimer();
         _timer.Interval = TimeSpan.FromSeconds(1);
         _timer.Tick += (_, _) =>
         {
             _resendSeconds--;
+            UpdateResendLabel();
             if (_resendSeconds <= 0)
-            {
-                _timer.Stop();
-                ResendLabel.Text = "Resend";
-                ResendLabel.TextColor = Color.FromArgb("#7C3AED");
-            }
-            else
-            {
-                ResendLabel.Text = $"Resend ({_resendSeconds}s)";
-            }
+                _timer!.Stop();
         };
         _timer.Start();
     }
 
-    private void OnResendTapped(object sender, EventArgs e)
+    private void UpdateResendLabel()
+    {
+        var resendText = Loc.Get("EnterCode_Resend");
+        if (_resendSeconds > 0)
+        {
+            ResendLabel.Text = $"{resendText} ({_resendSeconds}s)";
+            ResendLabel.TextColor = Color.FromArgb("#9CA3AF");
+        }
+        else
+        {
+            ResendLabel.Text = resendText;
+            ResendLabel.TextColor = Color.FromArgb("#7C3AED");
+        }
+    }
+
+    private async void OnResendTapped(object sender, EventArgs e)
     {
         if (_resendSeconds > 0) return;
-        // TODO: await _authService.ResendCodeAsync(_email);
-        StartResendTimer();
+
+        try
+        {
+            await _authApi.ForgotPassword(new ForgotPasswordRequest(_email));
+            StartResendTimer();
+            await DisplayAlertAsync("", Loc.Get("EnterCode_ResendSuccess"), "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", ex.Message, "OK");
+        }
     }
 
     // ── Verify ────────────────────────────────────
@@ -110,11 +126,15 @@ public partial class EnterPasswordCode : ContentPage
 
         try
         {
-            var result = await _authApi.VerifyResetCode(new VerifyResetCodeRequest(_email, code));
-            if (result.IsSuccessStatusCode)
-                Application.Current!.Windows[0].Page = new NewPasswordPage() { Email = _email, Code = code };
+            var response = await _authApi.VerifyResetCode(new VerifyResetCodeRequest(_email, code));
+            var body = response.Content;
+            if (response.IsSuccessStatusCode && body?.IsSuccess == true)
+                Application.Current!.Windows[0].Page = new NewPasswordPage { Email = _email, Code = code };
             else
-                await DisplayAlertAsync("Error", "Invalid or expired code", "OK");
+            {
+                var error = body?.Errors?.FirstOrDefault()?.Description ?? "Invalid or expired code";
+                await DisplayAlertAsync("Error", error, "OK");
+            }
         }
         catch (Exception ex)
         {
@@ -122,7 +142,7 @@ public partial class EnterPasswordCode : ContentPage
         }
     }
 
-    private async void OnBackTapped(object sender, EventArgs e)
+    private void OnBackTapped(object sender, EventArgs e)
     {
         _timer?.Stop();
         Application.Current!.Windows[0].Page = new LoginPage();

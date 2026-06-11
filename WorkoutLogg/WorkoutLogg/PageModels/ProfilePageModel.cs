@@ -1,9 +1,11 @@
+using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Modules.Users.DTO.Auth;
 using Modules.Users.DTO.Users;
 using System.Collections.ObjectModel;
 using WorkoutLogg.Database;
+using WorkoutLogg.Localization;
 using WorkoutLogg.Services;
 
 namespace WorkoutLogg.PageModels
@@ -24,6 +26,9 @@ namespace WorkoutLogg.PageModels
         [ObservableProperty] bool isPremium = false;
         [ObservableProperty] string streakLabel = "0";
         [ObservableProperty] string totalSessionsLabel = "0";
+        [ObservableProperty] bool hasProfilePicture = false;
+        [ObservableProperty] bool hasNoProfilePicture = true;
+        [ObservableProperty] ImageSource? avatarImageSource;
 
         // ── Personal Records (always 4 slots) ─────────────────────────────────
         [ObservableProperty] ObservableCollection<PersonalRecordVM> personalRecords = [];
@@ -58,13 +63,39 @@ namespace WorkoutLogg.PageModels
             IsPremium = user.IsPremium == true;
 
             var stats = user.BodyStats;
-            WeightLabel = stats?.Kg > 0 ? $"{stats.Kg} kg" : "—";
-            HeightLabel = stats?.Cm > 0 ? $"{stats.Cm} cm" : "—";
+            WeightLabel = stats?.Kg > 0 ? $"{stats.Kg} {Loc.Get("Common_Kg")}" : "—";
+            HeightLabel = stats?.Cm > 0 ? $"{stats.Cm} {Loc.Get("Common_Cm")}" : "—";
             BodyFatLabel = stats?.Fat > 0 ? $"{stats.Fat:0}%" : "—";
 
+            var culture = new CultureInfo(Loc.Get("_Culture"));
             MemberSinceLabel = joined.HasValue
-                ? $"Member since {joined.Value:MMM yyyy}"
-                : "Member";
+                ? $"{Loc.Get("Profile_MemberSince")} {joined.Value.ToString("MMM yyyy", culture)}"
+                : Loc.Get("Profile_Member");
+
+            SetProfilePicture(user.ProfilePicture);
+        }
+
+        public void SetProfilePicture(string? dataUrl)
+        {
+            HasProfilePicture = !string.IsNullOrEmpty(dataUrl);
+            HasNoProfilePicture = !HasProfilePicture;
+            if (HasProfilePicture && dataUrl!.Contains(","))
+            {
+                var base64 = dataUrl.Split(',')[1];
+                var bytes = Convert.FromBase64String(base64);
+                AvatarImageSource = ImageSource.FromStream(() => new MemoryStream(bytes));
+            }
+            else
+            {
+                AvatarImageSource = null;
+            }
+        }
+
+        public async Task<bool> UpdateProfilePictureAsync(string dataUrl)
+        {
+            var ok = await _userService.UpdateProfilePictureAsync(dataUrl);
+            if (ok) SetProfilePicture(dataUrl);
+            return ok;
         }
 
         private void ApplyStats(ProfileStats stats, UserDto? user)
@@ -76,8 +107,8 @@ namespace WorkoutLogg.PageModels
             var prs = stats.TopPRs;
             PersonalRecords = new ObservableCollection<PersonalRecordVM>(
                 Enumerable.Range(0, 4).Select(i => i < prs.Count
-                    ? new PersonalRecordVM(prs[i].ExerciseName, $"{prs[i].MaxWeightKg:0.#} kg")
-                    : new PersonalRecordVM("No record yet", "—")));
+                    ? new PersonalRecordVM(prs[i].ExerciseName, $"{prs[i].MaxWeightKg:0.#} {Loc.Get("Common_Kg")}")
+                    : new PersonalRecordVM(Loc.Get("Common_NoRecordYet"), "—")));
 
             // Achievements
             var unlocked = BuildAchievements(stats, user);

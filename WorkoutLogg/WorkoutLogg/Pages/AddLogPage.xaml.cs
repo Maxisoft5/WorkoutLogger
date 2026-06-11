@@ -1,6 +1,8 @@
 using Moduels.Workouts.DTO.Enums;
 using WorkoutLogg.Database;
 using WorkoutLogg.Database.Entities;
+using WorkoutLogg.Localization;
+using WorkoutLogg.Services;
 
 namespace WorkoutLogg.Pages;
 
@@ -9,6 +11,7 @@ namespace WorkoutLogg.Pages;
 public partial class AddLogPage : ContentPage, IQueryAttributable
 {
     private readonly WorkoutDatabase _db;
+    private readonly UserProfileService _profileService;
 
     private DateTime _date = DateTime.Today;
     private Guid _editingSessionId = Guid.Empty;
@@ -19,10 +22,11 @@ public partial class AddLogPage : ContentPage, IQueryAttributable
     public string? DateParam { get; set; }
     public string? SessionIdParam { get; set; }
 
-    public AddLogPage(WorkoutDatabase db)
+    public AddLogPage(WorkoutDatabase db, UserProfileService profileService)
     {
         InitializeComponent();
         _db = db;
+        _profileService = profileService;
     }
 
     void IQueryAttributable.ApplyQueryAttributes(IDictionary<string, object> query)
@@ -41,7 +45,7 @@ public partial class AddLogPage : ContentPage, IQueryAttributable
 
         if (_editingSessionId != Guid.Empty)
         {
-            PageTitle.Text = "Edit Log";
+            PageTitle.Text = Loc.Get("AddLog_EditTitle");
             var session = await _db.GetLogSessionWithExercisesAsync(_editingSessionId);
             if (session is null) { await Shell.Current.GoToAsync(".."); return; }
 
@@ -63,18 +67,20 @@ public partial class AddLogPage : ContentPage, IQueryAttributable
 
     private async void OnWorkoutSelectorTapped(object sender, TappedEventArgs e)
     {
-        var options = new List<string> { "— Custom (no plan)" };
+        var cancel = Loc.Get("Common_Cancel");
+        var customPlan = Loc.Get("AddLog_CustomPlan");
+        var options = new List<string> { customPlan };
         foreach (var w in _availableWorkouts)
             options.Add($"{w.MuscleGroup} · {w.StartDate:d MMM yyyy}");
 
-        var result = await DisplayActionSheetAsync("Link to workout plan?", "Cancel", null, [.. options]);
+        var result = await DisplayActionSheetAsync(Loc.Get("AddLog_LinkToPlan"), cancel, null, [.. options]);
 
-        if (result is null || result == "Cancel") return;
+        if (result is null || result == cancel) return;
 
-        if (result == "— Custom (no plan)")
+        if (result == customPlan)
         {
             _selectedWorkout = null;
-            WorkoutSelectorLabel.Text = "— Custom (no plan)";
+            WorkoutSelectorLabel.Text = customPlan;
             ClearAndRebuildExercises(null);
         }
         else
@@ -114,15 +120,17 @@ public partial class AddLogPage : ContentPage, IQueryAttributable
     {
         if (_selectedWorkout is not null && _selectedWorkout.Exercises.Count > 0)
         {
+            var cancel = Loc.Get("Common_Cancel");
+            var customExercise = Loc.Get("AddLog_CustomExercise");
             var planOptions = _selectedWorkout.Exercises
                 .Select(ex => ex.ExerciseName)
                 .ToList();
-            planOptions.Add("⚡ Custom exercise");
+            planOptions.Add(customExercise);
 
-            var pick = await DisplayActionSheetAsync("Add exercise", "Cancel", null, [.. planOptions]);
-            if (pick is null || pick == "Cancel") return;
+            var pick = await DisplayActionSheetAsync(Loc.Get("AddLog_AddExercise"), cancel, null, [.. planOptions]);
+            if (pick is null || pick == cancel) return;
 
-            if (pick == "⚡ Custom exercise")
+            if (pick == customExercise)
                 AddExerciseRow();
             else
             {
@@ -171,8 +179,25 @@ public partial class AddLogPage : ContentPage, IQueryAttributable
             await _db.ReplaceExerciseLogsAsync(session.Id, exercises);
         }
 
+        // Weight update
+        if (double.TryParse(WeightEntry.Text, out var weightKg) && weightKg > 0
+            && UpdateWeightCheckBox.IsChecked)
+        {
+            bool confirmed = await DisplayAlertAsync(
+                Loc.Get("AddLog_UpdateWeightTitle"),
+                $"{Loc.Get("AddLog_UpdateWeightMsg")} {weightKg:0.#} {Loc.Get("Common_Kg")}?",
+                Loc.Get("Common_Yes"),
+                Loc.Get("Common_No"));
+
+            if (confirmed)
+                await _profileService.UpdateBodyStatsAsync(kg: weightKg);
+        }
+
         await Shell.Current.GoToAsync("..");
     }
+
+    private void OnUpdateWeightLabelTapped(object sender, TappedEventArgs e) =>
+        UpdateWeightCheckBox.IsChecked = !UpdateWeightCheckBox.IsChecked;
 
     private void OnBackTapped(object sender, TappedEventArgs e) =>
         Shell.Current.GoToAsync("..");
@@ -199,7 +224,7 @@ internal class ExerciseLogFormRow
 
         _nameEntry = new Entry
         {
-            Placeholder = "Exercise name",
+            Placeholder = Loc.Get("AddLog_ExercisePlaceholder"),
             PlaceholderColor = Color.FromArgb("#9CA3AF"),
             TextColor = Color.FromArgb("#111827"),
             FontSize = 15,
@@ -209,13 +234,13 @@ internal class ExerciseLogFormRow
 
         _complexityPicker = new Picker
         {
-            Title = "Complexity",
+            Title = Loc.Get("AddWorkout_Complexity"),
             TextColor = Color.FromArgb("#111827"),
             TitleColor = Color.FromArgb("#9CA3AF"),
         };
-        _complexityPicker.Items.Add("🟢  Low");
-        _complexityPicker.Items.Add("🟡  Middle");
-        _complexityPicker.Items.Add("🔴  High");
+        _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_Low"));
+        _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_Middle"));
+        _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_High"));
         _complexityPicker.SelectedIndex = (int)(existing?.Complexity ?? fromPlan?.ExerciesComplexity ?? ExerciesComplexity.Low);
 
         _setsContainer = new VerticalStackLayout { Spacing = 8 };
@@ -261,7 +286,7 @@ internal class ExerciseLogFormRow
             HorizontalOptions = LayoutOptions.Start,
             Content = new Label
             {
-                Text = "+ Add Set",
+                Text = Loc.Get("AddWorkout_AddSet"),
                 FontSize = 13,
                 FontAttributes = FontAttributes.Bold,
                 TextColor = Color.FromArgb("#7C3AED"),
@@ -313,8 +338,8 @@ internal class ExerciseLogFormRow
     private Border BuildBadge()
     {
         var (bg, fg, text) = IsCustom
-            ? ("#FEF3C7", "#D97706", "⚡ Custom")
-            : ("#EDE9FE", "#7C3AED", "📋 From plan");
+            ? ("#FEF3C7", "#D97706", Loc.Get("AddLog_Custom"))
+            : ("#EDE9FE", "#7C3AED", Loc.Get("AddLog_FromPlan"));
 
         return new Border
         {
@@ -395,7 +420,7 @@ internal class SetLogFormRow
 
         _numberLabel = new Label
         {
-            Text = $"Set {number}",
+            Text = $"{Loc.Get("Common_Set")} {number}",
             FontSize = 12,
             FontAttributes = FontAttributes.Bold,
             TextColor = Color.FromArgb("#9CA3AF"),
@@ -405,14 +430,14 @@ internal class SetLogFormRow
 
         _warmupBadge = BuildWarmupBadge();
 
-        _weightEntry = NumEntry("kg");
-        _repsEntry = NumEntry("reps");
-        _restEntry = NumEntry("rest");
+        _weightEntry = NumEntry(Loc.Get("Common_Kg"));
+        _repsEntry = NumEntry(Loc.Get("Common_Reps"));
+        _restEntry = NumEntry(Loc.Get("Common_Rest"));
 
         _useMinutes = false;
         _unitToggle = new Label
         {
-            Text = "sec",
+            Text = Loc.Get("Common_Sec"),
             FontSize = 11,
             FontAttributes = FontAttributes.Bold,
             TextColor = Color.FromArgb("#7C3AED"),
@@ -454,7 +479,7 @@ internal class SetLogFormRow
             Padding = new Thickness(0, 4),
         };
 
-        var kgX = new Label { Text = "kg ×", FontSize = 12, TextColor = Color.FromArgb("#9CA3AF"), VerticalOptions = LayoutOptions.Center };
+        var kgX = new Label { Text = Loc.Get("Common_KgX"), FontSize = 12, TextColor = Color.FromArgb("#9CA3AF"), VerticalOptions = LayoutOptions.Center };
         var clock = new Label { Text = "⏱", FontSize = 13, VerticalOptions = LayoutOptions.Center };
 
         Grid.SetColumn(_numberLabel, 0);
@@ -519,8 +544,8 @@ internal class SetLogFormRow
                 : ((int)(val * 60)).ToString();
         }
         _useMinutes = !_useMinutes;
-        _unitToggle.Text = _useMinutes ? "min" : "sec";
-        _restEntry.Placeholder = _useMinutes ? "min" : "sec";
+        _unitToggle.Text = _useMinutes ? Loc.Get("Common_Min") : Loc.Get("Common_Sec");
+        _restEntry.Placeholder = _useMinutes ? Loc.Get("Common_Min") : Loc.Get("Common_Sec");
     }
 
     private void Fill(LogSetEntity s)
@@ -532,7 +557,7 @@ internal class SetLogFormRow
         _warmupBadge.Text = _isWarmup ? "🔥" : "○";
     }
 
-    public void UpdateNumber(int n) => _numberLabel.Text = $"Set {n}";
+    public void UpdateNumber(int n) => _numberLabel.Text = $"{Loc.Get("Common_Set")} {n}";
 
     private static Entry NumEntry(string placeholder) => new()
     {

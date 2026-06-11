@@ -18,5 +18,6 @@ namespace Modules.Users.DTO.Auth
         public UserRegistrationStep? UserRegistrationStep { get; set; }
         public bool? IsPremium { get; set; }
         public List<UserGoalDto>? Goals { get; set; }
+        public string? ProfilePicture { get; set; }
     }
 }

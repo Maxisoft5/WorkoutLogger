@@ -1,33 +1,49 @@
-namespace WorkoutLogg.Pages;
+namespace WorkoutLogg.Pages.Controls;
 
-public partial class LoadingPage : ContentPage
+public partial class LoadingOverlayView : ContentView
 {
     private readonly EcgDrawable _ecg = new();
     private IDispatcherTimer? _timer;
     private float _elapsed = 0f;
     private const float CycleMs = 1800f;
 
-    public LoadingPage()
+    public LoadingOverlayView()
     {
         InitializeComponent();
         EcgView.Drawable = _ecg;
     }
 
-    protected override void OnAppearing()
+    // Показывает оверлей сразу (без таймера) — вызывать из конструктора и OnDisappearing
+    public void Preload()
     {
-        base.OnAppearing();
+        _timer?.Stop();
+        _timer = null;
+        _ecg.DrawProgress = 0.35f;
+        _ecg.Opacity = 0.7f;
+        EcgView.Invalidate();
+        Opacity = 1f;
+        InputTransparent = false;
+    }
+
+    // Показывает с анимацией — вызывать в начале OnAppearing
+    public void Show()
+    {
+        _timer?.Stop();
         _elapsed = 0f;
+        Opacity = 1f;
+        InputTransparent = false;
         _timer = Dispatcher.CreateTimer();
         _timer.Interval = TimeSpan.FromMilliseconds(32);
         _timer.Tick += Tick;
         _timer.Start();
     }
 
-    protected override void OnDisappearing()
+    public void Hide()
     {
-        base.OnDisappearing();
         _timer?.Stop();
         _timer = null;
+        Opacity = 0f;
+        InputTransparent = true;
     }
 
     private void Tick(object? sender, EventArgs e)

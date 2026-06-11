@@ -28,7 +28,8 @@ namespace Modules.Users.Domain.Mappers
                 WorkOutCount = user.WorkOutCount,
                 IsPremium = user.IsPremium,
                 UserRegistrationStep = user.UserRegistrationStep,
-                Identity = user.Identity
+                Identity = user.Identity,
+                ProfilePicture = user.ProfilePicture
             };
         }
     }

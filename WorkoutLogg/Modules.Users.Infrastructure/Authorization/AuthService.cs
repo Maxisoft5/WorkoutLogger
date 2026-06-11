@@ -389,6 +389,10 @@ namespace Modules.Users.Infrastructure.Authorization
                 {
                     userCurrent.UserRegistrationStep = user.UserRegistrationStep.Value;
                 }
+                if (user.ProfilePicture != null)
+                {
+                    userCurrent.ProfilePicture = user.ProfilePicture;
+                }
                 if (user.Goals != null)
                 {
                     await SyncGoals(userCurrent, user.Goals);

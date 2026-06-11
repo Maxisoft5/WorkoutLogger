@@ -180,6 +180,7 @@
         </ScrollView>
 
         <controls:MainTabBar Grid.Row="1" ActiveTab="Dashboard" />
+        <controls:LoadingOverlayView x:Name="PageLoading" Grid.Row="0" Grid.RowSpan="2" />
 
     </Grid>
 </ContentPage>

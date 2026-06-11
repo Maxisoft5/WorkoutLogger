@@ -3,6 +3,7 @@
     x:Class="WorkoutLogg.Pages.AddWorkoutPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     BackgroundColor="#EEEEF6"
     Shell.NavBarIsVisible="False">
 
@@ -18,11 +19,11 @@
                     TextColor="#7C3AED"
                     Padding="0"
                     VerticalOptions="Center" />
-            <Label Grid.Column="1"
+            <Label x:Name="PageTitle"
+                   Grid.Column="1"
                    FontAttributes="Bold"
                    FontSize="20"
                    HorizontalOptions="Center"
-                   Text="New Workout"
                    TextColor="#111827"
                    VerticalOptions="Center" />
         </Grid>
@@ -34,7 +35,7 @@
                 <!-- Workout Type -->
                 <Border BackgroundColor="White" Padding="16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                     <VerticalStackLayout Spacing="12">
-                        <Label FontAttributes="Bold" FontSize="13" Text="Workout Type" TextColor="#6B7280" />
+                        <Label FontAttributes="Bold" FontSize="13" Text="{loc:Translate AddWorkout_WorkoutType}" TextColor="#6B7280" />
                         <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
                             <HorizontalStackLayout x:Name="TypeChips" Spacing="8" />
                         </ScrollView>
@@ -44,7 +45,7 @@
                 <!-- Date & Duration -->
                 <Border BackgroundColor="White" Padding="16" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                     <VerticalStackLayout Spacing="12">
-                        <Label FontAttributes="Bold" FontSize="13" Text="Date" TextColor="#6B7280" />
+                        <Label FontAttributes="Bold" FontSize="13" Text="{loc:Translate AddWorkout_Date}" TextColor="#6B7280" />
                         <DatePicker x:Name="WorkoutDatePicker"
                                     MinimumDate="01/01/2020"
                                     MaximumDate="12/31/2030"
@@ -53,11 +54,11 @@
                                     FontSize="15" />
                         <Grid ColumnDefinitions="*,16,*" ColumnSpacing="0">
                             <VerticalStackLayout Grid.Column="0" Spacing="4">
-                                <Label FontSize="12" Text="Start time" TextColor="#9CA3AF" />
+                                <Label FontSize="12" Text="{loc:Translate AddWorkout_StartTime}" TextColor="#9CA3AF" />
                                 <TimePicker x:Name="StartTimePicker" TextColor="#111827" FontSize="15" />
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Column="2" Spacing="4">
-                                <Label FontSize="12" Text="End time" TextColor="#9CA3AF" />
+                                <Label FontSize="12" Text="{loc:Translate AddWorkout_EndTime}" TextColor="#9CA3AF" />
                                 <TimePicker x:Name="EndTimePicker" TextColor="#111827" FontSize="15" />
                             </VerticalStackLayout>
                         </Grid>
@@ -69,7 +70,7 @@
                     <Label Grid.Column="0"
                            FontAttributes="Bold"
                            FontSize="17"
-                           Text="Exercises"
+                           Text="{loc:Translate AddWorkout_Exercises}"
                            TextColor="#111827"
                            VerticalOptions="Center" />
                     <Border Grid.Column="1"
@@ -79,7 +80,7 @@
                             StrokeThickness="0">
                         <Label FontAttributes="Bold"
                                FontSize="13"
-                               Text="+ Add"
+                               Text="{loc:Translate AddWorkout_AddBtn}"
                                TextColor="White">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnAddExerciseTapped" />
@@ -101,7 +102,7 @@
                         <Label FontSize="32" HorizontalOptions="Center" Text="🏋️" />
                         <Label FontSize="14"
                                HorizontalOptions="Center"
-                               Text="Tap &quot;+ Add&quot; to add your first exercise"
+                               Text="{loc:Translate AddWorkout_EmptyExercises}"
                                TextColor="#9CA3AF" />
                     </VerticalStackLayout>
                 </Border>
@@ -125,7 +126,7 @@
                     FontAttributes="Bold"
                     FontSize="16"
                     HeightRequest="52"
-                    Text="Save Workout"
+                    Text="{loc:Translate AddWorkout_Save}"
                     TextColor="White" />
         </Border>
 

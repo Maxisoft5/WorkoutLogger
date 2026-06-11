@@ -12,14 +12,29 @@ public partial class LoggerPage : ContentPage
         InitializeComponent();
         _vm = vm;
         BindingContext = vm;
+        PageLoading.Preload();
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await _vm.LoadAsync();
-        DateLabel.Text = _vm.DateLabel;
-        Calendar.MarkedDates = _vm.MarkedDates;
+        PageLoading.Show();
+        try
+        {
+            await _vm.LoadAsync();
+            DateLabel.Text = _vm.DateLabel;
+            Calendar.MarkedDates = _vm.MarkedDates;
+        }
+        finally
+        {
+            PageLoading.Hide();
+        }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        PageLoading.Preload();
     }
 
     private async void OnAddLogTapped(object sender, TappedEventArgs e)

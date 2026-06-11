@@ -74,6 +74,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<WorkoutLogg.PageModels.LoggerPageModel>();
         builder.Services.AddTransient<WorkoutLogg.Pages.LoggerPage>();
         builder.Services.AddTransient<WorkoutLogg.Pages.AddLogPage>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.EditBodyStatsPage>();
         builder.Services.AddSingleton<WorkoutLogg.PageModels.DashboardPageModel>();
         builder.Services.AddTransient<WorkoutLogg.Pages.DashboardPage>();
         builder.Services.AddSingleton<WorkoutLogg.Services.UserProfileService>();

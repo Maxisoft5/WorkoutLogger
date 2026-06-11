@@ -14,14 +14,23 @@ public partial class WorkoutsPage : ContentPage
         InitializeComponent();
         _vm = vm;
         BindingContext = vm;
+        PageLoading.Preload();
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await _vm.LoadAsync();
-        SessionCountLabel.Text = _vm.SessionCount;
-        Calendar.MarkedDates = _vm.MarkedDates;
+        PageLoading.Show();
+        try
+        {
+            await _vm.LoadAsync();
+            SessionCountLabel.Text = _vm.SessionCount;
+            Calendar.MarkedDates = _vm.MarkedDates;
+        }
+        finally
+        {
+            PageLoading.Hide();
+        }
     }
 
     private async void OnAddWorkoutTapped(object sender, TappedEventArgs e)
@@ -53,6 +62,12 @@ public partial class WorkoutsPage : ContentPage
         await _vm.DeleteWorkoutCommand.ExecuteAsync(workoutId);
         SessionCountLabel.Text = _vm.SessionCount;
         Calendar.MarkedDates = _vm.MarkedDates;
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        PageLoading.Preload();
     }
 
     private void OnDateSelected(object sender, DateTime date)

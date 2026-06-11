@@ -13,6 +13,18 @@ Common_BackButton: "← Back"
 Common_Continue: "Continue →"
 Common_Finish: "Finish →"
 Common_Or: "or"
+Common_Set: "Set"
+Common_Reps: "reps"
+Common_Rest: "rest"
+Common_Sec: "sec"
+Common_Min: "min"
+Common_KgX: "kg ×"
+Common_Exercises: "exercises"
+Common_Sets: "sets"
+Common_Yes: "Yes"
+Common_No: "No"
+Common_Error: "Error"
+Common_TryAgain: "Something went wrong. Please try again."
 
 # Auth — Login
 Login_Welcome: "Welcome back"
@@ -50,6 +62,10 @@ EnterCode_Title: "Enter the code"
 EnterCode_VerificationCode: "VERIFICATION CODE"
 EnterCode_DidntReceive: "Didn't receive it?"
 EnterCode_VerifyCode: "Verify Code"
+EnterCode_Resend: "Resend"
+EnterCode_DelayHint: "The code may take 1–3 minutes to arrive in your inbox"
+EnterCode_ResendSuccess: "Code sent! Check your inbox."
+Login_InvalidCredentials: "Invalid email or password"
 
 # Auth — New Password
 NewPassword_Title: "New password"
@@ -115,7 +131,7 @@ Dashboard_DayStreak: "day streak"
 
 # Workouts page
 Workouts_Title: "Workouts"
-Workouts_SessionsLogged: "{0} sessions logged"
+Workouts_SessionsLogged: "sessions logged"
 Workouts_Filter_All: "All"
 Workouts_Filter_Strength: "Strength"
 Workouts_Filter_Cardio: "Cardio"
@@ -160,6 +176,21 @@ AddLog_CustomExercise: "⚡ Custom exercise"
 AddLog_ExercisePlaceholder: "Exercise name"
 AddLog_FromPlan: "📋 From plan"
 AddLog_Custom: "⚡ Custom"
+AddLog_LinkToPlan: "Link to workout plan?"
+
+# Add log - weight tracking
+AddLog_TodayWeight: "Today's weight (optional)"
+AddLog_UpdateWeight: "Update profile weight"
+AddLog_UpdateWeightTitle: "Update weight?"
+AddLog_UpdateWeightMsg: "Set profile weight to"
+
+# Edit body stats page
+EditStats_Title: "Body Stats"
+EditStats_Weight: "WEIGHT (KG)"
+EditStats_Height: "HEIGHT (CM)"
+EditStats_BodyFat: "BODY FAT (%)"
+EditStats_Saved: "Stats updated"
+EditStats_Error: "Could not save. Check connection."
 
 # Profile page
 Profile_PersonalRecords: "Personal Records"
@@ -184,3 +215,44 @@ Tab_Dashboard: "Dashboard"
 Tab_Workouts: "Workouts"
 Tab_Logger: "Logger"
 Tab_Profile: "Profile"
+
+# Internal — culture code used for date formatting
+_Culture: "en-US"
+
+# Dashboard — time-based greetings
+Dashboard_GoodMorning: "Good morning"
+Dashboard_GoodAfternoon: "Good afternoon"
+Dashboard_GoodEvening: "Good evening"
+Dashboard_GoodNight: "Good night"
+Dashboard_Days: "days"
+Dashboard_Today: "Today"
+Dashboard_Yesterday: "Yesterday"
+Dashboard_CustomWorkout: "Custom workout"
+Dashboard_TapToStart: "Tap + in Logger to start"
+
+# Units
+Common_Kg: "kg"
+Common_Cm: "cm"
+
+# Loading screen
+Loading_Text: "LOADING"
+
+# Calendar day headers (Mon-first)
+Calendar_Mo: "Mo"
+Calendar_Tu: "Tu"
+Calendar_We: "We"
+Calendar_Th: "Th"
+Calendar_Fr: "Fr"
+Calendar_Sa: "Sa"
+Calendar_Su: "Su"
+
+# Workout types
+WorkoutType_Strength: "Strength"
+WorkoutType_Cardio: "Cardio"
+WorkoutType_BodyBuilding: "Body Building"
+WorkoutType_Running: "Running"
+WorkoutType_Yoga: "Yoga"
+WorkoutType_Stretch: "Stretch"
+
+# Add workout button
+AddWorkout_AddBtn: "+ Add"

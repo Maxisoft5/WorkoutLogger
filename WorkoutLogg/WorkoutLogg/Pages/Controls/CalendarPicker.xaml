@@ -2,7 +2,8 @@
 <ContentView
     x:Class="WorkoutLogg.Pages.Controls.CalendarPicker"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization">
 
     <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
         <VerticalStackLayout Spacing="12">
@@ -38,13 +39,13 @@
 
             <!-- Day of week headers -->
             <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="4">
-                <Label Grid.Column="0" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Mo" TextColor="#9CA3AF" />
-                <Label Grid.Column="1" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Tu" TextColor="#9CA3AF" />
-                <Label Grid.Column="2" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="We" TextColor="#9CA3AF" />
-                <Label Grid.Column="3" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Th" TextColor="#9CA3AF" />
-                <Label Grid.Column="4" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Fr" TextColor="#9CA3AF" />
-                <Label Grid.Column="5" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Sa" TextColor="#9CA3AF" />
-                <Label Grid.Column="6" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="Su" TextColor="#9CA3AF" />
+                <Label Grid.Column="0" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Mo}" TextColor="#9CA3AF" />
+                <Label Grid.Column="1" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Tu}" TextColor="#9CA3AF" />
+                <Label Grid.Column="2" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_We}" TextColor="#9CA3AF" />
+                <Label Grid.Column="3" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Th}" TextColor="#9CA3AF" />
+                <Label Grid.Column="4" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Fr}" TextColor="#9CA3AF" />
+                <Label Grid.Column="5" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Sa}" TextColor="#9CA3AF" />
+                <Label Grid.Column="6" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Su}" TextColor="#9CA3AF" />
             </Grid>
 
             <!-- Days grid populated from code-behind -->

@@ -1,3 +1,4 @@
+using System.Globalization;
 using WorkoutLogg.Localization;
 using WorkoutLogg.PageModels;
 using WorkoutLogg.Pages.Controls;
@@ -12,28 +13,46 @@ public partial class DashboardPage : ContentPage
     {
         InitializeComponent();
         _vm = vm;
-        DateLabel.Text = DateTime.Now.ToString("dddd, dd MMM").ToUpper();
+        PageLoading.Preload();
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-
-        var greeting = Loc.Get("Dashboard_Greeting");
-        var currentUser = await CurrentUserStore.GetCurrentUser();
-        if (currentUser != null)
+        PageLoading.Show();
+        try
         {
-            HelloUserText.Text = $"{greeting}, {currentUser.FullName} 👋";
-            AvatarLabel.Text = currentUser.FullName?.ToUpper().First().ToString() ?? "?";
-        }
-        else
-        {
-            HelloUserText.Text = $"{greeting} 👋";
-            AvatarLabel.Text = "?";
-        }
+            var culture = new CultureInfo(Loc.Get("_Culture"));
+            DateLabel.Text = DateTime.Now.ToString("dddd, dd MMM", culture).ToUpper();
 
-        await _vm.LoadAsync();
-        ApplyStats();
+            var hour = DateTime.Now.Hour;
+            var greetKey = hour switch
+            {
+                >= 6 and < 12 => "Dashboard_GoodMorning",
+                >= 12 and < 18 => "Dashboard_GoodAfternoon",
+                >= 18 and < 22 => "Dashboard_GoodEvening",
+                _ => "Dashboard_GoodNight",
+            };
+            var greeting = Loc.Get(greetKey);
+            var currentUser = await CurrentUserStore.GetCurrentUser();
+            if (currentUser != null)
+            {
+                HelloUserText.Text = $"{greeting}, {currentUser.FullName} 👋";
+                AvatarLabel.Text = currentUser.FullName?.ToUpper().First().ToString() ?? "?";
+            }
+            else
+            {
+                HelloUserText.Text = $"{greeting} 👋";
+                AvatarLabel.Text = "?";
+            }
+
+            await _vm.LoadAsync();
+            ApplyStats();
+        }
+        finally
+        {
+            PageLoading.Hide();
+        }
     }
 
     private void ApplyStats()
@@ -128,6 +147,12 @@ public partial class DashboardPage : ContentPage
             Grid.SetColumn(col, i);
             WeeklyBarsGrid.Children.Add(col);
         }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        PageLoading.Preload();
     }
 
     private async void OnSeeAllWorkoutsTapped(object sender, EventArgs e) =>

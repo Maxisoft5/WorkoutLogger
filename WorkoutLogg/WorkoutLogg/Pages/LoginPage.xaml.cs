@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Modules.Users.DTO.Auth;
 using Modules.Users.Infrastructure.Api;
+using WorkoutLogg.Localization;
 using WorkoutLogg.Validators;
 
 namespace WorkoutLogg.Pages;
@@ -70,6 +71,12 @@ public partial class LoginPage : ContentPage
                     await Shell.Current.GoToAsync("//Dashboard");
                 };
             }
+        }
+        else
+        {
+            var loginPage = new LoginPage();
+            Application.Current!.Windows[0].Page = loginPage;
+            await loginPage.DisplayAlert("", Loc.Get("Login_InvalidCredentials"), "OK");
         }
     }
 

@@ -28,7 +28,9 @@
 
                 <!-- Avatar -->
                 <Grid HorizontalOptions="Center" Margin="0,0,0,36" WidthRequest="150" HeightRequest="150">
+                    <!-- Initials (hidden when photo selected) -->
                     <Border
+                        x:Name="AvatarInitialsBorder"
                         BackgroundColor="#7C3AED"
                         HeightRequest="120"
                         HorizontalOptions="Center"
@@ -44,6 +46,21 @@
                             Text="A"
                             TextColor="White"
                             VerticalOptions="Center" />
+                    </Border>
+                    <!-- Profile photo (visible when selected) -->
+                    <Border
+                        x:Name="AvatarPhotoBorder"
+                        HeightRequest="120"
+                        HorizontalOptions="Center"
+                        StrokeShape="RoundRectangle 22"
+                        StrokeThickness="0"
+                        VerticalOptions="Center"
+                        WidthRequest="120"
+                        IsVisible="False">
+                        <Image x:Name="AvatarImage"
+                               Aspect="AspectFill"
+                               HeightRequest="120"
+                               WidthRequest="120" />
                     </Border>
                     <!-- Edit badge -->
                     <Border
