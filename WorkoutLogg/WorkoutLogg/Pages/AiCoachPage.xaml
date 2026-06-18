@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.AiCoachPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*,Auto,Auto">
+
+        <!-- ── Header ─────────────────────────────────────────── -->
+        <Border Grid.Row="0"
+                BackgroundColor="#7C3AED"
+                Padding="20,52,20,18"
+                StrokeShape="RoundRectangle 0,0,28,28"
+                StrokeThickness="0">
+            <Grid ColumnDefinitions="84,*,84">
+                <!-- AI avatar -->
+                <Border Grid.Column="0"
+                        BackgroundColor="#9333EA"
+                        HeightRequest="80" WidthRequest="80"
+                        StrokeShape="RoundRectangle 14" StrokeThickness="0"
+                        VerticalOptions="Center">
+                    <Label Text="🤖" FontSize="20"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+
+                <!-- Title + subtitle -->
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center"
+                                     HorizontalOptions="Center" Spacing="2">
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Label Text="{loc:Translate AiCoach_Title}"
+                               FontAttributes="Bold" FontSize="17" TextColor="White"
+                               VerticalOptions="Center" />
+                        <Border BackgroundColor="#9333EA" Padding="6,2"
+                                StrokeShape="RoundRectangle 6" StrokeThickness="0"
+                                VerticalOptions="Center">
+                            <Label Text="⭐ PREMIUM" FontSize="9" FontAttributes="Bold" TextColor="#DDD6FE" />
+                        </Border>
+                    </HorizontalStackLayout>
+                    <Label x:Name="KnowsLabel"
+                           FontSize="11" TextColor="#DDD6FE"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- ── Premium gate (shown when not premium) ──────────── -->
+        <VerticalStackLayout x:Name="PremiumGate" Grid.Row="1"
+                             IsVisible="False"
+                             VerticalOptions="Center"
+                             Padding="32" Spacing="20">
+            <Border BackgroundColor="#9333EA"
+                    HeightRequest="100" WidthRequest="100"
+                    StrokeShape="RoundRectangle 22" StrokeThickness="0"
+                    HorizontalOptions="Center">
+                <Label Text="🤖" FontSize="36"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Label Text="{loc:Translate AiCoach_PremiumOnly}"
+                   FontAttributes="Bold" FontSize="20" TextColor="#111827"
+                   HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+            <Label Text="{loc:Translate AiCoach_PremiumSub}"
+                   FontSize="14" TextColor="#6B7280"
+                   HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                   LineBreakMode="WordWrap" />
+            <Border BackgroundColor="#7C3AED"
+                    Padding="20,14" StrokeShape="RoundRectangle 16" StrokeThickness="0"
+                    HorizontalOptions="Center">
+                <Label Text="{loc:Translate AiCoach_Upgrade}"
+                       FontAttributes="Bold" FontSize="15" TextColor="White" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnUpgradeTapped" />
+                </Border.GestureRecognizers>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- ── Chat content ───────────────────────────────────── -->
+        <ScrollView x:Name="ChatScroll" Grid.Row="1">
+            <VerticalStackLayout Spacing="0">
+
+                <!-- Welcome screen (hidden once chat starts) -->
+                <VerticalStackLayout x:Name="WelcomeSection" Padding="20,20,20,8" Spacing="16">
+
+                    <!-- Greeting card -->
+                    <Border BackgroundColor="White" Padding="20,18"
+                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 20" StrokeThickness="1">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="14">
+                                <Border BackgroundColor="#EDE9FE"
+                                        HeightRequest="82" WidthRequest="82"
+                                        StrokeShape="RoundRectangle 16" StrokeThickness="0">
+                                    <Label Text="🤖" FontSize="24"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                                <VerticalStackLayout VerticalOptions="Center" Spacing="3">
+                                    <Label x:Name="GreetingLabel"
+                                           FontAttributes="Bold" FontSize="16" TextColor="#111827" />
+                                    <Label x:Name="GreetingSubLabel"
+                                           FontSize="12" TextColor="#6B7280" LineBreakMode="WordWrap" />
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Insight card -->
+                    <Border BackgroundColor="White" Padding="16,14"
+                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                        <HorizontalStackLayout Spacing="12">
+                            <Label Text="💡" FontSize="18" VerticalOptions="Start" Margin="0,2,0,0" />
+                            <VerticalStackLayout Spacing="4" HorizontalOptions="FillAndExpand">
+                                <Label Text="{loc:Translate AiCoach_InsightTitle}"
+                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                <Label x:Name="InsightLabel"
+                                       FontSize="12" TextColor="#6B7280"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!-- Quick action chips -->
+                    <Label Text="{loc:Translate AiCoach_QuickActions}"
+                           FontSize="10" FontAttributes="Bold" TextColor="#9CA3AF"
+                           CharacterSpacing="0.8" Margin="0,4,0,0" />
+
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                        <!-- Tip -->
+                        <Border Grid.Row="0" Grid.Column="0"
+                                BackgroundColor="White" Padding="14,12"
+                                Stroke="#F3F4F6" StrokeShape="RoundRectangle 14" StrokeThickness="1">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="🏃" FontSize="20" />
+                                <Label Text="{loc:Translate AiCoach_Action_Tip}"
+                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                <Label Text="{loc:Translate AiCoach_Action_Tip_Hint}"
+                                       FontSize="11" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTipTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+
+                        <!-- PR Forecast -->
+                        <Border Grid.Row="0" Grid.Column="1"
+                                BackgroundColor="White" Padding="14,12"
+                                Stroke="#F3F4F6" StrokeShape="RoundRectangle 14" StrokeThickness="1">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="📈" FontSize="20" />
+                                <Label Text="{loc:Translate AiCoach_Action_PR}"
+                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                <Label Text="{loc:Translate AiCoach_Action_PR_Hint}"
+                                       FontSize="11" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnPRForecastTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+
+                        <!-- Create plan -->
+                        <Border Grid.Row="1" Grid.Column="0"
+                                BackgroundColor="White" Padding="14,12"
+                                Stroke="#F3F4F6" StrokeShape="RoundRectangle 14" StrokeThickness="1">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="🏋️" FontSize="20" />
+                                <Label Text="{loc:Translate AiCoach_Action_Plan}"
+                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                <Label Text="{loc:Translate AiCoach_Action_Plan_Hint}"
+                                       FontSize="11" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnPlanTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+
+                        <!-- Analytics -->
+                        <Border Grid.Row="1" Grid.Column="1"
+                                BackgroundColor="White" Padding="14,12"
+                                Stroke="#F3F4F6" StrokeShape="RoundRectangle 14" StrokeThickness="1">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="📊" FontSize="20" />
+                                <Label Text="{loc:Translate AiCoach_Action_Analytics}"
+                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                <Label Text="{loc:Translate AiCoach_Action_Analytics_Hint}"
+                                       FontSize="11" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAnalyticsTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </Grid>
+
+                </VerticalStackLayout>
+
+                <!-- Messages (hidden initially; bubbles are added to Children in code-behind) -->
+                <VerticalStackLayout x:Name="MessagesPanel" IsVisible="False"
+                                     Padding="16,12,16,8" Spacing="10" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- ── Typing indicator ───────────────────────────────── -->
+        <Border x:Name="TypingIndicator"
+                Grid.Row="2"
+                IsVisible="False"
+                BackgroundColor="White"
+                Padding="14,10" Margin="16,0,16,4"
+                StrokeShape="RoundRectangle 18,18,18,4"
+                Stroke="#F3F4F6" StrokeThickness="1"
+                HorizontalOptions="Start">
+            <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+                <Ellipse Fill="#9CA3AF" HeightRequest="7" WidthRequest="7" />
+                <Ellipse Fill="#9CA3AF" HeightRequest="7" WidthRequest="7" Opacity="0.6" />
+                <Ellipse Fill="#9CA3AF" HeightRequest="7" WidthRequest="7" Opacity="0.3" />
+            </HorizontalStackLayout>
+        </Border>
+
+        <!-- ── Input bar + tab bar ────────────────────────────── -->
+        <VerticalStackLayout Grid.Row="3" Spacing="0">
+            <Border BackgroundColor="White"
+                    Margin="16,0,16,10"
+                    StrokeShape="RoundRectangle 22" StrokeThickness="1"
+                    Stroke="#E5E7EB">
+                <Grid ColumnDefinitions="*,Auto" Padding="16,8,8,8">
+                    <Entry x:Name="MessageEntry"
+                           Grid.Column="0"
+                           Placeholder="{loc:Translate AiCoach_Placeholder}"
+                           PlaceholderColor="#9CA3AF"
+                           FontSize="14" TextColor="#111827"
+                           VerticalOptions="Center"
+                           ReturnCommand="{Binding Source={x:Reference MessageEntry}, Path=ReturnCommand}"
+                           ReturnType="Send">
+                        <Entry.GestureRecognizers>
+                        </Entry.GestureRecognizers>
+                    </Entry>
+                    <Border Grid.Column="1"
+                            BackgroundColor="#7C3AED"
+                            HeightRequest="58" WidthRequest="58"
+                            Margin="10"
+                            StrokeShape="RoundRectangle 13" StrokeThickness="0">
+                        <Label Text="↑" FontAttributes="Bold" FontSize="18" TextColor="White"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSendTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <controls:MainTabBar ActiveTab="AI" />
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

@@ -26,8 +26,30 @@ namespace Modules.Subscriptions.Infrastructure.Services
             CancellationToken ct = default)
         {
             var providerType = useYooKassa ? PaymentProviderType.YooKassa : PaymentProviderType.Stripe;
-            var provider = _providers.First(p => p.ProviderType == providerType);
 
+            if (_settings.TestMode)
+            {
+                _db.Subscriptions.Add(new Subscription
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = userId,
+                    Plan = plan,
+                    Status = SubscriptionStatus.Active,
+                    Provider = providerType,
+                    ExternalPaymentId = "test-mode",
+                    StartedAt = DateTime.UtcNow,
+                    TrialEndsAt = DateTime.UtcNow.AddDays(7),
+                    ExpiresAt = plan == SubscriptionPlan.Annual
+                        ? DateTime.UtcNow.AddYears(1)
+                        : DateTime.UtcNow.AddMonths(1),
+                    CreatedAt = DateTime.UtcNow,
+                });
+                await _db.SaveChangesAsync(ct);
+                // null CheckoutUrl — сигнал для контроллера, что активация уже произошла
+                return new CheckoutResult(true, null, "test-mode", null);
+            }
+
+            var provider = _providers.First(p => p.ProviderType == providerType);
             var result = await provider.CreateCheckoutAsync(new CheckoutRequest(
                 userId, userEmail, plan,
                 ReturnUrl: _settings.AppReturnUrl,

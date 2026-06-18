@@ -71,8 +71,15 @@ namespace Modules.Common.Infrastructure.Messaging
 
     public class KafkaSettings
     {
+        public bool Enabled { get; set; } = true;
         public string BootstrapServers { get; set; } = "localhost:9094";
         public AuthTopics Topics { get; set; } = new();
+    }
+
+    public class NullEventPublisher : IEventPublisher
+    {
+        public Task PublishAsync<T>(string topic, T @event, CancellationToken ct = default) where T : class
+            => Task.CompletedTask;
     }
 
     public class AuthTopics

@@ -10,14 +10,17 @@ public partial class ProfilePage : ContentPage
     private readonly LanguageService _lang;
     private readonly IAuthFlow _authFlow;
     private readonly UserProfileService _userService;
+    private readonly ISubscriptionsApi _subscriptionsApi;
 
-    public ProfilePage(ProfilePageModel vm, LanguageService lang, IAuthFlow authFlow, UserProfileService userService)
+    public ProfilePage(ProfilePageModel vm, LanguageService lang, IAuthFlow authFlow,
+        UserProfileService userService, ISubscriptionsApi subscriptionsApi)
     {
         InitializeComponent();
         _vm = vm;
         _lang = lang;
         _authFlow = authFlow;
         _userService = userService;
+        _subscriptionsApi = subscriptionsApi;
         BindingContext = vm;
         PageLoading.Preload();
     }
@@ -29,11 +32,39 @@ public partial class ProfilePage : ContentPage
         try
         {
             await _vm.LoadAsync();
+            await LoadSubscriptionStatusAsync();
         }
         finally
         {
             PageLoading.Hide();
         }
+    }
+
+    private async Task LoadSubscriptionStatusAsync()
+    {
+        try
+        {
+            var token = await LoginService.GetActiveToken();
+            if (string.IsNullOrEmpty(token)) return;
+            var resp = await _subscriptionsApi.GetStatusAsync($"Bearer {token}");
+            if (!resp.IsSuccessStatusCode || resp.Content is null) return;
+
+            var status = resp.Content;
+            if (!status.IsActive) return;
+
+            PremiumRowTitle.Text = Loc.Get("Profile_Sub_Active");
+
+            if (status.ExpiresAt.HasValue)
+            {
+                var daysLeft = (int)(status.ExpiresAt.Value - DateTime.UtcNow).TotalDays;
+                var dateStr  = status.ExpiresAt.Value.ToLocalTime().ToString("dd.MM.yyyy");
+                PremiumRowSub.Text      = daysLeft > 0
+                    ? string.Format(Loc.Get("Profile_Sub_Expires"), dateStr) + $"  ·  {string.Format(Loc.Get("Premium_Active_DaysLeft"), daysLeft)}"
+                    : Loc.Get("Premium_Expired");
+                PremiumRowSub.IsVisible = true;
+            }
+        }
+        catch { }
     }
 
     protected override void OnDisappearing()

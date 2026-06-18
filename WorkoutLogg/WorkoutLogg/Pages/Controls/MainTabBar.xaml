@@ -14,15 +14,15 @@
             <Shadow Brush="#000000" Offset="0,-2" Radius="12" Opacity="0.06" />
         </Border.Shadow>
 
-        <Grid ColumnDefinitions="*,*,*,*" HeightRequest="72" Padding="0,8,0,12">
+        <Grid ColumnDefinitions="*,*,*,*,*" HeightRequest="72" Padding="0,8,0,12">
 
             <!-- Dashboard -->
             <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
                 <VerticalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnDashboardTapped" />
                 </VerticalStackLayout.GestureRecognizers>
-                <Label x:Name="DashboardIcon" FontSize="22" HorizontalOptions="Center" Text="⌂" TextColor="#9CA3AF" />
-                <Label x:Name="DashboardLabel" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Dashboard" TextColor="#9CA3AF" />
+                <Label x:Name="DashboardIcon" FontSize="20" HorizontalOptions="Center" Text="⌂" TextColor="#9CA3AF" />
+                <Label x:Name="DashboardLabel" FontAttributes="Bold" FontSize="9" HorizontalOptions="Center" Text="Dashboard" TextColor="#9CA3AF" />
             </VerticalStackLayout>
 
             <!-- Workouts -->
@@ -30,26 +30,35 @@
                 <VerticalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnWorkoutsTapped" />
                 </VerticalStackLayout.GestureRecognizers>
-                <Label x:Name="WorkoutsIcon" FontSize="22" HorizontalOptions="Center" Text="☰" TextColor="#9CA3AF" />
-                <Label x:Name="WorkoutsLabel" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Workouts" TextColor="#9CA3AF" />
+                <Label x:Name="WorkoutsIcon" FontSize="20" HorizontalOptions="Center" Text="☰" TextColor="#9CA3AF" />
+                <Label x:Name="WorkoutsLabel" FontAttributes="Bold" FontSize="9" HorizontalOptions="Center" Text="Workouts" TextColor="#9CA3AF" />
             </VerticalStackLayout>
 
-            <!-- Logger (placeholder col) -->
+            <!-- Logger -->
             <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
                 <VerticalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLoggerTapped" />
                 </VerticalStackLayout.GestureRecognizers>
-                <Label x:Name="LoggerIcon" FontSize="22" HorizontalOptions="Center" Text="📋" TextColor="#9CA3AF" />
-                <Label x:Name="LoggerLabel" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Logger" TextColor="#9CA3AF" />
+                <Label x:Name="LoggerIcon" FontSize="20" HorizontalOptions="Center" Text="📋" TextColor="#9CA3AF" />
+                <Label x:Name="LoggerLabel" FontAttributes="Bold" FontSize="9" HorizontalOptions="Center" Text="Logger" TextColor="#9CA3AF" />
+            </VerticalStackLayout>
+
+            <!-- AI Coach -->
+            <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAiTapped" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Label x:Name="AiIcon" FontSize="20" HorizontalOptions="Center" Text="🤖" TextColor="#9CA3AF" />
+                <Label x:Name="AiLabel" FontAttributes="Bold" FontSize="9" HorizontalOptions="Center" Text="AI" TextColor="#9CA3AF" />
             </VerticalStackLayout>
 
             <!-- Profile -->
-            <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
+            <VerticalStackLayout Grid.Column="4" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
                 <VerticalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnProfileTapped" />
                 </VerticalStackLayout.GestureRecognizers>
-                <Label x:Name="ProfileIcon" FontSize="22" HorizontalOptions="Center" Text="🪪" TextColor="#9CA3AF" />
-                <Label x:Name="ProfileLabel" FontAttributes="Bold" FontSize="10" HorizontalOptions="Center" Text="Profile" TextColor="#9CA3AF" />
+                <Label x:Name="ProfileIcon" FontSize="20" HorizontalOptions="Center" Text="🪪" TextColor="#9CA3AF" />
+                <Label x:Name="ProfileLabel" FontAttributes="Bold" FontSize="9" HorizontalOptions="Center" Text="Profile" TextColor="#9CA3AF" />
             </VerticalStackLayout>
 
         </Grid>

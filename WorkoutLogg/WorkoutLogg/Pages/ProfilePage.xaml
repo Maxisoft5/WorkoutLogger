@@ -263,9 +263,13 @@
                                 </Grid.GestureRecognizers>
                                 <Label Grid.Column="0" Text="⭐" FontSize="16"
                                        VerticalOptions="Center" Margin="0,0,8,0" />
-                                <Label Grid.Column="1" FontSize="15" FontAttributes="Bold"
-                                       Text="{loc:Translate Profile_GetPremium}"
-                                       TextColor="#7C3AED" VerticalOptions="Center" />
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                    <Label x:Name="PremiumRowTitle" FontSize="15" FontAttributes="Bold"
+                                           Text="{loc:Translate Profile_GetPremium}"
+                                           TextColor="#7C3AED" />
+                                    <Label x:Name="PremiumRowSub" FontSize="11" TextColor="#9CA3AF"
+                                           IsVisible="False" />
+                                </VerticalStackLayout>
                                 <Label Grid.Column="2" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
                             </Grid>
                             <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />

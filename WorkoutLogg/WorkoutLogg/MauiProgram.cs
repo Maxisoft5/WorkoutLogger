@@ -52,6 +52,45 @@ public static class MauiProgram
 		builder.Services.AddLogging(configure => configure.AddDebug());
 #endif
 
+        // Load appsettings.json from app bundle (Resources/Raw/appsettings.json)
+        var useLocalhost    = false;
+        var testMode        = false;
+        var vpsUrl          = "https://202.148.55.20:5001";
+        var localUrl        = "https://localhost:5001";
+        var localAndroidUrl = "https://10.0.2.2:5001";
+
+        try
+        {
+            var cfgTask = FileSystem.OpenAppPackageFileAsync("appsettings.json");
+            cfgTask.Wait(TimeSpan.FromSeconds(3));
+            if (cfgTask.IsCompletedSuccessfully)
+            {
+                using var stream = cfgTask.Result;
+                using var doc = System.Text.Json.JsonDocument.Parse(stream);
+                var root = doc.RootElement;
+
+                if (root.TryGetProperty("UseLocalhost", out var useLoc))
+                    useLocalhost = useLoc.GetBoolean();
+
+                if (root.TryGetProperty("TestMode", out var tm))
+                    testMode = tm.GetBoolean();
+
+                if (root.TryGetProperty("Api", out var api))
+                {
+                    if (api.TryGetProperty("VpsUrl", out var vps)) vpsUrl = vps.GetString() ?? vpsUrl;
+                    if (api.TryGetProperty("LocalUrl", out var loc)) localUrl = loc.GetString() ?? localUrl;
+                    if (api.TryGetProperty("LocalAndroidUrl", out var and)) localAndroidUrl = and.GetString() ?? localAndroidUrl;
+                }
+            }
+        }
+        catch { /* конфиг не загружен — используем defaults */ }
+
+        builder.Services.AddSingleton(new WorkoutLogg.Services.AppConfiguration
+        {
+            UseLocalhost = useLocalhost,
+            TestMode     = testMode,
+        });
+
 		builder.Services.AddSingleton<ProjectRepository>();
 		builder.Services.AddSingleton<TaskRepository>();
 		builder.Services.AddSingleton<CategoryRepository>();
@@ -84,13 +123,12 @@ public static class MauiProgram
         builder.Services.AddTransient<WorkoutLogg.Pages.PremiumPage>();
         builder.Services.AddTransient<WorkoutLogg.Pages.PremiumComparePage>();
         builder.Services.AddTransient<WorkoutLogg.Pages.PaymentPage>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.AiCoachPage>();
         builder.Services.AddTransient<AppShell>();
 
-        // On Android emulator the host machine is 10.0.2.2, not localhost.
-        // Dev HTTPS certificate is not trusted by Android, so bypass validation in Debug.
-        var baseUrl = DeviceInfo.Platform == DevicePlatform.Android
-            ? "https://202.148.55.20:5001"
-            : "https://202.148.55.20:5001";
+        var baseUrl = useLocalhost
+            ? (DeviceInfo.Platform == DevicePlatform.Android ? localAndroidUrl : localUrl)
+            : vpsUrl;
 
 #if DEBUG
         static HttpMessageHandler DevHandler() => new HttpClientHandler
@@ -128,15 +166,22 @@ public static class MauiProgram
 #endif
             ;
 
+        builder.Services.AddRefitClient<WorkoutLogg.Services.IAiCoachApi>()
+            .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+#if DEBUG
+            .ConfigurePrimaryHttpMessageHandler(DevHandler)
+#endif
+            ;
+
         builder.Services.AddSingleton<WorkoutLogg.Services.WorkoutSyncService>();
 
         builder.Services.AddSingleton(_ =>
         {
-            // На Android эмуляторе хост машины — 10.0.2.2
-            var address = DeviceInfo.Platform == DevicePlatform.Android
-                ? "https://202.148.55.20:5001"
-                : "http://202.148.55.20:5001";
-            return new ExercisesGrpcClient(address);
+            // gRPC работает по HTTP/1.1 на отдельном порту без TLS
+            var grpcUrl = useLocalhost
+                ? (DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000")
+                : "http://202.148.55.20:5000";
+            return new ExercisesGrpcClient(grpcUrl);
         });
 
         builder.Services.AddFluentValidation();

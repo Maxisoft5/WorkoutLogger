@@ -9,6 +9,7 @@ public partial class PaymentPage : ContentPage
 {
     private readonly ISubscriptionsApi _api;
     private readonly LanguageService _lang;
+    private readonly Services.AppConfiguration _appConfig;
 
     private string _plan = "annual";
     private bool _isRu;
@@ -28,11 +29,12 @@ public partial class PaymentPage : ContentPage
         }
     }
 
-    public PaymentPage(ISubscriptionsApi api, LanguageService lang)
+    public PaymentPage(ISubscriptionsApi api, LanguageService lang, Services.AppConfiguration appConfig)
     {
         InitializeComponent();
         _api = api;
         _lang = lang;
+        _appConfig = appConfig;
     }
 
     protected override void OnAppearing()
@@ -42,6 +44,7 @@ public partial class PaymentPage : ContentPage
         RuMethods.IsVisible = _isRu;
         EnMethods.IsVisible = !_isRu;
         RegionLabel.Text = _isRu ? Loc.Get("Payment_Region_RU") : Loc.Get("Payment_Region_EN");
+        TestModeBanner.IsVisible = _appConfig.TestMode;
         UpdateOrderSummary();
     }
 
@@ -145,7 +148,20 @@ public partial class PaymentPage : ContentPage
             var resp = await _api.CheckoutAsync($"Bearer {token}",
                 new SubscriptionCheckoutRequest(_plan, locale));
 
-            if (!resp.IsSuccessStatusCode || resp.Content?.CheckoutUrl is null)
+            if (!resp.IsSuccessStatusCode || resp.Content is null)
+            {
+                await DisplayAlert(Loc.Get("Common_Error"), Loc.Get("Payment_Error"), Loc.Get("Common_OK"));
+                return;
+            }
+
+            if (resp.Content.Activated)
+            {
+                await DisplayAlert(Loc.Get("Payment_Success_Title"), Loc.Get("Payment_Success_Body"), Loc.Get("Common_OK"));
+                await Shell.Current.GoToAsync("//main");
+                return;
+            }
+
+            if (resp.Content.CheckoutUrl is null)
             {
                 await DisplayAlert(Loc.Get("Common_Error"), Loc.Get("Payment_Error"), Loc.Get("Common_OK"));
                 return;

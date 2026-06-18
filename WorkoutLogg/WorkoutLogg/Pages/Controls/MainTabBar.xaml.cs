@@ -20,6 +20,7 @@ public partial class MainTabBar : ContentView
         DashboardLabel.Text = Loc.Get("Tab_Dashboard");
         WorkoutsLabel.Text  = Loc.Get("Tab_Workouts");
         LoggerLabel.Text    = Loc.Get("Tab_Logger");
+        AiLabel.Text        = Loc.Get("Tab_AI");
         ProfileLabel.Text   = Loc.Get("Tab_Profile");
         UpdateActiveTab("Dashboard");
     }
@@ -27,16 +28,18 @@ public partial class MainTabBar : ContentView
     private void UpdateActiveTab(string tab)
     {
         var purple = Color.FromArgb("#7C3AED");
-        var gray = Color.FromArgb("#9CA3AF");
+        var gray   = Color.FromArgb("#9CA3AF");
 
-        DashboardIcon.TextColor = tab == "Dashboard" ? purple : gray;
+        DashboardIcon.TextColor  = tab == "Dashboard" ? purple : gray;
         DashboardLabel.TextColor = tab == "Dashboard" ? purple : gray;
-        WorkoutsIcon.TextColor = tab == "Workouts" ? purple : gray;
-        WorkoutsLabel.TextColor = tab == "Workouts" ? purple : gray;
-        LoggerIcon.TextColor = tab == "Logger" ? purple : gray;
-        LoggerLabel.TextColor = tab == "Logger" ? purple : gray;
-        ProfileIcon.TextColor = tab == "Profile" ? purple : gray;
-        ProfileLabel.TextColor = tab == "Profile" ? purple : gray;
+        WorkoutsIcon.TextColor   = tab == "Workouts"  ? purple : gray;
+        WorkoutsLabel.TextColor  = tab == "Workouts"  ? purple : gray;
+        LoggerIcon.TextColor     = tab == "Logger"    ? purple : gray;
+        LoggerLabel.TextColor    = tab == "Logger"    ? purple : gray;
+        AiIcon.TextColor         = tab == "AI"        ? purple : gray;
+        AiLabel.TextColor        = tab == "AI"        ? purple : gray;
+        ProfileIcon.TextColor    = tab == "Profile"   ? purple : gray;
+        ProfileLabel.TextColor   = tab == "Profile"   ? purple : gray;
     }
 
     private async void OnDashboardTapped(object sender, TappedEventArgs e)
@@ -53,6 +56,11 @@ public partial class MainTabBar : ContentView
     {
         if (ActiveTab == "Logger") return;
         await Shell.Current.GoToAsync("//Logger");
+    }
+    private async void OnAiTapped(object sender, TappedEventArgs e)
+    {
+        if (ActiveTab == "AI") return;
+        await Shell.Current.GoToAsync("//AiCoach");
     }
     private async void OnProfileTapped(object sender, TappedEventArgs e)
     {

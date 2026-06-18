@@ -23,7 +23,7 @@
                         <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,24">
                             <Border Grid.Column="0"
                                     BackgroundColor="#9333EA"
-                                    HeightRequest="34" WidthRequest="34"
+                                    HeightRequest="64" WidthRequest="64"
                                     StrokeShape="RoundRectangle 10" StrokeThickness="0">
                                 <Label Text="×" FontSize="20" TextColor="White"
                                        HorizontalOptions="Center" VerticalOptions="Center" />
@@ -158,6 +158,48 @@
 
                 </VerticalStackLayout>
 
+                <!-- Active subscription card (hidden when not subscribed) -->
+                <VerticalStackLayout x:Name="SubscriptionActiveSection" IsVisible="False"
+                                     Padding="20,16,20,0">
+                    <Border BackgroundColor="White" Padding="20,18"
+                            StrokeShape="RoundRectangle 18" StrokeThickness="1.5">
+                        <Border.Stroke><SolidColorBrush Color="#7C3AED" /></Border.Stroke>
+                        <VerticalStackLayout Spacing="14">
+                            <HorizontalStackLayout Spacing="8">
+                                <Border BackgroundColor="#EDE9FE" Padding="8,4"
+                                        StrokeShape="RoundRectangle 8" StrokeThickness="0">
+                                    <Label x:Name="SubStatusBadge"
+                                           FontSize="11" FontAttributes="Bold" TextColor="#7C3AED" />
+                                </Border>
+                            </HorizontalStackLayout>
+                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" />
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="{loc:Translate Premium_Active_Plan}"
+                                       FontSize="13" TextColor="#6B7280" VerticalOptions="Center" />
+                                <Label Grid.Column="1" x:Name="SubPlanLabel"
+                                       FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="{loc:Translate Premium_Active_Expires}"
+                                       FontSize="13" TextColor="#6B7280" VerticalOptions="Center" />
+                                <Label Grid.Column="1" x:Name="SubExpiryLabel"
+                                       FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                            <Border BackgroundColor="#F0FDF4" Padding="14,10"
+                                    StrokeShape="RoundRectangle 12" StrokeThickness="0">
+                                <Label x:Name="SubDaysLeftLabel"
+                                       FontAttributes="Bold" FontSize="15" TextColor="#16A34A"
+                                       HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                            </Border>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Purchase section (hidden when already subscribed) -->
+                <VerticalStackLayout x:Name="PurchaseSection">
+
                 <!-- Plan selector -->
                 <VerticalStackLayout Padding="20,16,20,0" Spacing="8">
 
@@ -261,6 +303,8 @@
                     </Label.GestureRecognizers>
                 </Label>
 
+                </VerticalStackLayout><!-- /PurchaseSection -->
+
             </VerticalStackLayout>
         </ScrollView>
 
@@ -271,7 +315,8 @@
                              Spacing="10">
             <Border BackgroundColor="#7C3AED"
                     Padding="16" StrokeShape="RoundRectangle 18" StrokeThickness="0">
-                <Label Text="{loc:Translate Premium_CTA_Trial}"
+                <Label x:Name="CtaLabel"
+                       Text="{loc:Translate Premium_CTA_Trial}"
                        FontAttributes="Bold" FontSize="15" TextColor="White"
                        HorizontalOptions="Center" />
                 <Border.GestureRecognizers>

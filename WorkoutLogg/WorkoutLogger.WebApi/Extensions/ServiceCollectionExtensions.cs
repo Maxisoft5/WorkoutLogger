@@ -1,4 +1,5 @@
-﻿using Confluent.Kafka;
+﻿using WorkoutLogger.WebApi.Services;
+using Confluent.Kafka;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -26,9 +27,16 @@ namespace WorkoutLogger.WebApi.Extensions
         public static IServiceCollection AddKafkaMessaging(
             this IServiceCollection services,
             IConfiguration configuration)
-                {
+        {
             var settings = configuration.GetSection("Kafka").Get<KafkaSettings>() ?? new KafkaSettings();
             services.AddSingleton(settings);
+
+            if (!settings.Enabled)
+            {
+                services.AddSingleton<IEventPublisher, NullEventPublisher>();
+                return services;
+            }
+
             services.AddSingleton<IEventPublisher, KafkaEventPublisher>();
 
             services.AddHealthChecks()
@@ -68,6 +76,16 @@ namespace WorkoutLogger.WebApi.Extensions
             services.AddHttpClient<IEmailSender, MailtrapHttpEmailSender>();
             services.AddHostedService<OutboxProcessorService>();
 
+            return services;
+        }
+
+        public static IServiceCollection AddAiCoachService(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var settings = configuration.GetSection("AiCoach").Get<AiSettings>() ?? new AiSettings();
+            services.AddSingleton(settings);
+            services.AddHttpClient<AiChatService>();
             return services;
         }
 

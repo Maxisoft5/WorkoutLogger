@@ -36,6 +36,16 @@
                     </Border>
                 </Grid>
 
+                <!-- TestMode banner — only shown in development builds with TestMode=true -->
+                <Border x:Name="TestModeBanner" IsVisible="False"
+                        BackgroundColor="#FEF3C7" Padding="12,10"
+                        StrokeShape="RoundRectangle 12" StrokeThickness="0"
+                        Margin="0,0,0,16">
+                    <Label Text="ТЕСТОВЫЙ РЕЖИМ — оплата пропущена, Premium активируется сразу"
+                           FontSize="12" FontAttributes="Bold" TextColor="#92400E"
+                           HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                </Border>
+
                 <!-- Order summary card -->
                 <Border BackgroundColor="White" Padding="16,14"
                         Stroke="#F3F4F6" StrokeShape="RoundRectangle 18" StrokeThickness="1"

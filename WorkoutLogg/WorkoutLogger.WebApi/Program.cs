@@ -10,10 +10,14 @@ using WorkoutLogger.WebApi.Grpc;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// appsettings.Local.json — локальные секреты, не попадает в git
+builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: false);
+
 Serilog.Debugging.SelfLog.Enable(msg => Console.Error.WriteLine($"[Serilog] {msg}"));
 
 builder.Host.UseSerilog((ctx, _, config) =>
 {
+    var openSearchEnabled = ctx.Configuration.GetValue<bool>("OpenSearch:Enabled", true);
     var openSearchUrl = ctx.Configuration["OpenSearch:Url"] ?? "http://opensearch:9200";
 
     config
@@ -21,8 +25,11 @@ builder.Host.UseSerilog((ctx, _, config) =>
         .Enrich.FromLogContext()
         .Enrich.WithMachineName()
         .Enrich.WithEnvironmentName()
-        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
-        .WriteTo.OpenSearch(new OpenSearchSinkOptions(new Uri(openSearchUrl))
+        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}");
+
+    if (openSearchEnabled)
+    {
+        config.WriteTo.OpenSearch(new OpenSearchSinkOptions(new Uri(openSearchUrl))
         {
             AutoRegisterTemplate = true,
             IndexFormat = "workoutlogger-logs-{0:yyyy.MM.dd}",
@@ -32,9 +39,22 @@ builder.Host.UseSerilog((ctx, _, config) =>
                              | EmitEventFailureHandling.RaiseCallback,
             FailureCallback = e => Console.Error.WriteLine($"[Serilog] Failed: {e.MessageTemplate}")
         });
+    }
 });
 
 builder.AddServiceDefaults();
+
+// Если UseLocalhost=true — перекрываем все адреса localhost'ом поверх appsettings.json
+if (builder.Configuration.GetValue<bool>("UseLocalhost"))
+{
+    builder.Configuration.AddInMemoryCollection(new Dictionary<string, string?>
+    {
+        ["ConnectionStrings:DefaultConnection"] = "Host=localhost;Port=5432;Database=workoutLogger;Username=postgres;Password=051099",
+        ["ConnectionStrings:Redis"]             = "localhost:6379",
+        ["Kafka:BootstrapServers"]              = "localhost:9094",
+        ["OpenSearch:Url"]                      = "http://localhost:9200",
+    });
+}
 
 // Add services to the container.
 
@@ -51,6 +71,7 @@ builder.Services.AddOpenApi();
 var configration = builder.Configuration;
 builder.Services.AddAuthModule(configration);
 builder.Services.AddSubscriptionsModule(configration);
+builder.Services.AddAiCoachService(configration);
 builder.Services.AddHybridCache(configration);
 builder.Services.AddKafkaMessaging(configration);
 

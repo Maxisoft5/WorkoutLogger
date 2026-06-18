@@ -4,7 +4,7 @@ namespace WorkoutLogg.Services
 {
     public record SubscriptionCheckoutRequest(string Plan, string Locale);
 
-    public record SubscriptionCheckoutResponse(string? CheckoutUrl, string? PaymentId);
+    public record SubscriptionCheckoutResponse(string? CheckoutUrl, string? PaymentId, bool Activated = false);
 
     public record SubscriptionStatusResponse(
         bool IsActive, string? Plan, string? Status,

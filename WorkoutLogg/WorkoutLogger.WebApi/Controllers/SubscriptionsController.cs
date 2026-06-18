@@ -38,7 +38,13 @@ namespace WorkoutLogger.WebApi.Controllers
             if (!result.Success)
                 return BadRequest(new { error = result.Error });
 
-            return Ok(new { checkoutUrl = result.CheckoutUrl, paymentId = result.PaymentId });
+            if (result.PaymentId == "test-mode")
+            {
+                await _userService.SetPremiumAsync(userId, true);
+                return Ok(new { checkoutUrl = (string?)null, paymentId = result.PaymentId, activated = true });
+            }
+
+            return Ok(new { checkoutUrl = result.CheckoutUrl, paymentId = result.PaymentId, activated = false });
         }
 
         [HttpGet("status")]

@@ -17,6 +17,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("EditBodyStats", typeof(Pages.EditBodyStatsPage));
         Routing.RegisterRoute("Standards", typeof(Pages.StandardsPage));
         Routing.RegisterRoute("Premium", typeof(Pages.PremiumPage));
+        Routing.RegisterRoute("AiCoach", typeof(Pages.AiCoachPage));
         Routing.RegisterRoute("PremiumCompare", typeof(Pages.PremiumComparePage));
         Routing.RegisterRoute("Payment", typeof(Pages.PaymentPage));
         Routing.RegisterRoute("Logger", typeof(LoggerPage));

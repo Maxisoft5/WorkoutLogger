@@ -22,6 +22,7 @@
     <ShellContent Route="Dashboard" Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:DashboardPage}" />
     <ShellContent Route="Workouts"  Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:WorkoutsPage}" />
     <ShellContent Route="Logger"    Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:LoggerPage}" />
+    <ShellContent Route="AiCoach"   Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:AiCoachPage}" />
     <ShellContent Route="Profile"   Shell.TabBarIsVisible="False" ContentTemplate="{DataTemplate pages:ProfilePage}" />
 
 </Shell>
