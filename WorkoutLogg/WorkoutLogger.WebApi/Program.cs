@@ -44,12 +44,14 @@ builder.Host.UseSerilog((ctx, _, config) =>
 
 builder.AddServiceDefaults();
 
-// Если UseLocalhost=true — перекрываем все адреса localhost'ом поверх appsettings.json
+// Если UseLocalhost=true — перекрываем все адреса localhost'ом поверх appsettings.json.
+// Пароль БД берётся из POSTGRES_PASSWORD (env / appsettings.Local.json), а не хардкодится.
 if (builder.Configuration.GetValue<bool>("UseLocalhost"))
 {
+    var localDbPassword = builder.Configuration["POSTGRES_PASSWORD"] ?? "postgres";
     builder.Configuration.AddInMemoryCollection(new Dictionary<string, string?>
     {
-        ["ConnectionStrings:DefaultConnection"] = "Host=localhost;Port=5432;Database=workoutLogger;Username=postgres;Password=051099",
+        ["ConnectionStrings:DefaultConnection"] = $"Host=localhost;Port=5432;Database=workoutLogger;Username=postgres;Password={localDbPassword}",
         ["ConnectionStrings:Redis"]             = "localhost:6379",
         ["Kafka:BootstrapServers"]              = "localhost:9094",
         ["OpenSearch:Url"]                      = "http://localhost:9200",

@@ -34,6 +34,9 @@ artifacts/
 # Local secrets (never commit)
 appsettings.Local.json
 appsettings.Development.json
+.env
+*.env
+!.env.example
 
 # OS
 .DS_Store
