@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Modules.Common.Domain.Events;
 using Modules.Common.Infrastructure.Messaging;
 using Modules.Users.Domain.Authentication;
@@ -10,6 +11,7 @@ namespace WorkoutLogger.WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[EnableRateLimiting("auth")]
 public class AuthController(IAuthService authService,
     IUserService userService,
     IHttpContextAccessor httpContextAccessor,
