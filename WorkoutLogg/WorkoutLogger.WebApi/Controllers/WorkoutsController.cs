@@ -6,13 +6,14 @@ using Moduels.Workouts.DTO.Responses;
 using Modules.Users.Domain.Exercies;
 using Modules.Users.Domain.Workout;
 using Modules.Users.Infrastructure.Database;
+using WorkoutLogger.WebApi.Services;
 
 namespace WorkoutLogger.WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 [Authorize]
-public class WorkoutsController(UsersDbContext dbContext) : ControllerBase
+public class WorkoutsController(UsersDbContext dbContext, ICurrentUser currentUser) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> CreateWorkout([FromBody] CreateWorkoutRequest request, CancellationToken ct)
@@ -107,8 +108,7 @@ public class WorkoutsController(UsersDbContext dbContext) : ControllerBase
 
     // ── helpers ──────────────────────────────────────────────────────────────
 
-    private string? UserId() =>
-        User.Claims.FirstOrDefault(c => c.Type == "userid")?.Value;
+    private string? UserId() => currentUser.UserId;
 
     private static Exercise MapExercise(CreateExerciseRequest e)
     {

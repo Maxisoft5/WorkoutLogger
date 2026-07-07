@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Users.Domain.Authentication;
-using System.Security.Claims;
 using System.Text;
 using WorkoutLogger.WebApi.Services;
 
@@ -10,15 +9,15 @@ namespace WorkoutLogger.WebApi.Controllers
     [ApiController]
     [Route("api/ai")]
     [Authorize]
-    public class AiCoachController(AiChatService claude, IUserService userService) : ControllerBase
+    public class AiCoachController(AiChatService claude, IUserService userService, ICurrentUser currentUser) : ControllerBase
     {
         [HttpPost("chat")]
         public async Task<IActionResult> Chat([FromBody] AiChatApiRequest request, CancellationToken ct)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (userId is null) return Unauthorized();
+            var email = currentUser.Email;
+            if (email is null) return Unauthorized();
 
-            var user = await userService.GetUserByEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "");
+            var user = await userService.GetUserByEmail(email);
             if (!user.IsSuccess || user.Value?.IsPremium != true)
                 return StatusCode(403, new { error = "Premium subscription required" });
 
