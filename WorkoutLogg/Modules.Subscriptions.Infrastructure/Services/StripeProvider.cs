@@ -96,7 +96,9 @@ namespace Modules.Subscriptions.Infrastructure.Services
 
         private static bool VerifySignature(string payload, string signature, string secret)
         {
-            if (string.IsNullOrEmpty(secret)) return true;
+            // Fail closed: without a configured webhook secret we cannot verify
+            // authenticity, so no webhook may activate a subscription.
+            if (string.IsNullOrEmpty(secret)) return false;
             try
             {
                 var parts = signature.Split(',')
@@ -109,7 +111,9 @@ namespace Modules.Subscriptions.Infrastructure.Services
                 using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secret));
                 var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(signed));
                 var computed = Convert.ToHexString(hash).ToLowerInvariant();
-                return computed == parts["v1"];
+                return CryptographicOperations.FixedTimeEquals(
+                    Encoding.UTF8.GetBytes(computed),
+                    Encoding.UTF8.GetBytes(parts["v1"]));
             }
             catch { return false; }
         }

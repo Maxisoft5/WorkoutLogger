@@ -67,7 +67,7 @@ namespace Modules.Subscriptions.Infrastructure.Services
             }
         }
 
-        public Task<WebhookResult> ProcessWebhookAsync(string payload, string signature, CancellationToken ct = default)
+        public async Task<WebhookResult> ProcessWebhookAsync(string payload, string signature, CancellationToken ct = default)
         {
             try
             {
@@ -76,19 +76,41 @@ namespace Modules.Subscriptions.Infrastructure.Services
                 var eventType = root.GetProperty("event").GetString();
 
                 if (eventType != "payment.succeeded")
-                    return Task.FromResult(new WebhookResult(true, null, null, false));
+                    return new WebhookResult(true, null, null, false);
 
-                var obj = root.GetProperty("object");
-                var paymentId = obj.GetProperty("id").GetString()!;
-                var meta = obj.GetProperty("metadata");
-                var userId = meta.GetProperty("user_id").GetString()!;
+                var paymentId = root.GetProperty("object").GetProperty("id").GetString()!;
 
-                return Task.FromResult(new WebhookResult(true, userId, paymentId, true));
+                // YooKassa webhooks are not signed, so the notification body cannot be
+                // trusted: anyone can POST a fake "payment.succeeded" event and get
+                // Premium for free. Per YooKassa docs, the payment must be re-fetched
+                // from the API and only the API response used as the source of truth.
+                var verified = await GetPaymentAsync(paymentId, ct);
+                if (verified is null)
+                    return new WebhookResult(false, null, null, false);
+
+                var status = verified.Value.GetProperty("status").GetString();
+                if (status != "succeeded")
+                    return new WebhookResult(true, null, null, false);
+
+                var userId = verified.Value.GetProperty("metadata").GetProperty("user_id").GetString()!;
+                return new WebhookResult(true, userId, paymentId, true);
             }
             catch
             {
-                return Task.FromResult(new WebhookResult(false, null, null, false));
+                return new WebhookResult(false, null, null, false);
             }
+        }
+
+        private async Task<JsonElement?> GetPaymentAsync(string paymentId, CancellationToken ct)
+        {
+            using var resp = await _http.GetAsync(
+                $"https://api.yookassa.ru/v2/payments/{Uri.EscapeDataString(paymentId)}", ct);
+            if (!resp.IsSuccessStatusCode)
+                return null;
+
+            var json = await resp.Content.ReadAsStringAsync(ct);
+            using var doc = JsonDocument.Parse(json);
+            return doc.RootElement.Clone();
         }
     }
 }
