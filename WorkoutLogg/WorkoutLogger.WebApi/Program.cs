@@ -66,6 +66,9 @@ builder.Services.AddControllers().AddJsonOptions(opts =>
 });
 builder.Services.AddGrpc(); 
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<WorkoutLogger.WebApi.Services.ICurrentUser, WorkoutLogger.WebApi.Services.CurrentUser>();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 

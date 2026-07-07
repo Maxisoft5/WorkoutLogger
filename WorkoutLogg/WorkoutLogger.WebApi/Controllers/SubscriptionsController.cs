@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Modules.Subscriptions.Infrastructure.Domain;
 using Modules.Subscriptions.Infrastructure.Services;
 using Modules.Users.Domain.Authentication;
-using System.Security.Claims;
+using WorkoutLogger.WebApi.Services;
 
 namespace WorkoutLogger.WebApi.Controllers
 {
@@ -13,11 +13,16 @@ namespace WorkoutLogger.WebApi.Controllers
     {
         private readonly SubscriptionService _subscriptionService;
         private readonly IUserService _userService;
+        private readonly ICurrentUser _currentUser;
 
-        public SubscriptionsController(SubscriptionService subscriptionService, IUserService userService)
+        public SubscriptionsController(
+            SubscriptionService subscriptionService,
+            IUserService userService,
+            ICurrentUser currentUser)
         {
             _subscriptionService = subscriptionService;
             _userService = userService;
+            _currentUser = currentUser;
         }
 
         [HttpPost("checkout")]
@@ -25,8 +30,8 @@ namespace WorkoutLogger.WebApi.Controllers
         public async Task<IActionResult> CreateCheckout(
             [FromBody] CheckoutApiRequest request, CancellationToken ct)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var email = User.FindFirst(ClaimTypes.Email)?.Value ?? "";
+            var userId = _currentUser.UserId;
+            var email = _currentUser.Email ?? "";
             if (userId is null) return Unauthorized();
 
             var plan = string.Equals(request.Plan, "annual", StringComparison.OrdinalIgnoreCase)
@@ -51,7 +56,7 @@ namespace WorkoutLogger.WebApi.Controllers
         [Authorize]
         public async Task<IActionResult> GetStatus(CancellationToken ct)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = _currentUser.UserId;
             if (userId is null) return Unauthorized();
 
             var sub = await _subscriptionService.GetActiveSubscriptionAsync(userId, ct);
@@ -69,7 +74,7 @@ namespace WorkoutLogger.WebApi.Controllers
         [Authorize]
         public async Task<IActionResult> Cancel(CancellationToken ct)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = _currentUser.UserId;
             if (userId is null) return Unauthorized();
 
             await _subscriptionService.CancelSubscriptionAsync(userId, ct);
