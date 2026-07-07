@@ -417,6 +417,7 @@ namespace Modules.Users.Infrastructure.Authorization
 
             var code = RandomNumberGenerator.GetInt32(100000, 999999).ToString();
             await cacheService.SetAsync($"reset:{email}", code, TimeSpan.FromMinutes(10), ct);
+            await cacheService.RemoveAsync($"reset-attempts:{email}", ct);
 
             var payload = JsonSerializer.Serialize(new EmailPayload(
                 To: email,
@@ -434,20 +435,19 @@ namespace Modules.Users.Infrastructure.Authorization
             return Result.Success;
         }
 
+        // Max attempts to guess a reset code before it is invalidated.
+        private const int MaxResetCodeAttempts = 5;
+
         public async Task<Result> VerifyResetCodeAsync(string email, string code, CancellationToken ct = default)
         {
-            var stored = await cacheService.GetAsync<string>($"reset:{email}", ct);
-            if (stored == null || stored != code)
-                return new Result(new Error("400", "Invalid or expired code", ErrorType.Validation));
-
-            return Result.Success;
+            return await CheckResetCodeAsync(email, code, ct);
         }
 
         public async Task<Result> ResetPasswordAsync(string email, string code, string newPassword, CancellationToken ct = default)
         {
-            var stored = await cacheService.GetAsync<string>($"reset:{email}", ct);
-            if (stored == null || stored != code)
-                return new Result(new Error("400", "Invalid or expired code", ErrorType.Validation));
+            var check = await CheckResetCodeAsync(email, code, ct);
+            if (!check.IsSuccess)
+                return check;
 
             var user = await userManager.FindByEmailAsync(email);
             if (user == null)
@@ -459,6 +459,55 @@ namespace Modules.Users.Infrastructure.Authorization
                 return new Result(new Error("400", string.Join("; ", result.Errors.Select(e => e.Description)), ErrorType.Validation));
 
             await cacheService.RemoveAsync($"reset:{email}", ct);
+            await cacheService.RemoveAsync($"reset-attempts:{email}", ct);
+
+            // Invalidate all refresh tokens so a possibly-compromised session is cut off.
+            var activeTokens = await dbContext.Set<RefreshToken>()
+                .Where(rt => rt.UserId == user.Id && !rt.Invalidated)
+                .ToListAsync(ct);
+            foreach (var rt in activeTokens)
+            {
+                rt.Invalidated = true;
+                rt.UpdatedAtUtc = DateTime.UtcNow;
+            }
+            if (activeTokens.Count > 0)
+                await dbContext.SaveChangesAsync(ct);
+
+            return Result.Success;
+        }
+
+        /// <summary>
+        /// Validates a reset code with a constant-time comparison and enforces a
+        /// per-email attempt limit. After too many failed attempts the code is
+        /// invalidated to prevent brute-forcing the 6-digit code.
+        /// </summary>
+        private async Task<Result> CheckResetCodeAsync(string email, string code, CancellationToken ct)
+        {
+            var invalid = new Result(new Error("400", "Invalid or expired code", ErrorType.Validation));
+
+            var stored = await cacheService.GetAsync<string>($"reset:{email}", ct);
+            if (stored == null)
+                return invalid;
+
+            var attemptsRaw = await cacheService.GetAsync<string>($"reset-attempts:{email}", ct);
+            var attempts = int.TryParse(attemptsRaw, out var a) ? a : 0;
+            if (attempts >= MaxResetCodeAttempts)
+            {
+                await cacheService.RemoveAsync($"reset:{email}", ct);
+                return invalid;
+            }
+
+            var matches = CryptographicOperations.FixedTimeEquals(
+                Encoding.UTF8.GetBytes(stored),
+                Encoding.UTF8.GetBytes(code ?? string.Empty));
+
+            if (!matches)
+            {
+                await cacheService.SetAsync($"reset-attempts:{email}", (attempts + 1).ToString(),
+                    TimeSpan.FromMinutes(10), ct);
+                return invalid;
+            }
+
             return Result.Success;
         }
 

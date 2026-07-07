@@ -5,6 +5,7 @@ using Modules.Users.Infrastructure.Database;
 using Serilog;
 using Serilog.Sinks.OpenSearch;
 using System.Text.Json.Serialization;
+using System.Threading.RateLimiting;
 using WorkoutLogger.WebApi.Extensions;
 using WorkoutLogger.WebApi.Grpc;
 
@@ -68,6 +69,21 @@ builder.Services.AddGrpc();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+// Rate limiting to protect auth endpoints from password/reset-code brute force.
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.AddPolicy("auth", httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 10,
+                Window = TimeSpan.FromMinutes(1),
+                QueueLimit = 0
+            }));
+});
+
 var configration = builder.Configuration;
 builder.Services.AddAuthModule(configration);
 builder.Services.AddSubscriptionsModule(configration);
@@ -96,6 +112,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRateLimiter();
 
 app.UseAuthentication();
 app.UseAuthorization();
