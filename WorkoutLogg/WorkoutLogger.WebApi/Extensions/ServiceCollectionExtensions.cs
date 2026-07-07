@@ -68,6 +68,8 @@ namespace WorkoutLogger.WebApi.Extensions
             services.AddClaimsAuthorization();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<Modules.Users.Infrastructure.Workouts.IWorkoutService,
+                Modules.Users.Infrastructure.Workouts.WorkoutService>();
             services.AddMemoryCache();
             services.AddHttpContextAccessor();
 
