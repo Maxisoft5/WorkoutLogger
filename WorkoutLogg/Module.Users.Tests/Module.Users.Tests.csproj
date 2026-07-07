@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Modules.Common.Infrastructure\Modules.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules.Users.Infrastructure\Modules.Users.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules.Subscriptions.Infrastructure\Modules.Subscriptions.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
