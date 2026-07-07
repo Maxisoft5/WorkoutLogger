@@ -8,7 +8,7 @@ namespace Modules.Subscriptions.Infrastructure.Database
         public SubscriptionsDbContext CreateDbContext(string[] args)
         {
             var connectionString = Environment.GetEnvironmentVariable("SUBSCRIPTIONS_DB")
-                ?? "Host=202.148.55.20;Port=5432;Database=workoutLogger;Username=postgres;Password=051099";
+                ?? "Host=localhost;Port=5432;Database=workoutLogger;Username=postgres;Password=postgres";
 
             var options = new DbContextOptionsBuilder<SubscriptionsDbContext>()
                 .UseNpgsql(connectionString)

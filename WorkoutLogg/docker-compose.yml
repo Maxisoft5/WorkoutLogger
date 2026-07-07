@@ -4,9 +4,9 @@ services:
     container_name: workoutlogger-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: workoutLogger
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 051099
+      POSTGRES_DB: ${POSTGRES_DB:-workoutLogger}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required (see .env.example)}
     ports:
       - "5432:5432"
     volumes:
@@ -56,7 +56,7 @@ services:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,EXTERNAL://0.0.0.0:9094
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://202.148.55.20:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://${KAFKA_EXTERNAL_HOST:-localhost}:9094
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
@@ -130,8 +130,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?GRAFANA_ADMIN_PASSWORD is required (see .env.example)}
       GF_INSTALL_PLUGINS: grafana-opensearch-datasource
     volumes:
       - grafana-data:/var/lib/grafana
@@ -166,12 +166,12 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
-      ASPNETCORE_Kestrel__Certificates__Default__Password: CertPassword123
-      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=workoutLogger;Username=postgres;Password=051099"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: ${CERT_PASSWORD:?CERT_PASSWORD is required (see .env.example)}
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=${POSTGRES_DB:-workoutLogger};Username=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}"
       ConnectionStrings__Redis: "redis:6379"
       Kafka__BootstrapServers: "kafka:9092"
       OpenSearch__Url: "http://opensearch:9200"
-      AuthConfiguration__Key: "your_secret_key_here_change_it_please"
+      AuthConfiguration__Key: ${JWT_SIGNING_KEY:?JWT_SIGNING_KEY is required (see .env.example)}
       AuthConfiguration__Issuer: "DevTips"
       AuthConfiguration__Audience: "DevTips"
     volumes:
