@@ -28,3 +28,17 @@ Auth events (login, registration, failed login) публикуются в Kafka,
 - Manual commit на consumer стороне после успешной записи в OpenSearch
 - Дневные индексы (`auth-events-yyyy.MM.dd`) — стандарт для time-series данных
 - Резистентность к падению Kafka — auth flow продолжает работать
+## EF Core migrations
+
+Package Manager Console (Visual Studio):
+
+```powershell
+Add-Migration <Name> -Project Modules.Users.Infrastructure -StartupProject WorkoutLogger.WebApi -Context UsersDbContext
+Remove-Migration -Project Modules.Users.Infrastructure -StartupProject WorkoutLogger.WebApi -Context UsersDbContext
+```
+
+CLI:
+
+```bash
+dotnet ef database update --project Modules.Users.Infrastructure --startup-project WorkoutLogger.WebApi --context UsersDbContext
+```
