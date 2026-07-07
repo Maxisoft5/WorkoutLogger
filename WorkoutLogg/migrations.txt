@@ -1,8 +1,0 @@
-Add-Migration Name -Project Modules.Users.Infrastructure -StartupProject WorkoutLogger.WebApi -Context UsersDbContext
-
-
-Remove-Migration -Project Modules.Users.Infrastructure -StartupProject WorkoutLogger.WebApi -Context UsersDbContext
-
-
-dotnet ef database update --project Modules.Users.Infrastructure --startup-project WorkoutLogger.WebApi --context UsersDbContext
-

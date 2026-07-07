@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -251,65 +250,6 @@ namespace Modules.Users.Infrastructure.Authorization
         private static bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken)
             => validatedToken is JwtSecurityToken jwtSecurityToken
                && jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
-
-        /// <summary>
-        /// Updates a user's role and invalidates their refresh tokens
-        /// </summary>
-        /// <param name="userId">The ID of the user to update</param>
-        /// <param name="newRole">The new role to assign to the user</param>
-        /// <param name="cancellationToken">A cancellation token</param>
-        /// <returns>A result containing success or failure information</returns>
-        public async Task<Result<UpdateRoleResponse>> UpdateUserRoleAsync(string userId, string newRole, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-            // Verify the role exists
-            //var role = await roleManager.FindByNameAsync(newRole);
-            //if (role is null)
-            //{
-            //    logger.LogWarning("Role '{NewRole}' does not exist", newRole);
-            //    return UserErrors.RoleNotFound(newRole);
-            //}
-
-            //// Find the user
-            //var user = await userManager.FindByIdAsync(userId);
-            //if (user is null)
-            //{
-            //    return UserErrors.NotFound(userId);
-            //}
-
-            //// Get current roles and remove them
-            //var currentRoles = await userManager.GetRolesAsync(user);
-            //if (currentRoles.Any())
-            //{
-            //    await userManager.RemoveFromRolesAsync(user, currentRoles);
-            //}
-
-            //// Add the new role
-            //var addRoleResult = await userManager.AddToRoleAsync(user, newRole);
-            //if (!addRoleResult.Succeeded)
-            //{
-            //    logger.LogError("Failed to add role '{NewRole}' to user '{UserId}': {@Errors}", newRole, userId, addRoleResult.Errors);
-            //    return UserErrors.UpdateRoleFailed(addRoleResult.Errors);
-            //}
-
-            //// Invalidate all refresh tokens for this user
-            //var refreshTokens = await dbContext.RefreshTokens
-            //    .Where(rt => rt.UserId == userId && !rt.Invalidated)
-            //    .ToListAsync(cancellationToken);
-
-            //foreach (var refreshToken in refreshTokens)
-            //{
-            //    refreshToken.Invalidated = true;
-            //    refreshToken.UpdatedAtUtc = DateTime.UtcNow;
-
-            //    // Add to memory cache for the middleware to check
-            //    memoryCache.Set(refreshToken.JwtId, RevocatedTokenType.RoleChanged);
-            //}
-
-            //await dbContext.SaveChangesAsync(cancellationToken);
-
-            //return Result.Success;
-        }
 
         public async Task<Result<User>> GetCurrent()
         {

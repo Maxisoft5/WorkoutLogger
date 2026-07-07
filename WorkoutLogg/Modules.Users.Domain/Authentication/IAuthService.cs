@@ -8,7 +8,6 @@ namespace Modules.Users.Domain.Authentication
     {
         Task<Result<User>> UpdateUser(UserDto user);
         Task<Result<User>> GetCurrent();
-        Task<Result<UpdateRoleResponse>> UpdateUserRoleAsync(string userId, string newRole, CancellationToken cancellationToken);
         Task<Result<LoginUserResponse>> LoginAsync(string email, string password, CancellationToken cancellationToken = default);
         Task<Result<RegisterUserResponse>> RegisterAsync(UserDto user, CancellationToken cancellationToken);
         Task<Result<RefreshTokenResponse>> RefreshTokenAsync(string token, string refreshToken,
