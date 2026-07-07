@@ -13,6 +13,7 @@ using Modules.Common.Infrastructure.Configurations;
 using Modules.Common.Infrastructure.Email;
 using Modules.Common.Infrastructure.Messaging;
 using Modules.Users.Domain.Authentication;
+using Modules.Users.Domain.Errors;
 using Modules.Users.Domain.Tokens;
 using Modules.Users.Domain.Users;
 using Modules.Users.DTO.Auth;
@@ -46,13 +47,14 @@ namespace Modules.Users.Infrastructure.Authorization
             var user = await userManager.FindByEmailAsync(email);
             if (user is null)
             {
-                return new Result<LoginUserResponse>(new List<Error>());
+                // Same error as for a wrong password — don't reveal whether the account exists.
+                return new Result<LoginUserResponse>(UserErrors.InvalidCredentials());
             }
 
             var result = await signInManager.CheckPasswordSignInAsync(user, password, false);
             if (!result.Succeeded)
             {
-                return new Result<LoginUserResponse>(new List<Error>());
+                return new Result<LoginUserResponse>(UserErrors.InvalidCredentials());
             }
 
             var (token, refreshToken) = await GenerateJwtAndRefreshTokenAsync(user, null);
@@ -381,10 +383,9 @@ namespace Modules.Users.Infrastructure.Authorization
                 {
                     userCurrent.WorkOutCount = user.WorkOutCount.Value;
                 }
-                if (user.IsPremium.HasValue)
-                {
-                    userCurrent.IsPremium = user.IsPremium.Value;
-                }
+                // NOTE: user.IsPremium is intentionally ignored here.
+                // Premium status is managed exclusively by the subscriptions module
+                // (IUserService.SetPremiumAsync) after a verified payment.
                 if (user.UserRegistrationStep.HasValue)
                 {
                     userCurrent.UserRegistrationStep = user.UserRegistrationStep.Value;
@@ -402,11 +403,11 @@ namespace Modules.Users.Infrastructure.Authorization
                 await cacheService.RemoveAsync($"user:{userIdClaim.Value}");
                 return new Result<User>(userCurrent);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return new Result<User>(new Error("500", ex.Message, ErrorType.Failure));
+                logger.LogError(ex, "Failed to update user profile");
+                return new Result<User>(new Error("500", "Failed to update profile", ErrorType.Failure));
             }
-            return new Result<User>(new Error("500", "not saved",ErrorType.Failure));
         }
 
         public async Task<Result> SendPasswordResetCodeAsync(string email, CancellationToken ct = default)

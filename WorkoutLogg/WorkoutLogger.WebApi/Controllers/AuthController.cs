@@ -62,15 +62,17 @@ public class AuthController(IAuthService authService,
                 UserAgent = ctx?.Request.Headers.UserAgent.ToString()
             });
         }
-        return Ok(login);
+        return login.IsSuccess ? Ok(login) : Unauthorized(login);
     }
 
-    [Authorize]
+    // No [Authorize] here on purpose: the access token is expired by the time
+    // a client refreshes it. RefreshTokenAsync validates the token pair itself
+    // (signature, JTI match, stored refresh token, expiry, invalidation).
     [HttpPost("Refresh")]
     public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest token)
     {
         var refreshed = await authService.RefreshTokenAsync(token.Token, token.RefreshToken);
-        return Ok(refreshed);
+        return refreshed.IsSuccess ? Ok(refreshed) : Unauthorized(refreshed);
     }
 
     [HttpPost("CreateAccount")]
@@ -85,6 +87,10 @@ public class AuthController(IAuthService authService,
     public async Task<IActionResult> UpdateAccount([FromBody] UserDto user)
     {
         var upd = await authService.UpdateUser(user);
+        if (!upd.IsSuccess || upd.Value is null)
+        {
+            return BadRequest(upd);
+        }
         return Ok(UserMapper.MapUser(upd.Value));
     }
 
