@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Users.Domain.Authentication;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using WorkoutLogger.WebApi.Services;
 
@@ -71,7 +72,9 @@ namespace WorkoutLogger.WebApi.Controllers
         }
     }
 
-    public record AiChatMessageDto(string Role, string Content);
+    public record AiChatMessageDto(
+        [property: Required, MaxLength(20)] string Role,
+        [property: Required, MaxLength(4000)] string Content);
 
     public record AiWorkoutContextDto(
         int TotalSessions,
@@ -80,7 +83,7 @@ namespace WorkoutLogger.WebApi.Controllers
         string? RecentSummary);
 
     public record AiChatApiRequest(
-        List<AiChatMessageDto> Messages,
+        [property: Required, MinLength(1), MaxLength(50)] List<AiChatMessageDto> Messages,
         AiWorkoutContextDto? Context,
         string? Language);
 
