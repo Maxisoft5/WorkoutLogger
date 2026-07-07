@@ -69,7 +69,8 @@ builder.Services.AddGrpc();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-// Rate limiting to protect auth endpoints from password/reset-code brute force.
+builder.Services.AddExceptionHandler<WorkoutLogger.WebApi.Services.GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -84,6 +85,7 @@ builder.Services.AddRateLimiter(options =>
             }));
 });
 
+
 var configration = builder.Configuration;
 builder.Services.AddAuthModule(configration);
 builder.Services.AddSubscriptionsModule(configration);
@@ -93,6 +95,8 @@ builder.Services.AddKafkaMessaging(configration);
 
 
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 app.MapDefaultEndpoints();
 

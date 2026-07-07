@@ -40,7 +40,7 @@ namespace WorkoutLogger.WebApi.Services
             if (!resp.IsSuccessStatusCode)
             {
                 var err = await resp.Content.ReadAsStringAsync(ct);
-                logger.LogError("DeepSeek API error {Status}: {Body}", resp.StatusCode, err);
+                logger.LogError("AI provider API error {Status}: {Body}", resp.StatusCode, err);
                 resp.EnsureSuccessStatusCode();
             }
 
