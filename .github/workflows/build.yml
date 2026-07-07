@@ -53,3 +53,35 @@ jobs:
           name: test-results
           path: TestResults
           retention-days: 7
+
+  build-maui:
+    name: MAUI Android build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install MAUI Android workload
+        run: dotnet workload install maui-android
+
+      - name: Restore MAUI client
+        run: dotnet restore WorkoutLogg/WorkoutLogg/WorkoutLogg.csproj
+
+      # Debug configuration: Release enables AOT (RunAOTCompilation=true),
+      # which is much slower and unnecessary for PR validation.
+      # The Aspire AppHost is not built on Linux: it references the MAUI
+      # project with TargetFramework=net10.0, which only exists on Windows.
+      - name: Build MAUI client (Android)
+        run: dotnet build WorkoutLogg/WorkoutLogg/WorkoutLogg.csproj -f net10.0-android --configuration Debug --no-restore
