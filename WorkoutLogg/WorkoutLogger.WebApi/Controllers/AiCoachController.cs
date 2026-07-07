@@ -33,9 +33,11 @@ namespace WorkoutLogger.WebApi.Controllers
                 var reply = await claude.ChatAsync(systemPrompt, messages, ct);
                 return Ok(new AiChatApiResponse(reply, true));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, new AiChatApiResponse("", false, ex.Message));
+                // The underlying error is already logged in AiChatService.
+                // Never surface the raw exception message to the client.
+                return StatusCode(500, new AiChatApiResponse("", false, "AI service is temporarily unavailable"));
             }
         }
 

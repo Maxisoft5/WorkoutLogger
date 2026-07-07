@@ -68,6 +68,9 @@ builder.Services.AddGrpc();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddExceptionHandler<WorkoutLogger.WebApi.Services.GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var configration = builder.Configuration;
 builder.Services.AddAuthModule(configration);
 builder.Services.AddSubscriptionsModule(configration);
@@ -77,6 +80,8 @@ builder.Services.AddKafkaMessaging(configration);
 
 
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 app.MapDefaultEndpoints();
 
