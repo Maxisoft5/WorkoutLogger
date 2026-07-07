@@ -26,11 +26,12 @@ public class AuthServiceTests
     {
         _userManager = Substitute.For<UserManager<User>>(
             Substitute.For<IUserStore<User>>(), null, null, null, null, null, null, null, null);
+        // Identity 2.3.x: SignInManager ctor has 6 parameters (no IUserConfirmation).
         _signInManager = Substitute.For<SignInManager<User>>(
             _userManager,
             Substitute.For<IHttpContextAccessor>(),
             Substitute.For<IUserClaimsPrincipalFactory<User>>(),
-            null, null, null, null);
+            null, null, null);
         _cache = Substitute.For<ICacheService>();
 
         _sut = new AuthService(
