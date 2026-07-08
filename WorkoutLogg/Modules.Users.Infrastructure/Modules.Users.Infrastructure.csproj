@@ -25,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="Modules.Users.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Modules.Common.Infrastructure\Modules.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules.Users.Domain\Modules.Users.Domain.csproj" />
   </ItemGroup>
