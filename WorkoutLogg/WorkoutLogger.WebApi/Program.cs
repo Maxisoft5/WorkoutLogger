@@ -91,12 +91,12 @@ builder.Services.AddRateLimiter(options =>
 });
 
 
-var configration = builder.Configuration;
-builder.Services.AddAuthModule(configration);
-builder.Services.AddSubscriptionsModule(configration);
-builder.Services.AddAiCoachService(configration);
-builder.Services.AddHybridCache(configration);
-builder.Services.AddKafkaMessaging(configration);
+var configuration = builder.Configuration;
+builder.Services.AddAuthModule(configuration);
+builder.Services.AddSubscriptionsModule(configuration);
+builder.Services.AddAiCoachService(configuration);
+builder.Services.AddHybridCache(configuration);
+builder.Services.AddKafkaMessaging(configuration);
 
 
 var app = builder.Build();

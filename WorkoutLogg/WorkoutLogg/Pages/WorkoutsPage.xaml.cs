@@ -1,4 +1,4 @@
-using Moduels.Workouts.DTO.Enums;
+using Modules.Workouts.DTO.Enums;
 using WorkoutLogg.Localization;
 using WorkoutLogg.PageModels;
 

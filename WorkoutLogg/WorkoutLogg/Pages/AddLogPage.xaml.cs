@@ -1,4 +1,4 @@
-using Moduels.Workouts.DTO.Enums;
+using Modules.Workouts.DTO.Enums;
 using WorkoutLogg.Database;
 using WorkoutLogg.Database.Entities;
 using WorkoutLogg.Localization;
@@ -241,7 +241,7 @@ internal class ExerciseLogFormRow
         _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_Low"));
         _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_Middle"));
         _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_High"));
-        _complexityPicker.SelectedIndex = (int)(existing?.Complexity ?? fromPlan?.ExerciesComplexity ?? ExerciesComplexity.Low);
+        _complexityPicker.SelectedIndex = (int)(existing?.Complexity ?? fromPlan?.ExerciseComplexity ?? ExerciseComplexity.Low);
 
         _setsContainer = new VerticalStackLayout { Spacing = 8 };
 
@@ -389,9 +389,9 @@ internal class ExerciseLogFormRow
         IsCustom = IsCustom,
         Complexity = _complexityPicker.SelectedIndex switch
         {
-            1 => ExerciesComplexity.Middle,
-            2 => ExerciesComplexity.High,
-            _ => ExerciesComplexity.Low,
+            1 => ExerciseComplexity.Middle,
+            2 => ExerciseComplexity.High,
+            _ => ExerciseComplexity.Low,
         },
         Sets = _setRows.Select((r, i) => r.ToEntity(i + 1)).ToList(),
     };

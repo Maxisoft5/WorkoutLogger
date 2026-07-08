@@ -1,4 +1,4 @@
-using Moduels.Workouts.DTO.Enums;
+using Modules.Workouts.DTO.Enums;
 using SQLite;
 
 namespace WorkoutLogg.Database.Entities
@@ -11,7 +11,7 @@ namespace WorkoutLogg.Database.Entities
         [Indexed]
         public Guid WorkoutId { get; set; }
 
-        public ExerciesComplexity ExerciesComplexity { get; set; }
+        public ExerciseComplexity ExerciseComplexity { get; set; }
 
         [MaxLength(100)]
         public string ExerciseName { get; set; } = "";

@@ -1,4 +1,4 @@
-using Moduels.Workouts.DTO.Enums;
+using Modules.Workouts.DTO.Enums;
 using SQLite;
 
 namespace WorkoutLogg.Database.Entities
@@ -18,7 +18,7 @@ namespace WorkoutLogg.Database.Entities
 
         public bool IsCustom { get; set; }        // true = not from a workout plan
 
-        public ExerciesComplexity Complexity { get; set; }
+        public ExerciseComplexity Complexity { get; set; }
 
         [Ignore]
         public List<LogSetEntity> Sets { get; set; } = [];

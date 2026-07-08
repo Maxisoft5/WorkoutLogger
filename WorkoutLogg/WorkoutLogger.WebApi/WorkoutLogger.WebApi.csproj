@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modules.Common.Grpc.Contacts\Modules.Common.Grpc.Contacts.csproj" />
+    <ProjectReference Include="..\Modules.Common.Grpc.Contracts\Modules.Common.Grpc.Contracts.csproj" />
     <ProjectReference Include="..\Modules.Common.Infrastructure\Modules.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules.Users.Domain\Modules.Users.Domain.csproj" />
     <ProjectReference Include="..\Modules.Users.Infrastructure\Modules.Users.Infrastructure.csproj" />

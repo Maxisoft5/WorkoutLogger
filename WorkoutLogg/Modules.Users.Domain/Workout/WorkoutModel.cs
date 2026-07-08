@@ -1,6 +1,6 @@
-﻿using Moduels.Workouts.DTO.Enums;
+﻿using Modules.Workouts.DTO.Enums;
 using Modules.Common.Domain;
-using Modules.Users.Domain.Exercies;
+using Modules.Users.Domain.Exercises;
 using Modules.Users.Domain.Logs;
 using Modules.Users.Domain.Users;
 

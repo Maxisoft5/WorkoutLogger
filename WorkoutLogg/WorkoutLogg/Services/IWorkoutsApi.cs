@@ -1,5 +1,5 @@
-using Moduels.Workouts.DTO.Requests;
-using Moduels.Workouts.DTO.Responses;
+using Modules.Workouts.DTO.Requests;
+using Modules.Workouts.DTO.Responses;
 using Refit;
 
 namespace WorkoutLogg.Services

@@ -8,13 +8,13 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY ["WorkoutLogger.WebApi/WorkoutLogger.WebApi.csproj", "WorkoutLogger.WebApi/"]
-COPY ["Modules.Common.Grpc.Contacts/Modules.Common.Grpc.Contacts.csproj", "Modules.Common.Grpc.Contacts/"]
+COPY ["Modules.Common.Grpc.Contracts/Modules.Common.Grpc.Contracts.csproj", "Modules.Common.Grpc.Contracts/"]
 COPY ["Modules.Common.Infrastructure/Modules.Common.Infrastructure.csproj", "Modules.Common.Infrastructure/"]
 COPY ["Modules.Common.Domain/Modules.Common.Domain.csproj", "Modules.Common.Domain/"]
 COPY ["Modules.Users.Domain/Modules.Users.Domain.csproj", "Modules.Users.Domain/"]
 COPY ["Modules.Users.Infrastructure/Modules.Users.Infrastructure.csproj", "Modules.Users.Infrastructure/"]
 COPY ["Modules.Users.DTO/Modules.Users.DTO.csproj", "Modules.Users.DTO/"]
-COPY ["Moduels.Workouts.DTO/Moduels.Workouts.DTO.csproj", "Moduels.Workouts.DTO/"]
+COPY ["Modules.Workouts.DTO/Modules.Workouts.DTO.csproj", "Modules.Workouts.DTO/"]
 COPY ["WorkoutLogg.ServiceDefaults/WorkoutLogg.ServiceDefaults.csproj", "WorkoutLogg.ServiceDefaults/"]
 
 RUN dotnet restore "./WorkoutLogger.WebApi/WorkoutLogger.WebApi.csproj"

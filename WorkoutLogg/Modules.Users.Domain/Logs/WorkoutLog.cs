@@ -1,5 +1,5 @@
 ﻿using Modules.Common.Domain;
-using Modules.Users.Domain.Exercies;
+using Modules.Users.Domain.Exercises;
 using Modules.Users.Domain.Workout;
 
 namespace Modules.Users.Domain.Logs

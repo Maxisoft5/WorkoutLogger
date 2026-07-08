@@ -106,7 +106,7 @@ WorkoutLogg/
 │
 ├── Common/
 │   ├── Modules.Common.Domain            # Базовые типы, события, Outbox
-│   ├── Modules.Common.Grpc.Contacts     # .proto-контракты (shared сервер + клиент)
+│   ├── Modules.Common.Grpc.Contracts     # .proto-контракты (shared сервер + клиент)
 │   └── Modules.Common.Infrastructure    # Caching, Messaging, Email, конфигурации
 │
 ├── Modules/
@@ -283,7 +283,7 @@ dotnet run --project WorkoutLogger.EventsConsumer
 
 ### gRPC
 
-- Shared contract project (`Modules.Common.Grpc.Contacts`) с `GrpcServices="Both"`
+- Shared contract project (`Modules.Common.Grpc.Contracts`) с `GrpcServices="Both"`
 - Unary и server streaming RPC
 - Сосуществование REST и gRPC на одном Kestrel (`Http1AndHttp2`)
 - Передача JWT через gRPC metadata

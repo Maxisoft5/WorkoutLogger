@@ -1,0 +1,21 @@
+using Modules.Workouts.DTO.Enums;
+using System.ComponentModel.DataAnnotations;
+
+namespace Modules.Workouts.DTO.Requests
+{
+    public class UpdateWorkoutRequest : IValidatableObject
+    {
+        public WorkoutType WorkoutType { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public List<CreateExerciseRequest> Exercises { get; set; } = [];
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (EndDate < StartDate)
+                yield return new ValidationResult(
+                    "EndDate must be greater than or equal to StartDate.",
+                    [nameof(EndDate)]);
+        }
+    }
+}

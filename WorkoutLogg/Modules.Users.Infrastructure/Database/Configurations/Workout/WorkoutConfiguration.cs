@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Moduels.Workouts.DTO.Enums;
+using Modules.Workouts.DTO.Enums;
 using Modules.Users.Domain.Users;
 using Modules.Users.Domain.Workout;
 using Modules.Users.DTO.Auth;
