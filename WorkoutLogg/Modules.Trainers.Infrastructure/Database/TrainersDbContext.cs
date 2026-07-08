@@ -6,6 +6,7 @@ namespace Modules.Trainers.Infrastructure.Database
     public class TrainersDbContext : DbContext
     {
         public DbSet<TrainerProfile> TrainerProfiles { get; set; } = null!;
+        public DbSet<TrainingRequest> TrainingRequests { get; set; } = null!;
 
         public TrainersDbContext(DbContextOptions<TrainersDbContext> options) : base(options) { }
 

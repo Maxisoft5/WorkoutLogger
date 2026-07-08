@@ -121,6 +121,7 @@ namespace WorkoutLogger.WebApi.Extensions
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ITrainerProfileService, TrainerProfileService>();
+            services.AddScoped<ITrainingRequestService, TrainingRequestService>();
 
             return services;
         }
