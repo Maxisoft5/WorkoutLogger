@@ -6,6 +6,7 @@ using Modules.Common.Infrastructure.Messaging;
 using Modules.Users.Domain.Authentication;
 using Modules.Users.Domain.Mappers;
 using Modules.Users.DTO.Auth;
+using WorkoutLogger.WebApi.Extensions;
 
 namespace WorkoutLogger.WebApi.Controllers;
 
@@ -62,7 +63,9 @@ public class AuthController(IAuthService authService,
                 UserAgent = ctx?.Request.Headers.UserAgent.ToString()
             });
         }
-        return login.IsSuccess ? Ok(login) : Unauthorized(login);
+        // The response contains only the token pair; the Result wrapper
+        // (and its empty-errors pitfall) never crosses the API boundary.
+        return login.ToActionResult(v => new RegisterUserResponse(v.Token!, v.RefreshToken!));
     }
 
     // No [Authorize] here on purpose: the access token is expired by the time
@@ -72,14 +75,14 @@ public class AuthController(IAuthService authService,
     public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest token)
     {
         var refreshed = await authService.RefreshTokenAsync(token.Token, token.RefreshToken);
-        return refreshed.IsSuccess ? Ok(refreshed) : Unauthorized(refreshed);
+        return refreshed.ToActionResult();
     }
 
     [HttpPost("CreateAccount")]
     public async Task<IActionResult> CreateAccount([FromBody] UserDto user)
     {
         var created = await authService.RegisterAsync(user, default);
-        return Ok(created);
+        return created.ToActionResult();
     }
 
     [Authorize]
@@ -87,31 +90,27 @@ public class AuthController(IAuthService authService,
     public async Task<IActionResult> UpdateAccount([FromBody] UserDto user)
     {
         var upd = await authService.UpdateUser(user);
-        if (!upd.IsSuccess || upd.Value is null)
-        {
-            return BadRequest(upd);
-        }
-        return Ok(UserMapper.MapUser(upd.Value));
+        return upd.ToActionResult(UserMapper.MapUser);
     }
 
     [HttpPost("ForgotPassword")]
     public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
     {
         var result = await authService.SendPasswordResetCodeAsync(request.Email);
-        return Ok(result);
+        return result.ToActionResult();
     }
 
     [HttpPost("VerifyResetCode")]
     public async Task<IActionResult> VerifyResetCode([FromBody] VerifyResetCodeRequest request)
     {
         var result = await authService.VerifyResetCodeAsync(request.Email, request.Code);
-        return Ok(result);
+        return result.ToActionResult();
     }
 
     [HttpPost("ResetPassword")]
     public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
     {
         var result = await authService.ResetPasswordAsync(request.Email, request.Code, request.NewPassword);
-        return Ok(result);
+        return result.ToActionResult();
     }
 }

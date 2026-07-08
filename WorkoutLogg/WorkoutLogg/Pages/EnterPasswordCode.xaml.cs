@@ -127,12 +127,11 @@ public partial class EnterPasswordCode : ContentPage
         try
         {
             var response = await _authApi.VerifyResetCode(new VerifyResetCodeRequest(_email, code));
-            var body = response.Content;
-            if (response.IsSuccessStatusCode && body?.IsSuccess == true)
+            if (response.IsSuccessStatusCode)
                 Application.Current!.Windows[0].Page = new NewPasswordPage { Email = _email, Code = code };
             else
             {
-                var error = body?.Errors?.FirstOrDefault()?.Description ?? "Invalid or expired code";
+                var error = ApiProblem.GetDetail(response, "Invalid or expired code");
                 await DisplayAlertAsync("Error", error, "OK");
             }
         }

@@ -28,7 +28,7 @@ namespace WorkoutLogg.Services
 
             if (!resp.IsSuccessStatusCode) return false;
 
-            var pair = resp.Content?.Value;
+            var pair = resp.Content;
             if (pair == null) return false;
 
             await LoginService.AddToken(pair.Token);

@@ -97,13 +97,13 @@ namespace Modules.Users.Infrastructure.Authorization
             var validatedToken = GetPrincipalFromToken(token, tokenValidationParameters);
             if (validatedToken is null)
             {
-                return new Result<RefreshTokenResponse>(new Error("401", "401", ErrorType.Forbidden));
+                return new Result<RefreshTokenResponse>(new Error("401", "Invalid or expired token", ErrorType.Unauthorized));
             }
 
             var jti = validatedToken.Claims.SingleOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti)?.Value;
             if (string.IsNullOrEmpty(jti))
             {
-                return new Result<RefreshTokenResponse>(new Error("401", "401", ErrorType.Forbidden));
+                return new Result<RefreshTokenResponse>(new Error("401", "Invalid or expired token", ErrorType.Unauthorized));
             }
 
             var storedRefreshToken = await dbContext.Set<RefreshToken>().FirstOrDefaultAsync(x => x.Token == refreshToken,
@@ -111,39 +111,39 @@ namespace Modules.Users.Infrastructure.Authorization
             if (storedRefreshToken is null)
             {
                 logger.LogWarning("Refresh token does not exist");
-                return new Result<RefreshTokenResponse>(new Error("401", "401", ErrorType.Forbidden));
+                return new Result<RefreshTokenResponse>(new Error("401", "Invalid or expired token", ErrorType.Unauthorized));
             }
 
             if (DateTime.UtcNow > storedRefreshToken.ExpiryDate)
             {
                 logger.LogWarning("Refresh token has expired");
-                return new Result<RefreshTokenResponse>(new Error("401", "401", ErrorType.Forbidden));
+                return new Result<RefreshTokenResponse>(new Error("401", "Invalid or expired token", ErrorType.Unauthorized));
             }
 
             if (storedRefreshToken.Invalidated)
             {
                 logger.LogWarning("Refresh token has been invalidated");
-                return new Result<RefreshTokenResponse>(new Error("401", "401", ErrorType.Forbidden));
+                return new Result<RefreshTokenResponse>(new Error("401", "Invalid or expired token", ErrorType.Unauthorized));
             }
 
             if (storedRefreshToken.JwtId != jti)
             {
                 logger.LogWarning("Refresh token does not match this JWT");
-                return new Result<RefreshTokenResponse>(new Error("401", "401", ErrorType.Forbidden));
+                return new Result<RefreshTokenResponse>(new Error("401", "Invalid or expired token", ErrorType.Unauthorized));
             }
 
             var userId = validatedToken.Claims.FirstOrDefault(x => x.Type == "userid")?.Value;
             if (userId is null)
             {
                 logger.LogWarning("Current user is not found");
-                return new Result<RefreshTokenResponse>(new Error("401", "401", ErrorType.Forbidden));
+                return new Result<RefreshTokenResponse>(new Error("401", "Invalid or expired token", ErrorType.Unauthorized));
             }
 
             var user = await userManager.FindByIdAsync(userId);
             if (user is null)
             {
                 logger.LogWarning("Current user is not found");
-                return new Result<RefreshTokenResponse>(new Error("401", "401", ErrorType.Forbidden));
+                return new Result<RefreshTokenResponse>(new Error("401", "Invalid or expired token", ErrorType.Unauthorized));
             }
 
             var (newToken, newRefreshToken) = await GenerateJwtAndRefreshTokenAsync(user, refreshToken);
