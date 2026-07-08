@@ -12,5 +12,11 @@ namespace Modules.Trainers.Infrastructure.Services
 
         /// <summary>Постраничный список активных тренеров для вкладки «Тренеры» ученика.</summary>
         Task<TrainerProfilesPageDto> GetActiveAsync(int page, int pageSize, CancellationToken ct = default);
+
+        /// <summary>
+        /// Поиск активных тренеров с фильтрами и match-скором (экран 02).
+        /// Предпочтения ученика влияют только на скор и сортировку, фильтры — на выборку.
+        /// </summary>
+        Task<TrainerSearchPageDto> SearchAsync(TrainerSearchRequest request, StudentPreferences preferences, CancellationToken ct = default);
     }
 }

@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Modules.Common.Domain\Modules.Common.Domain.csproj" />
+    <ProjectReference Include="..\Modules.Users.DTO\Modules.Users.DTO.csproj" />
   </ItemGroup>
 
 </Project>

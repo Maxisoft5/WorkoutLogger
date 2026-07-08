@@ -80,6 +80,62 @@ namespace Modules.Trainers.Infrastructure.Services
             };
         }
 
+        // Match-скор считается в памяти, поэтому выборка ограничена сверху.
+        // На объёмах MVP этого достаточно; при росте — вынести скоринг в SQL/поисковый индекс.
+        private const int MaxSearchCandidates = 500;
+
+        public async Task<TrainerSearchPageDto> SearchAsync(
+            TrainerSearchRequest request, StudentPreferences preferences, CancellationToken ct = default)
+        {
+            var page = Math.Max(request.Page, 1);
+            var pageSize = Math.Clamp(request.PageSize, 1, 100);
+
+            var query = dbContext.TrainerProfiles
+                .AsNoTracking()
+                .Where(p => p.IsActive);
+
+            if (request.Specializations != TrainerSpecializations.None)
+                query = query.Where(p => (p.Specializations & request.Specializations) != TrainerSpecializations.None);
+
+            if (request.Formats != TrainingFormats.None)
+                query = query.Where(p => (p.Formats & request.Formats) != TrainingFormats.None);
+
+            if (request.PriceMin is > 0)
+                query = query.Where(p => p.PricePerSession >= request.PriceMin);
+
+            if (request.PriceMax is > 0)
+                query = query.Where(p => p.PricePerSession <= request.PriceMax);
+
+            var totalCount = await query.CountAsync(ct);
+            var candidates = await query
+                .OrderBy(p => p.CreatedAtUtc)
+                .Take(MaxSearchCandidates)
+                .ToListAsync(ct);
+
+            var scored = candidates
+                .Select(p => new TrainerSearchItemDto
+                {
+                    Profile = p.MapProfile(),
+                    MatchScore = TrainerMatchCalculator.CalculateMatch(p, preferences)
+                });
+
+            scored = request.SortBy switch
+            {
+                TrainerSortBy.PriceAsc => scored.OrderBy(i => i.Profile.PricePerSession).ThenByDescending(i => i.MatchScore),
+                TrainerSortBy.PriceDesc => scored.OrderByDescending(i => i.Profile.PricePerSession).ThenByDescending(i => i.MatchScore),
+                TrainerSortBy.Newest => scored.OrderByDescending(i => i.Profile.CreatedAtUtc),
+                _ => scored.OrderByDescending(i => i.MatchScore).ThenBy(i => i.Profile.PricePerSession)
+            };
+
+            return new TrainerSearchPageDto
+            {
+                Items = scored.Skip((page - 1) * pageSize).Take(pageSize).ToList(),
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalCount
+            };
+        }
+
         private static Error? Validate(UpsertTrainerProfileRequest request)
         {
             if (request.Specializations == TrainerSpecializations.None)
