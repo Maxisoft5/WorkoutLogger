@@ -84,5 +84,19 @@ namespace Modules.Trainers.Infrastructure.Domain
         public static Error NoAcceptedRequest() =>
             Error.Validation($"{ErrorPrefix}.{nameof(NoAcceptedRequest)}",
                 "You can pay only a trainer who accepted your training request");
+
+        public static Error ConversationNotFound() =>
+            new($"{ErrorPrefix}.{nameof(ConversationNotFound)}", "Conversation not found", ErrorType.NotFound);
+
+        public static Error NotConversationParticipant() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(NotConversationParticipant)}",
+                "You are not a participant of this conversation");
+
+        public static Error NoChatRelationship() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(NoChatRelationship)}",
+                "Chat is available only between a student and a trainer connected by a training request");
+
+        public static Error EmptyMessage() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(EmptyMessage)}", "Message text must not be empty");
     }
 }

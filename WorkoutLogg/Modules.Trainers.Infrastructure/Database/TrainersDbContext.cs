@@ -10,6 +10,8 @@ namespace Modules.Trainers.Infrastructure.Database
         public DbSet<Wallet> Wallets { get; set; } = null!;
         public DbSet<WalletTransaction> WalletTransactions { get; set; } = null!;
         public DbSet<TrainingPayment> TrainingPayments { get; set; } = null!;
+        public DbSet<Conversation> Conversations { get; set; } = null!;
+        public DbSet<ChatMessage> ChatMessages { get; set; } = null!;
 
         public TrainersDbContext(DbContextOptions<TrainersDbContext> options) : base(options) { }
 
