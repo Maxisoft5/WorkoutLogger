@@ -18,6 +18,9 @@ namespace Modules.Users.Infrastructure.Api
         [Put("/Auth/UpdateAccount")]
         public Task<IApiResponse<UserDto>> UpdateAccount([Header("Authorization")] string token, [Body] UserDto user);
 
+        [Post("/Auth/SelectRole")]
+        public Task<IApiResponse<UserDto>> SelectRole([Header("Authorization")] string token, [Body] SelectRoleRequest request);
+
         [Post("/Auth/ForgotPassword")]
         public Task<IApiResponse> ForgotPassword([Body] ForgotPasswordRequest request);
 

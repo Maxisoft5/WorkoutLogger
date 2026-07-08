@@ -7,6 +7,7 @@ using Modules.Users.Domain.Authentication;
 using Modules.Users.Domain.Mappers;
 using Modules.Users.DTO.Auth;
 using WorkoutLogger.WebApi.Extensions;
+using WorkoutLogger.WebApi.Services;
 
 namespace WorkoutLogger.WebApi.Controllers;
 
@@ -91,6 +92,21 @@ public class AuthController(IAuthService authService,
     {
         var upd = await authService.UpdateUser(user);
         return upd.ToActionResult(UserMapper.MapUser);
+    }
+
+    /// <summary>
+    /// Выбор активной роли аккаунта (ученик/тренер) — шаг регистрации 01 модуля «Тренеры».
+    /// Роль можно сменить позже в профиле этим же эндпоинтом.
+    /// </summary>
+    [Authorize]
+    [HttpPost("SelectRole")]
+    public async Task<IActionResult> SelectRole([FromBody] SelectRoleRequest request, [FromServices] ICurrentUser currentUser)
+    {
+        if (currentUser.UserId is null)
+            return Unauthorized();
+
+        var result = await userService.SetActiveRoleAsync(currentUser.UserId, request.Role);
+        return result.ToActionResult();
     }
 
     [HttpPost("ForgotPassword")]

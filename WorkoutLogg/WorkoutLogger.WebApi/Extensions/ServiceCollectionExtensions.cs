@@ -13,6 +13,8 @@ using Modules.Common.Infrastructure.Email;
 using Modules.Common.Infrastructure.Messaging;
 using Modules.Subscriptions.Infrastructure.Database;
 using Modules.Subscriptions.Infrastructure.Services;
+using Modules.Trainers.Infrastructure.Database;
+using Modules.Trainers.Infrastructure.Services;
 using Modules.Users.Domain.Authentication;
 using Modules.Users.Domain.Users;
 using Modules.Users.Infrastructure.Authorization;
@@ -107,6 +109,18 @@ namespace WorkoutLogger.WebApi.Extensions
             services.AddTransient<IPaymentProvider, YooKassaProvider>();
             services.AddTransient<IPaymentProvider, StripeProvider>();
             services.AddScoped<SubscriptionService>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddTrainersModule(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.AddDbContext<TrainersDbContext>(options =>
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<ITrainerProfileService, TrainerProfileService>();
 
             return services;
         }

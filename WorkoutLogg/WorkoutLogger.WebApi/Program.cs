@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Modules.Common.Infrastructure.Extensions;
 using Modules.Subscriptions.Infrastructure.Database;
+using Modules.Trainers.Infrastructure.Database;
 using Modules.Users.Infrastructure.Database;
 using Serilog;
 using Serilog.Sinks.OpenSearch;
@@ -94,6 +95,7 @@ builder.Services.AddRateLimiter(options =>
 var configuration = builder.Configuration;
 builder.Services.AddAuthModule(configuration);
 builder.Services.AddSubscriptionsModule(configuration);
+builder.Services.AddTrainersModule(configuration);
 builder.Services.AddAiCoachService(configuration);
 builder.Services.AddHybridCache(configuration);
 builder.Services.AddKafkaMessaging(configuration);
@@ -112,6 +114,9 @@ using (var scope = app.Services.CreateScope())
 
     var subsDb = scope.ServiceProvider.GetRequiredService<SubscriptionsDbContext>();
     await subsDb.Database.MigrateAsync();
+
+    var trainersDb = scope.ServiceProvider.GetRequiredService<TrainersDbContext>();
+    await trainersDb.Database.MigrateAsync();
 }
 
 // Configure the HTTP request pipeline.

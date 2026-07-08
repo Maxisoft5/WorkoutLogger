@@ -26,6 +26,7 @@ namespace Modules.Users.Domain.Mappers
                     Goal = g.Goal
                 }).ToList(),
                 WorkOutCount = user.WorkOutCount,
+                ActiveRole = user.ActiveRole,
                 IsPremium = user.IsPremium,
                 UserRegistrationStep = user.UserRegistrationStep,
                 Identity = user.Identity,
