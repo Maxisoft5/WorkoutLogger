@@ -9,6 +9,7 @@ namespace Modules.Trainers.Infrastructure.Database
         public DbSet<TrainingRequest> TrainingRequests { get; set; } = null!;
         public DbSet<Wallet> Wallets { get; set; } = null!;
         public DbSet<WalletTransaction> WalletTransactions { get; set; } = null!;
+        public DbSet<TrainingPayment> TrainingPayments { get; set; } = null!;
 
         public TrainersDbContext(DbContextOptions<TrainersDbContext> options) : base(options) { }
 
