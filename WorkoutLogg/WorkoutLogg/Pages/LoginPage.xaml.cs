@@ -39,10 +39,10 @@ public partial class LoginPage : ContentPage
 
         var loginRes = await AuthApi.Login(userDto);
         var res = loginRes.Content;
-        if (res != null && res.IsSuccess && !string.IsNullOrWhiteSpace(res.Value?.Token))
+        if (loginRes.IsSuccessStatusCode && !string.IsNullOrWhiteSpace(res?.Token))
         {
-            await LoginService.AddToken(res.Value.Token);
-            var currentUser = await AuthApi.GetCurrentUser($"Bearer {res.Value.Token}");
+            await LoginService.AddToken(res.Token);
+            var currentUser = await AuthApi.GetCurrentUser($"Bearer {res.Token}");
             if (currentUser != null && currentUser.IsSuccessStatusCode && currentUser.Content != null)
             {
                 await CurrentUserStore.SetCurrentUser(currentUser.Content);

@@ -42,14 +42,14 @@ public partial class CreateAccount : ContentPage
         var created = await AuthApi.CreateAccount(userDto);
         var res = created.Content;
 
-        if (res.IsSuccess && !string.IsNullOrWhiteSpace(res.Value?.Token))
+        if (created.IsSuccessStatusCode && !string.IsNullOrWhiteSpace(res?.Token))
         {
-            await LoginService.AddToken(res.Value.Token);
+            await LoginService.AddToken(res.Token);
             Application.Current!.Windows[0].Page = new OnboardingProfilePage();
         } 
         else
         {
-            await DisplayAlertAsync("Error", string.Join(";", res.Errors.Select(s => s.Description)), "Ok");
+            await DisplayAlertAsync("Error", ApiProblem.GetDetail(created, "Failed to create account"), "Ok");
         }
     }
 

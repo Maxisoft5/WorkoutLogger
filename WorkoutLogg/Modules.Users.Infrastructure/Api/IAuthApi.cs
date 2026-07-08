@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using Modules.Common.Domain.Results;
 using Modules.Users.Domain.Authentication;
 using Modules.Users.DTO.Auth;
 using Refit;
@@ -12,21 +10,21 @@ namespace Modules.Users.Infrastructure.Api
         public Task<IApiResponse<UserDto>> GetCurrentUser([Header("Authorization")] string token);
 
         [Post("/Auth/CreateAccount")]
-        public Task<IApiResponse<Result<RegisterUserResponse>>> CreateAccount([Body] UserDto user);
+        public Task<IApiResponse<RegisterUserResponse>> CreateAccount([Body] UserDto user);
 
         [Post("/Auth/Login")]
-        public Task<IApiResponse<Result<RegisterUserResponse>>> Login([Body] UserDto user);
+        public Task<IApiResponse<RegisterUserResponse>> Login([Body] UserDto user);
 
         [Put("/Auth/UpdateAccount")]
         public Task<IApiResponse<UserDto>> UpdateAccount([Header("Authorization")] string token, [Body] UserDto user);
 
         [Post("/Auth/ForgotPassword")]
-        public Task<IApiResponse<object>> ForgotPassword([Body] ForgotPasswordRequest request);
+        public Task<IApiResponse> ForgotPassword([Body] ForgotPasswordRequest request);
 
         [Post("/Auth/VerifyResetCode")]
-        public Task<IApiResponse<Result>> VerifyResetCode([Body] VerifyResetCodeRequest request);
+        public Task<IApiResponse> VerifyResetCode([Body] VerifyResetCodeRequest request);
 
         [Post("/Auth/ResetPassword")]
-        public Task<IApiResponse<Result>> ResetPassword([Body] ResetPasswordRequest request);
+        public Task<IApiResponse> ResetPassword([Body] ResetPasswordRequest request);
     }
 }

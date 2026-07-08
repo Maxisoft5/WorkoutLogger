@@ -32,9 +32,9 @@ namespace Modules.Users.Domain.Errors
             Error.NotFound($"{ErrorPrefix}.{nameof(UpdateRoleFailed)}", string.Join(", ", identityErrors.Select(e => e.Description)));
 
         public static Error InvalidCredentials() =>
-            Error.Validation($"{ErrorPrefix}.{nameof(InvalidCredentials)}", "Invalid email or password");
+            Error.Unauthorized($"{ErrorPrefix}.{nameof(InvalidCredentials)}", "Invalid email or password");
 
         public static Error InvalidToken() =>
-            Error.Validation($"{ErrorPrefix}.{nameof(InvalidToken)}", "Invalid token");
+            Error.Unauthorized($"{ErrorPrefix}.{nameof(InvalidToken)}", "Invalid token");
     }
 }
