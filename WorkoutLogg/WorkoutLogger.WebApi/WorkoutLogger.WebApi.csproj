@@ -35,6 +35,7 @@
     <ProjectReference Include="..\Modules.Users.Domain\Modules.Users.Domain.csproj" />
     <ProjectReference Include="..\Modules.Users.Infrastructure\Modules.Users.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules.Subscriptions.Infrastructure\Modules.Subscriptions.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules.Trainers.Infrastructure\Modules.Trainers.Infrastructure.csproj" />
     <ProjectReference Include="..\WorkoutLogg.ServiceDefaults\WorkoutLogg.ServiceDefaults.csproj" />
   </ItemGroup>
 

@@ -16,6 +16,9 @@
   <Folder Name="/Modules/WorkoutsModule/">
     <Project Path="Modules.Workouts.DTO/Modules.Workouts.DTO.csproj" Id="b678eba3-de6e-410e-93b2-6971f53aa234" />
   </Folder>
+  <Folder Name="/Modules/TrainersModule/">
+    <Project Path="Modules.Trainers.Infrastructure/Modules.Trainers.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/Modules/SubscriptionsModule/">
     <Project Path="Modules.Subscriptions.Infrastructure/Modules.Subscriptions.Infrastructure.csproj" />
   </Folder>

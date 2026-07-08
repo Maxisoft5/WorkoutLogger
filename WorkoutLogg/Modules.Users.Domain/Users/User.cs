@@ -22,6 +22,7 @@ namespace Modules.Users.Domain.Users
         public ICollection<WorkoutModel> Workouts { get; set; } = null!;
         public WorkOutCountVariant WorkOutCount { get; set; }
         public UserRegistrationStep UserRegistrationStep { get; set; }
+        public AccountRole ActiveRole { get; set; }
         public bool IsPremium { get; set; }
         public string? ProfilePicture { get; set; }
         public DateTime CreatedAtUtc { get; set; }

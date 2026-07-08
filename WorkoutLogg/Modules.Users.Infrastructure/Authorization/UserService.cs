@@ -21,6 +21,20 @@ namespace Modules.Users.Infrastructure.Authorization
             return new Result<UserDto>(user.MapUser());
         }
 
+        public async Task<Result<UserDto>> SetActiveRoleAsync(string userId, DTO.Users.AccountRole role)
+        {
+            if (!Enum.IsDefined(role))
+                return new Result<UserDto>(Error.Validation("Users.InvalidRole", $"Unknown account role '{role}'"));
+
+            var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            if (user == null)
+                return new Result<UserDto>(new Error("404", "user not found", ErrorType.NotFound));
+
+            user.ActiveRole = role;
+            await dbContext.SaveChangesAsync();
+            return new Result<UserDto>(user.MapUser());
+        }
+
         public async Task SetPremiumAsync(string userId, bool isPremium)
         {
             var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
