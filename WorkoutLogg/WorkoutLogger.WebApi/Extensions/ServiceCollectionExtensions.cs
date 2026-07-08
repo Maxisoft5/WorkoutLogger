@@ -123,6 +123,7 @@ namespace WorkoutLogger.WebApi.Extensions
             services.AddScoped<ITrainerProfileService, TrainerProfileService>();
             services.AddScoped<ITrainingRequestService, TrainingRequestService>();
             services.AddScoped<IWalletService, WalletService>();
+            services.AddScoped<ITrainingPaymentService, TrainingPaymentService>();
 
             return services;
         }
