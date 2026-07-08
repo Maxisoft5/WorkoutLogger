@@ -42,5 +42,14 @@ namespace Modules.Users.Infrastructure.Authorization
             user.IsPremium = isPremium;
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task<List<DateTime>> GetWorkoutDatesAsync(string userId, DateTime sinceUtc)
+        {
+            return await dbContext.Workouts
+                .AsNoTracking()
+                .Where(w => w.UserId == userId && w.StartDate >= sinceUtc)
+                .Select(w => w.StartDate)
+                .ToListAsync();
+        }
     }
 }

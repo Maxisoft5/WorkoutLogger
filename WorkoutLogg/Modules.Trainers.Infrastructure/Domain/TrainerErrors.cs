@@ -51,5 +51,22 @@ namespace Modules.Trainers.Infrastructure.Domain
         public static Error TrainerNotFoundOrInactive() =>
             new($"{ErrorPrefix}.{nameof(TrainerNotFoundOrInactive)}",
                 "Trainer profile not found or inactive", ErrorType.NotFound);
+
+        public static Error InvalidAmount() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(InvalidAmount)}", "Amount must be positive");
+
+        public static Error InsufficientFunds() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(InsufficientFunds)}", "Not enough FitCoins in the wallet");
+
+        public static Error DuplicateOperation() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(DuplicateOperation)}", "This operation has already been processed");
+
+        public static Error StreakNotReached() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(StreakNotReached)}",
+                $"Workout streak of {RewardAmounts.StreakLengthDays} consecutive days is required");
+
+        public static Error StreakBonusAlreadyClaimed() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(StreakBonusAlreadyClaimed)}",
+                "Streak bonus has already been claimed for the current series");
     }
 }
