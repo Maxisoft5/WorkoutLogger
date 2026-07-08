@@ -1,4 +1,4 @@
-﻿using Moduels.Workouts.DTO.Enums;
+﻿using Modules.Workouts.DTO.Enums;
 using SQLite;
 using System;
 using System.Collections.Generic;

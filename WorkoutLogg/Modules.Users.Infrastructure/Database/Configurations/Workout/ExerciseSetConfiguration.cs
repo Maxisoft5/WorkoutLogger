@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Modules.Users.Domain.Exercies;
+using Modules.Users.Domain.Exercises;
 
 namespace Modules.Users.Infrastructure.Database.Configurations.Workout
 {

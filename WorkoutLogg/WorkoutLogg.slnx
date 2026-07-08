@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/Common/">
     <Project Path="Modules.Common.Domain/Modules.Common.Domain.csproj" Id="5f4a2507-6d0a-4a4c-ac69-561d5bb33682" />
-    <Project Path="Modules.Common.Grpc.Contacts/Modules.Common.Grpc.Contacts.csproj" Id="d5993d2a-81de-4c0d-914d-53310836cc33" />
+    <Project Path="Modules.Common.Grpc.Contracts/Modules.Common.Grpc.Contracts.csproj" Id="d5993d2a-81de-4c0d-914d-53310836cc33" />
     <Project Path="Modules.Common.Infrastructure/Modules.Common.Infrastructure.csproj" Id="b62e34b4-7d4d-4ace-9a4b-807d1e802216" />
   </Folder>
   <Folder Name="/Modules/" />
@@ -11,10 +11,10 @@
     <Project Path="Modules.Users.Infrastructure/Modules.Users.Infrastructure.csproj" Id="5f24b623-83be-4fed-87af-64253b323bfa" />
   </Folder>
   <Folder Name="/Modules/UsersModule/Tests/">
-    <Project Path="Module.Users.Tests/Module.Users.Tests.csproj" Id="dba49d39-b23e-440e-9bb1-b431607b0d88" />
+    <Project Path="Modules.Users.Tests/Modules.Users.Tests.csproj" Id="dba49d39-b23e-440e-9bb1-b431607b0d88" />
   </Folder>
   <Folder Name="/Modules/WorkoutsModule/">
-    <Project Path="Moduels.Workouts.DTO/Moduels.Workouts.DTO.csproj" Id="b678eba3-de6e-410e-93b2-6971f53aa234" />
+    <Project Path="Modules.Workouts.DTO/Modules.Workouts.DTO.csproj" Id="b678eba3-de6e-410e-93b2-6971f53aa234" />
   </Folder>
   <Folder Name="/Modules/SubscriptionsModule/">
     <Project Path="Modules.Subscriptions.Infrastructure/Modules.Subscriptions.Infrastructure.csproj" />

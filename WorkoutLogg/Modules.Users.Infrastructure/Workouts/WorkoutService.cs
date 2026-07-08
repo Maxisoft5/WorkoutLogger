@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Moduels.Workouts.DTO.Requests;
-using Moduels.Workouts.DTO.Responses;
-using Modules.Users.Domain.Exercies;
+using Modules.Workouts.DTO.Requests;
+using Modules.Workouts.DTO.Responses;
+using Modules.Users.Domain.Exercises;
 using Modules.Users.Domain.Workout;
 using Modules.Users.Infrastructure.Database;
 
@@ -94,7 +94,7 @@ public class WorkoutService(UsersDbContext dbContext) : IWorkoutService
             Id = exerciseId,
             Name = e.Name,
             Description = e.Description,
-            ExerciesComplexity = e.Complexity,
+            ExerciseComplexity = e.Complexity,
             CreatedAtUtc = DateTime.UtcNow,
             Sets = e.Sets.Select((s, i) => new ExerciseSet
             {

@@ -1,4 +1,4 @@
-using Moduels.Workouts.DTO.Requests;
+using Modules.Workouts.DTO.Requests;
 using WorkoutLogg.Database;
 using WorkoutLogg.Database.Entities;
 
@@ -90,7 +90,7 @@ namespace WorkoutLogg.Services
         {
             Name = ex.ExerciseName,
             Description = ex.Description,
-            Complexity = ex.ExerciesComplexity,
+            Complexity = ex.ExerciseComplexity,
             Sets = ex.Sets.Select(s => new CreateSetRequest
             {
                 SetNumber = s.SetNumber,

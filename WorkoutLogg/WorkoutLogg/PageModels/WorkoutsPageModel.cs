@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Moduels.Workouts.DTO.Enums;
+using Modules.Workouts.DTO.Enums;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using WorkoutLogg.Database;

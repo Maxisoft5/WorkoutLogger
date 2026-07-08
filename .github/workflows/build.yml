@@ -32,7 +32,7 @@ jobs:
         run: dotnet restore WorkoutLogg/WorkoutLogger.EventsConsumer/WorkoutLogger.EventsConsumer.csproj
 
       - name: Restore Tests
-        run: dotnet restore WorkoutLogg/Module.Users.Tests/Module.Users.Tests.csproj
+        run: dotnet restore WorkoutLogg/Modules.Users.Tests/Modules.Users.Tests.csproj
 
       # The MAUI client (WorkoutLogg) and the Aspire AppHost (which references it)
       # are intentionally excluded: they require mobile workloads that are not
@@ -44,7 +44,7 @@ jobs:
         run: dotnet build WorkoutLogg/WorkoutLogger.EventsConsumer/WorkoutLogger.EventsConsumer.csproj --configuration Release --no-restore
 
       - name: Run unit tests
-        run: dotnet test WorkoutLogg/Module.Users.Tests/Module.Users.Tests.csproj --configuration Release --logger "trx;LogFileName=test-results.trx" --results-directory TestResults
+        run: dotnet test WorkoutLogg/Modules.Users.Tests/Modules.Users.Tests.csproj --configuration Release --logger "trx;LogFileName=test-results.trx" --results-directory TestResults
 
       - name: Upload test results
         if: always()

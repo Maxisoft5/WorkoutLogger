@@ -14,8 +14,8 @@ namespace Modules.Users.Infrastructure.Database
         public DbSet<OutboxMessage> OutboxMessages { get; set; } = null!;
         public DbSet<UserGoal> UserGoals { get; set; } = null!;
         public DbSet<Modules.Users.Domain.Workout.WorkoutModel> Workouts { get; set; } = null!;
-        public DbSet<Modules.Users.Domain.Exercies.Exercise> Exercises { get; set; } = null!;
-        public DbSet<Modules.Users.Domain.Exercies.ExerciseSet> ExerciseSets { get; set; } = null!;
+        public DbSet<Modules.Users.Domain.Exercises.Exercise> Exercises { get; set; } = null!;
+        public DbSet<Modules.Users.Domain.Exercises.ExerciseSet> ExerciseSets { get; set; } = null!;
         public DbSet<Modules.Users.Domain.Logs.WorkoutLog> WorkoutLogs { get; set; } = null!;
 
         public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options)

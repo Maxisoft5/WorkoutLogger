@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Moduels.Workouts.DTO.Requests;
+using Modules.Workouts.DTO.Requests;
 using Modules.Users.Infrastructure.Workouts;
 using WorkoutLogger.WebApi.Services;
 
