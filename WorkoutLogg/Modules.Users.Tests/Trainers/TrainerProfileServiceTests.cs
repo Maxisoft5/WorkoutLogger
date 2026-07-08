@@ -165,6 +165,88 @@ public class TrainerProfileServiceTests
     }
 
     [Test]
+    public async Task Search_FiltersBySpecializationFormatAndPrice()
+    {
+        var strengthOnline = ValidRequest(); // Strength|WeightLoss, Online|Gym, 450
+        await _service.UpsertAsync("user-1", strengthOnline);
+
+        var yogaOnSite = ValidRequest();
+        yogaOnSite.Specializations = TrainerSpecializations.Yoga;
+        yogaOnSite.Formats = TrainingFormats.OnSite;
+        yogaOnSite.PricePerSession = 800;
+        await _service.UpsertAsync("user-2", yogaOnSite);
+
+        var result = await _service.SearchAsync(
+            new TrainerSearchRequest
+            {
+                Specializations = TrainerSpecializations.Strength,
+                Formats = TrainingFormats.Online,
+                PriceMin = 200,
+                PriceMax = 500
+            },
+            new StudentPreferences());
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.TotalCount, Is.EqualTo(1));
+            Assert.That(result.Items, Has.Count.EqualTo(1));
+            Assert.That(result.Items[0].Profile.UserId, Is.EqualTo("user-1"));
+        });
+    }
+
+    [Test]
+    public async Task Search_SortsByMatchScoreDescending()
+    {
+        var strength = ValidRequest();
+        strength.Specializations = TrainerSpecializations.Strength;
+        await _service.UpsertAsync("strength-trainer", strength);
+
+        var yoga = ValidRequest();
+        yoga.Specializations = TrainerSpecializations.Yoga;
+        await _service.UpsertAsync("yoga-trainer", yoga);
+
+        var preferences = new StudentPreferences { DesiredSpecializations = TrainerSpecializations.Yoga };
+        var result = await _service.SearchAsync(new TrainerSearchRequest(), preferences);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Items, Has.Count.EqualTo(2));
+            Assert.That(result.Items[0].Profile.UserId, Is.EqualTo("yoga-trainer"));
+            Assert.That(result.Items[0].MatchScore, Is.GreaterThan(result.Items[1].MatchScore));
+        });
+    }
+
+    [Test]
+    public async Task Search_SortByPriceAsc_IgnoresMatchOrdering()
+    {
+        var cheap = ValidRequest();
+        cheap.PricePerSession = 200;
+        await _service.UpsertAsync("cheap", cheap);
+
+        var expensive = ValidRequest();
+        expensive.PricePerSession = 700;
+        await _service.UpsertAsync("expensive", expensive);
+
+        var result = await _service.SearchAsync(
+            new TrainerSearchRequest { SortBy = TrainerSortBy.PriceAsc },
+            new StudentPreferences());
+
+        Assert.That(result.Items.Select(i => i.Profile.PricePerSession), Is.Ordered.Ascending);
+    }
+
+    [Test]
+    public async Task Search_ExcludesInactiveTrainers()
+    {
+        var inactive = ValidRequest();
+        inactive.IsActive = false;
+        await _service.UpsertAsync("inactive", inactive);
+
+        var result = await _service.SearchAsync(new TrainerSearchRequest(), new StudentPreferences());
+
+        Assert.That(result.TotalCount, Is.EqualTo(0));
+    }
+
+    [Test]
     public async Task GetActive_InvalidPaging_IsNormalized()
     {
         await _service.UpsertAsync("user-1", ValidRequest());
