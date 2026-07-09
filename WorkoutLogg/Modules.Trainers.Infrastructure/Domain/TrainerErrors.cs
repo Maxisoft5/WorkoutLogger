@@ -68,5 +68,21 @@ namespace Modules.Trainers.Infrastructure.Domain
         public static Error StreakBonusAlreadyClaimed() =>
             Error.Conflict($"{ErrorPrefix}.{nameof(StreakBonusAlreadyClaimed)}",
                 "Streak bonus has already been claimed for the current series");
+
+        public static Error PaymentNotFound() =>
+            new($"{ErrorPrefix}.{nameof(PaymentNotFound)}", "Training payment not found", ErrorType.NotFound);
+
+        public static Error NotPaymentStudent() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(NotPaymentStudent)}", "The payment belongs to another student");
+
+        public static Error NotPaymentTrainer() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(NotPaymentTrainer)}", "The payment is addressed to another trainer");
+
+        public static Error PaymentNotHeld() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(PaymentNotHeld)}", "The payment has already been resolved");
+
+        public static Error NoAcceptedRequest() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(NoAcceptedRequest)}",
+                "You can pay only a trainer who accepted your training request");
     }
 }
