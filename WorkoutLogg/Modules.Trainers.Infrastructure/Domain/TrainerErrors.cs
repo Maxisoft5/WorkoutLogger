@@ -98,5 +98,30 @@ namespace Modules.Trainers.Infrastructure.Domain
 
         public static Error EmptyMessage() =>
             Error.Validation($"{ErrorPrefix}.{nameof(EmptyMessage)}", "Message text must not be empty");
+
+        // ─── Reviews (M8) ─────────────────────────────────────────────────────
+
+        public static Error ReviewNotFound() =>
+            new($"{ErrorPrefix}.{nameof(ReviewNotFound)}", "Review not found", ErrorType.NotFound);
+
+        public static Error InvalidRating() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(InvalidRating)}", "Rating must be between 1 and 5");
+
+        public static Error ReviewRequiresCompletedPayment() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(ReviewRequiresCompletedPayment)}",
+                "A review can only be left after a completed training payment");
+
+        public static Error ReviewAlreadyExists() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(ReviewAlreadyExists)}",
+                "A review has already been submitted for this payment");
+
+        public static Error NotReviewOwner() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(NotReviewOwner)}", "The review belongs to another student");
+
+        public static Error ReviewReplyForbidden() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(ReviewReplyForbidden)}", "Only the reviewed trainer can reply");
+
+        public static Error ReplyAlreadyExists() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(ReplyAlreadyExists)}", "A reply has already been added to this review");
     }
 }

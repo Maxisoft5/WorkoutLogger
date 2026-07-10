@@ -17,6 +17,9 @@ namespace Modules.Trainers.Infrastructure.Services
         public int? PriceMin { get; set; }
         public int? PriceMax { get; set; }
 
+        /// <summary>Минимальный рейтинг (null — без фильтра; типичные значения: 4.5, 4.8).</summary>
+        public double? MinRating { get; set; }
+
         public TrainerSortBy SortBy { get; set; } = TrainerSortBy.Match;
 
         public int Page { get; set; } = 1;
@@ -50,6 +53,11 @@ namespace Modules.Trainers.Infrastructure.Services
 
         /// <summary>Детерминированный match-скор 0–100 (v1: специализации 50 + формат 30 + цена 20).</summary>
         public int MatchScore { get; set; }
+
+        /// <summary>Средний рейтинг за последние 12 месяцев. Null если отзывов нет.</summary>
+        public double? AverageRating { get; set; }
+
+        public int ReviewCount { get; set; }
     }
 
     public class TrainerSearchPageDto

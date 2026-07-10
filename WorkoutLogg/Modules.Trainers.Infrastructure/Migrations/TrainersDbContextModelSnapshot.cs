@@ -309,6 +309,52 @@ namespace Modules.Trainers.Infrastructure.Migrations
                     b.ToTable("WalletTransactions", "trainers");
                 });
 
+            modelBuilder.Entity("Modules.Trainers.Infrastructure.Domain.Review", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("PaymentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("StudentUserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("character varying(450)");
+
+                    b.Property<string>("Text")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<string>("TrainerReply")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<DateTime?>("TrainerRepliedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("TrainerUserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("character varying(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentId")
+                        .IsUnique();
+
+                    b.HasIndex("TrainerUserId", "CreatedAtUtc");
+
+                    b.ToTable("Reviews", "trainers");
+                });
+
             modelBuilder.Entity("Modules.Trainers.Infrastructure.Domain.ChatMessage", b =>
                 {
                     b.HasOne("Modules.Trainers.Infrastructure.Domain.Conversation", "Conversation")

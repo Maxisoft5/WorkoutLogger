@@ -112,12 +112,32 @@ namespace Modules.Trainers.Infrastructure.Services
                 .Take(MaxSearchCandidates)
                 .ToListAsync(ct);
 
+            var candidateIds = candidates.Select(p => p.UserId).ToList();
+
+            // Рейтинги за последние 12 месяцев (M8).
+            var ratingCutoff = DateTime.UtcNow.AddMonths(-12);
+            var ratings = await dbContext.Reviews
+                .Where(r => candidateIds.Contains(r.TrainerUserId) && r.CreatedAtUtc >= ratingCutoff)
+                .GroupBy(r => r.TrainerUserId)
+                .Select(g => new { TrainerUserId = g.Key, Avg = g.Average(r => (double)r.Rating), Count = g.Count() })
+                .ToDictionaryAsync(x => x.TrainerUserId, ct);
+
             var scored = candidates
-                .Select(p => new TrainerSearchItemDto
+                .Select(p =>
                 {
-                    Profile = p.MapProfile(),
-                    MatchScore = TrainerMatchCalculator.CalculateMatch(p, preferences)
+                    ratings.TryGetValue(p.UserId, out var rating);
+                    return new TrainerSearchItemDto
+                    {
+                        Profile = p.MapProfile(),
+                        MatchScore = TrainerMatchCalculator.CalculateMatch(p, preferences),
+                        AverageRating = rating?.Avg,
+                        ReviewCount = rating?.Count ?? 0,
+                    };
                 });
+
+            // Применяем фильтр по рейтингу (4.5+, 4.8+ из дизайна).
+            if (request.MinRating is > 0)
+                scored = scored.Where(i => i.AverageRating >= request.MinRating);
 
             scored = request.SortBy switch
             {
@@ -127,12 +147,13 @@ namespace Modules.Trainers.Infrastructure.Services
                 _ => scored.OrderByDescending(i => i.MatchScore).ThenBy(i => i.Profile.PricePerSession)
             };
 
+            var scoredList = scored.ToList();
             return new TrainerSearchPageDto
             {
-                Items = scored.Skip((page - 1) * pageSize).Take(pageSize).ToList(),
+                Items = scoredList.Skip((page - 1) * pageSize).Take(pageSize).ToList(),
                 Page = page,
                 PageSize = pageSize,
-                TotalCount = totalCount
+                TotalCount = scoredList.Count // точный счётчик с учётом рейтинг-фильтра
             };
         }
 
