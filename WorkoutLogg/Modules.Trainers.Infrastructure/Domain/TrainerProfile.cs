@@ -26,6 +26,12 @@ namespace Modules.Trainers.Infrastructure.Domain
         /// <summary>Показывается ли карточка в поиске учеников. Выключается при смене роли на «Ученик».</summary>
         public bool IsActive { get; set; } = true;
 
+        /// <summary>Выставляется при одобрении заявки на верификацию (M9).</summary>
+        public bool HasVerifiedBadge { get; set; }
+
+        /// <summary>Конкретный бейдж (Verified / Master). Null если не верифицирован.</summary>
+        public VerificationBadge? VerificationBadge { get; set; }
+
         public DateTime CreatedAtUtc { get; set; }
         public DateTime? UpdatedAtUtc { get; set; }
     }

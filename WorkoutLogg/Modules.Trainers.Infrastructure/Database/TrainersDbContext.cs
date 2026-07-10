@@ -12,6 +12,8 @@ namespace Modules.Trainers.Infrastructure.Database
         public DbSet<TrainingPayment> TrainingPayments { get; set; } = null!;
         public DbSet<Conversation> Conversations { get; set; } = null!;
         public DbSet<ChatMessage> ChatMessages { get; set; } = null!;
+        public DbSet<TrainerVerification> TrainerVerifications { get; set; } = null!;
+        public DbSet<VerificationDocument> VerificationDocuments { get; set; } = null!;
 
         public TrainersDbContext(DbContextOptions<TrainersDbContext> options) : base(options) { }
 

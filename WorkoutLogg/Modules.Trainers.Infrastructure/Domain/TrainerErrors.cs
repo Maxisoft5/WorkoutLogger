@@ -98,5 +98,28 @@ namespace Modules.Trainers.Infrastructure.Domain
 
         public static Error EmptyMessage() =>
             Error.Validation($"{ErrorPrefix}.{nameof(EmptyMessage)}", "Message text must not be empty");
+
+        // ─── Verification (M9) ────────────────────────────────────────────────
+
+        public static Error VerificationNotFound() =>
+            new($"{ErrorPrefix}.{nameof(VerificationNotFound)}", "Verification application not found", ErrorType.NotFound);
+
+        public static Error VerificationAlreadyExists() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(VerificationAlreadyExists)}",
+                "A verification application already exists for this trainer");
+
+        public static Error VerificationNotPending() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(VerificationNotPending)}",
+                "The verification application is not in pending status");
+
+        public static Error DocumentNotFound() =>
+            new($"{ErrorPrefix}.{nameof(DocumentNotFound)}", "Document not found", ErrorType.NotFound);
+
+        public static Error DocumentBelongsToAnotherVerification() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(DocumentBelongsToAnotherVerification)}",
+                "The document belongs to another verification application");
+
+        public static Error InvalidFileUrl() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(InvalidFileUrl)}", "File URL must be a valid HTTPS URL");
     }
 }
