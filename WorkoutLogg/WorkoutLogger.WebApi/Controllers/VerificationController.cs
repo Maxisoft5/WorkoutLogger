@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Trainers.Infrastructure.Services;
-using Modules.Users.Domain.Authentication;
 using WorkoutLogger.WebApi.Extensions;
+using WorkoutLogger.WebApi.Services;
 
 namespace WorkoutLogger.WebApi.Controllers
 {
