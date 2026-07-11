@@ -126,6 +126,9 @@ public partial class ProfilePage : ContentPage
     private async void OnStandardsTapped(object sender, TappedEventArgs e) =>
         await Shell.Current.GoToAsync("Standards");
 
+    private async void OnTrainersTapped(object sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("Trainers");
+
     private async void OnLogoutTapped(object sender, TappedEventArgs e)
     {
         var confirmed = await DisplayAlertAsync(
