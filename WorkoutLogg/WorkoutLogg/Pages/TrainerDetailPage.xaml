@@ -45,8 +45,15 @@
                                 <Label Text="{Binding Emoji}" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
-                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="20" TextColor="#111827" />
+                                <HorizontalStackLayout Spacing="6">
+                                    <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="20" TextColor="#111827" />
+                                    <Border BackgroundColor="#EFF6FF" Padding="6,2" StrokeThickness="0" StrokeShape="RoundRectangle 8"
+                                            VerticalOptions="Center" IsVisible="{Binding IsVerified}">
+                                        <Label Text="{Binding VerifiedLabel}" FontAttributes="Bold" FontSize="10" TextColor="#2563EB" />
+                                    </Border>
+                                </HorizontalStackLayout>
                                 <Label Text="{Binding SpecializationsLabel}" FontSize="13" TextColor="#6B7280" />
+                                <Label Text="{Binding RatingWithCountLabel}" FontSize="13" TextColor="#F59E0B" FontAttributes="Bold" />
                             </VerticalStackLayout>
                             <Border Grid.Column="2" BackgroundColor="#F0FDF4" Padding="10,6" VerticalOptions="Start"
                                     StrokeThickness="0" StrokeShape="RoundRectangle 12">

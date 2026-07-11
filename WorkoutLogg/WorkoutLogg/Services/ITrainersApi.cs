@@ -68,10 +68,16 @@ namespace WorkoutLogg.Services
         int PricePerSession,
         string? About,
         bool IsActive,
+        bool HasVerifiedBadge,
+        string? VerificationBadge,
         DateTime CreatedAtUtc,
         DateTime? UpdatedAtUtc);
 
-    public record TrainerSearchItemDto(TrainerProfileDto Profile, int MatchScore);
+    public record TrainerSearchItemDto(
+        TrainerProfileDto Profile,
+        int MatchScore,
+        double? AverageRating,
+        int ReviewCount);
 
     public record TrainerSearchPageDto(
         List<TrainerSearchItemDto> Items, int Page, int PageSize, int TotalCount);
@@ -114,6 +120,7 @@ namespace WorkoutLogg.Services
             [AliasAs("formats")] int formats,
             [AliasAs("priceMin")] int? priceMin,
             [AliasAs("priceMax")] int? priceMax,
+            [AliasAs("minRating")] double? minRating,
             [AliasAs("sortBy")] int sortBy,
             [AliasAs("page")] int page,
             [AliasAs("pageSize")] int pageSize,

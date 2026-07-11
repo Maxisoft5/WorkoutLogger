@@ -125,6 +125,34 @@
                     </HorizontalStackLayout>
                 </ScrollView>
 
+                <!-- Rating filter -->
+                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="{loc:Translate Trainers_Filter_Rating}" FontAttributes="Bold" FontSize="13" TextColor="#6B7280" VerticalOptions="Center" Margin="0,0,4,0" />
+                        <Border x:Name="RatingAny" BackgroundColor="#7C3AED" StrokeThickness="0" Padding="14,8" StrokeShape="RoundRectangle 20">
+                            <Label x:Name="RatingAnyLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Rating_Any}" TextColor="White">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnRatingTapped" CommandParameter="0" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Border>
+                        <Border x:Name="Rating45" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                            <Label x:Name="Rating45Label" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Rating_45}" TextColor="#6B7280">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnRatingTapped" CommandParameter="4.5" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Border>
+                        <Border x:Name="Rating48" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                            <Label x:Name="Rating48Label" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Rating_48}" TextColor="#6B7280">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnRatingTapped" CommandParameter="4.8" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Border>
+                    </HorizontalStackLayout>
+                </ScrollView>
+
                 <!-- Recommended for you -->
                 <VerticalStackLayout Spacing="10" IsVisible="{Binding HasRecommended}">
                     <Label Text="{loc:Translate Trainers_Recommended}"
@@ -180,8 +208,15 @@
                                     </Border>
                                     <!-- Info -->
                                     <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
-                                        <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" TextColor="#111827" />
+                                        <HorizontalStackLayout Spacing="6">
+                                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" TextColor="#111827" />
+                                            <Border BackgroundColor="#EFF6FF" Padding="6,2" StrokeThickness="0" StrokeShape="RoundRectangle 8"
+                                                    VerticalOptions="Center" IsVisible="{Binding IsVerified}">
+                                                <Label Text="{Binding VerifiedLabel}" FontAttributes="Bold" FontSize="10" TextColor="#2563EB" />
+                                            </Border>
+                                        </HorizontalStackLayout>
                                         <Label Text="{Binding SubLabel}" FontSize="12" TextColor="#9CA3AF" />
+                                        <Label Text="{Binding RatingWithCountLabel}" FontSize="12" TextColor="#F59E0B" FontAttributes="Bold" />
                                         <Label Text="{Binding About}" FontSize="12" TextColor="#6B7280" MaxLines="2" LineBreakMode="TailTruncation" IsVisible="{Binding HasAbout}" />
                                     </VerticalStackLayout>
                                     <!-- Match + price -->
