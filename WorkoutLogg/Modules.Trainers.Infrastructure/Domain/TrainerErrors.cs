@@ -98,5 +98,55 @@ namespace Modules.Trainers.Infrastructure.Domain
 
         public static Error EmptyMessage() =>
             Error.Validation($"{ErrorPrefix}.{nameof(EmptyMessage)}", "Message text must not be empty");
+
+        // ─── Schedule (M7) ────────────────────────────────────────────────────
+
+        public static Error SlotNotFound() =>
+            new($"{ErrorPrefix}.{nameof(SlotNotFound)}", "Slot not found", ErrorType.NotFound);
+
+        public static Error SlotInPast() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(SlotInPast)}", "Cannot create or book a slot in the past");
+
+        public static Error SlotEndBeforeStart() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(SlotEndBeforeStart)}", "Slot end time must be after start time");
+
+        public static Error SlotTooShort() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(SlotTooShort)}", "Slot duration must be at least 15 minutes");
+
+        public static Error SlotTooLong() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(SlotTooLong)}", "Slot duration must not exceed 8 hours");
+
+        public static Error SlotAlreadyBooked() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(SlotAlreadyBooked)}", "This slot has already been booked");
+
+        public static Error SlotBelongsToAnotherTrainer() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(SlotBelongsToAnotherTrainer)}", "The slot belongs to another trainer");
+
+        public static Error CannotDeleteBookedSlot() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(CannotDeleteBookedSlot)}", "Cannot delete a slot that is already booked");
+
+        public static Error CannotBookOwnSlot() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(CannotBookOwnSlot)}", "A trainer cannot book their own slot");
+
+        public static Error BookingNotFound() =>
+            new($"{ErrorPrefix}.{nameof(BookingNotFound)}", "Booking not found", ErrorType.NotFound);
+
+        public static Error NotBookingStudent() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(NotBookingStudent)}", "The booking belongs to another student");
+
+        public static Error NotBookingTrainer() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(NotBookingTrainer)}", "The booking is for another trainer");
+
+        public static Error BookingNotCancellable() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(BookingNotCancellable)}", "Booking cannot be cancelled in its current state");
+
+        public static Error BookingNotConfirmable() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(BookingNotConfirmable)}", "Only a pending booking can be confirmed");
+
+        public static Error BookingNotCompletable() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(BookingNotCompletable)}", "Only a confirmed booking can be marked as completed");
+
+        public static Error BookingNotNoShowable() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(BookingNotNoShowable)}", "Only a confirmed booking can be marked as no-show");
     }
 }
