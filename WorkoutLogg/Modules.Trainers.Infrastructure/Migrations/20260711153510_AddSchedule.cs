@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -86,11 +86,11 @@ namespace Modules.Trainers.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Bookings",
+                name: "AvailabilitySlots",
                 schema: "trainers");
 
             migrationBuilder.DropTable(
-                name: "AvailabilitySlots",
+                name: "Bookings",
                 schema: "trainers");
         }
     }
