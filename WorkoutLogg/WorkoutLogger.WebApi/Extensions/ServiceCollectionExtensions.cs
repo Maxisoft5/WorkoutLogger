@@ -125,6 +125,8 @@ namespace WorkoutLogger.WebApi.Extensions
             services.AddScoped<IWalletService, WalletService>();
             services.AddScoped<ITrainingPaymentService, TrainingPaymentService>();
             services.AddScoped<IChatService, ChatService>();
+            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IVerificationService, VerificationService>();
             services.AddScoped<IScheduleService, ScheduleService>();
 
             return services;

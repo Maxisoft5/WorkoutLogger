@@ -26,6 +26,8 @@ namespace Modules.Trainers.Infrastructure.Services
         public int PricePerSession { get; set; }
         public string? About { get; set; }
         public bool IsActive { get; set; }
+        public bool HasVerifiedBadge { get; set; }
+        public string? VerificationBadge { get; set; }
         public DateTime CreatedAtUtc { get; set; }
         public DateTime? UpdatedAtUtc { get; set; }
     }
@@ -50,6 +52,8 @@ namespace Modules.Trainers.Infrastructure.Services
             PricePerSession = profile.PricePerSession,
             About = profile.About,
             IsActive = profile.IsActive,
+            HasVerifiedBadge = profile.HasVerifiedBadge,
+            VerificationBadge = profile.VerificationBadge?.ToString(),
             CreatedAtUtc = profile.CreatedAtUtc,
             UpdatedAtUtc = profile.UpdatedAtUtc
         };

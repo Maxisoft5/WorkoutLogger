@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Modules.Trainers.Infrastructure.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Modules.Trainers.Infrastructure.Migrations
 {
     [DbContext(typeof(TrainersDbContext))]
-    partial class TrainersDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260711153510_AddSchedule")]
+    partial class AddSchedule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,52 +196,6 @@ namespace Modules.Trainers.Infrastructure.Migrations
                     b.ToTable("Conversations", "trainers");
                 });
 
-            modelBuilder.Entity("Modules.Trainers.Infrastructure.Domain.Review", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("PaymentId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("StudentUserId")
-                        .IsRequired()
-                        .HasMaxLength(450)
-                        .HasColumnType("character varying(450)");
-
-                    b.Property<string>("Text")
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)");
-
-                    b.Property<DateTime?>("TrainerRepliedAtUtc")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("TrainerReply")
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)");
-
-                    b.Property<string>("TrainerUserId")
-                        .IsRequired()
-                        .HasMaxLength(450)
-                        .HasColumnType("character varying(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PaymentId")
-                        .IsUnique();
-
-                    b.HasIndex("TrainerUserId", "CreatedAtUtc");
-
-                    b.ToTable("Reviews", "trainers");
-                });
-
             modelBuilder.Entity("Modules.Trainers.Infrastructure.Domain.TrainerProfile", b =>
                 {
                     b.Property<Guid>("Id")
@@ -260,9 +217,6 @@ namespace Modules.Trainers.Infrastructure.Migrations
                     b.Property<int>("Formats")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("HasVerifiedBadge")
-                        .HasColumnType("boolean");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
@@ -280,10 +234,6 @@ namespace Modules.Trainers.Infrastructure.Migrations
                         .HasMaxLength(450)
                         .HasColumnType("character varying(450)");
 
-                    b.Property<string>("VerificationBadge")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IsActive");
@@ -292,48 +242,6 @@ namespace Modules.Trainers.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("TrainerProfiles", "trainers");
-                });
-
-            modelBuilder.Entity("Modules.Trainers.Infrastructure.Domain.TrainerVerification", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Badge")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("ModeratorComment")
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)");
-
-                    b.Property<DateTime?>("ReviewedAtUtc")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("ReviewedByUserId")
-                        .HasMaxLength(450)
-                        .HasColumnType("character varying(450)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("SubmittedAtUtc")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("TrainerUserId")
-                        .IsRequired()
-                        .HasMaxLength(450)
-                        .HasColumnType("character varying(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TrainerUserId")
-                        .IsUnique();
-
-                    b.ToTable("TrainerVerifications", "trainers");
                 });
 
             modelBuilder.Entity("Modules.Trainers.Infrastructure.Domain.TrainingPayment", b =>
@@ -442,40 +350,6 @@ namespace Modules.Trainers.Infrastructure.Migrations
                     b.ToTable("TrainingRequests", "trainers");
                 });
 
-            modelBuilder.Entity("Modules.Trainers.Infrastructure.Domain.VerificationDocument", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<string>("FileUrl")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("character varying(2048)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("UploadedAtUtc")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("VerificationId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VerificationId");
-
-                    b.ToTable("VerificationDocuments", "trainers");
-                });
-
             modelBuilder.Entity("Modules.Trainers.Infrastructure.Domain.Wallet", b =>
                 {
                     b.Property<Guid>("Id")
@@ -553,17 +427,6 @@ namespace Modules.Trainers.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Conversation");
-                });
-
-            modelBuilder.Entity("Modules.Trainers.Infrastructure.Domain.VerificationDocument", b =>
-                {
-                    b.HasOne("Modules.Trainers.Infrastructure.Domain.TrainerVerification", "Verification")
-                        .WithMany()
-                        .HasForeignKey("VerificationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Verification");
                 });
 
             modelBuilder.Entity("Modules.Trainers.Infrastructure.Domain.Conversation", b =>

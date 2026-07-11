@@ -98,7 +98,52 @@ namespace Modules.Trainers.Infrastructure.Domain
 
         public static Error EmptyMessage() =>
             Error.Validation($"{ErrorPrefix}.{nameof(EmptyMessage)}", "Message text must not be empty");
+        // ─── Reviews (M8) ─────────────────────────────────────────────────────
 
+        public static Error ReviewNotFound() =>
+            new($"{ErrorPrefix}.{nameof(ReviewNotFound)}", "Review not found", ErrorType.NotFound);
+
+        public static Error InvalidRating() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(InvalidRating)}", "Rating must be between 1 and 5");
+
+        public static Error ReviewRequiresCompletedPayment() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(ReviewRequiresCompletedPayment)}",
+                "A review can only be left after a completed training payment");
+
+        public static Error ReviewAlreadyExists() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(ReviewAlreadyExists)}",
+                "A review has already been submitted for this payment");
+
+        public static Error NotReviewOwner() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(NotReviewOwner)}", "The review belongs to another student");
+
+        public static Error ReviewReplyForbidden() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(ReviewReplyForbidden)}", "Only the reviewed trainer can reply");
+
+        public static Error ReplyAlreadyExists() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(ReplyAlreadyExists)}", "A reply has already been added to this review");
+        // ─── Verification (M9) ────────────────────────────────────────────────
+
+        public static Error VerificationNotFound() =>
+            new($"{ErrorPrefix}.{nameof(VerificationNotFound)}", "Verification application not found", ErrorType.NotFound);
+
+        public static Error VerificationAlreadyExists() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(VerificationAlreadyExists)}",
+                "A verification application already exists for this trainer");
+
+        public static Error VerificationNotPending() =>
+            Error.Conflict($"{ErrorPrefix}.{nameof(VerificationNotPending)}",
+                "The verification application is not in pending status");
+
+        public static Error DocumentNotFound() =>
+            new($"{ErrorPrefix}.{nameof(DocumentNotFound)}", "Document not found", ErrorType.NotFound);
+
+        public static Error DocumentBelongsToAnotherVerification() =>
+            Error.Forbidden($"{ErrorPrefix}.{nameof(DocumentBelongsToAnotherVerification)}",
+                "The document belongs to another verification application");
+
+        public static Error InvalidFileUrl() =>
+            Error.Validation($"{ErrorPrefix}.{nameof(InvalidFileUrl)}", "File URL must be a valid HTTPS URL");
         // ─── Schedule (M7) ────────────────────────────────────────────────────
 
         public static Error SlotNotFound() =>
