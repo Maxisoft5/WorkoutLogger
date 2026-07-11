@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.WalletPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
+    xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
+    x:DataType="vm:WalletPageModel"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <Border Grid.Row="0" BackgroundColor="#7C3AED"
+                Padding="20,52,20,20"
+                StrokeShape="RoundRectangle 0,0,28,28"
+                StrokeThickness="0">
+            <Grid ColumnDefinitions="Auto,*">
+                <Border Grid.Column="0" BackgroundColor="#9333EA" Padding="10,8"
+                        StrokeShape="RoundRectangle 10" StrokeThickness="0" VerticalOptions="Center">
+                    <Label Text="←" FontSize="18" TextColor="White" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Label Grid.Column="1" Margin="12,0,0,0" Text="{loc:Translate Wallet_Title}"
+                       FontAttributes="Bold" FontSize="20" TextColor="White" VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,16,20,24" Spacing="16">
+
+                <!-- Balance card -->
+                <Border BackgroundColor="#7C3AED" Padding="24" StrokeThickness="0" StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout Spacing="6" HorizontalOptions="Center">
+                        <Label Text="{loc:Translate Wallet_Balance}" FontSize="13" TextColor="#DDD6FE" HorizontalOptions="Center" />
+                        <Label Text="{Binding BalanceLabel}" FontAttributes="Bold" FontSize="40" TextColor="White" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Earn FitCoins -->
+                <Label Text="{loc:Translate Wallet_Earn}" FontAttributes="Bold" FontSize="18" TextColor="#111827" />
+                <Border BackgroundColor="White" Padding="4,8" Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 16">
+                    <VerticalStackLayout>
+                        <!-- Streak (claimable) -->
+                        <Grid Padding="16,12" ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="🔥" FontSize="22" VerticalOptions="Center" Margin="0,0,12,0" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="{loc:Translate Wallet_Earn_Streak}" FontAttributes="Bold" FontSize="15" TextColor="#111827" />
+                                <Label Text="{loc:Translate Wallet_Earn_Streak_Sub}" FontSize="12" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <Border Grid.Column="2" BackgroundColor="#7C3AED" Padding="14,8" StrokeThickness="0" StrokeShape="RoundRectangle 12" VerticalOptions="Center">
+                                <Label x:Name="ClaimLabel" Text="{loc:Translate Wallet_Earn_Claim}" FontAttributes="Bold" FontSize="13" TextColor="White">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnClaimStreakTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Border>
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                        <!-- Challenge (coming soon) -->
+                        <Grid Padding="16,12" ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="🏆" FontSize="22" VerticalOptions="Center" Margin="0,0,12,0" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="{loc:Translate Wallet_Earn_Challenge}" FontAttributes="Bold" FontSize="15" TextColor="#111827" />
+                                <Label Text="{loc:Translate Wallet_Earn_Challenge_Sub}" FontSize="12" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="{loc:Translate Common_ComingSoon}" FontSize="11" TextColor="#9CA3AF" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                        <!-- Referral (coming soon) -->
+                        <Grid Padding="16,12" ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="👥" FontSize="22" VerticalOptions="Center" Margin="0,0,12,0" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="{loc:Translate Wallet_Earn_Referral}" FontAttributes="Bold" FontSize="15" TextColor="#111827" />
+                                <Label Text="{loc:Translate Wallet_Earn_Referral_Sub}" FontSize="12" TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="{loc:Translate Common_ComingSoon}" FontSize="11" TextColor="#9CA3AF" VerticalOptions="Center" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- History -->
+                <Label Text="{loc:Translate Wallet_History}" FontAttributes="Bold" FontSize="18" TextColor="#111827" />
+
+                <CollectionView ItemsSource="{Binding Transactions}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:WalletTxItem">
+                            <Border BackgroundColor="White" Padding="16,12" Margin="0,0,0,8"
+                                    Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 14">
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                    <Border Grid.Column="0" BackgroundColor="#F3F4F6" WidthRequest="40" HeightRequest="40"
+                                            StrokeThickness="0" StrokeShape="RoundRectangle 20" VerticalOptions="Center">
+                                        <Label Text="{Binding Emoji}" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                        <Label Text="{Binding TypeLabel}" FontAttributes="Bold" FontSize="14" TextColor="#111827" />
+                                        <Label Text="{Binding SubLabel}" FontSize="12" TextColor="#9CA3AF" />
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="2" Text="{Binding AmountLabel}" FontAttributes="Bold" FontSize="15"
+                                           TextColor="{Binding AmountColor}" VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Empty state -->
+                <VerticalStackLayout IsVisible="{Binding IsEmpty}" Padding="0,24" Spacing="10" HorizontalOptions="Center">
+                    <Label FontSize="40" HorizontalOptions="Center" Text="💰" />
+                    <Label FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"
+                           Text="{loc:Translate Wallet_Empty}" TextColor="#111827" />
+                    <Label FontSize="14" HorizontalOptions="Center"
+                           Text="{loc:Translate Wallet_EmptySubtitle}" TextColor="#9CA3AF" />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <controls:LoadingOverlayView x:Name="PageLoading" Grid.Row="0" Grid.RowSpan="2" />
+    </Grid>
+</ContentPage>

@@ -129,6 +129,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<WorkoutLogg.PageModels.TrainersPageModel>();
         builder.Services.AddTransient<WorkoutLogg.Pages.TrainersPage>();
         builder.Services.AddTransient<WorkoutLogg.Pages.TrainerDetailPage>();
+        builder.Services.AddSingleton<WorkoutLogg.PageModels.WalletPageModel>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.WalletPage>();
         builder.Services.AddTransient<AppShell>();
 
         var baseUrl = useLocalhost
@@ -188,6 +190,13 @@ public static class MauiProgram
                 }));
 
         builder.Services.AddRefitClient<WorkoutLogg.Services.ITrainersApi>(trainersRefitSettings)
+            .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+#if DEBUG
+            .ConfigurePrimaryHttpMessageHandler(DevHandler)
+#endif
+            ;
+
+        builder.Services.AddRefitClient<WorkoutLogg.Services.IWalletApi>(trainersRefitSettings)
             .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
 #if DEBUG
             .ConfigurePrimaryHttpMessageHandler(DevHandler)

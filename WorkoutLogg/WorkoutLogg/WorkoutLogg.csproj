@@ -173,6 +173,9 @@
 	  <MauiXaml Update="Pages\TrainerDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\WalletPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\PremiumPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
