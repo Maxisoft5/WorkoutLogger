@@ -124,6 +124,11 @@ public static class MauiProgram
         builder.Services.AddTransient<WorkoutLogg.Pages.PremiumComparePage>();
         builder.Services.AddTransient<WorkoutLogg.Pages.PaymentPage>();
         builder.Services.AddTransient<WorkoutLogg.Pages.AiCoachPage>();
+        // Trainer marketplace (student side): PageModel is a singleton so the selected
+        // trainer can be shared between the list and the detail page without query serialisation.
+        builder.Services.AddSingleton<WorkoutLogg.PageModels.TrainersPageModel>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.TrainersPage>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.TrainerDetailPage>();
         builder.Services.AddTransient<AppShell>();
 
         var baseUrl = useLocalhost
@@ -167,6 +172,22 @@ public static class MauiProgram
             ;
 
         builder.Services.AddRefitClient<WorkoutLogg.Services.IAiCoachApi>()
+            .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+#if DEBUG
+            .ConfigurePrimaryHttpMessageHandler(DevHandler)
+#endif
+            ;
+
+        // Trainers API serialises enums as strings (server uses JsonStringEnumConverter),
+        // so this client is configured with the same converter to round-trip them by name.
+        var trainersRefitSettings = new RefitSettings(
+            new SystemTextJsonContentSerializer(
+                new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web)
+                {
+                    Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() }
+                }));
+
+        builder.Services.AddRefitClient<WorkoutLogg.Services.ITrainersApi>(trainersRefitSettings)
             .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
 #if DEBUG
             .ConfigurePrimaryHttpMessageHandler(DevHandler)

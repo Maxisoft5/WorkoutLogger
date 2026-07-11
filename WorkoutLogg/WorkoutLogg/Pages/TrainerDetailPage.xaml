@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WorkoutLogg.Pages.TrainerDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
+    xmlns:loc="clr-namespace:WorkoutLogg.Localization"
+    xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
+    x:DataType="vm:TrainerCardItem"
+    BackgroundColor="#EEEEF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <Border Grid.Row="0" BackgroundColor="#7C3AED"
+                Padding="20,52,20,20"
+                StrokeShape="RoundRectangle 0,0,28,28"
+                StrokeThickness="0">
+            <Grid ColumnDefinitions="Auto,*">
+                <Border Grid.Column="0" BackgroundColor="#9333EA" Padding="10,8"
+                        StrokeShape="RoundRectangle 10" StrokeThickness="0"
+                        VerticalOptions="Center">
+                    <Label Text="←" FontSize="18" TextColor="White" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Label Grid.Column="1" Margin="12,0,0,0" Text="{loc:Translate Trainers_Detail_Title}"
+                       FontAttributes="Bold" FontSize="20" TextColor="White" VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,16,20,24" Spacing="16">
+
+                <!-- Trainer card -->
+                <Border BackgroundColor="White" Padding="20"
+                        Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout Spacing="14">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                            <Border Grid.Column="0" BackgroundColor="#EDE9FE" WidthRequest="64" HeightRequest="64"
+                                    StrokeThickness="0" StrokeShape="RoundRectangle 32">
+                                <Label Text="{Binding Emoji}" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="20" TextColor="#111827" />
+                                <Label Text="{Binding SpecializationsLabel}" FontSize="13" TextColor="#6B7280" />
+                            </VerticalStackLayout>
+                            <Border Grid.Column="2" BackgroundColor="#F0FDF4" Padding="10,6" VerticalOptions="Start"
+                                    StrokeThickness="0" StrokeShape="RoundRectangle 12">
+                                <Label Text="{Binding MatchLabel}" FontAttributes="Bold" FontSize="12" TextColor="{Binding MatchColor}" />
+                            </Border>
+                        </Grid>
+
+                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" />
+
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="12">
+                            <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="2">
+                                <Label Text="{loc:Translate Trainers_Experience}" FontSize="11" TextColor="#9CA3AF" />
+                                <Label Text="{Binding ExperienceLabel}" FontAttributes="Bold" FontSize="14" TextColor="#111827" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="2">
+                                <Label Text="{loc:Translate Trainers_Formats}" FontSize="11" TextColor="#9CA3AF" />
+                                <Label Text="{Binding FormatsLabel}" FontAttributes="Bold" FontSize="14" TextColor="#111827" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="2">
+                                <Label Text="{loc:Translate Trainers_Price}" FontSize="11" TextColor="#9CA3AF" />
+                                <Label Text="{Binding PricePerSessionLabel}" FontAttributes="Bold" FontSize="14" TextColor="#7C3AED" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <VerticalStackLayout Spacing="4" IsVisible="{Binding HasAbout}">
+                            <Label Text="{loc:Translate Trainers_About}" FontSize="11" TextColor="#9CA3AF" />
+                            <Label Text="{Binding About}" FontSize="14" TextColor="#374151" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Send request -->
+                <Border BackgroundColor="White" Padding="20"
+                        Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout Spacing="14">
+                        <Label Text="{loc:Translate Trainers_Request_Title}" FontAttributes="Bold" FontSize="17" TextColor="#111827" />
+
+                        <!-- Level -->
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="{loc:Translate Trainers_Request_Level}" FontSize="13" TextColor="#6B7280" />
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                <Border x:Name="LevelBeginner" Grid.Column="0" BackgroundColor="#7C3AED" StrokeThickness="0" StrokeShape="RoundRectangle 12">
+                                    <Label x:Name="LevelBeginnerLabel" Text="{loc:Translate Trainers_Level_Beginner}" FontAttributes="Bold" FontSize="13" TextColor="White" HorizontalOptions="Center" Padding="0,10">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnLevelTapped" CommandParameter="Beginner" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Border>
+                                <Border x:Name="LevelIntermediate" Grid.Column="1" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" StrokeShape="RoundRectangle 12">
+                                    <Label x:Name="LevelIntermediateLabel" Text="{loc:Translate Trainers_Level_Intermediate}" FontAttributes="Bold" FontSize="13" TextColor="#6B7280" HorizontalOptions="Center" Padding="0,10">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnLevelTapped" CommandParameter="Intermediate" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Border>
+                                <Border x:Name="LevelAdvanced" Grid.Column="2" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" StrokeShape="RoundRectangle 12">
+                                    <Label x:Name="LevelAdvancedLabel" Text="{loc:Translate Trainers_Level_Advanced}" FontAttributes="Bold" FontSize="13" TextColor="#6B7280" HorizontalOptions="Center" Padding="0,10">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnLevelTapped" CommandParameter="Advanced" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Border>
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <!-- Budget -->
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="{loc:Translate Trainers_Request_Budget}" FontSize="13" TextColor="#6B7280" />
+                            <Border BackgroundColor="#F9FAFB" Stroke="#E5E7EB" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="12,0">
+                                <Entry x:Name="BudgetEntry" Keyboard="Numeric" Placeholder="450" FontSize="14" TextColor="#111827" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Message -->
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="{loc:Translate Trainers_Request_Message}" FontSize="13" TextColor="#6B7280" />
+                            <Border BackgroundColor="#F9FAFB" Stroke="#E5E7EB" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="12,4">
+                                <Editor x:Name="MessageEditor" HeightRequest="90" FontSize="14" TextColor="#111827"
+                                        Placeholder="{loc:Translate Trainers_Request_MessagePlaceholder}" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <Border BackgroundColor="#7C3AED" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+                            <Label x:Name="SubmitLabel" Text="{loc:Translate Trainers_Request_Submit}" FontAttributes="Bold" FontSize="16"
+                                   TextColor="White" HorizontalOptions="Center" Padding="0,14">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSubmitTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <controls:LoadingOverlayView x:Name="PageLoading" Grid.Row="0" Grid.RowSpan="2" />
+    </Grid>
+</ContentPage>
