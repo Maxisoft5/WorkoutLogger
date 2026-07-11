@@ -31,6 +31,10 @@ namespace WorkoutLogg.PageModels
         [ObservableProperty]
         private TrainerSortBy sortBy = TrainerSortBy.Match;
 
+        /// <summary>Минимальный рейтинг фильтра (null — без фильтра; 4.5 / 4.8 из дизайна).</summary>
+        [ObservableProperty]
+        private double? minRating;
+
         /// <summary>Выбранная карточка передаётся на страницу деталей (без сериализации через query).</summary>
         public TrainerCardItem? SelectedTrainer { get; set; }
 
@@ -79,6 +83,7 @@ namespace WorkoutLogg.PageModels
                     (int)TrainingFormats.None,
                     null,
                     null,
+                    MinRating,
                     (int)SortBy,
                     page: 1,
                     pageSize: 20);
@@ -113,6 +118,14 @@ namespace WorkoutLogg.PageModels
             await SearchAsync();
         }
 
+        /// <summary>Фильтр по минимальному рейтингу (null / 4.5 / 4.8) и перезапуск поиска.</summary>
+        public async Task SetMinRatingAsync(double? min)
+        {
+            if (MinRating == min) return;
+            MinRating = min;
+            await SearchAsync();
+        }
+
         /// <summary>Найти карточку по UserId среди результатов и рекомендаций (для перехода к деталям).</summary>
         public TrainerCardItem? FindByUserId(string userId) =>
             Results.FirstOrDefault(t => t.UserId == userId)
@@ -129,6 +142,10 @@ namespace WorkoutLogg.PageModels
         public int PricePerSession { get; set; }
         public string? About { get; set; }
         public int MatchScore { get; set; }
+        public bool HasVerifiedBadge { get; set; }
+        public string? VerificationBadge { get; set; }
+        public double? AverageRating { get; set; }
+        public int ReviewCount { get; set; }
 
         public string Title => TrainerLabels.PrimarySpecialization(Specializations);
         public string Emoji => TrainerLabels.SpecializationEmoji(Specializations);
@@ -140,6 +157,18 @@ namespace WorkoutLogg.PageModels
         public string MatchLabel => string.Format(Loc.Get("Trainers_MatchPercent"), MatchScore);
         public string SubLabel => $"{ExperienceLabel} · {FormatsLabel}";
         public bool HasAbout => !string.IsNullOrWhiteSpace(About);
+
+        // Рейтинг (M8) и верификация (M9)
+        public bool HasRating => AverageRating.HasValue;
+        public string RatingLabel => AverageRating.HasValue ? $"⭐ {AverageRating.Value:0.0}" : "";
+        public string ReviewCountLabel => string.Format(Loc.Get("Trainers_Reviews"), ReviewCount);
+        public string RatingWithCountLabel => AverageRating.HasValue
+            ? $"⭐ {AverageRating.Value:0.0} · {ReviewCountLabel}"
+            : Loc.Get("Trainers_NoReviews");
+        public bool IsVerified => HasVerifiedBadge;
+        public string VerifiedLabel => VerificationBadge == "Master"
+            ? Loc.Get("Trainers_Badge_Master")
+            : Loc.Get("Trainers_Badge_Verified");
 
         public Color MatchColor => MatchScore >= 80
             ? Color.FromArgb("#16A34A")
@@ -154,6 +183,10 @@ namespace WorkoutLogg.PageModels
             PricePerSession = dto.Profile.PricePerSession,
             About = dto.Profile.About,
             MatchScore = dto.MatchScore,
+            HasVerifiedBadge = dto.Profile.HasVerifiedBadge,
+            VerificationBadge = dto.Profile.VerificationBadge,
+            AverageRating = dto.AverageRating,
+            ReviewCount = dto.ReviewCount,
         };
     }
 

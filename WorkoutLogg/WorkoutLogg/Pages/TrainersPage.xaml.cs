@@ -29,6 +29,7 @@ public partial class TrainersPage : ContentPage
             await _vm.LoadAsync();
             UpdateSpecChips();
             UpdateSortChips();
+            UpdateRatingChips();
         }
         finally
         {
@@ -63,6 +64,17 @@ public partial class TrainersPage : ContentPage
         UpdateSortChips();
     }
 
+    private async void OnRatingTapped(object sender, TappedEventArgs e)
+    {
+        if (e.Parameter is not string raw) return;
+        double? min = double.TryParse(raw, System.Globalization.CultureInfo.InvariantCulture, out var v) && v > 0
+            ? v
+            : null;
+
+        await _vm.SetMinRatingAsync(min);
+        UpdateRatingChips();
+    }
+
     private async void OnTrainerTapped(object sender, TappedEventArgs e)
     {
         if (e.Parameter is not string userId) return;
@@ -91,6 +103,14 @@ public partial class TrainersPage : ContentPage
         SetChip(SortPriceAsc, SortPriceAscLabel, sort == TrainerSortBy.PriceAsc);
         SetChip(SortPriceDesc, SortPriceDescLabel, sort == TrainerSortBy.PriceDesc);
         SetChip(SortNewest, SortNewestLabel, sort == TrainerSortBy.Newest);
+    }
+
+    private void UpdateRatingChips()
+    {
+        var min = _vm.MinRating;
+        SetChip(RatingAny, RatingAnyLabel, min is null);
+        SetChip(Rating45, Rating45Label, min is 4.5);
+        SetChip(Rating48, Rating48Label, min is 4.8);
     }
 
     private static void SetChip(Border border, Label label, bool active)
