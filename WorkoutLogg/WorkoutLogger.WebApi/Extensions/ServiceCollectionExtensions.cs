@@ -72,6 +72,8 @@ namespace WorkoutLogger.WebApi.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<Modules.Users.Infrastructure.Workouts.IWorkoutService,
                 Modules.Users.Infrastructure.Workouts.WorkoutService>();
+            // Брокер live-обновлений тренировок для gRPC WatchWorkout (server streaming).
+            services.AddSingleton<Modules.Users.Infrastructure.Workouts.WorkoutUpdatesBroker>();
             services.AddMemoryCache();
             services.AddHttpContextAccessor();
 

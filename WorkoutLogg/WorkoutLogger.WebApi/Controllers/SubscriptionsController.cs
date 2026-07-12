@@ -70,6 +70,31 @@ namespace WorkoutLogger.WebApi.Controllers
             });
         }
 
+        /// <summary>
+        /// Восстановление покупки: пере-синхронизация подписки из БД в флаг User.IsPremium.
+        /// Полезно после переустановки приложения или входа на новом устройстве.
+        /// </summary>
+        [HttpPost("restore")]
+        [Authorize]
+        public async Task<IActionResult> Restore(CancellationToken ct)
+        {
+            var userId = _currentUser.UserId;
+            if (userId is null) return Unauthorized();
+
+            var sub = await _subscriptionService.RestoreAsync(userId, ct);
+            await _userService.SetPremiumAsync(userId, sub is not null);
+
+            return Ok(new
+            {
+                restored = sub is not null,
+                isActive = sub is not null,
+                plan = sub?.Plan.ToString(),
+                status = sub?.Status.ToString(),
+                expiresAt = sub?.ExpiresAt,
+                trialEndsAt = sub?.TrialEndsAt,
+            });
+        }
+
         [HttpPost("cancel")]
         [Authorize]
         public async Task<IActionResult> Cancel(CancellationToken ct)
