@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Modules.Common.Infrastructure.Caching;
 using Modules.Common.Infrastructure.RateLimiting;
 
@@ -46,9 +45,7 @@ namespace Modules.Common.Infrastructure.Extensions
             }
             else
             {
-                services.AddSingleton<ILoginAttemptStore>(sp => new RedisLoginAttemptStore(
-                    redisConnectionString,
-                    sp.GetRequiredService<ILogger<RedisLoginAttemptStore>>()));
+                services.AddSingleton<ILoginAttemptStore>(_ => new RedisLoginAttemptStore(redisConnectionString));
             }
 
             services.AddSingleton<ILoginRateLimiter, LoginRateLimiter>();

@@ -1,5 +1,7 @@
 # WorkoutLogg
 
+[![Build & Test](https://github.com/Maxisoft5/WorkoutLogger/actions/workflows/build.yml/badge.svg)](https://github.com/Maxisoft5/WorkoutLogger/actions/workflows/build.yml)
+
 > Pet-проект для изучения и демонстрации работы с современным .NET-стеком: модульная архитектура, .NET MAUI, gRPC, Kafka, Redis, OpenSearch, Grafana, .NET Aspire, YooKassa, Stripe.
 
 Приложение для логирования тренировок с полным циклом: онбординг → журнал тренировок → аналитика → Premium-подписка с интегрированной оплатой.
@@ -66,10 +68,12 @@
 ┌──────────────────────────────────────────────────────────────────┐
 │                     WorkoutLogger.WebApi                         │
 │  ┌────────────────────────────────────────────────────────────┐  │
-│  │  Auth / Users    │  Subscriptions    │  Exercises (gRPC)   │  │
+│  │ Auth / Users │ Subscriptions │ Trainers │ gRPC (Exercises, │  │
+│  │              │               │          │  WatchWorkout)   │  │
 │  └────────────────────────────────────────────────────────────┘  │
 │  ┌────────────────────────────────────────────────────────────┐  │
-│  │  Modules.Users  │  Modules.Subscriptions  │  Modules.Common│  │
+│  │ Modules.Users │ Modules.Subscriptions │ Modules.Trainers │  │
+│  │              Modules.Common (Caching, Kafka, RateLimiting) │  │
 │  └────────────────────────────────────────────────────────────┘  │
 └────┬──────────────────┬──────────────────┬──────────────────┬────┘
      │                  │                  │                  │
@@ -91,7 +95,7 @@
 
 ### Принципы
 
-- **Модульный монолит** — каждый домен (`Users`, `Subscriptions`) живёт в своих проектах с чёткими границами; межмодульная коммуникация — только через публичные контракты.
+- **Модульный монолит** — каждый домен (`Users`, `Subscriptions`, `Trainers`) живёт в своих проектах с чёткими границами; межмодульная коммуникация — только через публичные контракты.
 - **REST + gRPC сосуществуют** — на одном Kestrel-инстансе через `Http1AndHttp2`. REST используется для стандартных CRUD-операций, gRPC — для тяжёлых справочников и стриминговых сценариев.
 - **Event-driven observability** — события аутентификации публикуются в Kafka и отдельно индексируются в OpenSearch. Падение Kafka не ломает основной auth-flow.
 - **Multi-level caching** — гибридный кэш с fallback: при недоступности Redis срабатывает circuit breaker и сервис продолжает работать с `IMemoryCache`.
@@ -117,7 +121,13 @@ WorkoutLogg/
 │   │   └── Tests/
 │   │
 │   ├── WorkoutsModule/                  # Bounded context: тренировки
-│   │   └── Modules.Workouts.DTO         # (в разработке)
+│   │   └── Modules.Workouts.DTO         # Контракты Workouts API
+│   │
+│   ├── TrainersModule/                  # Маркетплейс тренеров
+│   │   └── Modules.Trainers.Infrastructure
+│   │       ├── Domain/                  # TrainerProfile, TrainingRequest, Wallet, Booking, Review, ...
+│   │       ├── Database/                # TrainersDbContext (схема trainers), EF Migrations
+│   │       └── Services/                # Профили, заявки, кошелёк, оплаты, чат, расписание, отзывы, верификация
 │   │
 │   └── SubscriptionsModule/             # Подписки и приём платежей
 │       └── Modules.Subscriptions.Infrastructure
@@ -143,6 +153,7 @@ WorkoutLogg/
 |-----------------|----------------------------|-----------------------------------------------|
 | `users`         | `UsersDbContext`            | ASP.NET Identity tables, Refresh tokens, Workouts, Outbox |
 | `subscriptions` | `SubscriptionsDbContext`    | Subscriptions, статусы, external payment IDs  |
+| `trainers`      | `TrainersDbContext`         | Профили тренеров, заявки, кошельки FitCoins, оплаты, чат, слоты/бронирования, отзывы, верификация |
 
 ---
 
@@ -246,6 +257,14 @@ dotnet run --project WorkoutLogger.EventsConsumer
 | `POST /webhooks/yookassa` | YooKassa | `payment.succeeded` → активация подписки     |
 | `POST /webhooks/stripe`   | Stripe   | `checkout.session.completed` → активация     |
 
+### AI-эндпоинты (Premium)
+
+| URL                  | Назначение                                                        |
+|----------------------|-------------------------------------------------------------------|
+| `POST /api/ai/chat`     | AI Coach — чат с контекстом реальных тренировок пользователя   |
+| `POST /api/ai/forecast` | Record Forecast — прогноз следующих личных рекордов            |
+| `POST /api/ai/plan`     | Plan Generator — недельный план под цель и историю пользователя |
+
 ---
 
 ## 💡 Демонстрируемые подходы
@@ -255,6 +274,9 @@ dotnet run --project WorkoutLogger.EventsConsumer
 - JWT Bearer + refresh-tokens с revocation
 - ASP.NET Core Identity с кастомным `UserValidator`
 - Многошаговый онбординг через `UserRegistrationStep` (Profile → Body → Goals → Finished)
+- **Rate limiting на Login через Redis**: `ILoginRateLimiter` — счётчик неудачных попыток
+  по паре IP+email (атомарный `INCR` + `EXPIRE`, fixed window 5 попыток / 15 минут),
+  при недоступном Redis прозрачный fallback на in-memory-хранилище; ответ `429 + Retry-After`
 
 ### Платёжная система (`Modules.Subscriptions`)
 
@@ -288,6 +310,18 @@ dotnet run --project WorkoutLogger.EventsConsumer
 - Сосуществование REST и gRPC на одном Kestrel (`Http1AndHttp2`)
 - Передача JWT через gRPC metadata
 - gRPC-клиент в MAUI с bypass dev-сертификата в DEBUG
+- **`WatchWorkout` — live-стриминг активной тренировки**: in-process `WorkoutUpdatesBroker`
+  на bounded-каналах (медленный подписчик теряет старые события, но не блокирует публикацию);
+  `WorkoutService` публикует `SetCompleted` при каждом sync и `WorkoutFinished` при закрытии сессии
+
+### Маркетплейс тренеров (`Modules.Trainers`)
+
+- Профили тренеров со специализациями ([Flags]-enum), match-скор под цели ученика
+- Заявки ученик→тренер (адресные и открытая лента), статистика тренера
+- Кошелёк FitCoins: бонусы за серию, оплата тренировок с эскроу и комиссией 10%
+- Чат тренер↔ученик (доступ только паре, связанной заявкой; MVP на поллинге)
+- Расписание и бронирование слотов (подтверждение, отмена с late-cancel, no-show)
+- Отзывы с рейтингом за 12 месяцев и ответами тренера; верификация с бейджами
 
 ### Событийная архитектура
 
@@ -316,8 +350,10 @@ dotnet run --project WorkoutLogger.EventsConsumer
 
 ### Реализовано
 - [x] JWT-аутентификация с refresh-токенами
+- [x] Rate limiting на `Login` через Redis (fallback на in-memory)
 - [x] Модульная структура решения
 - [x] gRPC: справочник упражнений (unary + server streaming)
+- [x] gRPC `WatchWorkout` — стриминг live-обновлений активной тренировки
 - [x] Kafka: публикация auth-событий
 - [x] OpenSearch + Grafana: индексация и визуализация событий
 - [x] Redis-кэш с fallback на MemoryCache и circuit breaker
@@ -330,23 +366,23 @@ dotnet run --project WorkoutLogger.EventsConsumer
 - [x] MAUI: локализация EN / RU
 - [x] Premium paywall (PremiumPage, PremiumComparePage)
 - [x] Stripe + YooKassa интеграция (checkout, webhooks, активация)
+- [x] Восстановление покупки (restore purchase)
 - [x] `Modules.Subscriptions.Infrastructure` — отдельный модуль, схема БД
+- [x] AI-фичи (Premium): Coach, Record Forecast, Plan Generator
+- [x] Маркетплейс тренеров: профили, поиск с match-скором, заявки
+- [x] Кошелёк FitCoins + оплата тренировок с эскроу
+- [x] MAUI: чат тренер↔ученик, бронирование слотов, отзывы
 - [x] .NET Aspire оркестрация
-
-### В разработке
-- [ ] AI-фичи: Coach, Record Forecast, Plan Generator (бэкенд)
-- [ ] gRPC `WatchWorkout` — стриминг live-обновлений активной тренировки
-- [ ] Rate limiting на `Login` через Redis
-- [ ] Восстановление покупки (restore purchase)
-- [ ] CI/CD пайплайн
+- [x] CI/CD: GitHub Actions — бэкенд build + tests, MAUI Android build
 
 ### Идеи на будущее
-- [ ] SignalR для real-time нотификаций о новых PR
+- [ ] SignalR для real-time нотификаций о новых PR (и чата вместо поллинга)
 - [ ] Push-уведомления через Firebase
 - [ ] Экспорт PDF/CSV (Premium-фича)
 - [ ] Аналитика по мышечным группам (Premium)
 - [ ] Социальные функции — share workout, друзья
 - [ ] Интеграция с Apple Health / Google Fit
+- [ ] MAUI-клиент для gRPC `WatchWorkout` (экран «смотреть тренировку друга»)
 
 ---
 

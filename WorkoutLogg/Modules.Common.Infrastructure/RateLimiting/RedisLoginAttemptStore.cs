@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 
 namespace Modules.Common.Infrastructure.RateLimiting
@@ -7,8 +6,9 @@ namespace Modules.Common.Infrastructure.RateLimiting
     /// Redis-хранилище счётчиков попыток входа: атомарный INCR + EXPIRE
     /// (fixed window). Подключение ленивое, AbortOnConnectFail=false —
     /// недоступный Redis не валит приложение на старте.
+    /// Ошибки Redis пробрасываются наверх — их логирует LoginRateLimiter при fallback.
     /// </summary>
-    public class RedisLoginAttemptStore(string connectionString, ILogger<RedisLoginAttemptStore> logger)
+    public class RedisLoginAttemptStore(string connectionString)
         : ILoginAttemptStore, IDisposable
     {
         private readonly Lazy<Task<ConnectionMultiplexer>> _connection = new(() =>
