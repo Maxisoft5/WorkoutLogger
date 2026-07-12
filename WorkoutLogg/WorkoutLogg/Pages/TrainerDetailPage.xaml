@@ -82,6 +82,27 @@
                             <Label Text="{loc:Translate Trainers_About}" FontSize="11" TextColor="#9CA3AF" />
                             <Label Text="{Binding About}" FontSize="14" TextColor="#374151" />
                         </VerticalStackLayout>
+
+                        <!-- Write a message (M6) -->
+                        <Border BackgroundColor="#EDE9FE" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+                            <Label Text="{loc:Translate Trainers_Message}" FontAttributes="Bold" FontSize="15"
+                                   TextColor="#7C3AED" HorizontalOptions="Center" Padding="0,12">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnMessageTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Available slots (M7) -->
+                <Border BackgroundColor="White" Padding="20"
+                        Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="{loc:Translate Trainers_Slots_Title}" FontAttributes="Bold" FontSize="17" TextColor="#111827" />
+                        <VerticalStackLayout x:Name="SlotsPanel" Spacing="8" />
+                        <Label x:Name="SlotsEmptyLabel" Text="{loc:Translate Trainers_Slots_Empty}"
+                               FontSize="13" TextColor="#9CA3AF" IsVisible="False" />
                     </VerticalStackLayout>
                 </Border>
 
@@ -144,6 +165,17 @@
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Reviews (M8) -->
+                <Border BackgroundColor="White" Padding="20"
+                        Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="{loc:Translate Trainers_Reviews_Title}" FontAttributes="Bold" FontSize="17" TextColor="#111827" />
+                        <VerticalStackLayout x:Name="ReviewsPanel" Spacing="10" />
+                        <Label x:Name="ReviewsEmptyLabel" Text="{loc:Translate Trainers_NoReviews}"
+                               FontSize="13" TextColor="#9CA3AF" IsVisible="False" />
                     </VerticalStackLayout>
                 </Border>
 

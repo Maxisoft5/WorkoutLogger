@@ -25,6 +25,9 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("Trainers", typeof(Pages.TrainersPage));
         Routing.RegisterRoute("TrainerDetail", typeof(Pages.TrainerDetailPage));
         Routing.RegisterRoute("Wallet", typeof(Pages.WalletPage));
+        Routing.RegisterRoute("ChatList", typeof(Pages.ChatListPage));
+        Routing.RegisterRoute("ChatThread", typeof(Pages.ChatThreadPage));
+        Routing.RegisterRoute("MyBookings", typeof(Pages.MyBookingsPage));
         var currentTheme = Application.Current!.RequestedTheme;		
 	}
 

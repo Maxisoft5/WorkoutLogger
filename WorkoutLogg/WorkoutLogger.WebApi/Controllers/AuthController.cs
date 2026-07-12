@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 using Modules.Common.Domain.Events;
 using Modules.Common.Infrastructure.Messaging;
+using Modules.Common.Infrastructure.RateLimiting;
 using Modules.Users.Domain.Authentication;
 using Modules.Users.Domain.Mappers;
 using Modules.Users.DTO.Auth;
@@ -34,13 +35,27 @@ public class AuthController(IAuthService authService,
     }
 
     [HttpPost("Login")]
-    public async Task<IActionResult> Login([FromBody] UserDto user)
+    public async Task<IActionResult> Login([FromBody] UserDto user, [FromServices] ILoginRateLimiter loginRateLimiter)
     {
+        var ctx = httpContextAccessor.HttpContext;
+        var clientIp = ctx?.Connection.RemoteIpAddress?.ToString();
+
+        // Redis-backed защита от перебора паролей: после N неудачных попыток
+        // с одной пары IP+email вход блокируется до конца окна.
+        var rateLimit = await loginRateLimiter.CheckAsync(user.Email ?? "", clientIp);
+        if (rateLimit.IsBlocked)
+        {
+            if (rateLimit.RetryAfter is { } retryAfter)
+                Response.Headers.RetryAfter = ((int)Math.Ceiling(retryAfter.TotalSeconds)).ToString();
+            return StatusCode(StatusCodes.Status429TooManyRequests,
+                new { error = "Too many failed login attempts. Try again later." });
+        }
+
         var login = await authService.LoginAsync(user.Email, user.Password);
 
-        var ctx = httpContextAccessor.HttpContext;
         if (login.IsSuccess)
         {
+            await loginRateLimiter.ResetAsync(user.Email ?? "", clientIp);
             var logined = await userService.GetUserByEmail(user.Email);
             if (logined.IsSuccess)
             {
@@ -56,6 +71,7 @@ public class AuthController(IAuthService authService,
         }
         else
         {
+            await loginRateLimiter.RecordFailureAsync(user.Email ?? "", clientIp);
             await eventPublisher.PublishAsync(kafkaSettings.Topics.AuthEvents, new AuthEvent
             {
                 EventType = "user.login_failed",

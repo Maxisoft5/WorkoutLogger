@@ -132,6 +132,12 @@ public partial class ProfilePage : ContentPage
     private async void OnWalletTapped(object sender, TappedEventArgs e) =>
         await Shell.Current.GoToAsync("Wallet");
 
+    private async void OnMessagesTapped(object sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("ChatList");
+
+    private async void OnBookingsTapped(object sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("MyBookings");
+
     private async void OnLogoutTapped(object sender, TappedEventArgs e)
     {
         var confirmed = await DisplayAlertAsync(

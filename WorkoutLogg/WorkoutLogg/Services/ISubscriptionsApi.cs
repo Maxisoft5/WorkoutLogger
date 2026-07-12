@@ -10,6 +10,10 @@ namespace WorkoutLogg.Services
         bool IsActive, string? Plan, string? Status,
         DateTime? ExpiresAt, DateTime? TrialEndsAt);
 
+    public record SubscriptionRestoreResponse(
+        bool Restored, bool IsActive, string? Plan, string? Status,
+        DateTime? ExpiresAt, DateTime? TrialEndsAt);
+
     public interface ISubscriptionsApi
     {
         [Post("/api/subscriptions/checkout")]
@@ -19,6 +23,11 @@ namespace WorkoutLogg.Services
 
         [Get("/api/subscriptions/status")]
         Task<IApiResponse<SubscriptionStatusResponse>> GetStatusAsync(
+            [Header("Authorization")] string token);
+
+        /// <summary>Восстановление покупки: пере-синхронизация подписки с сервером.</summary>
+        [Post("/api/subscriptions/restore")]
+        Task<IApiResponse<SubscriptionRestoreResponse>> RestoreAsync(
             [Header("Authorization")] string token);
     }
 }

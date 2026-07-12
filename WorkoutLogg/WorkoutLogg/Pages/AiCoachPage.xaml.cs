@@ -128,9 +128,64 @@ public partial class AiCoachPage : ContentPage
     // ── Quick actions ────────────────────────────────────────────
 
     private void OnTipTapped(object sender, TappedEventArgs e)        => SendMessage(Loc.Get("AiCoach_Action_Tip_Msg"));
-    private void OnPRForecastTapped(object sender, TappedEventArgs e) => SendMessage(Loc.Get("AiCoach_Action_PR_Msg"));
-    private void OnPlanTapped(object sender, TappedEventArgs e)       => SendMessage(Loc.Get("AiCoach_Action_Plan_Msg"));
     private void OnAnalyticsTapped(object sender, TappedEventArgs e)  => SendMessage(Loc.Get("AiCoach_Action_Analytics_Msg"));
+
+    // PR-прогноз и генератор плана используют выделенные эндпоинты
+    // (/api/ai/forecast, /api/ai/plan) со структурированными промптами на бэкенде.
+    private void OnPRForecastTapped(object sender, TappedEventArgs e) =>
+        RunSpecialAction(Loc.Get("AiCoach_Action_PR_Msg"), (token, locale, ct) =>
+            _api.ForecastAsync(token, new AiForecastRequestDto(_context, locale), ct));
+
+    private void OnPlanTapped(object sender, TappedEventArgs e) =>
+        RunSpecialAction(Loc.Get("AiCoach_Action_Plan_Msg"), (token, locale, ct) =>
+            _api.GeneratePlanAsync(token, new AiPlanRequestDto(_context, locale), ct));
+
+    private void RunSpecialAction(
+        string userText,
+        Func<string, string, CancellationToken, Task<Refit.IApiResponse<AiChatResponseDto>>> call)
+    {
+        if (!_isPremium) return;
+
+        WelcomeSection.IsVisible = false;
+        MessagesPanel.IsVisible  = true;
+        AddBubble("user", userText);
+
+        _ = FetchSpecialReplyAsync(call);
+    }
+
+    private async Task FetchSpecialReplyAsync(
+        Func<string, string, CancellationToken, Task<Refit.IApiResponse<AiChatResponseDto>>> call)
+    {
+        TypingIndicator.IsVisible = true;
+        ScrollToBottom();
+
+        try
+        {
+            var token = await LoginService.GetActiveToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                TypingIndicator.IsVisible = false;
+                ShowError();
+                return;
+            }
+
+            var resp = await call($"Bearer {token}", _lang.CurrentCode, CancellationToken.None);
+
+            TypingIndicator.IsVisible = false;
+
+            if (resp.IsSuccessStatusCode && resp.Content?.Success == true)
+                AddBubble("assistant", resp.Content.Content);
+            else
+                ShowError();
+        }
+        catch
+        {
+            TypingIndicator.IsVisible = false;
+            ShowError();
+        }
+
+        ScrollToBottom();
+    }
 
     private void OnSendTapped(object sender, TappedEventArgs e)
     {

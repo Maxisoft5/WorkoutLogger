@@ -99,6 +99,39 @@ namespace Modules.Subscriptions.Infrastructure.Services
             await _db.SaveChangesAsync(ct);
         }
 
+        /// <summary>
+        /// Восстановление покупки (restore purchase): пере-синхронизация статуса
+        /// подписки из БД. Просроченные Active/Trial-подписки помечаются Expired,
+        /// возвращается актуальная активная подписка (или null, если её нет).
+        /// </summary>
+        public async Task<Subscription?> RestoreAsync(string userId, CancellationToken ct = default)
+        {
+            var now = DateTime.UtcNow;
+
+            var candidates = await _db.Subscriptions
+                .Where(s => s.UserId == userId &&
+                    (s.Status == SubscriptionStatus.Active || s.Status == SubscriptionStatus.Trial))
+                .OrderByDescending(s => s.CreatedAt)
+                .ToListAsync(ct);
+
+            Subscription? active = null;
+            foreach (var sub in candidates)
+            {
+                if (sub.ExpiresAt is not null && sub.ExpiresAt <= now)
+                {
+                    sub.Status = SubscriptionStatus.Expired;
+                    sub.UpdatedAt = now;
+                }
+                else
+                {
+                    active ??= sub;
+                }
+            }
+
+            await _db.SaveChangesAsync(ct);
+            return active;
+        }
+
         public async Task CancelSubscriptionAsync(string userId, CancellationToken ct = default)
         {
             var sub = await GetActiveSubscriptionAsync(userId, ct);

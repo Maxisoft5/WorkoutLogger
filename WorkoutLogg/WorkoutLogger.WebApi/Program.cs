@@ -98,6 +98,7 @@ builder.Services.AddSubscriptionsModule(configuration);
 builder.Services.AddTrainersModule(configuration);
 builder.Services.AddAiCoachService(configuration);
 builder.Services.AddHybridCache(configuration);
+builder.Services.AddLoginRateLimiter(configuration);
 builder.Services.AddKafkaMessaging(configuration);
 
 
@@ -134,5 +135,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapGrpcService<ExercisesGrpcService>();
+app.MapGrpcService<WorkoutsGrpcService>();
 
 app.Run();

@@ -7,7 +7,7 @@ using Modules.Users.Infrastructure.Database;
 
 namespace Modules.Users.Infrastructure.Workouts;
 
-public class WorkoutService(UsersDbContext dbContext) : IWorkoutService
+public class WorkoutService(UsersDbContext dbContext, WorkoutUpdatesBroker? updatesBroker = null) : IWorkoutService
 {
     public async Task<WorkoutResponse> CreateAsync(string userId, CreateWorkoutRequest request, CancellationToken ct = default)
     {
@@ -49,6 +49,8 @@ public class WorkoutService(UsersDbContext dbContext) : IWorkoutService
 
         if (workout is null) return null;
 
+        var previousEndDate = workout.EndDate;
+
         workout.WorkoutType = request.WorkoutType;
         workout.StartDate = DateTime.SpecifyKind(request.StartDate, DateTimeKind.Utc);
         workout.EndDate = DateTime.SpecifyKind(request.EndDate, DateTimeKind.Utc);
@@ -60,16 +62,53 @@ public class WorkoutService(UsersDbContext dbContext) : IWorkoutService
         foreach (var ex in workout.Exercises.ToList())
             dbContext.Remove(ex);
 
+        var newExercises = new List<Exercise>(request.Exercises.Count);
         foreach (var req in request.Exercises)
         {
             var ex = MapExercise(req);
             ex.WorkoutId = workout.Id;
             dbContext.Exercises.Add(ex);
+            newExercises.Add(ex);
         }
 
         await dbContext.SaveChangesAsync(ct);
 
+        PublishLiveUpdates(workout.Id, newExercises, previousEndDate, workout.StartDate, workout.EndDate);
+
         return ToResponse(workout, Guid.Empty);
+    }
+
+    /// <summary>
+    /// Live-обновления для gRPC WatchWorkout: каждый sync активной тренировки
+    /// публикует последний завершённый подход, а перенос EndDate (сессия закрыта
+    /// или продлена) — итоговое событие WorkoutFinished.
+    /// </summary>
+    private void PublishLiveUpdates(
+        Guid workoutId, List<Exercise> exercises,
+        DateTime previousEndDate, DateTime startDate, DateTime endDate)
+    {
+        if (updatesBroker is null) return;
+
+        var now = DateTime.UtcNow;
+
+        var lastExercise = exercises.LastOrDefault(e => e.Sets.Count > 0);
+        var lastSet = lastExercise?.Sets.OrderBy(s => s.SetNumber).LastOrDefault();
+        if (lastExercise is not null && lastSet is not null)
+        {
+            updatesBroker.Publish(new WorkoutUpdateEvent(
+                workoutId, now,
+                SetCompleted: new SetCompletedEvent(
+                    lastExercise.Id.ToString(), lastExercise.Name, lastSet.Reps, lastSet.WeightKg)));
+        }
+
+        if (endDate != previousEndDate && endDate > startDate)
+        {
+            var totalSets = exercises.Sum(e => e.Sets.Count);
+            var durationSeconds = (int)(endDate - startDate).TotalSeconds;
+            updatesBroker.Publish(new WorkoutUpdateEvent(
+                workoutId, now,
+                Finished: new WorkoutFinishedEvent(totalSets, durationSeconds)));
+        }
     }
 
     public async Task<bool> DeleteAsync(string userId, Guid workoutId, CancellationToken ct = default)

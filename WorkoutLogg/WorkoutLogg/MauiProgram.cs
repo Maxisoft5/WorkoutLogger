@@ -131,6 +131,12 @@ public static class MauiProgram
         builder.Services.AddTransient<WorkoutLogg.Pages.TrainerDetailPage>();
         builder.Services.AddSingleton<WorkoutLogg.PageModels.WalletPageModel>();
         builder.Services.AddTransient<WorkoutLogg.Pages.WalletPage>();
+        // Chat (M6), bookings (M7): списки перезагружаются в OnAppearing.
+        builder.Services.AddSingleton<WorkoutLogg.PageModels.ChatListPageModel>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.ChatListPage>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.ChatThreadPage>();
+        builder.Services.AddSingleton<WorkoutLogg.PageModels.MyBookingsPageModel>();
+        builder.Services.AddTransient<WorkoutLogg.Pages.MyBookingsPage>();
         builder.Services.AddTransient<AppShell>();
 
         var baseUrl = useLocalhost
@@ -197,6 +203,27 @@ public static class MauiProgram
             ;
 
         builder.Services.AddRefitClient<WorkoutLogg.Services.IWalletApi>(trainersRefitSettings)
+            .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+#if DEBUG
+            .ConfigurePrimaryHttpMessageHandler(DevHandler)
+#endif
+            ;
+
+        builder.Services.AddRefitClient<WorkoutLogg.Services.IChatApi>(trainersRefitSettings)
+            .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+#if DEBUG
+            .ConfigurePrimaryHttpMessageHandler(DevHandler)
+#endif
+            ;
+
+        builder.Services.AddRefitClient<WorkoutLogg.Services.IScheduleApi>(trainersRefitSettings)
+            .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+#if DEBUG
+            .ConfigurePrimaryHttpMessageHandler(DevHandler)
+#endif
+            ;
+
+        builder.Services.AddRefitClient<WorkoutLogg.Services.IReviewsApi>(trainersRefitSettings)
             .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
 #if DEBUG
             .ConfigurePrimaryHttpMessageHandler(DevHandler)
