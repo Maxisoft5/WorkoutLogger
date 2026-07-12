@@ -86,9 +86,52 @@ public partial class PremiumPage : ContentPage
     private async void OnCloseTapped(object sender, TappedEventArgs e) =>
         await Shell.Current.GoToAsync("..");
 
-    private void OnRestoreTapped(object sender, TappedEventArgs e)
+    private async void OnRestoreTapped(object sender, TappedEventArgs e)
     {
-        // TODO: restore purchase
+        try
+        {
+            var token = await LoginService.GetActiveToken();
+            if (string.IsNullOrEmpty(token)) return;
+
+            var resp = await _api.RestoreAsync($"Bearer {token}");
+            if (!resp.IsSuccessStatusCode || resp.Content is null)
+            {
+                await DisplayAlertAsync(Loc.Get("Common_Error"), Loc.Get("Common_TryAgain"), Loc.Get("Common_OK"));
+                return;
+            }
+
+            var restored = resp.Content;
+            if (restored.Restored)
+            {
+                // Обновляем кэшированного пользователя, чтобы Premium-фичи открылись сразу.
+                var user = await CurrentUserStore.GetCurrentUser();
+                if (user is not null)
+                {
+                    user.IsPremium = true;
+                    await CurrentUserStore.SetCurrentUser(user);
+                }
+
+                ApplySubscriptionUI(new SubscriptionStatusResponse(
+                    restored.IsActive, restored.Plan, restored.Status,
+                    restored.ExpiresAt, restored.TrialEndsAt));
+
+                await DisplayAlertAsync(
+                    Loc.Get("Premium_RestoredTitle"),
+                    Loc.Get("Premium_RestoredMsg"),
+                    Loc.Get("Common_OK"));
+            }
+            else
+            {
+                await DisplayAlertAsync(
+                    Loc.Get("Premium_Restore"),
+                    Loc.Get("Premium_NothingToRestore"),
+                    Loc.Get("Common_OK"));
+            }
+        }
+        catch
+        {
+            await DisplayAlertAsync(Loc.Get("Common_Error"), Loc.Get("Common_TryAgain"), Loc.Get("Common_OK"));
+        }
     }
 
     private void OnAnnualTapped(object sender, TappedEventArgs e)
