@@ -2,11 +2,12 @@
 <ContentPage
     x:Class="WorkoutLogg.Pages.ProfilePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:theme="clr-namespace:WorkoutLogg.Utilities"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="*,Auto">
@@ -15,7 +16,7 @@
             <VerticalStackLayout Spacing="0">
 
                 <!-- Purple header card -->
-                <Border BackgroundColor="#7C3AED"
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                         Padding="20,52,20,24"
                         StrokeShape="RoundRectangle 0,0,28,28"
                         StrokeThickness="0">
@@ -28,7 +29,7 @@
                                     <TapGestureRecognizer Tapped="OnChangeAvatarTapped" />
                                 </Grid.GestureRecognizers>
                                 <!-- Initials fallback -->
-                                <Border BackgroundColor="#9333EA"
+                                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}"
                                         HeightRequest="84"
                                         StrokeShape="Ellipse"
                                         StrokeThickness="0"
@@ -52,7 +53,7 @@
                                             <EllipseGeometry Center="42,42" RadiusX="42" RadiusY="42" />
                                         </Image.Clip>
                                     </Image>
-                                    <Ellipse Stroke="#9333EA" StrokeThickness="2"
+                                    <Ellipse Stroke="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" StrokeThickness="2"
                                              HeightRequest="84" WidthRequest="84"
                                              Fill="Transparent" />
                                 </Grid>
@@ -65,15 +66,15 @@
                                 <HorizontalStackLayout Spacing="6">
                                     <Label FontSize="13"
                                            Text="{Binding MemberSinceLabel}"
-                                           TextColor="#DDD6FE" />
+                                           TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" />
                                     <Border IsVisible="{Binding IsPremium}"
-                                            BackgroundColor="#9333EA"
+                                            BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}"
                                             Padding="8,3"
                                             StrokeShape="RoundRectangle 8"
                                             StrokeThickness="0">
                                         <Label FontAttributes="Bold"
                                                FontSize="11"
-                                               Text="⭐ Premium"
+                                               Text="Premium"
                                                TextColor="White" />
                                     </Border>
                                 </HorizontalStackLayout>
@@ -85,24 +86,24 @@
                             <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="2">
                                 <Label FontAttributes="Bold" FontSize="22" HorizontalOptions="Center"
                                        Text="{Binding WeightLabel}" TextColor="White" />
-                                <Label FontSize="12" HorizontalOptions="Center" Text="{loc:Translate Profile_Weight}" TextColor="#DDD6FE" />
+                                <Label FontSize="12" HorizontalOptions="Center" Text="{loc:Translate Profile_Weight}" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" />
                             </VerticalStackLayout>
-                            <BoxView Grid.Column="1" BackgroundColor="#9333EA" WidthRequest="1" />
+                            <BoxView Grid.Column="1" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" WidthRequest="1" />
                             <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="2">
                                 <Label FontAttributes="Bold" FontSize="22" HorizontalOptions="Center"
                                        Text="{Binding HeightLabel}" TextColor="White" />
-                                <Label FontSize="12" HorizontalOptions="Center" Text="{loc:Translate Profile_Height}" TextColor="#DDD6FE" />
+                                <Label FontSize="12" HorizontalOptions="Center" Text="{loc:Translate Profile_Height}" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" />
                             </VerticalStackLayout>
-                            <BoxView Grid.Column="3" BackgroundColor="#9333EA" WidthRequest="1" />
+                            <BoxView Grid.Column="3" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" WidthRequest="1" />
                             <VerticalStackLayout Grid.Column="4" HorizontalOptions="Center" Spacing="2">
                                 <Label FontAttributes="Bold" FontSize="22" HorizontalOptions="Center"
                                        Text="{Binding BodyFatLabel}" TextColor="White" />
-                                <Label FontSize="12" HorizontalOptions="Center" Text="{loc:Translate Profile_BodyFat}" TextColor="#DDD6FE" />
+                                <Label FontSize="12" HorizontalOptions="Center" Text="{loc:Translate Profile_BodyFat}" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" />
                             </VerticalStackLayout>
                         </Grid>
 
                         <!-- Edit stats button -->
-                        <Border BackgroundColor="#9333EA"
+                        <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}"
                                 Padding="14,6"
                                 StrokeShape="RoundRectangle 12"
                                 StrokeThickness="0"
@@ -110,7 +111,7 @@
                             <Label FontAttributes="Bold"
                                    FontSize="12"
                                    Text="{loc:Translate Common_Edit}"
-                                   TextColor="#DDD6FE">
+                                   TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnEditStatsTapped" />
                                 </Label.GestureRecognizers>
@@ -122,29 +123,29 @@
 
                         <!-- Activity pills -->
                         <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                            <Border BackgroundColor="#9333EA" Padding="14,8" StrokeShape="RoundRectangle 20" StrokeThickness="0">
+                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" Padding="14,8" StrokeShape="RoundRectangle 20" StrokeThickness="0">
                                 <HorizontalStackLayout Spacing="5">
-                                    <Label Text="🔥" FontSize="14" VerticalOptions="Center" />
+                                    <Label Style="{StaticResource IconFire}" FontSize="18" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" VerticalOptions="Center" />
                                     <Label VerticalOptions="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding StreakLabel}" FontAttributes="Bold" TextColor="White" FontSize="13" />
                                                 <Span Text=" " TextColor="White" FontSize="13" />
-                                                <Span Text="{loc:Translate Common_DayStreak}" TextColor="#DDD6FE" FontSize="12" />
+                                                <Span Text="{loc:Translate Common_DayStreak}" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" FontSize="12" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
                                 </HorizontalStackLayout>
                             </Border>
-                            <Border BackgroundColor="#9333EA" Padding="14,8" StrokeShape="RoundRectangle 20" StrokeThickness="0">
+                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" Padding="14,8" StrokeShape="RoundRectangle 20" StrokeThickness="0">
                                 <HorizontalStackLayout Spacing="5">
-                                    <Label Text="📓" FontSize="14" VerticalOptions="Center" />
+                                    <Label Style="{StaticResource IconJournal}" FontSize="18" VerticalOptions="Center" />
                                     <Label VerticalOptions="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding TotalSessionsLabel}" FontAttributes="Bold" TextColor="White" FontSize="13" />
                                                 <Span Text=" " TextColor="White" FontSize="13" />
-                                                <Span Text="{loc:Translate Common_Sessions}" TextColor="#DDD6FE" FontSize="12" />
+                                                <Span Text="{loc:Translate Common_Sessions}" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" FontSize="12" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -158,10 +159,10 @@
                 <VerticalStackLayout Padding="20,20,20,12" Spacing="16">
 
                     <!-- Personal Records -->
-                    <Border BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6"
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="18,16" Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}"
                             StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <VerticalStackLayout Spacing="14">
-                            <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Profile_PersonalRecords}" TextColor="#111827" />
+                            <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Profile_PersonalRecords}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
 
                             <CollectionView ItemsSource="{Binding PersonalRecords}"
                                             SelectionMode="None"
@@ -172,13 +173,13 @@
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="vm:PersonalRecordVM">
-                                        <Border BackgroundColor="#F9FAFB" Padding="14,12"
-                                                Stroke="#F3F4F6" StrokeShape="RoundRectangle 12" StrokeThickness="1">
+                                        <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" Padding="14,12"
+                                                Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 12" StrokeThickness="1">
                                             <VerticalStackLayout Spacing="3">
                                                 <Label FontSize="12" Text="{Binding ExerciseName}"
-                                                       TextColor="#9CA3AF" LineBreakMode="TailTruncation" MaxLines="1" />
+                                                       TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" LineBreakMode="TailTruncation" MaxLines="1" />
                                                 <Label FontAttributes="Bold" FontSize="20"
-                                                       Text="{Binding WeightLabel}" TextColor="{Binding ValueColor}" />
+                                                       Text="{Binding WeightLabel}" TextColor="{theme:ThemeBinding Path=ValueColor, Background=False}" />
                                             </VerticalStackLayout>
                                         </Border>
                                     </DataTemplate>
@@ -188,14 +189,14 @@
                     </Border>
 
                     <!-- Achievements -->
-                    <Border BackgroundColor="White" Padding="18,16" Stroke="#F3F4F6"
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="18,16" Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}"
                             StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <VerticalStackLayout Spacing="12">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0" FontAttributes="Bold" FontSize="16"
-                                       Text="{loc:Translate Profile_Achievements}" TextColor="#111827" />
+                                       Text="{loc:Translate Profile_Achievements}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Grid.Column="1" FontAttributes="Bold" FontSize="13"
-                                       Text="{Binding UnlockedLabel}" TextColor="#7C3AED" />
+                                       Text="{Binding UnlockedLabel}" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
                             </Grid>
 
                             <CollectionView ItemsSource="{Binding Achievements}"
@@ -207,7 +208,7 @@
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="vm:AchievementVM">
-                                        <Border BackgroundColor="{Binding CardBg}"
+                                        <Border BackgroundColor="{theme:ThemeBinding Path=CardBg, Background=True}"
                                                 Padding="10,10"
                                                 StrokeShape="RoundRectangle 14"
                                                 StrokeThickness="0"
@@ -216,33 +217,33 @@
                                                   RowDefinitions="Auto,Auto,Auto" RowSpacing="2">
                                                 <!-- Emoji circle -->
                                                 <Border Grid.Column="0" Grid.RowSpan="3"
-                                                        BackgroundColor="{Binding EmojiCircleColor}"
+                                                        BackgroundColor="{theme:ThemeBinding Path=EmojiCircleColor, Background=True}"
                                                         HeightRequest="78" WidthRequest="78"
                                                         StrokeShape="RoundRectangle 10"
                                                         StrokeThickness="0"
                                                         VerticalOptions="Start">
                                                     <Label FontSize="16"
                                                            HorizontalOptions="Center"
-                                                           Text="{Binding Emoji}"
+                                                           Text="{Binding Emoji}" Style="{StaticResource FitnessIcon}"
                                                            VerticalOptions="Center" />
                                                 </Border>
                                                 <!-- Title -->
                                                 <Label Grid.Column="1" Grid.Row="0"
                                                        FontAttributes="Bold" FontSize="11"
                                                        Text="{Binding Title}"
-                                                       TextColor="{Binding TitleColor}"
+                                                       TextColor="{theme:ThemeBinding Path=TitleColor, Background=False}"
                                                        LineBreakMode="TailTruncation" MaxLines="1" />
                                                 <!-- Description -->
                                                 <Label Grid.Column="1" Grid.Row="1"
                                                        FontSize="9"
                                                        Text="{Binding Description}"
-                                                       TextColor="#9CA3AF"
+                                                       TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                                                        LineBreakMode="WordWrap" MaxLines="2" />
                                                 <!-- Progress -->
                                                 <Label Grid.Column="1" Grid.Row="2"
                                                        FontSize="9" FontAttributes="Bold"
                                                        Text="{Binding ProgressText}"
-                                                       TextColor="{Binding ProgressColor}"
+                                                       TextColor="{theme:ThemeBinding Path=ProgressColor, Background=False}"
                                                        IsVisible="{Binding HasProgress}" />
                                             </Grid>
                                         </Border>
@@ -253,84 +254,97 @@
                     </Border>
 
                     <!-- Settings -->
-                    <Border BackgroundColor="White" Padding="4,8" Stroke="#F3F4F6"
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="4,8" Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}"
                             StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <VerticalStackLayout>
                             <!-- Premium row -->
+                            <Grid Padding="16,14" ColumnDefinitions="*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnThemeTapped" />
+                                </Grid.GestureRecognizers>
+                                <Label Text="{loc:Translate Profile_Theme}" FontSize="15"
+                                       TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1" Style="{StaticResource IconRight}" FontSize="20"
+                                       TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
+                                       InputTransparent="True" VerticalOptions="Center" />
+                            </Grid>
+                            <BoxView HeightRequest="1" Margin="16,0"
+                                     BackgroundColor="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" />
                             <Grid Padding="16,14" ColumnDefinitions="Auto,*,Auto">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnPremiumTapped" />
                                 </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" Text="⭐" FontSize="16"
+                                <Label Grid.Column="0" Style="{StaticResource IconPremium}" FontSize="22"
                                        VerticalOptions="Center" Margin="0,0,8,0" />
                                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
                                     <Label x:Name="PremiumRowTitle" FontSize="15" FontAttributes="Bold"
                                            Text="{loc:Translate Profile_GetPremium}"
-                                           TextColor="#7C3AED" />
-                                    <Label x:Name="PremiumRowSub" FontSize="11" TextColor="#9CA3AF"
+                                           TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
+                                    <Label x:Name="PremiumRowSub" FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                                            IsVisible="False" />
                                 </VerticalStackLayout>
-                                <Label Grid.Column="2" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
+                                <Label Grid.Column="2" Style="{StaticResource IconRight}" InputTransparent="True" FontSize="20" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" VerticalOptions="Center" />
                             </Grid>
-                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                            <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" Margin="16,0" />
                             <Grid Padding="16,14" ColumnDefinitions="*,Auto">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnLanguageTapped" />
                                 </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" FontSize="15" Text="{loc:Translate Profile_Language}" TextColor="#111827" VerticalOptions="Center" />
-                                <Label Grid.Column="1" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
+                                <Label Grid.Column="0" FontSize="15" Text="{loc:Translate Profile_Language}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Style="{StaticResource IconRight}" InputTransparent="True" FontSize="20" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" VerticalOptions="Center" />
                             </Grid>
-                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                            <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" Margin="16,0" />
                             <Grid Padding="16,14" ColumnDefinitions="Auto,*,Auto">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnTrainersTapped" />
                                 </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" Text="🏋️" FontSize="16" VerticalOptions="Center" Margin="0,0,8,0" />
-                                <Label Grid.Column="1" FontSize="15" Text="{loc:Translate Profile_FindTrainer}" TextColor="#111827" VerticalOptions="Center" />
-                                <Label Grid.Column="2" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
+                                <Label Grid.Column="0" Style="{StaticResource IconStrength}" FontSize="22" VerticalOptions="Center" Margin="0,0,8,0" />
+                                <Label Grid.Column="1" FontSize="15" Text="{loc:Translate Profile_FindTrainer}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" VerticalOptions="Center" />
+                                <Label Grid.Column="2" Style="{StaticResource IconRight}" InputTransparent="True" FontSize="20" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" VerticalOptions="Center" />
                             </Grid>
-                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                            <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" Margin="16,0" />
                             <Grid Padding="16,14" ColumnDefinitions="Auto,*,Auto">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnWalletTapped" />
                                 </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" Text="💰" FontSize="16" VerticalOptions="Center" Margin="0,0,8,0" />
-                                <Label Grid.Column="1" FontSize="15" Text="{loc:Translate Profile_Wallet}" TextColor="#111827" VerticalOptions="Center" />
-                                <Label Grid.Column="2" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
+                                <Label Grid.Column="0" Style="{StaticResource IconWallet}" FontSize="22" VerticalOptions="Center" Margin="0,0,8,0" />
+                                <Label Grid.Column="1" FontSize="15" Text="{loc:Translate Profile_Wallet}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" VerticalOptions="Center" />
+                                <Label Grid.Column="2" Style="{StaticResource IconRight}" InputTransparent="True" FontSize="20" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" VerticalOptions="Center" />
                             </Grid>
-                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                            <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" Margin="16,0" />
                             <Grid Padding="16,14" ColumnDefinitions="Auto,*,Auto">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnMessagesTapped" />
                                 </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" Text="💬" FontSize="16" VerticalOptions="Center" Margin="0,0,8,0" />
-                                <Label Grid.Column="1" FontSize="15" Text="{loc:Translate Profile_Messages}" TextColor="#111827" VerticalOptions="Center" />
-                                <Label Grid.Column="2" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
+                                <Label Grid.Column="0" Style="{StaticResource IconChat}" FontSize="22" VerticalOptions="Center" Margin="0,0,8,0" />
+                                <Label Grid.Column="1" FontSize="15" Text="{loc:Translate Profile_Messages}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" VerticalOptions="Center" />
+                                <Label Grid.Column="2" Style="{StaticResource IconRight}" InputTransparent="True" FontSize="20" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" VerticalOptions="Center" />
                             </Grid>
-                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                            <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" Margin="16,0" />
                             <Grid Padding="16,14" ColumnDefinitions="Auto,*,Auto">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnBookingsTapped" />
                                 </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" Text="📅" FontSize="16" VerticalOptions="Center" Margin="0,0,8,0" />
-                                <Label Grid.Column="1" FontSize="15" Text="{loc:Translate Profile_Bookings}" TextColor="#111827" VerticalOptions="Center" />
-                                <Label Grid.Column="2" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
+                                <Label Grid.Column="0" Style="{StaticResource IconCalendar}" FontSize="22" VerticalOptions="Center" Margin="0,0,8,0" />
+                                <Label Grid.Column="1" FontSize="15" Text="{loc:Translate Profile_Bookings}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" VerticalOptions="Center" />
+                                <Label Grid.Column="2" Style="{StaticResource IconRight}" InputTransparent="True" FontSize="20" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" VerticalOptions="Center" />
                             </Grid>
-                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                            <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" Margin="16,0" />
                             <Grid Padding="16,14" ColumnDefinitions="*,Auto">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnStandardsTapped" />
                                 </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" FontSize="15" Text="{loc:Translate Profile_Standards}" TextColor="#111827" VerticalOptions="Center" />
-                                <Label Grid.Column="1" FontSize="18" Text="›" TextColor="#9CA3AF" VerticalOptions="Center" />
+                                <Label Grid.Column="0" FontSize="15" Text="{loc:Translate Profile_Standards}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Style="{StaticResource IconRight}" InputTransparent="True" FontSize="20" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" VerticalOptions="Center" />
                             </Grid>
-                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                            <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" Margin="16,0" />
                             <Grid Padding="16,14" ColumnDefinitions="*,Auto">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnLogoutTapped" />
                                 </Grid.GestureRecognizers>
-                                <Label Grid.Column="0" FontSize="15" Text="{loc:Translate Profile_Logout}" TextColor="#EF4444" VerticalOptions="Center" />
-                                <Label Grid.Column="1" FontSize="18" Text="›" TextColor="#FCA5A5" VerticalOptions="Center" />
+                                <Label Grid.Column="0" FontSize="15" Text="{loc:Translate Profile_Logout}" TextColor="{AppThemeBinding Light={StaticResource ThemeDangerLight}, Dark={StaticResource ThemeDangerDark}}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Style="{StaticResource IconRight}" InputTransparent="True" FontSize="20" TextColor="{AppThemeBinding Light={StaticResource ThemeDangerLight}, Dark={StaticResource ThemeDangerDark}}" VerticalOptions="Center" />
                             </Grid>
                         </VerticalStackLayout>
                     </Border>

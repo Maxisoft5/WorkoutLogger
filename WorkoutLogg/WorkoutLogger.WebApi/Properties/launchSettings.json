@@ -3,18 +3,24 @@
     "http": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "UseLocalhost": "true",
+        "Kafka__Enabled": "true",
+        "OpenSearch__Enabled": "true"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5205"
+      "applicationUrl": "http://localhost:5000"
     },
     "https": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "UseLocalhost": "true",
+        "Kafka__Enabled": "true",
+        "OpenSearch__Enabled": "true"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7280;http://localhost:5205"
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
     },
     "Container (Dockerfile)": {
       "commandName": "Docker",

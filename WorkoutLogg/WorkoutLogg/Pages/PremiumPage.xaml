@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="*,Auto">
@@ -13,7 +13,7 @@
             <VerticalStackLayout Spacing="0">
 
                 <!-- Hero -->
-                <Border BackgroundColor="#7C3AED"
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                         Padding="20,52,20,32"
                         StrokeShape="RoundRectangle 0,0,28,28"
                         StrokeThickness="0">
@@ -22,18 +22,19 @@
                         <!-- Close / Restore row -->
                         <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,24">
                             <Border Grid.Column="0"
-                                    BackgroundColor="#9333EA"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}"
                                     HeightRequest="64" WidthRequest="64"
                                     StrokeShape="RoundRectangle 10" StrokeThickness="0">
-                                <Label Text="×" FontSize="20" TextColor="White"
+                                <Label Style="{StaticResource IconCloseAction}" InputTransparent="True" TextColor="White"
                                        HorizontalOptions="Center" VerticalOptions="Center" />
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnCloseTapped" />
                                 </Border.GestureRecognizers>
                             </Border>
                             <Label Grid.Column="2"
-                                   Text="{loc:Translate Premium_Restore}"
-                                   TextColor="#DDD6FE" FontSize="12" FontAttributes="Bold"
+                                    Text="{loc:Translate Premium_Restore}"
+                                    MinimumHeightRequest="48" MinimumWidthRequest="48" VerticalTextAlignment="Center" BackgroundColor="Transparent"
+                                   TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" FontSize="12" FontAttributes="Bold"
                                    VerticalOptions="Center">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnRestoreTapped" />
@@ -42,11 +43,11 @@
                         </Grid>
 
                         <!-- Icon -->
-                        <Border BackgroundColor="#9333EA"
+                        <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}"
                                 HeightRequest="85" WidthRequest="85"
                                 StrokeShape="RoundRectangle 22" StrokeThickness="0"
                                 HorizontalOptions="Center" Margin="0,0,0,14">
-                            <Label Text="⭐" FontSize="32"
+                            <Label Style="{StaticResource IconPremium}" TextColor="White" FontSize="36"
                                    HorizontalOptions="Center" VerticalOptions="Center" />
                         </Border>
 
@@ -56,12 +57,12 @@
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="WorkoutLog " TextColor="White" FontAttributes="Bold" FontSize="26" />
-                                    <Span Text="Premium" TextColor="#DDD6FE" FontAttributes="Bold" FontSize="26" />
+                                    <Span Text="Premium" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" FontAttributes="Bold" FontSize="26" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
                         <Label Text="{loc:Translate Premium_Subtitle}"
-                               TextColor="#DDD6FE" FontSize="13"
+                               TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" FontSize="13"
                                HorizontalOptions="Center" HorizontalTextAlignment="Center"
                                LineBreakMode="WordWrap" />
 
@@ -71,87 +72,87 @@
                 <!-- Feature cards -->
                 <VerticalStackLayout Padding="20,20,20,0" Spacing="8">
 
-                    <Border BackgroundColor="White" Padding="14,12"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,12"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <Grid ColumnDefinitions="65,*" ColumnSpacing="12">
-                            <Border Grid.Column="0" BackgroundColor="#EDE9FE"
+                            <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}"
                                     HeightRequest="65" WidthRequest="65"
                                     StrokeShape="RoundRectangle 13" StrokeThickness="0">
-                                <Label Text="🤖" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Label Style="{StaticResource IconCoach}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                 <Label Text="{loc:Translate Premium_Feature_AiCoach}"
-                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Text="{loc:Translate Premium_Feature_AiCoach_Desc}"
-                                       FontSize="11" TextColor="#9CA3AF" LineBreakMode="WordWrap" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" LineBreakMode="WordWrap" />
                             </VerticalStackLayout>
                         </Grid>
                     </Border>
 
-                    <Border BackgroundColor="White" Padding="14,12"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,12"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <Grid ColumnDefinitions="65,*" ColumnSpacing="12">
-                            <Border Grid.Column="0" BackgroundColor="#DCFCE7"
+                            <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSuccessSoftLight}, Dark={StaticResource ThemeSuccessSoftDark}}"
                                     HeightRequest="65" WidthRequest="65"
                                     StrokeShape="RoundRectangle 13" StrokeThickness="0">
-                                <Label Text="📈" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Label Style="{StaticResource IconProgress}" FontSize="24" TextColor="{AppThemeBinding Light={StaticResource ThemeSuccessLight}, Dark={StaticResource ThemeSuccessDark}}" HorizontalOptions="Center" VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                 <Label Text="{loc:Translate Premium_Feature_Forecast}"
-                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Text="{loc:Translate Premium_Feature_Forecast_Desc}"
-                                       FontSize="11" TextColor="#9CA3AF" LineBreakMode="WordWrap" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" LineBreakMode="WordWrap" />
                             </VerticalStackLayout>
                         </Grid>
                     </Border>
 
-                    <Border BackgroundColor="White" Padding="14,12"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,12"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <Grid ColumnDefinitions="65,*" ColumnSpacing="12">
-                            <Border Grid.Column="0" BackgroundColor="#DBEAFE"
+                            <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeBlueSoftLight}, Dark={StaticResource ThemeBlueSoftDark}}"
                                     HeightRequest="65" WidthRequest="65"
                                     StrokeShape="RoundRectangle 13" StrokeThickness="0">
-                                <Label Text="📊" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Label Style="{StaticResource IconChart}" FontSize="24" TextColor="{AppThemeBinding Light={StaticResource ThemeBlueLight}, Dark={StaticResource ThemeBlueDark}}" HorizontalOptions="Center" VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                 <Label Text="{loc:Translate Premium_Feature_Analytics}"
-                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Text="{loc:Translate Premium_Feature_Analytics_Desc}"
-                                       FontSize="11" TextColor="#9CA3AF" LineBreakMode="WordWrap" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" LineBreakMode="WordWrap" />
                             </VerticalStackLayout>
                         </Grid>
                     </Border>
 
-                    <Border BackgroundColor="White" Padding="14,12"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,12"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <Grid ColumnDefinitions="65,*" ColumnSpacing="12">
-                            <Border Grid.Column="0" BackgroundColor="#FEF3C7"
+                            <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeWarningSoftLight}, Dark={StaticResource ThemeWarningSoftDark}}"
                                     HeightRequest="65" WidthRequest="65"
                                     StrokeShape="RoundRectangle 13" StrokeThickness="0">
-                                <Label Text="🏋️" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Label Style="{StaticResource IconStrength}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                 <Label Text="{loc:Translate Premium_Feature_PlanGen}"
-                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Text="{loc:Translate Premium_Feature_PlanGen_Desc}"
-                                       FontSize="11" TextColor="#9CA3AF" LineBreakMode="WordWrap" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" LineBreakMode="WordWrap" />
                             </VerticalStackLayout>
                         </Grid>
                     </Border>
 
-                    <Border BackgroundColor="White" Padding="14,12"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,12"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <Grid ColumnDefinitions="65,*" ColumnSpacing="12">
-                            <Border Grid.Column="0" BackgroundColor="#DCFCE7"
+                            <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSuccessSoftLight}, Dark={StaticResource ThemeSuccessSoftDark}}"
                                     HeightRequest="65" WidthRequest="65"
                                     StrokeShape="RoundRectangle 13" StrokeThickness="0">
-                                <Label Text="📤" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Label Style="{StaticResource IconDocument}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                 <Label Text="{loc:Translate Premium_Feature_Export}"
-                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Text="{loc:Translate Premium_Feature_Export_Desc}"
-                                       FontSize="11" TextColor="#9CA3AF" LineBreakMode="WordWrap" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" LineBreakMode="WordWrap" />
                             </VerticalStackLayout>
                         </Grid>
                     </Border>
@@ -161,36 +162,36 @@
                 <!-- Active subscription card (hidden when not subscribed) -->
                 <VerticalStackLayout x:Name="SubscriptionActiveSection" IsVisible="False"
                                      Padding="20,16,20,0">
-                    <Border BackgroundColor="White" Padding="20,18"
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="20,18"
                             StrokeShape="RoundRectangle 18" StrokeThickness="1.5">
-                        <Border.Stroke><SolidColorBrush Color="#7C3AED" /></Border.Stroke>
+                        <Border.Stroke><SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" /></Border.Stroke>
                         <VerticalStackLayout Spacing="14">
                             <HorizontalStackLayout Spacing="8">
-                                <Border BackgroundColor="#EDE9FE" Padding="8,4"
+                                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}" Padding="8,4"
                                         StrokeShape="RoundRectangle 8" StrokeThickness="0">
                                     <Label x:Name="SubStatusBadge"
-                                           FontSize="11" FontAttributes="Bold" TextColor="#7C3AED" />
+                                           FontSize="11" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
                                 </Border>
                             </HorizontalStackLayout>
-                            <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" />
+                            <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" />
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0" Text="{loc:Translate Premium_Active_Plan}"
-                                       FontSize="13" TextColor="#6B7280" VerticalOptions="Center" />
+                                       FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" VerticalOptions="Center" />
                                 <Label Grid.Column="1" x:Name="SubPlanLabel"
-                                       FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                       FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                        VerticalOptions="Center" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0" Text="{loc:Translate Premium_Active_Expires}"
-                                       FontSize="13" TextColor="#6B7280" VerticalOptions="Center" />
+                                       FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" VerticalOptions="Center" />
                                 <Label Grid.Column="1" x:Name="SubExpiryLabel"
-                                       FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                       FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                        VerticalOptions="Center" />
                             </Grid>
-                            <Border BackgroundColor="#F0FDF4" Padding="14,10"
+                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSuccessSoftLight}, Dark={StaticResource ThemeSuccessSoftDark}}" Padding="14,10"
                                     StrokeShape="RoundRectangle 12" StrokeThickness="0">
                                 <Label x:Name="SubDaysLeftLabel"
-                                       FontAttributes="Bold" FontSize="15" TextColor="#16A34A"
+                                       FontAttributes="Bold" FontSize="15" TextColor="{AppThemeBinding Light={StaticResource ThemeSuccessLight}, Dark={StaticResource ThemeSuccessDark}}"
                                        HorizontalOptions="Center" HorizontalTextAlignment="Center" />
                             </Border>
                         </VerticalStackLayout>
@@ -205,28 +206,28 @@
 
                     <!-- Annual (pre-selected) -->
                     <Border x:Name="AnnualBorder"
-                            BackgroundColor="#EDE9FE"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}"
                             Padding="16,14"
                             StrokeShape="RoundRectangle 18" StrokeThickness="2">
                         <Border.Stroke>
-                            <SolidColorBrush Color="#7C3AED" />
+                            <SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
                         </Border.Stroke>
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
                             <Border Grid.Column="0" x:Name="AnnualRadio"
-                                    BackgroundColor="#7C3AED"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                                     HeightRequest="55" WidthRequest="55"
                                     StrokeShape="Ellipse" StrokeThickness="0"
                                     VerticalOptions="Center">
-                                <Label x:Name="AnnualCheck" Text="✓"
+                                <Label x:Name="AnnualCheck" Style="{StaticResource IconCheck}"
                                        FontSize="11" FontAttributes="Bold" TextColor="White"
                                        HorizontalOptions="Center" VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
                                 <HorizontalStackLayout Spacing="8">
                                     <Label Text="{loc:Translate Premium_Plan_Annual}"
-                                           FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                           FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                            VerticalOptions="Center" />
-                                    <Border BackgroundColor="#7C3AED" Padding="6,2"
+                                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}" Padding="6,2"
                                             StrokeShape="RoundRectangle 99" StrokeThickness="0"
                                             VerticalOptions="Center">
                                         <Label Text="−40%" FontSize="9" FontAttributes="Bold"
@@ -234,14 +235,14 @@
                                     </Border>
                                 </HorizontalStackLayout>
                                 <Label Text="{loc:Translate Premium_Plan_Annual_Sub}"
-                                       FontSize="11" TextColor="#9CA3AF" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="End">
                                 <Label Text="{loc:Translate Premium_Plan_Annual_Price}"
-                                       FontAttributes="Bold" FontSize="16" TextColor="#111827"
+                                       FontAttributes="Bold" FontSize="16" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                        HorizontalOptions="End" />
                                 <Label Text="{loc:Translate Premium_PerMonth}"
-                                       FontSize="10" TextColor="#9CA3AF"
+                                       FontSize="10" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                                        HorizontalOptions="End" />
                             </VerticalStackLayout>
                         </Grid>
@@ -252,11 +253,11 @@
 
                     <!-- Monthly -->
                     <Border x:Name="MonthlyBorder"
-                            BackgroundColor="White"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
                             Padding="16,14"
                             StrokeShape="RoundRectangle 18" StrokeThickness="2">
                         <Border.Stroke>
-                            <SolidColorBrush Color="#E5E7EB" />
+                            <SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" />
                         </Border.Stroke>
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
                             <Border Grid.Column="0" x:Name="MonthlyRadio"
@@ -265,25 +266,25 @@
                                     StrokeShape="Ellipse" StrokeThickness="2"
                                     VerticalOptions="Center">
                                 <Border.Stroke>
-                                    <SolidColorBrush Color="#E5E7EB" />
+                                    <SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" />
                                 </Border.Stroke>
-                                <Label x:Name="MonthlyCheck" Text="✓"
+                                <Label x:Name="MonthlyCheck" Style="{StaticResource IconCheck}"
                                        FontSize="11" FontAttributes="Bold" TextColor="White"
                                        IsVisible="False"
                                        HorizontalOptions="Center" VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
                                 <Label Text="{loc:Translate Premium_Plan_Monthly}"
-                                       FontAttributes="Bold" FontSize="14" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Text="{loc:Translate Premium_Plan_Monthly_Sub}"
-                                       FontSize="11" TextColor="#9CA3AF" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="End">
                                 <Label Text="{loc:Translate Premium_Plan_Monthly_Price}"
-                                       FontAttributes="Bold" FontSize="16" TextColor="#111827"
+                                       FontAttributes="Bold" FontSize="16" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                        HorizontalOptions="End" />
                                 <Label Text="{loc:Translate Premium_PerMonth}"
-                                       FontSize="10" TextColor="#9CA3AF"
+                                       FontSize="10" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                                        HorizontalOptions="End" />
                             </VerticalStackLayout>
                         </Grid>
@@ -296,7 +297,7 @@
 
                 <!-- Compare link -->
                 <Label Text="{loc:Translate Premium_CompareLink}"
-                       TextColor="#7C3AED" FontSize="13" FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" FontSize="13" FontAttributes="Bold"
                        HorizontalOptions="Center" Margin="0,16,0,20">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnCompareTapped" />
@@ -311,9 +312,9 @@
         <!-- Sticky bottom CTA -->
         <VerticalStackLayout Grid.Row="1"
                              Padding="20,12,20,28"
-                             BackgroundColor="#EEEEF6"
+                             BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
                              Spacing="10">
-            <Border BackgroundColor="#7C3AED"
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                     Padding="16" StrokeShape="RoundRectangle 18" StrokeThickness="0">
                 <Label x:Name="CtaLabel"
                        Text="{loc:Translate Premium_CTA_Trial}"
@@ -324,7 +325,7 @@
                 </Border.GestureRecognizers>
             </Border>
             <Label x:Name="FootnoteLabel"
-                   TextColor="#9CA3AF" FontSize="11"
+                   TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" FontSize="11"
                    HorizontalOptions="Center" HorizontalTextAlignment="Center"
                    LineBreakMode="WordWrap" />
         </VerticalStackLayout>

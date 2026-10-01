@@ -2,33 +2,34 @@
 <ContentPage
     x:Class="WorkoutLogg.Pages.LoggerPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:theme="clr-namespace:WorkoutLogg.Utilities"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="*,Auto">
 
-        <ScrollView Grid.Row="0">
+        <CollectionView x:Name="SessionsList" Grid.Row="0" ItemsSource="{Binding Sessions}" SelectionMode="None">
+            <CollectionView.Header>
             <VerticalStackLayout Padding="20,52,20,12" Spacing="16">
 
                 <!-- Header -->
                 <Grid ColumnDefinitions="*,Auto">
                     <VerticalStackLayout Grid.Column="0" Spacing="2">
-                        <Label FontAttributes="Bold" FontSize="28" Text="{loc:Translate Logger_Title}" TextColor="#111827" />
-                        <Label x:Name="DateLabel" FontSize="14" Text="Today" TextColor="#9CA3AF" />
+                        <Label FontAttributes="Bold" FontSize="28" Text="{loc:Translate Logger_Title}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                        <Label x:Name="DateLabel" FontSize="14" Text="Today" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                     </VerticalStackLayout>
                     <Border Grid.Column="1"
-                            BackgroundColor="#7C3AED"
-                            Padding="14,10"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
+                            Padding="0" MinimumWidthRequest="48" MinimumHeightRequest="48"
                             StrokeShape="RoundRectangle 14"
                             StrokeThickness="0"
                             VerticalOptions="Center">
-                        <Label FontAttributes="Bold"
-                               FontSize="22"
-                               Text="+"
+                        <Label Style="{StaticResource IconAddAction}"
+                               SemanticProperties.Description="{loc:Translate AddLog_Title}"
                                TextColor="White"
                                VerticalOptions="Center">
                             <Label.GestureRecognizers>
@@ -41,28 +42,28 @@
                 <!-- Calendar for day selection -->
                 <controls:CalendarPicker
                     x:Name="Calendar"
-                    AccentColor="#7C3AED"
+                    AccentColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}"
                     DateSelected="OnDateSelected" />
 
-                <!-- Sessions list -->
-                <CollectionView x:Name="SessionsList"
-                                ItemsSource="{Binding Sessions}"
-                                SelectionMode="None">
+            </VerticalStackLayout>
+            </CollectionView.Header>
+                <!-- Список получает ограниченную высоту Grid и виртуализирует элементы. -->
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="vm:LogSessionDisplayItem">
-                            <Border BackgroundColor="White"
+                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
+                                    Margin="20,0"
                                     Padding="16,14"
-                                    Stroke="#F3F4F6"
+                                    Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}"
                                     StrokeShape="RoundRectangle 16"
                                     StrokeThickness="1">
                                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
 
                                     <!-- Icon -->
                                     <Border Grid.Column="0"
-                                            BackgroundColor="{Binding BadgeColor}"
+                                            BackgroundColor="{theme:ThemeBinding Path=BadgeColor, Background=True}"
                                             HeightRequest="68"
                                             WidthRequest="68"
                                             StrokeShape="RoundRectangle 14"
@@ -70,7 +71,7 @@
                                             VerticalOptions="Center">
                                         <Label FontSize="22"
                                                HorizontalOptions="Center"
-                                               Text="{Binding Emoji}"
+                                               Text="{Binding Emoji}" Style="{StaticResource FitnessIcon}"
                                                VerticalOptions="Center" />
                                     </Border>
 
@@ -79,11 +80,11 @@
                                         <Label FontAttributes="Bold"
                                                FontSize="15"
                                                Text="{Binding Title}"
-                                               TextColor="#111827" />
+                                               TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                         <Label FontSize="12"
                                                Text="{Binding SubLabel}"
-                                               TextColor="#9CA3AF" />
-                                        <Border BackgroundColor="{Binding BadgeColor}"
+                                               TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                                        <Border BackgroundColor="{theme:ThemeBinding Path=BadgeColor, Background=True}"
                                                 Padding="6,3"
                                                 StrokeShape="RoundRectangle 6"
                                                 StrokeThickness="0"
@@ -91,7 +92,7 @@
                                             <Label FontAttributes="Bold"
                                                    FontSize="10"
                                                    Text="{Binding BadgeText}"
-                                                   TextColor="{Binding BadgeTextColor}" />
+                                                   TextColor="{theme:ThemeBinding Path=BadgeTextColor, Background=False}" />
                                         </Border>
                                     </VerticalStackLayout>
 
@@ -104,12 +105,13 @@
                                                FontSize="13"
                                                HorizontalOptions="End"
                                                Text="{Binding WeightLabel}"
-                                               TextColor="#7C3AED" />
+                                               TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
                                         <Label FontAttributes="Bold"
                                                FontSize="20"
                                                HorizontalOptions="End"
-                                               Text="⋮"
-                                               TextColor="#9CA3AF"
+                                                Style="{StaticResource IconMoreAction}"
+                                                SemanticProperties.Description="{loc:Translate Common_MoreActions}"
+                                               TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                                                Padding="4,0">
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer
@@ -123,27 +125,26 @@
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-                </CollectionView>
-
                 <!-- Empty state -->
+                <CollectionView.Footer>
                 <VerticalStackLayout IsVisible="{Binding IsEmpty}"
                                      Padding="0,32"
                                      Spacing="10"
                                      HorizontalOptions="Center">
-                    <Label FontSize="40" HorizontalOptions="Center" Text="📓" />
+                    <Label Style="{StaticResource IconJournal}" FontSize="40" HorizontalOptions="Center" />
                     <Label FontAttributes="Bold"
                            FontSize="16"
                            HorizontalOptions="Center"
                            Text="{loc:Translate Logger_Empty}"
-                           TextColor="#111827" />
+                           TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                     <Label FontSize="14"
                            HorizontalOptions="Center"
                            Text="{loc:Translate Logger_EmptySubtitle}"
-                           TextColor="#9CA3AF" />
+                           TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                 </VerticalStackLayout>
 
-            </VerticalStackLayout>
-        </ScrollView>
+                </CollectionView.Footer>
+        </CollectionView>
 
         <controls:MainTabBar Grid.Row="1" ActiveTab="Logger" />
         <controls:LoadingOverlayView x:Name="PageLoading" Grid.Row="0" Grid.RowSpan="2" />

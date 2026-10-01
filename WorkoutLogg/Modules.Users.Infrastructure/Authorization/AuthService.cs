@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+using Modules.Common.Infrastructure.Tenancy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -38,12 +39,15 @@ namespace Modules.Users.Infrastructure.Authorization
     UsersDbContext dbContext,
     IEventPublisher eventPublisher,
     KafkaSettings kafkaSettings,
-    ICacheService cacheService) : IAuthService
+    ICacheService cacheService, TenantContext? tenant = null) : IAuthService
     {
         public async Task<Result<LoginUserResponse>> LoginAsync(string email, string password, 
             CancellationToken cancellationToken = default)
         {
-            var user = await userManager.FindByEmailAsync(email);
+            var identifier = LoginIdentifier.Normalize(email);
+            if (identifier is null || string.IsNullOrEmpty(password)) return new Result<LoginUserResponse>(UserErrors.InvalidCredentials());
+            var user = identifier.Contains('@') ? await userManager.FindByEmailAsync(identifier)
+                : await dbContext.Users.SingleOrDefaultAsync(x => x.NormalizedPhoneNumber == identifier, cancellationToken);
             if (user is null)
             {
                 // Same error as for a wrong password — don't reveal whether the account exists.
@@ -68,14 +72,30 @@ namespace Modules.Users.Infrastructure.Authorization
 
         public async Task<Result<RegisterUserResponse>> RegisterAsync(UserDto requestUser, CancellationToken cancellationToken)
         {
+            var hasEmail = !string.IsNullOrWhiteSpace(requestUser.Email);
+            var hasPhone = !string.IsNullOrWhiteSpace(requestUser.PhoneNumber);
+            if (hasEmail == hasPhone || (hasEmail && LoginIdentifier.Normalize(requestUser.Email)?.Contains('@') != true)
+                || (hasPhone && LoginIdentifier.NormalizePhone(requestUser.PhoneNumber) is null))
+                return new(new Error("InvalidContact", "Укажите email или телефон в международном формате, например +79991234567.", ErrorType.Validation));
+            if (string.IsNullOrWhiteSpace(requestUser.FullName) || string.IsNullOrEmpty(requestUser.Password))
+                return new(new Error("InvalidRegistration", "Укажите имя и пароль.", ErrorType.Validation));
+            var phone = hasPhone ? LoginIdentifier.NormalizePhone(requestUser.PhoneNumber) : null;
+            if (phone is not null && await dbContext.Users.AnyAsync(x => x.NormalizedPhoneNumber == phone, cancellationToken))
+                return new(new Error("DuplicatePhone", "Этот телефон уже зарегистрирован в клубе.", ErrorType.Validation));
             var user = new User()
             {
                 Id = Guid.NewGuid().ToString(),
-                Email = requestUser.Email,
+                Email = hasEmail ? requestUser.Email!.Trim() : null,
+                PhoneNumber = phone,
+                NormalizedPhoneNumber = phone,
+                PhoneNumberConfirmed = false,
                 UserName = requestUser.FullName,
                 UserRegistrationStep = DTO.Users.UserRegistrationStep.Profile
             };
-            var result = await userManager.CreateAsync(user, requestUser.Password);
+            IdentityResult result;
+            try { result = await userManager.CreateAsync(user, requestUser.Password); }
+            catch (DbUpdateException ex) when (ex.InnerException is Npgsql.PostgresException { SqlState: "23505", ConstraintName: "IX_users_NormalizedPhoneNumber" })
+            { return new(new Error("DuplicatePhone", "Этот телефон уже зарегистрирован в клубе.", ErrorType.Validation)); }
             if (!result.Succeeded)
             {
                 logger.LogInformation("Failed to register user: {@Errors}", result.Errors);
@@ -95,7 +115,7 @@ namespace Modules.Users.Infrastructure.Authorization
             CancellationToken cancellationToken=default)
         {
             var validatedToken = GetPrincipalFromToken(token, tokenValidationParameters);
-            if (validatedToken is null)
+            if (validatedToken is null || (tenant is not null && !tenant.Accepts(validatedToken)))
             {
                 return new Result<RefreshTokenResponse>(new Error("401", "Invalid or expired token", ErrorType.Unauthorized));
             }
@@ -194,7 +214,7 @@ namespace Modules.Users.Infrastructure.Authorization
             return refreshToken.Token;
         }
 
-        private static string GenerateJwtToken(User user,
+        private string GenerateJwtToken(User user,
             AuthConfiguration authConfiguration,
             string userRole,
             IList<Claim> roleClaims)
@@ -204,8 +224,9 @@ namespace Modules.Users.Infrastructure.Authorization
 
             var tokenId = Guid.NewGuid().ToString();
             List<Claim> claims = [
-                new(JwtRegisteredClaimNames.Sub, user.Email!),
+                new(JwtRegisteredClaimNames.Sub, user.Email ?? user.Id),
                 new("userid", user.Id),
+                new("tenant_id", tenant?.Current.Id ?? "legacy"),
                 new("role", userRole),
                 new(JwtRegisteredClaimNames.Jti, tokenId)
             ];

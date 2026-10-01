@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using WorkoutLogg.Database;
 using WorkoutLogg.Database.Entities;
 using WorkoutLogg.Localization;
@@ -29,12 +30,29 @@ public partial class AiCoachPage : ContentPage
         _api  = api;
         _db   = db;
         _lang = lang;
+        PageLoading.Preload();
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await LoadAsync();
+        var timer = System.Diagnostics.Stopwatch.StartNew();
+        try
+        {
+            await PageLoading.ShowAndRenderAsync();
+            await LoadAsync();
+        }
+        finally
+        {
+            PageLoading.Hide();
+            System.Diagnostics.Debug.WriteLine($"[PageLoad] AiCoach: {timer.ElapsedMilliseconds} ms");
+        }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        PageLoading.Preload();
     }
 
     // ── Setup ────────────────────────────────────────────────────
@@ -114,7 +132,7 @@ public partial class AiCoachPage : ContentPage
             return Loc.Get("AiCoach_InsightNoData");
 
         if (_context.CurrentStreak >= 3)
-            return $"🔥 {_context.CurrentStreak}-day streak! Keep the momentum going.";
+            return $"{_context.CurrentStreak}-day streak! Keep the momentum going.";
 
         if (!string.IsNullOrEmpty(_context.PersonalRecords))
         {
@@ -263,17 +281,14 @@ public partial class AiCoachPage : ContentPage
         {
             Text           = content,
             FontSize       = 14,
-            TextColor      = isUser ? Colors.White : Color.FromArgb("#111827"),
-            LineBreakMode  = LineBreakMode.WordWrap,
-        };
+            LineBreakMode  = LineBreakMode.WordWrap
+        }.WithThemeColor("TextColor", isUser ? Colors.White : Color.FromArgb("#111827"));
 
         var border = new Border
         {
             Content          = label,
-            BackgroundColor  = isUser ? Color.FromArgb("#7C3AED") : Colors.White,
             Padding          = new Thickness(14, 10),
             StrokeThickness  = isUser ? 0 : 1,
-            Stroke           = isUser ? null : new SolidColorBrush(Color.FromArgb("#F3F4F6")),
             StrokeShape      = new Microsoft.Maui.Controls.Shapes.RoundRectangle
             {
                 CornerRadius = isUser
@@ -281,8 +296,8 @@ public partial class AiCoachPage : ContentPage
                     : new CornerRadius(18, 18, 18, 4),
             },
             HorizontalOptions = isUser ? LayoutOptions.End : LayoutOptions.Start,
-            MaximumWidthRequest = 300,
-        };
+            MaximumWidthRequest = 300
+        }.WithThemeColor("BackgroundColor", isUser ? Color.FromArgb("#7C3AED") : Colors.White).WithThemeColor("Stroke", isUser ? null : new SolidColorBrush(Color.FromArgb("#F3F4F6")));
 
         return border;
     }

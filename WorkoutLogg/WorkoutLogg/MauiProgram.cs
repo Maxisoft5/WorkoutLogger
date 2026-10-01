@@ -139,11 +139,21 @@ public static class MauiProgram
         builder.Services.AddTransient<WorkoutLogg.Pages.MyBookingsPage>();
         builder.Services.AddTransient<AppShell>();
 
+        // 10.0.2.2 доступен только эмулятору. Физический телефон использует
+        // LocalUrl через adb reverse tcp:5001 tcp:5001 при подключении по USB.
+        var isAndroidEmulator = DeviceInfo.Platform == DevicePlatform.Android
+            && DeviceInfo.DeviceType == DeviceType.Virtual;
         var baseUrl = useLocalhost
-            ? (DeviceInfo.Platform == DevicePlatform.Android ? localAndroidUrl : localUrl)
+            ? (isAndroidEmulator ? localAndroidUrl : localUrl)
             : vpsUrl;
 
 #if DEBUG
+        var apiUri = new Uri(baseUrl);
+        var endpointDiagnostic = $"[ApiEndpoint] Platform={DeviceInfo.Platform}; DeviceType={DeviceInfo.DeviceType}; UseLocalhost={useLocalhost}; Address={apiUri.Scheme}://{apiUri.Host}:{apiUri.Port}";
+        System.Diagnostics.Debug.WriteLine(endpointDiagnostic);
+#if ANDROID
+        Android.Util.Log.Info("WorkoutLogger.Api", endpointDiagnostic);
+#endif
         static HttpMessageHandler DevHandler() => new HttpClientHandler
         {
             ServerCertificateCustomValidationCallback =
@@ -152,14 +162,22 @@ public static class MauiProgram
 #endif
 
         builder.Services.AddRefitClient<IAuthApi>()
-              .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+              .ConfigureHttpClient(b =>
+              {
+                  b.BaseAddress = new Uri(baseUrl);
+                  b.Timeout = TimeSpan.FromSeconds(30);
+              })
 #if DEBUG
               .ConfigurePrimaryHttpMessageHandler(DevHandler)
 #endif
               .AddHttpMessageHandler<AuthHeaderHandler>();
 
         builder.Services.AddRefitClient<IAuthRefreshApi>()
-              .ConfigureHttpClient(b => b.BaseAddress = new Uri(baseUrl))
+              .ConfigureHttpClient(b =>
+              {
+                  b.BaseAddress = new Uri(baseUrl);
+                  b.Timeout = TimeSpan.FromSeconds(30);
+              })
 #if DEBUG
               .ConfigurePrimaryHttpMessageHandler(DevHandler)
 #endif
@@ -234,10 +252,8 @@ public static class MauiProgram
 
         builder.Services.AddSingleton(_ =>
         {
-            // gRPC работает по HTTP/1.1 на отдельном порту без TLS
-            var grpcUrl = useLocalhost
-                ? (DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000")
-                : "http://202.148.55.20:5000";
+            // Локальный gRPC использует тот же HTTPS endpoint с HTTP/2.
+            var grpcUrl = useLocalhost ? baseUrl : "http://202.148.55.20:5000";
             return new ExercisesGrpcClient(grpcUrl);
         });
 

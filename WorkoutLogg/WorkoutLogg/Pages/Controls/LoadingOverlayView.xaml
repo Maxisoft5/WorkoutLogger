@@ -3,7 +3,7 @@
              x:Class="WorkoutLogg.Pages.Controls.LoadingOverlayView"
              Opacity="0"
              InputTransparent="True">
-    <Grid BackgroundColor="#E0000000">
+    <Grid BackgroundColor="{AppThemeBinding Light=#EDF5F5F5, Dark=#ED101010}">
         <GraphicsView x:Name="EcgView"
                       WidthRequest="200" HeightRequest="70"
                       HorizontalOptions="Center"

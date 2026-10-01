@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using Modules.Users.DTO.Auth;
 using Modules.Users.Infrastructure.Api;
 using Modules.Users.Infrastructure.Authorization;
@@ -47,23 +48,23 @@ public partial class OnboardingProfilePage : ContentPage
     private void SetSex(string sex)
     {
         // Сброс всех
-        MaleBorder.BackgroundColor = Colors.White; MaleBorder.Stroke = Color.FromArgb("#E5E7EB"); MaleBorder.StrokeThickness = 1.5; MaleButton.TextColor = Color.FromArgb("#374151");
-        FemaleBorder.BackgroundColor = Colors.White; FemaleBorder.Stroke = Color.FromArgb("#E5E7EB"); FemaleBorder.StrokeThickness = 1.5; FemaleButton.TextColor = Color.FromArgb("#374151");
+        MaleBorder.WithThemeColor("BackgroundColor", Colors.White); MaleBorder.WithThemeColor("Stroke", Color.FromArgb("#E5E7EB")); MaleBorder.StrokeThickness = 1.5; MaleButton.WithThemeColor("TextColor", Color.FromArgb("#374151"));
+        FemaleBorder.WithThemeColor("BackgroundColor", Colors.White); FemaleBorder.WithThemeColor("Stroke", Color.FromArgb("#E5E7EB")); FemaleBorder.StrokeThickness = 1.5; FemaleButton.WithThemeColor("TextColor", Color.FromArgb("#374151"));
 
         // Активный
         switch (sex)
         {
             case "Male":
                 _selectedSex = UserSex.Male;
-                MaleBorder.BackgroundColor = Color.FromArgb("#7C3AED");
+                MaleBorder.WithThemeColor("BackgroundColor", Color.FromArgb("#7C3AED"));
                 MaleBorder.StrokeThickness = 0;
-                MaleButton.TextColor = Colors.White;
+                MaleButton.WithThemeColor("TextColor", Colors.White);
                 break;
             case "Female":
                 _selectedSex = UserSex.Female;
-                FemaleBorder.BackgroundColor = Color.FromArgb("#7C3AED");
+                FemaleBorder.WithThemeColor("BackgroundColor", Color.FromArgb("#7C3AED"));
                 FemaleBorder.StrokeThickness = 0;
-                FemaleButton.TextColor = Colors.White;
+                FemaleButton.WithThemeColor("TextColor", Colors.White);
                 break;
         }
     }

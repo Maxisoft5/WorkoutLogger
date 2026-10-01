@@ -64,7 +64,7 @@ public class EcgDrawable : IDrawable
                 consumed = target;
             }
 
-            // gradient purple → pink based on horizontal midpoint
+            // Warm orange accent against either neutral surface.
             float mid = (ax + bx) / 2f / w;
             canvas.StrokeColor = Gradient(mid, Opacity);
             canvas.DrawLine(ax, ay, bx, by);
@@ -73,9 +73,9 @@ public class EcgDrawable : IDrawable
 
     private static Color Gradient(float t, float alpha)
     {
-        float r = 0x7C / 255f + t * (0xEC / 255f - 0x7C / 255f);
-        float g = 0x3A / 255f + t * (0x48 / 255f - 0x3A / 255f);
-        float b = 0xED / 255f + t * (0x99 / 255f - 0xED / 255f);
+        float r = 0xC4 / 255f + t * (0xFF / 255f - 0xC4 / 255f);
+        float g = 0x4B / 255f + t * (0x97 / 255f - 0x4B / 255f);
+        float b = 0x0B / 255f + t * (0x5C / 255f - 0x0B / 255f);
         return new Color(r, g, b, alpha);
     }
 }

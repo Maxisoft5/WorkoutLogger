@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     xmlns:fonts="clr-namespace:Fonts"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">
 
@@ -17,7 +17,7 @@
             <!-- App Icon -->
             <Border
                 Margin="0,0,0,28"
-                BackgroundColor="#7C3AED"
+                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                 HeightRequest="100"
                 WidthRequest="100"
                 HorizontalOptions="Center"
@@ -26,7 +26,8 @@
                 <Label
                     FontSize="40"
                     HorizontalOptions="Center"
-                    Text="💪"
+                    Style="{StaticResource IconBrand}"
+                    TextColor="White"
                     VerticalOptions="Center" />
             </Border>
 
@@ -39,7 +40,7 @@
                 HorizontalTextAlignment="Center"
                 Margin="0,0,0,8"
                 Text="{loc:Translate Login_Welcome}"
-                TextColor="#111827" />
+                TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
 
             <!-- Subtitle -->
             <Label
@@ -49,7 +50,7 @@
                 HorizontalTextAlignment="Center"
                 Margin="0,0,0,40"
                 Text="{loc:Translate Login_Subtitle}"
-                TextColor="#9CA3AF" />
+                TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
 
             <!-- EMAIL Label -->
             <Label
@@ -59,14 +60,14 @@
                 FontSize="11"
                 Margin="4,0,0,8"
                 Text="{loc:Translate Login_EmailLabel}"
-                TextColor="#6B7280" />
+                TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" />
 
             <!-- Email Entry -->
             <Border
                 x:Name="EmailBorder"
                 Margin="0,0,0,20"
-                BackgroundColor="White"
-                Stroke="#E5E7EB"
+                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
+                Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}"
                 StrokeShape="RoundRectangle 14"
                 StrokeThickness="1.5">
                 <Entry
@@ -76,12 +77,12 @@
                     Keyboard="Email"
                     Margin="16,0"
                     Placeholder=""
-                    PlaceholderColor="Black"
+                    PlaceholderColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                     ReturnType="Next"
-                    TextColor="#111827"
+                    TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                     VerticalOptions="Center" />
             </Border>
-            <Label x:Name="EmailError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+            <Label x:Name="EmailError" Margin="4,0,0,12" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeDangerLight}, Dark={StaticResource ThemeDangerDark}}" IsVisible="False" />
 
             <!-- PASSWORD Label -->
             <Label
@@ -91,17 +92,17 @@
                 FontSize="11"
                 Margin="4,0,0,8"
                 Text="{loc:Translate Login_PasswordLabel}"
-                TextColor="#6B7280" />
+                TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" />
 
             <!-- Password Entry -->
             <Border
                 x:Name="PasswordBorder"
                 Margin="0,0,0,12"
-                BackgroundColor="White"
-                Stroke="#E5E7EB"
+                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
+                Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}"
                 StrokeShape="RoundRectangle 14"
                 StrokeThickness="1.5">
-                <Grid ColumnDefinitions="*,44">
+                <Grid ColumnDefinitions="*,48">
                     <Entry
                         x:Name="PasswordEntry"
                         BackgroundColor="Transparent"
@@ -110,13 +111,16 @@
                         IsPassword="True"
                         Margin="16,0,0,0"
                         Placeholder="••••••••"
-                        PlaceholderColor="#D1D5DB"
+                        PlaceholderColor="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}"
                         ReturnType="Done"
-                        TextColor="#111827"
+                        TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                         VerticalOptions="Center" />
-                    <Image
+                    <Grid Grid.Column="1" MinimumHeightRequest="48" WidthRequest="48" BackgroundColor="Transparent" SemanticProperties.Description="{loc:Translate Common_TogglePassword}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTogglePasswordVisibility" />
+                        </Grid.GestureRecognizers>
+                    <Image InputTransparent="True"
                         x:Name="PasswordEyeImage"
-                        Grid.Column="1"
                         HeightRequest="20"
                         WidthRequest="20"
                         HorizontalOptions="Center"
@@ -125,16 +129,14 @@
                             <FontImageSource
                                 Glyph="{x:Static fonts:FluentUI.eye_20_regular}"
                                 FontFamily="{x:Static fonts:FluentUI.FontFamily}"
-                                Color="#9CA3AF"
+                                Color="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                                 Size="20"/>
                         </Image.Source>
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnTogglePasswordVisibility" />
-                        </Image.GestureRecognizers>
                     </Image>
+                    </Grid>
                 </Grid>
             </Border>
-            <Label x:Name="PasswordError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+            <Label x:Name="PasswordError" Margin="4,0,0,12" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeDangerLight}, Dark={StaticResource ThemeDangerDark}}" IsVisible="False" />
 
             <!-- Forgot Password -->
             <Label
@@ -144,7 +146,7 @@
                 HorizontalOptions="End"
                 Margin="0,0,4,32"
                 Text="{loc:Translate Login_ForgotPassword}"
-                TextColor="#7C3AED">
+                TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnForgotPasswordTapped" />
                 </Label.GestureRecognizers>
@@ -157,8 +159,8 @@
                 StrokeThickness="0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="#7C3AED" Offset="0" />
-                        <GradientStop Color="#9333EA" Offset="1" />
+                        <GradientStop Color="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" Offset="0" />
+                        <GradientStop Color="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
                 <Button
@@ -175,25 +177,19 @@
             </Border>
 
             <!-- Sign Up Link -->
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
-                <Label
-                    FontFamily="OpenSans"
-                    FontSize="14"
-                    Text="{loc:Translate Login_NoAccount}"
-                    TextColor="#9CA3AF"
-                    VerticalOptions="Center" />
-                <Label
-                    FontAttributes="Bold"
-                    FontFamily="OpenSans"
-                    FontSize="14"
-                    Text="{loc:Translate Login_SignUp}"
-                    TextColor="#7C3AED"
-                    VerticalOptions="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnSignUpTapped" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </HorizontalStackLayout>
+            <Label FontFamily="OpenSans" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" HorizontalTextAlignment="Center" LineBreakMode="WordWrap">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{loc:Translate Login_NoAccount}" />
+                        <Span Text=" " />
+                        <Span FontAttributes="Bold" Text="{loc:Translate Login_SignUp}" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSignUpTapped" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

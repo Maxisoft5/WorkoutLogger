@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using System.Globalization;
 using WorkoutLogg.Localization;
 
@@ -9,7 +10,7 @@ public partial class CalendarPicker : ContentView
 
     public static readonly BindableProperty SelectedDateProperty =
         BindableProperty.Create(nameof(SelectedDate), typeof(DateTime?), typeof(CalendarPicker), DateTime.Today,
-            propertyChanged: (b, _, _) => ((CalendarPicker)b).Rebuild());
+            propertyChanged: (b, _, _) => ((CalendarPicker)b).RequestRebuild());
 
     public DateTime? SelectedDate
     {
@@ -20,7 +21,7 @@ public partial class CalendarPicker : ContentView
     /// <summary>Даты с точкой-индикатором тренировки</summary>
     public static readonly BindableProperty MarkedDatesProperty =
         BindableProperty.Create(nameof(MarkedDates), typeof(IEnumerable<DateTime>), typeof(CalendarPicker), null,
-            propertyChanged: (b, _, _) => ((CalendarPicker)b).Rebuild());
+            propertyChanged: (b, _, _) => ((CalendarPicker)b).RequestRebuild());
 
     public IEnumerable<DateTime> MarkedDates
     {
@@ -30,7 +31,7 @@ public partial class CalendarPicker : ContentView
 
     public static readonly BindableProperty AccentColorProperty =
         BindableProperty.Create(nameof(AccentColor), typeof(Color), typeof(CalendarPicker), Color.FromArgb("#7C3AED"),
-            propertyChanged: (b, _, _) => ((CalendarPicker)b).Rebuild());
+            propertyChanged: (b, _, _) => ((CalendarPicker)b).RequestRebuild());
 
     public Color AccentColor
     {
@@ -42,13 +43,18 @@ public partial class CalendarPicker : ContentView
     public event EventHandler<DateTime>? DateSelected;
 
     // ── State ─────────────────────────────────────────────────────────────
-    private DateTime _viewMonth;
+    private DateTime _viewMonth = new(DateTime.Today.Year, DateTime.Today.Month, 1);
+    private DateTime? _renderedMonth;
+    private bool _rebuildQueued;
+    private readonly List<(DateTime Date, Border Background, Label Number,
+        Microsoft.Maui.Controls.Shapes.Ellipse Dot)> _cells = [];
 
     public CalendarPicker()
     {
         InitializeComponent();
-        _viewMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-        Rebuild();
+        // Создание ячеек откладывается до загрузки контрола. Изменения свойств
+        // при разборе XAML не должны несколько раз строить один календарь.
+        Loaded += (_, _) => RequestRebuild();
     }
 
     private void OnPrevMonth(object sender, EventArgs e)
@@ -65,14 +71,35 @@ public partial class CalendarPicker : ContentView
 
     private void Rebuild()
     {
-        if (MonthLabel == null || DaysGrid == null) return;
+        if (!IsLoaded || MonthLabel == null || DaysGrid == null) return;
 
         MonthLabel.Text = _viewMonth.ToString("MMMM yyyy", new CultureInfo(Loc.Get("_Culture")));
-        DaysGrid.Children.Clear();
 
         var marked = MarkedDates?.Select(d => d.Date).ToHashSet() ?? [];
         var selected = SelectedDate?.Date;
         var today = DateTime.Today;
+
+        if (_renderedMonth == _viewMonth)
+        {
+            // При смене выделения / меток переиспользуем native views.
+            foreach (var cell in _cells)
+            {
+                bool isSelected = cell.Date == selected;
+                bool isToday = cell.Date == today;
+                cell.Background.WithThemeColor("BackgroundColor", isSelected ? AccentColor
+                    : isToday ? Color.FromArgb("#EDE9FE") : Colors.Transparent);
+                cell.Number.FontAttributes = isSelected || isToday ? FontAttributes.Bold : FontAttributes.None;
+                cell.Number.WithThemeColor("TextColor", isSelected ? Colors.White
+                    : isToday ? AccentColor : Color.FromArgb("#111827"));
+                cell.Dot.WithThemeColor("Fill", isSelected ? Colors.White : AccentColor);
+                cell.Dot.IsVisible = marked.Contains(cell.Date);
+            }
+            return;
+        }
+
+        DaysGrid.Children.Clear();
+        _cells.Clear();
+        _renderedMonth = _viewMonth;
 
         // ISO week: Monday = 0
         int firstDow = ((int)_viewMonth.DayOfWeek + 6) % 7;
@@ -97,6 +124,19 @@ public partial class CalendarPicker : ContentView
         }
     }
 
+    private void RequestRebuild()
+    {
+        if (!IsLoaded || _rebuildQueued)
+            return;
+
+        _rebuildQueued = true;
+        Dispatcher.Dispatch(() =>
+        {
+            _rebuildQueued = false;
+            Rebuild();
+        });
+    }
+
     private View BuildCell(int day, bool isSel, bool isTod, bool isMark, DateTime date)
     {
         var accent = AccentColor;
@@ -108,14 +148,13 @@ public partial class CalendarPicker : ContentView
         // Индикатор выделения — фиксированный квадрат, наложен поверх
         var selBg = new Border
         {
-            BackgroundColor = isSel ? accent : isTod ? accentLight : Colors.Transparent,
             StrokeThickness = 0,
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 10 },
             HeightRequest = bgSize,
             WidthRequest = bgSize,
             HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.Center,
-        };
+            VerticalOptions = LayoutOptions.Center
+        }.WithThemeColor("BackgroundColor", isSel ? accent : isTod ? accentLight : Colors.Transparent);
 
         // Число — свободно центрируется в ячейке, не зажато в bgSize
         var label = new Label
@@ -124,23 +163,22 @@ public partial class CalendarPicker : ContentView
             FontSize = DeviceInfo.Idiom == DeviceIdiom.Desktop ? 15 : 14,
             FontAttributes = isSel || isTod ? FontAttributes.Bold : FontAttributes.None,
             HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.Center,
-            TextColor = isSel ? Colors.White : isTod ? accent : Color.FromArgb("#111827"),
-        };
+            VerticalOptions = LayoutOptions.Center
+        }.WithThemeColor("TextColor", isSel ? Colors.White : isTod ? accent : Color.FromArgb("#111827"));
 
         // Точка-индикатор залоггированного дня
         var dot = new Microsoft.Maui.Controls.Shapes.Ellipse
         {
-            Fill = isSel ? Colors.White : accent,
             HeightRequest = 5,
             WidthRequest = 5,
             HorizontalOptions = LayoutOptions.Center,
-            IsVisible = isMark,
-        };
+            IsVisible = isMark
+        }.WithThemeColor("Fill", isSel ? Colors.White : accent);
 
         // Контейнер заполняет всю колонку; selBg и label в одной строке (overlay)
         var container = new Grid
         {
+            MinimumHeightRequest = 48,
             HorizontalOptions = LayoutOptions.Fill,
             RowDefinitions = new RowDefinitionCollection(
                 new RowDefinition(new GridLength(bgSize)),
@@ -154,6 +192,7 @@ public partial class CalendarPicker : ContentView
         container.Children.Add(selBg);
         container.Children.Add(label);
         container.Children.Add(dot);
+        _cells.Add((date, selBg, label, dot));
 
         var tap = new TapGestureRecognizer();
         tap.Tapped += (_, _) =>

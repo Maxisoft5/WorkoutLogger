@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using WorkoutLogg.Localization;
 
 namespace WorkoutLogg.Pages;
@@ -56,6 +57,8 @@ public partial class StandardsPage : ContentPage
     public StandardsPage()
     {
         InitializeComponent();
+        TouchTargets.ExpandLabel(MenBorder);
+        TouchTargets.ExpandLabel(WomenBorder);
         BuildWeightChips(MenStandards.Keys.ToList());
         RenderTable();
     }
@@ -85,15 +88,15 @@ public partial class StandardsPage : ContentPage
 
     private void UpdateSexToggle()
     {
-        MenBorder.BackgroundColor    = _isMen ? Color.FromArgb("#7C3AED") : Colors.White;
-        MenBorder.Stroke            = _isMen ? new SolidColorBrush(Colors.Transparent) : new SolidColorBrush(Color.FromArgb("#E5E7EB"));
+        MenBorder.WithThemeColor("BackgroundColor", _isMen ? Color.FromArgb("#7C3AED") : Colors.White);
+        MenBorder.WithThemeColor("Stroke", _isMen ? new SolidColorBrush(Colors.Transparent) : new SolidColorBrush(Color.FromArgb("#E5E7EB")));
         MenBorder.StrokeThickness   = _isMen ? 0 : 1.5;
-        MenLabel.TextColor          = _isMen ? Colors.White : Color.FromArgb("#374151");
+        MenLabel.WithThemeColor("TextColor", _isMen ? Colors.White : Color.FromArgb("#374151"));
 
-        WomenBorder.BackgroundColor  = _isMen ? Colors.White : Color.FromArgb("#7C3AED");
-        WomenBorder.Stroke          = _isMen ? new SolidColorBrush(Color.FromArgb("#E5E7EB")) : new SolidColorBrush(Colors.Transparent);
+        WomenBorder.WithThemeColor("BackgroundColor", _isMen ? Colors.White : Color.FromArgb("#7C3AED"));
+        WomenBorder.WithThemeColor("Stroke", _isMen ? new SolidColorBrush(Color.FromArgb("#E5E7EB")) : new SolidColorBrush(Colors.Transparent));
         WomenBorder.StrokeThickness = _isMen ? 1.5 : 0;
-        WomenLabel.TextColor        = _isMen ? Color.FromArgb("#374151") : Colors.White;
+        WomenLabel.WithThemeColor("TextColor", _isMen ? Color.FromArgb("#374151") : Colors.White);
     }
 
     private void BuildWeightChips(List<string> keys)
@@ -107,19 +110,19 @@ public partial class StandardsPage : ContentPage
             var isSelected = key == _selectedWeight;
             var chip = new Border
             {
-                BackgroundColor = isSelected ? Color.FromArgb("#7C3AED") : Colors.White,
-                Stroke = isSelected ? new SolidColorBrush(Colors.Transparent) : new SolidColorBrush(Color.FromArgb("#E5E7EB")),
                 StrokeThickness = isSelected ? 0 : 1,
                 StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 20 },
                 Padding = new Thickness(14, 6),
-            };
+                MinimumHeightRequest = 48
+            }.WithThemeColor("BackgroundColor", isSelected ? Color.FromArgb("#7C3AED") : Colors.White).WithThemeColor("Stroke", isSelected ? new SolidColorBrush(Colors.Transparent) : new SolidColorBrush(Color.FromArgb("#E5E7EB")));
             var label = new Label
             {
                 Text = $"{key} {Loc.Get("Common_Kg")}",
+                InputTransparent = true,
+                VerticalOptions = LayoutOptions.Center,
                 FontSize = 13,
-                FontAttributes = FontAttributes.Bold,
-                TextColor = isSelected ? Colors.White : Color.FromArgb("#374151"),
-            };
+                FontAttributes = FontAttributes.Bold
+            }.WithThemeColor("TextColor", isSelected ? Colors.White : Color.FromArgb("#374151"));
             chip.Content = label;
 
             var capturedKey = key;
@@ -153,11 +156,10 @@ public partial class StandardsPage : ContentPage
 
             var row = new Border
             {
-                BackgroundColor = bg,
                 Padding = new Thickness(12, 10),
                 StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 10 },
-                StrokeThickness = 0,
-            };
+                StrokeThickness = 0
+            }.WithThemeColor("BackgroundColor", bg);
 
             var grid = new Grid
             {
@@ -180,13 +182,11 @@ public partial class StandardsPage : ContentPage
         }
     }
 
-    private static Label MakeCell(string text, FontAttributes attrs, Color color) => new()
+    private static Label MakeCell(string text, FontAttributes attrs, Color color) => new Label()
     {
         Text = text,
         FontSize = 13,
         FontAttributes = attrs,
-        TextColor = color,
         HorizontalOptions = LayoutOptions.Center,
-        VerticalOptions = LayoutOptions.Center,
-    };
+        VerticalOptions = LayoutOptions.Center    }.WithThemeColor("TextColor", color);
 }

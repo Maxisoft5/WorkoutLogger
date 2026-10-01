@@ -160,10 +160,10 @@ namespace WorkoutLogg.PageModels
 
         // Рейтинг (M8) и верификация (M9)
         public bool HasRating => AverageRating.HasValue;
-        public string RatingLabel => AverageRating.HasValue ? $"⭐ {AverageRating.Value:0.0}" : "";
+        public string RatingLabel => AverageRating.HasValue ? $"{AverageRating.Value:0.0} / 5" : "";
         public string ReviewCountLabel => string.Format(Loc.Get("Trainers_Reviews"), ReviewCount);
         public string RatingWithCountLabel => AverageRating.HasValue
-            ? $"⭐ {AverageRating.Value:0.0} · {ReviewCountLabel}"
+            ? $"{AverageRating.Value:0.0} / 5 · {ReviewCountLabel}"
             : Loc.Get("Trainers_NoReviews");
         public bool IsVerified => HasVerifiedBadge;
         public string VerifiedLabel => VerificationBadge == "Master"
@@ -195,12 +195,12 @@ namespace WorkoutLogg.PageModels
     {
         private static readonly (TrainerSpecializations Flag, string Emoji)[] SpecEmojis =
         {
-            (TrainerSpecializations.Strength, "🏋️"),
-            (TrainerSpecializations.WeightLoss, "🔥"),
-            (TrainerSpecializations.Crossfit, "🤸"),
-            (TrainerSpecializations.Yoga, "🧘"),
-            (TrainerSpecializations.Rehabilitation, "🩺"),
-            (TrainerSpecializations.Running, "🏃"),
+            (TrainerSpecializations.Strength, FitnessIcons.Strength),
+            (TrainerSpecializations.WeightLoss, FitnessIcons.Fire),
+            (TrainerSpecializations.Crossfit, FitnessIcons.Cardio),
+            (TrainerSpecializations.Yoga, FitnessIcons.Mobility),
+            (TrainerSpecializations.Rehabilitation, FitnessIcons.Brand),
+            (TrainerSpecializations.Running, FitnessIcons.Cardio),
         };
 
         public static string Specializations(TrainerSpecializations s)
@@ -230,7 +230,7 @@ namespace WorkoutLogg.PageModels
         {
             foreach (var (flag, emoji) in SpecEmojis)
                 if (s.HasFlag(flag)) return emoji;
-            return "🏋️";
+            return FitnessIcons.Strength;
         }
 
         public static string Experience(ExperienceRange e) => Loc.Get($"Trainers_Exp_{e}");

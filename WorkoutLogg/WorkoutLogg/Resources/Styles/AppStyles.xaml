@@ -27,9 +27,9 @@
 
 
     <!-- Цветовая палитра -->
-    <Color x:Key="PurplePrimary">#7C3AED</Color>
-    <Color x:Key="PurpleAccent">#9333EA</Color>
-    <Color x:Key="PageBackground">#EEEEF6</Color>
+    <Color x:Key="PurplePrimary">#B84408</Color>
+    <Color x:Key="PurpleAccent">#7551A8</Color>
+    <Color x:Key="PageBackground">#F5F5F5</Color>
     <Color x:Key="CardBackground">White</Color>
     <Color x:Key="TextPrimary">#111827</Color>
     <Color x:Key="TextSecondary">#6B7280</Color>
@@ -39,8 +39,8 @@
     <!-- Стиль поля ввода -->
     <Style x:Key="LoginEntryStyle" TargetType="Entry">
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
-        <Setter Property="PlaceholderColor" Value="{StaticResource TextMuted}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="Margin" Value="16,0" />
         <Setter Property="VerticalOptions" Value="Center" />
@@ -48,25 +48,25 @@
 
     <!-- Стиль обёртки Border вокруг Entry -->
     <Style x:Key="EntryBorderStyle" TargetType="Border">
-        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" />
         <Setter Property="HeightRequest" Value="56" />
-        <Setter Property="Stroke" Value="{StaticResource BorderColor}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 14" />
         <Setter Property="StrokeThickness" Value="1.5" />
     </Style>
 
     <!-- Стиль социальных кнопок (Apple / Google) -->
     <Style x:Key="SocialButtonBorderStyle" TargetType="Border">
-        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" />
         <Setter Property="HeightRequest" Value="56" />
-        <Setter Property="Stroke" Value="{StaticResource BorderColor}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 14" />
         <Setter Property="StrokeThickness" Value="1.5" />
     </Style>
 
     <Style x:Key="SocialButtonStyle" TargetType="Button">
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="15" />
     </Style>
@@ -166,17 +166,17 @@
     <!-- Стили для нижней навигации (TabBar) -->
     <Style TargetType="TabBar">
         <!-- Цвет фона панели -->
-        <Setter Property="Shell.BackgroundColor" Value="#1a1a2e" />
+        <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" />
         <!-- Цвет текста и иконки активной вкладки -->
-        <Setter Property="Shell.TabBarTitleColor" Value="#4d90fe" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="#888888" />
         <!-- Цвет индикатора активной вкладки (если поддерживается) -->
-        <Setter Property="Shell.TabBarForegroundColor" Value="#4d90fe" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
     </Style>
 
     <!-- Опционально: стили для Flyout (если будете использовать боковое меню) -->
     <Style TargetType="FlyoutItem">
-        <Setter Property="Shell.BackgroundColor" Value="#1a1a2e" />
+        <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" />
         <Setter Property="Shell.TitleColor" Value="White" />
     </Style>
     <Style TargetType="Label">

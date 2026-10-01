@@ -112,13 +112,13 @@ namespace WorkoutLogg.PageModels
 
         public string Emoji => WorkoutType switch
         {
-            WorkoutType.Strength => "🏋️",
-            WorkoutType.Cardio => "🏃",
-            WorkoutType.Stretch => "🧘",
-            WorkoutType.BodyBuilding => "💪",
-            WorkoutType.Yoga => "🧘",
-            WorkoutType.Running => "🏃",
-            _ => "🏋️",
+            WorkoutType.Strength => FitnessIcons.Strength,
+            WorkoutType.Cardio => FitnessIcons.Cardio,
+            WorkoutType.Stretch => FitnessIcons.Mobility,
+            WorkoutType.BodyBuilding => FitnessIcons.Strength,
+            WorkoutType.Yoga => FitnessIcons.Mobility,
+            WorkoutType.Running => FitnessIcons.Cardio,
+            _ => FitnessIcons.Strength,
         };
 
         public string TypeLabel => Loc.Get($"WorkoutType_{WorkoutType}");

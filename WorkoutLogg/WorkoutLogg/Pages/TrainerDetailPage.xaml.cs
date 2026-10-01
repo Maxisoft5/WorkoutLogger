@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using Modules.Users.Infrastructure.Api;
 using System.Globalization;
 using WorkoutLogg.Localization;
@@ -76,10 +77,10 @@ public partial class TrainerDetailPage : ContentPage
 
     private static void SetChip(Border border, Label label, bool active)
     {
-        border.BackgroundColor = active ? Purple : White;
-        border.Stroke = active ? Purple : ChipStroke;
+        border.WithThemeColor("BackgroundColor", active ? Purple : White);
+        border.WithThemeColor("Stroke", active ? Purple : ChipStroke);
         border.StrokeThickness = active ? 0 : 1.5;
-        label.TextColor = active ? White : ChipText;
+        label.WithThemeColor("TextColor", active ? White : ChipText);
     }
 
     // ── Chat (M6) ────────────────────────────────────────────────
@@ -141,34 +142,30 @@ public partial class TrainerDetailPage : ContentPage
         {
             Text = start.ToString("d MMM yyyy, HH:mm", culture),
             FontAttributes = FontAttributes.Bold,
-            FontSize = 14,
-            TextColor = Color.FromArgb("#111827"),
-        });
+            FontSize = 14
+        }.WithThemeColor("TextColor", Color.FromArgb("#111827")));
         info.Children.Add(new Label
         {
             Text = $"{slot.DurationMinutes} {Loc.Get("Trainers_Slots_Minutes")}" +
                    (string.IsNullOrWhiteSpace(slot.Note) ? "" : $" · {slot.Note}"),
-            FontSize = 12,
-            TextColor = Color.FromArgb("#9CA3AF"),
-        });
+            FontSize = 12
+        }.WithThemeColor("TextColor", Color.FromArgb("#9CA3AF")));
         grid.Add(info, 0);
 
         var bookLabel = new Label
         {
             Text = Loc.Get("Trainers_Slots_Book"),
             FontAttributes = FontAttributes.Bold,
-            FontSize = 13,
-            TextColor = Colors.White,
-        };
+            FontSize = 13
+        }.WithThemeColor("TextColor", Colors.White);
         var bookButton = new Border
         {
             Content = bookLabel,
-            BackgroundColor = Purple,
             Padding = new Thickness(16, 8),
             StrokeThickness = 0,
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = new CornerRadius(12) },
-            VerticalOptions = LayoutOptions.Center,
-        };
+            VerticalOptions = LayoutOptions.Center
+        }.WithThemeColor("BackgroundColor", Purple);
         var tap = new TapGestureRecognizer();
         tap.Tapped += async (_, _) => await BookSlotAsync(slot);
         bookButton.GestureRecognizers.Add(tap);
@@ -177,12 +174,10 @@ public partial class TrainerDetailPage : ContentPage
         return new Border
         {
             Content = grid,
-            BackgroundColor = Color.FromArgb("#F9FAFB"),
             Padding = new Thickness(14, 10),
-            Stroke = new SolidColorBrush(Color.FromArgb("#E5E7EB")),
             StrokeThickness = 1,
-            StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = new CornerRadius(12) },
-        };
+            StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = new CornerRadius(12) }
+        }.WithThemeColor("BackgroundColor", Color.FromArgb("#F9FAFB")).WithThemeColor("Stroke", new SolidColorBrush(Color.FromArgb("#E5E7EB")));
     }
 
     private async Task BookSlotAsync(SlotDto slot)
@@ -276,16 +271,16 @@ public partial class TrainerDetailPage : ContentPage
         };
         header.Add(new Label
         {
-            Text = string.Concat(Enumerable.Repeat("⭐", Math.Clamp(review.Rating, 1, 5))),
+            Text = string.Concat(Enumerable.Repeat(FitnessIcons.Star, Math.Clamp(review.Rating, 1, 5))),
+            FontFamily = FitnessIcons.FontFamily,
             FontSize = 12,
         }, 0);
         header.Add(new Label
         {
             Text = review.CreatedAtUtc.ToLocalTime().ToString("d MMM yyyy", culture),
             FontSize = 11,
-            TextColor = Color.FromArgb("#9CA3AF"),
-            VerticalOptions = LayoutOptions.Center,
-        }, 1);
+            VerticalOptions = LayoutOptions.Center
+        }.WithThemeColor("TextColor", Color.FromArgb("#9CA3AF")), 1);
         stack.Children.Add(header);
 
         if (!string.IsNullOrWhiteSpace(review.Text))
@@ -293,9 +288,8 @@ public partial class TrainerDetailPage : ContentPage
             stack.Children.Add(new Label
             {
                 Text = review.Text,
-                FontSize = 13,
-                TextColor = Color.FromArgb("#374151"),
-            });
+                FontSize = 13
+            }.WithThemeColor("TextColor", Color.FromArgb("#374151")));
         }
 
         if (!string.IsNullOrWhiteSpace(review.TrainerReply))
@@ -304,20 +298,17 @@ public partial class TrainerDetailPage : ContentPage
             {
                 Text = $"↳ {review.TrainerReply}",
                 FontSize = 12,
-                TextColor = Color.FromArgb("#6B7280"),
-                Margin = new Thickness(10, 0, 0, 0),
-            });
+                Margin = new Thickness(10, 0, 0, 0)
+            }.WithThemeColor("TextColor", Color.FromArgb("#6B7280")));
         }
 
         return new Border
         {
             Content = stack,
-            BackgroundColor = Color.FromArgb("#F9FAFB"),
             Padding = new Thickness(14, 10),
-            Stroke = new SolidColorBrush(Color.FromArgb("#E5E7EB")),
             StrokeThickness = 1,
-            StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = new CornerRadius(12) },
-        };
+            StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = new CornerRadius(12) }
+        }.WithThemeColor("BackgroundColor", Color.FromArgb("#F9FAFB")).WithThemeColor("Stroke", new SolidColorBrush(Color.FromArgb("#E5E7EB")));
     }
 
     private async void OnSubmitTapped(object sender, TappedEventArgs e)

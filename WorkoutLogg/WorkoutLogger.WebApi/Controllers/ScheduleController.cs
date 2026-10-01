@@ -18,6 +18,7 @@ namespace WorkoutLogger.WebApi.Controllers
         // ─── Слоты ────────────────────────────────────────────────────────────
 
         /// <summary>Тренер добавляет слот в расписание.</summary>
+        [Authorize(Policy = "GymTrainer")]
         [HttpPost("slots")]
         public async Task<IActionResult> AddSlot([FromBody] CreateSlotRequest request, CancellationToken ct)
         {
@@ -47,6 +48,7 @@ namespace WorkoutLogger.WebApi.Controllers
         }
 
         /// <summary>Личное расписание тренера (все слоты, включая занятые).</summary>
+        [Authorize(Policy = "GymTrainer")]
         [HttpGet("slots/my")]
         public async Task<IActionResult> GetMySchedule(
             [FromQuery] DateTime? from = null,
@@ -99,6 +101,7 @@ namespace WorkoutLogger.WebApi.Controllers
         }
 
         /// <summary>Бронирования для тренера (входящие).</summary>
+        [Authorize(Policy = "GymTrainer")]
         [HttpGet("bookings/trainer")]
         public async Task<IActionResult> GetTrainerBookings(CancellationToken ct)
         {
@@ -110,6 +113,7 @@ namespace WorkoutLogger.WebApi.Controllers
         }
 
         /// <summary>Тренер подтверждает бронирование.</summary>
+        [Authorize(Policy = "GymTrainer")]
         [HttpPost("bookings/{bookingId:guid}/confirm")]
         public async Task<IActionResult> Confirm(Guid bookingId, CancellationToken ct)
         {
@@ -133,6 +137,7 @@ namespace WorkoutLogger.WebApi.Controllers
         }
 
         /// <summary>Тренер отмечает тренировку состоявшейся.</summary>
+        [Authorize(Policy = "GymTrainer")]
         [HttpPost("bookings/{bookingId:guid}/complete")]
         public async Task<IActionResult> Complete(Guid bookingId, CancellationToken ct)
         {
@@ -144,6 +149,7 @@ namespace WorkoutLogger.WebApi.Controllers
         }
 
         /// <summary>Тренер отмечает no-show (ученик не явился).</summary>
+        [Authorize(Policy = "GymTrainer")]
         [HttpPost("bookings/{bookingId:guid}/no-show")]
         public async Task<IActionResult> NoShow(Guid bookingId, CancellationToken ct)
         {

@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using System.Globalization;
 using WorkoutLogg.Localization;
 using WorkoutLogg.Services;
@@ -212,29 +213,25 @@ public partial class ChatThreadPage : ContentPage
             {
                 Text = message.Text,
                 FontSize = 14,
-                TextColor = isMine ? Colors.White : Color.FromArgb("#111827"),
-                LineBreakMode = LineBreakMode.WordWrap,
-            },
-            BackgroundColor = isMine ? Color.FromArgb("#7C3AED") : Colors.White,
+                LineBreakMode = LineBreakMode.WordWrap
+            }.WithThemeColor("TextColor", isMine ? Colors.White : Color.FromArgb("#111827")),
             Padding = new Thickness(14, 10),
             StrokeThickness = isMine ? 0 : 1,
-            Stroke = isMine ? null : new SolidColorBrush(Color.FromArgb("#F3F4F6")),
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle
             {
                 CornerRadius = isMine
                     ? new CornerRadius(18, 18, 4, 18)
                     : new CornerRadius(18, 18, 18, 4),
             },
-            MaximumWidthRequest = 300,
-        });
+            MaximumWidthRequest = 300
+        }.WithThemeColor("BackgroundColor", isMine ? Color.FromArgb("#7C3AED") : Colors.White).WithThemeColor("Stroke", isMine ? null : new SolidColorBrush(Color.FromArgb("#F3F4F6"))));
 
         stack.Children.Add(new Label
         {
             Text = timeText,
             FontSize = 10,
-            TextColor = Color.FromArgb("#9CA3AF"),
-            HorizontalOptions = isMine ? LayoutOptions.End : LayoutOptions.Start,
-        });
+            HorizontalOptions = isMine ? LayoutOptions.End : LayoutOptions.Start
+        }.WithThemeColor("TextColor", Color.FromArgb("#9CA3AF")));
 
         MessagesPanel.Children.Add(stack);
     }

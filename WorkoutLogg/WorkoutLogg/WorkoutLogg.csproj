@@ -189,5 +189,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
-	
+
+    <!-- IDE Debug builds restore the USB tunnel lost after reconnecting the phone. -->
+    <Target Name="ConnectLocalAndroidApi"
+            AfterTargets="Build;Install"
+            Condition="'$(Configuration)' == 'Debug' and '$(TargetPlatformIdentifier)' == 'android' and '$(DesignTimeBuild)' != 'true' and '$(EnableLocalApiReverse)' != 'false' and $([MSBuild]::IsOSPlatform('windows'))">
+        <Exec Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\..\tools\Connect-LocalApi.ps1&quot; -AdbPath &quot;$(AdbToolPath)adb.exe&quot; -ConfigPath &quot;$(MSBuildProjectDirectory)\Resources\Raw\appsettings.json&quot; -DeviceSerial &quot;$(LocalApiDeviceSerial)&quot;"
+              ContinueOnError="WarnAndContinue" />
+    </Target>
 </Project>

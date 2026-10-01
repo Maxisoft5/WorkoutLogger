@@ -9,6 +9,7 @@ using Modules.Users.Domain.Mappers;
 using Modules.Users.DTO.Auth;
 using WorkoutLogger.WebApi.Extensions;
 using WorkoutLogger.WebApi.Services;
+using Modules.Common.Infrastructure.Tenancy;
 
 namespace WorkoutLogger.WebApi.Controllers;
 
@@ -19,7 +20,7 @@ public class AuthController(IAuthService authService,
     IUserService userService,
     IHttpContextAccessor httpContextAccessor,
     IEventPublisher eventPublisher,
-    KafkaSettings kafkaSettings) : ControllerBase
+    KafkaSettings kafkaSettings, TenantContext? tenant = null) : ControllerBase
 {
 
     [Authorize]
@@ -37,12 +38,16 @@ public class AuthController(IAuthService authService,
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] UserDto user, [FromServices] ILoginRateLimiter loginRateLimiter)
     {
+        if (string.IsNullOrWhiteSpace(user.Email) == string.IsNullOrWhiteSpace(user.PhoneNumber))
+            return BadRequest(new { message = "Укажите email или телефон." });
+        var identifier = LoginIdentifier.Normalize(!string.IsNullOrWhiteSpace(user.Email) ? user.Email : user.PhoneNumber);
+        if (identifier is null || string.IsNullOrEmpty(user.Password)) return BadRequest(new { message = "Проверьте логин и пароль." });
         var ctx = httpContextAccessor.HttpContext;
         var clientIp = ctx?.Connection.RemoteIpAddress?.ToString();
 
         // Redis-backed защита от перебора паролей: после N неудачных попыток
         // с одной пары IP+email вход блокируется до конца окна.
-        var rateLimit = await loginRateLimiter.CheckAsync(user.Email ?? "", clientIp);
+        var rateLimit = await loginRateLimiter.CheckAsync(identifier, clientIp);
         if (rateLimit.IsBlocked)
         {
             if (rateLimit.RetryAfter is { } retryAfter)
@@ -51,17 +56,18 @@ public class AuthController(IAuthService authService,
                 new { error = "Too many failed login attempts. Try again later." });
         }
 
-        var login = await authService.LoginAsync(user.Email, user.Password);
+        var login = await authService.LoginAsync(identifier, user.Password);
 
         if (login.IsSuccess)
         {
-            await loginRateLimiter.ResetAsync(user.Email ?? "", clientIp);
-            var logined = await userService.GetUserByEmail(user.Email);
-            if (logined.IsSuccess)
+            await loginRateLimiter.ResetAsync(identifier, clientIp);
+            var logined = !string.IsNullOrWhiteSpace(user.Email) ? await userService.GetUserByEmail(user.Email) : null;
+            if (logined?.IsSuccess == true)
             {
                 await eventPublisher.PublishAsync(kafkaSettings.Topics.AuthEvents, new AuthEvent
                 {
                     EventType = "user.login",
+                    TenantId = tenant?.Current.Id ?? "legacy",
                     Email = user.Email ?? "unknown",
                     UserId = logined.Value?.Id ?? "",
                     IpAddress = ctx?.Connection.RemoteIpAddress?.ToString(),
@@ -71,10 +77,11 @@ public class AuthController(IAuthService authService,
         }
         else
         {
-            await loginRateLimiter.RecordFailureAsync(user.Email ?? "", clientIp);
+            await loginRateLimiter.RecordFailureAsync(identifier, clientIp);
             await eventPublisher.PublishAsync(kafkaSettings.Topics.AuthEvents, new AuthEvent
             {
                 EventType = "user.login_failed",
+                TenantId = tenant?.Current.Id ?? "legacy",
                 Email = user.Email ?? "unknown",
                 IpAddress = ctx?.Connection.RemoteIpAddress?.ToString(),
                 UserAgent = ctx?.Request.Headers.UserAgent.ToString()

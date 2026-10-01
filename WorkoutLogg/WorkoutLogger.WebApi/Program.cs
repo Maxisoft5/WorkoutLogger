@@ -9,11 +9,17 @@ using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
 using WorkoutLogger.WebApi.Extensions;
 using WorkoutLogger.WebApi.Grpc;
+using WorkoutLogger.WebApi.Tenancy;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // appsettings.Local.json — локальные секреты, не попадает в git
 builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: false);
+builder.Configuration.AddJsonFile("appsettings.Tenants.json", optional: true, reloadOnChange: false);
+// Окружение и аргументы запуска имеют приоритет над локальным JSON.
+builder.Configuration.AddEnvironmentVariables().AddCommandLine(args);
+builder.AddLocalServiceConfiguration();
 
 Serilog.Debugging.SelfLog.Enable(msg => Console.Error.WriteLine($"[Serilog] {msg}"));
 
@@ -46,20 +52,6 @@ builder.Host.UseSerilog((ctx, _, config) =>
 
 builder.AddServiceDefaults();
 
-// Если UseLocalhost=true — перекрываем все адреса localhost'ом поверх appsettings.json.
-// Пароль БД берётся из POSTGRES_PASSWORD (env / appsettings.Local.json), а не хардкодится.
-if (builder.Configuration.GetValue<bool>("UseLocalhost"))
-{
-    var localDbPassword = builder.Configuration["POSTGRES_PASSWORD"] ?? "postgres";
-    builder.Configuration.AddInMemoryCollection(new Dictionary<string, string?>
-    {
-        ["ConnectionStrings:DefaultConnection"] = $"Host=localhost;Port=5432;Database=workoutLogger;Username=postgres;Password={localDbPassword}",
-        ["ConnectionStrings:Redis"]             = "localhost:6379",
-        ["Kafka:BootstrapServers"]              = "localhost:9094",
-        ["OpenSearch:Url"]                      = "http://localhost:9200",
-    });
-}
-
 // Add services to the container.
 
 builder.Services.AddControllers().AddJsonOptions(opts =>
@@ -82,7 +74,7 @@ builder.Services.AddRateLimiter(options =>
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
     options.AddPolicy("auth", httpContext =>
         RateLimitPartition.GetFixedWindowLimiter(
-            partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            partitionKey: $"{httpContext.RequestServices.GetRequiredService<Modules.Common.Infrastructure.Tenancy.TenantContext>().Current.Id}:{httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown"}",
             factory: _ => new FixedWindowRateLimiterOptions
             {
                 PermitLimit = 10,
@@ -100,25 +92,26 @@ builder.Services.AddAiCoachService(configuration);
 builder.Services.AddHybridCache(configuration);
 builder.Services.AddLoginRateLimiter(configuration);
 builder.Services.AddKafkaMessaging(configuration);
+builder.Services.AddGymTenancy(configuration);
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    // Host remains the original HTTP Host, checked against TenantCatalog.
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    foreach (var address in configuration.GetSection("ReverseProxy:KnownProxies").Get<string[]>() ?? [])
+        options.KnownProxies.Add(System.Net.IPAddress.Parse(address));
+});
 
 
 var app = builder.Build();
 
+app.UseForwardedHeaders();
 app.UseExceptionHandler();
 
 app.MapDefaultEndpoints();
 
-using (var scope = app.Services.CreateScope())
-{
-    var usersDb = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
-    await usersDb.Database.MigrateAsync();
-
-    var subsDb = scope.ServiceProvider.GetRequiredService<SubscriptionsDbContext>();
-    await subsDb.Database.MigrateAsync();
-
-    var trainersDb = scope.ServiceProvider.GetRequiredService<TrainersDbContext>();
-    await trainersDb.Database.MigrateAsync();
-}
+if (configuration.GetValue<bool>("Tenancy:MigrateOnStartup", true) || configuration.GetValue<bool>("Tenancy:MigrationOnly"))
+    await app.Services.MigrateGymsAsync(configuration);
+if (configuration.GetValue<bool>("Tenancy:MigrationOnly")) return;
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -127,6 +120,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.Use(TenantServices.ResolveTenant);
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.UseRateLimiter();
 
@@ -136,5 +132,6 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapGrpcService<ExercisesGrpcService>();
 app.MapGrpcService<WorkoutsGrpcService>();
+app.MapFallbackToFile("index.html");
 
 app.Run();

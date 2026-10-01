@@ -87,12 +87,12 @@ namespace WorkoutLogg.PageModels
 
         public string Emoji => Status switch
         {
-            "Pending" => "⏳",
-            "Confirmed" => "✅",
-            "Completed" => "🏆",
-            "Cancelled" => "❌",
-            "NoShow" => "🚫",
-            _ => "📅",
+            "Pending" => FitnessIcons.Timer,
+            "Confirmed" => FitnessIcons.CheckCircle,
+            "Completed" => FitnessIcons.Trophy,
+            "Cancelled" => FitnessIcons.Close,
+            "NoShow" => FitnessIcons.Prohibited,
+            _ => FitnessIcons.Calendar,
         };
 
         public Color StatusColor => Status switch

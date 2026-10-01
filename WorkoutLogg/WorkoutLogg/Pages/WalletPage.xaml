@@ -2,25 +2,26 @@
 <ContentPage
     x:Class="WorkoutLogg.Pages.WalletPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:theme="clr-namespace:WorkoutLogg.Utilities"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
     x:DataType="vm:WalletPageModel"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,*">
 
         <!-- Header -->
-        <Border Grid.Row="0" BackgroundColor="#7C3AED"
+        <Border Grid.Row="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                 Padding="20,52,20,20"
                 StrokeShape="RoundRectangle 0,0,28,28"
                 StrokeThickness="0">
             <Grid ColumnDefinitions="Auto,*">
-                <Border Grid.Column="0" BackgroundColor="#9333EA" Padding="10,8"
+                <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" Padding="0"
                         StrokeShape="RoundRectangle 10" StrokeThickness="0" VerticalOptions="Center">
-                    <Label Text="←" FontSize="18" TextColor="White" VerticalOptions="Center">
+                    <Label Style="{StaticResource IconBackAction}" TextColor="White" VerticalOptions="Center" SemanticProperties.Description="{loc:Translate Common_Back}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnBackTapped" />
                         </Label.GestureRecognizers>
@@ -35,25 +36,25 @@
             <VerticalStackLayout Padding="20,16,20,24" Spacing="16">
 
                 <!-- Balance card -->
-                <Border BackgroundColor="#7C3AED" Padding="24" StrokeThickness="0" StrokeShape="RoundRectangle 20">
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}" Padding="24" StrokeThickness="0" StrokeShape="RoundRectangle 20">
                     <VerticalStackLayout Spacing="6" HorizontalOptions="Center">
-                        <Label Text="{loc:Translate Wallet_Balance}" FontSize="13" TextColor="#DDD6FE" HorizontalOptions="Center" />
+                        <Label Text="{loc:Translate Wallet_Balance}" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" HorizontalOptions="Center" />
                         <Label Text="{Binding BalanceLabel}" FontAttributes="Bold" FontSize="40" TextColor="White" HorizontalOptions="Center" />
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- Earn FitCoins -->
-                <Label Text="{loc:Translate Wallet_Earn}" FontAttributes="Bold" FontSize="18" TextColor="#111827" />
-                <Border BackgroundColor="White" Padding="4,8" Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 16">
+                <Label Text="{loc:Translate Wallet_Earn}" FontAttributes="Bold" FontSize="18" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="4,8" Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeThickness="1" StrokeShape="RoundRectangle 16">
                     <VerticalStackLayout>
                         <!-- Streak (claimable) -->
                         <Grid Padding="16,12" ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="🔥" FontSize="22" VerticalOptions="Center" Margin="0,0,12,0" />
+                            <Label Grid.Column="0" Style="{StaticResource IconFire}" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" FontSize="24" VerticalOptions="Center" Margin="0,0,12,0" />
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                                <Label Text="{loc:Translate Wallet_Earn_Streak}" FontAttributes="Bold" FontSize="15" TextColor="#111827" />
-                                <Label Text="{loc:Translate Wallet_Earn_Streak_Sub}" FontSize="12" TextColor="#9CA3AF" />
+                                <Label Text="{loc:Translate Wallet_Earn_Streak}" FontAttributes="Bold" FontSize="15" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                                <Label Text="{loc:Translate Wallet_Earn_Streak_Sub}" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
-                            <Border Grid.Column="2" BackgroundColor="#7C3AED" Padding="14,8" StrokeThickness="0" StrokeShape="RoundRectangle 12" VerticalOptions="Center">
+                            <Border Grid.Column="2" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}" Padding="14,8" StrokeThickness="0" StrokeShape="RoundRectangle 12" VerticalOptions="Center">
                                 <Label x:Name="ClaimLabel" Text="{loc:Translate Wallet_Earn_Claim}" FontAttributes="Bold" FontSize="13" TextColor="White">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnClaimStreakTapped" />
@@ -61,48 +62,48 @@
                                 </Label>
                             </Border>
                         </Grid>
-                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                        <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" Margin="16,0" />
                         <!-- Challenge (coming soon) -->
                         <Grid Padding="16,12" ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="🏆" FontSize="22" VerticalOptions="Center" Margin="0,0,12,0" />
+                            <Label Grid.Column="0" Style="{StaticResource IconTrophy}" FontSize="24" VerticalOptions="Center" Margin="0,0,12,0" />
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                                <Label Text="{loc:Translate Wallet_Earn_Challenge}" FontAttributes="Bold" FontSize="15" TextColor="#111827" />
-                                <Label Text="{loc:Translate Wallet_Earn_Challenge_Sub}" FontSize="12" TextColor="#9CA3AF" />
+                                <Label Text="{loc:Translate Wallet_Earn_Challenge}" FontAttributes="Bold" FontSize="15" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                                <Label Text="{loc:Translate Wallet_Earn_Challenge_Sub}" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
-                            <Label Grid.Column="2" Text="{loc:Translate Common_ComingSoon}" FontSize="11" TextColor="#9CA3AF" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="{loc:Translate Common_ComingSoon}" FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" VerticalOptions="Center" />
                         </Grid>
-                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" Margin="16,0" />
+                        <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" Margin="16,0" />
                         <!-- Referral (coming soon) -->
                         <Grid Padding="16,12" ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="👥" FontSize="22" VerticalOptions="Center" Margin="0,0,12,0" />
+                            <Label Grid.Column="0" Style="{StaticResource IconPeople}" FontSize="24" VerticalOptions="Center" Margin="0,0,12,0" />
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                                <Label Text="{loc:Translate Wallet_Earn_Referral}" FontAttributes="Bold" FontSize="15" TextColor="#111827" />
-                                <Label Text="{loc:Translate Wallet_Earn_Referral_Sub}" FontSize="12" TextColor="#9CA3AF" />
+                                <Label Text="{loc:Translate Wallet_Earn_Referral}" FontAttributes="Bold" FontSize="15" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                                <Label Text="{loc:Translate Wallet_Earn_Referral_Sub}" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
-                            <Label Grid.Column="2" Text="{loc:Translate Common_ComingSoon}" FontSize="11" TextColor="#9CA3AF" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="{loc:Translate Common_ComingSoon}" FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" VerticalOptions="Center" />
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- History -->
-                <Label Text="{loc:Translate Wallet_History}" FontAttributes="Bold" FontSize="18" TextColor="#111827" />
+                <Label Text="{loc:Translate Wallet_History}" FontAttributes="Bold" FontSize="18" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
 
                 <CollectionView ItemsSource="{Binding Transactions}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="vm:WalletTxItem">
-                            <Border BackgroundColor="White" Padding="16,12" Margin="0,0,0,8"
-                                    Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 14">
+                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="16,12" Margin="0,0,0,8"
+                                    Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeThickness="1" StrokeShape="RoundRectangle 14">
                                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                                    <Border Grid.Column="0" BackgroundColor="#F3F4F6" WidthRequest="40" HeightRequest="40"
+                                    <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" WidthRequest="40" HeightRequest="40"
                                             StrokeThickness="0" StrokeShape="RoundRectangle 20" VerticalOptions="Center">
-                                        <Label Text="{Binding Emoji}" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                                        <Label Text="{Binding Emoji}" Style="{StaticResource FitnessIcon}" FontSize="22" HorizontalOptions="Center" VerticalOptions="Center" />
                                     </Border>
                                     <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                                        <Label Text="{Binding TypeLabel}" FontAttributes="Bold" FontSize="14" TextColor="#111827" />
-                                        <Label Text="{Binding SubLabel}" FontSize="12" TextColor="#9CA3AF" />
+                                        <Label Text="{Binding TypeLabel}" FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                                        <Label Text="{Binding SubLabel}" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                                     </VerticalStackLayout>
                                     <Label Grid.Column="2" Text="{Binding AmountLabel}" FontAttributes="Bold" FontSize="15"
-                                           TextColor="{Binding AmountColor}" VerticalOptions="Center" />
+                                           TextColor="{theme:ThemeBinding Path=AmountColor, Background=False}" VerticalOptions="Center" />
                                 </Grid>
                             </Border>
                         </DataTemplate>
@@ -111,11 +112,11 @@
 
                 <!-- Empty state -->
                 <VerticalStackLayout IsVisible="{Binding IsEmpty}" Padding="0,24" Spacing="10" HorizontalOptions="Center">
-                    <Label FontSize="40" HorizontalOptions="Center" Text="💰" />
+                    <Label Style="{StaticResource IconWallet}" FontSize="40" HorizontalOptions="Center" />
                     <Label FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"
-                           Text="{loc:Translate Wallet_Empty}" TextColor="#111827" />
+                           Text="{loc:Translate Wallet_Empty}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                     <Label FontSize="14" HorizontalOptions="Center"
-                           Text="{loc:Translate Wallet_EmptySubtitle}" TextColor="#9CA3AF" />
+                           Text="{loc:Translate Wallet_EmptySubtitle}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                 </VerticalStackLayout>
 
             </VerticalStackLayout>

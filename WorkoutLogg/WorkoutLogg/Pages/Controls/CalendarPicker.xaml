@@ -5,18 +5,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization">
 
-    <Border BackgroundColor="White" Padding="16,14" Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="16,14" Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
         <VerticalStackLayout Spacing="12">
 
             <!-- Month navigation -->
-            <Grid ColumnDefinitions="40,*,40">
+            <Grid ColumnDefinitions="48,*,48">
                 <Button Grid.Column="0"
                         BackgroundColor="Transparent"
                         Clicked="OnPrevMonth"
                         FontAttributes="Bold"
                         FontSize="18"
-                        Text="‹"
-                        TextColor="#9CA3AF"
+                        Style="{StaticResource IconPreviousButton}" SemanticProperties.Description="{loc:Translate Calendar_PreviousMonth}"
+                        TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                         Padding="0"
                         HorizontalOptions="Center" />
                 <Label x:Name="MonthLabel"
@@ -24,28 +24,28 @@
                        FontAttributes="Bold"
                        FontSize="15"
                        HorizontalOptions="Center"
-                       TextColor="#111827"
+                       TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                        VerticalOptions="Center" />
                 <Button Grid.Column="2"
                         BackgroundColor="Transparent"
                         Clicked="OnNextMonth"
                         FontAttributes="Bold"
                         FontSize="18"
-                        Text="›"
-                        TextColor="#9CA3AF"
+                        Style="{StaticResource IconNextButton}" SemanticProperties.Description="{loc:Translate Calendar_NextMonth}"
+                        TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                         Padding="0"
                         HorizontalOptions="Center" />
             </Grid>
 
             <!-- Day of week headers -->
             <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="4">
-                <Label Grid.Column="0" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Mo}" TextColor="#9CA3AF" />
-                <Label Grid.Column="1" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Tu}" TextColor="#9CA3AF" />
-                <Label Grid.Column="2" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_We}" TextColor="#9CA3AF" />
-                <Label Grid.Column="3" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Th}" TextColor="#9CA3AF" />
-                <Label Grid.Column="4" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Fr}" TextColor="#9CA3AF" />
-                <Label Grid.Column="5" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Sa}" TextColor="#9CA3AF" />
-                <Label Grid.Column="6" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Su}" TextColor="#9CA3AF" />
+                <Label Grid.Column="0" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Mo}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label Grid.Column="1" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Tu}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label Grid.Column="2" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_We}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label Grid.Column="3" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Th}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label Grid.Column="4" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Fr}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label Grid.Column="5" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Sa}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label Grid.Column="6" FontAttributes="Bold" FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Calendar_Su}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
             </Grid>
 
             <!-- Days grid populated from code-behind -->

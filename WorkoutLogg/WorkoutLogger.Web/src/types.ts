@@ -1,0 +1,10 @@
+export type Block = { title: string; text: string; visible: boolean };
+export type Brand = { name: string; tagline: string; accent: string; defaultTheme: 'light' | 'dark' | 'system'; shape: 'rounded' | 'square'; homeBlocks: Block[]; profileBlocks: Block[] };
+export type Site = { tenantId: string; brand: Brand };
+export type User = { id: string; fullName: string; email?: string; phoneNumber?: string; bodyStats?: { kg: number; cm: number; fat: number }; goals?: { goal: string }[]; workOutCount?: string; activeRole: string; isPremium: boolean };
+export type Workout = { id: string; workoutType: string; startDate: string; endDate: string; exerciseCount: number };
+export type ExerciseSet = { setNumber: number; reps: number; weightKg: number; restSeconds: number; isWarmup: boolean };
+export type Exercise = { name: string; description: string; complexity: string; sets: ExerciseSet[] };
+export type WorkoutDetail = Workout & { exercises: Exercise[] };
+export type Trainer = { id: string; userId: string; name: string; about: string; pricePerSession: number; isActive: boolean; specializations: string; experience: string; formats: string };
+export const workoutNames: Record<string, string> = { All: 'Общая', Strength: 'Силовая', Cardio: 'Кардио', Stretch: 'Растяжка', BodyBuilding: 'Бодибилдинг', Yoga: 'Йога', Running: 'Бег' };

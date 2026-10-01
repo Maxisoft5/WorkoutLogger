@@ -29,7 +29,7 @@ namespace WorkoutLogg.PageModels
         [ObservableProperty] private string lastTitle = "No workouts logged yet";
         [ObservableProperty] private string lastSubLabel = "Tap + in Logger to start";
         [ObservableProperty] private string lastVolumeLabel = "—";
-        [ObservableProperty] private string lastEmoji = "📓";
+        [ObservableProperty] private string lastEmoji = FitnessIcons.Journal;
         [ObservableProperty] private bool hasLastWorkout;
 
         // ── Week bars (built in code-behind via LoadAsync) ────────────────────
@@ -84,7 +84,7 @@ namespace WorkoutLogg.PageModels
             {
                 HasLastWorkout = true;
                 LastTitle = last.IsCustom ? Loc.Get("Dashboard_CustomWorkout") : last.WorkoutLabel;
-                LastEmoji = last.IsCustom ? "⚡" : "🏋️";
+                LastEmoji = last.IsCustom ? FitnessIcons.Cardio : FitnessIcons.Strength;
 
                 var culture = new CultureInfo(Loc.Get("_Culture"));
                 var dateStr = last.Date.Date == today ? Loc.Get("Dashboard_Today")

@@ -28,15 +28,16 @@ public partial class ProfilePage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        PageLoading.Show();
+        var timer = System.Diagnostics.Stopwatch.StartNew();
         try
         {
-            await _vm.LoadAsync();
-            await LoadSubscriptionStatusAsync();
+            await PageLoading.ShowAndRenderAsync();
+            await Task.WhenAll(_vm.LoadAsync(), LoadSubscriptionStatusAsync());
         }
         finally
         {
             PageLoading.Hide();
+            System.Diagnostics.Debug.WriteLine($"[PageLoad] Profile: {timer.ElapsedMilliseconds} ms");
         }
     }
 
@@ -101,6 +102,18 @@ public partial class ProfilePage : ContentPage
         await _lang.SetLanguageAsync(newCode);
     }
 
+    private async void OnThemeTapped(object sender, TappedEventArgs e)
+    {
+        var values = new[] { "light", "dark", "system" };
+        var labels = new[] { Loc.Get("Theme_Light"), Loc.Get("Theme_Dark"), Loc.Get("Theme_System") };
+        var options = labels.Select((label, index) =>
+            values[index] == ThemeService.Selected ? "✓ " + label : label).ToArray();
+        var selected = await DisplayActionSheetAsync(Loc.Get("Profile_Theme"),
+            Loc.Get("Common_Cancel"), null, options);
+        var index = Array.IndexOf(options, selected);
+        if (index >= 0) ThemeService.Set(values[index]);
+    }
+
     private async void OnChangeAvatarTapped(object sender, TappedEventArgs e)
     {
         var photo = await MediaPicker.PickPhotoAsync();
@@ -118,25 +131,25 @@ public partial class ProfilePage : ContentPage
     }
 
     private async void OnEditStatsTapped(object sender, TappedEventArgs e) =>
-        await Shell.Current.GoToAsync("EditBodyStats");
+        await AppShell.NavigateAsync("EditBodyStats");
 
     private async void OnPremiumTapped(object sender, TappedEventArgs e) =>
-        await Shell.Current.GoToAsync("Premium");
+        await AppShell.NavigateAsync("Premium");
 
     private async void OnStandardsTapped(object sender, TappedEventArgs e) =>
-        await Shell.Current.GoToAsync("Standards");
+        await AppShell.NavigateAsync("Standards");
 
     private async void OnTrainersTapped(object sender, TappedEventArgs e) =>
-        await Shell.Current.GoToAsync("Trainers");
+        await AppShell.NavigateAsync("Trainers");
 
     private async void OnWalletTapped(object sender, TappedEventArgs e) =>
-        await Shell.Current.GoToAsync("Wallet");
+        await AppShell.NavigateAsync("Wallet");
 
     private async void OnMessagesTapped(object sender, TappedEventArgs e) =>
-        await Shell.Current.GoToAsync("ChatList");
+        await AppShell.NavigateAsync("ChatList");
 
     private async void OnBookingsTapped(object sender, TappedEventArgs e) =>
-        await Shell.Current.GoToAsync("MyBookings");
+        await AppShell.NavigateAsync("MyBookings");
 
     private async void OnLogoutTapped(object sender, TappedEventArgs e)
     {

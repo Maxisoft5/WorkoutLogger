@@ -2,26 +2,27 @@
 <ContentPage
     x:Class="WorkoutLogg.Pages.TrainersPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:theme="clr-namespace:WorkoutLogg.Utilities"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
     x:DataType="vm:TrainersPageModel"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,*">
 
         <!-- Header -->
-        <Border Grid.Row="0" BackgroundColor="#7C3AED"
+        <Border Grid.Row="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                 Padding="20,52,20,20"
                 StrokeShape="RoundRectangle 0,0,28,28"
                 StrokeThickness="0">
             <Grid ColumnDefinitions="Auto,*">
-                <Border Grid.Column="0" BackgroundColor="#9333EA" Padding="10,8"
+                <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" Padding="0"
                         StrokeShape="RoundRectangle 10" StrokeThickness="0"
                         VerticalOptions="Center">
-                    <Label Text="←" FontSize="18" TextColor="White" VerticalOptions="Center">
+                    <Label Style="{StaticResource IconBackAction}" TextColor="White" VerticalOptions="Center" SemanticProperties.Description="{loc:Translate Common_Back}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnBackTapped" />
                         </Label.GestureRecognizers>
@@ -31,7 +32,7 @@
                     <Label Text="{loc:Translate Trainers_Title}"
                            FontAttributes="Bold" FontSize="20" TextColor="White" />
                     <Label Text="{loc:Translate Trainers_Subtitle}"
-                           FontSize="12" TextColor="#DDD6FE" />
+                           FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" />
                 </VerticalStackLayout>
             </Grid>
         </Border>
@@ -42,189 +43,191 @@
                 <!-- Specialization filter chips -->
                 <VerticalStackLayout Spacing="8">
                     <Label Text="{loc:Translate Trainers_Filter_Specialization}"
-                           FontAttributes="Bold" FontSize="13" TextColor="#6B7280" />
-                    <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                           FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" />
+                    <controls:HorizontalScrollHint>
                         <HorizontalStackLayout Spacing="8">
-                            <Border x:Name="ChipStrength" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                                <Label x:Name="ChipStrengthLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_Strength}" TextColor="#6B7280">
+                            <Border x:Name="ChipStrength" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                                <Label x:Name="ChipStrengthLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_Strength}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnSpecTapped" CommandParameter="Strength" />
                                     </Label.GestureRecognizers>
                                 </Label>
                             </Border>
-                            <Border x:Name="ChipWeightLoss" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                                <Label x:Name="ChipWeightLossLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_WeightLoss}" TextColor="#6B7280">
+                            <Border x:Name="ChipWeightLoss" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                                <Label x:Name="ChipWeightLossLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_WeightLoss}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnSpecTapped" CommandParameter="WeightLoss" />
                                     </Label.GestureRecognizers>
                                 </Label>
                             </Border>
-                            <Border x:Name="ChipCrossfit" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                                <Label x:Name="ChipCrossfitLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_Crossfit}" TextColor="#6B7280">
+                            <Border x:Name="ChipCrossfit" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                                <Label x:Name="ChipCrossfitLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_Crossfit}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnSpecTapped" CommandParameter="Crossfit" />
                                     </Label.GestureRecognizers>
                                 </Label>
                             </Border>
-                            <Border x:Name="ChipYoga" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                                <Label x:Name="ChipYogaLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_Yoga}" TextColor="#6B7280">
+                            <Border x:Name="ChipYoga" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                                <Label x:Name="ChipYogaLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_Yoga}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnSpecTapped" CommandParameter="Yoga" />
                                     </Label.GestureRecognizers>
                                 </Label>
                             </Border>
-                            <Border x:Name="ChipRehabilitation" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                                <Label x:Name="ChipRehabilitationLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_Rehabilitation}" TextColor="#6B7280">
+                            <Border x:Name="ChipRehabilitation" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                                <Label x:Name="ChipRehabilitationLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_Rehabilitation}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnSpecTapped" CommandParameter="Rehabilitation" />
                                     </Label.GestureRecognizers>
                                 </Label>
                             </Border>
-                            <Border x:Name="ChipRunning" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                                <Label x:Name="ChipRunningLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_Running}" TextColor="#6B7280">
+                            <Border x:Name="ChipRunning" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                                <Label x:Name="ChipRunningLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Spec_Running}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnSpecTapped" CommandParameter="Running" />
                                     </Label.GestureRecognizers>
                                 </Label>
                             </Border>
                         </HorizontalStackLayout>
-                    </ScrollView>
+                    </controls:HorizontalScrollHint>
                 </VerticalStackLayout>
 
                 <!-- Sort chips -->
-                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                <controls:HorizontalScrollHint>
                     <HorizontalStackLayout Spacing="8">
-                        <Border x:Name="SortMatch" BackgroundColor="#7C3AED" StrokeThickness="0" Padding="14,8" StrokeShape="RoundRectangle 20">
+                        <Border x:Name="SortMatch" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}" StrokeThickness="0" Padding="14,8" StrokeShape="RoundRectangle 20">
                             <Label x:Name="SortMatchLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Sort_Match}" TextColor="White">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnSortTapped" CommandParameter="Match" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
-                        <Border x:Name="SortPriceAsc" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                            <Label x:Name="SortPriceAscLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Sort_PriceAsc}" TextColor="#6B7280">
+                        <Border x:Name="SortPriceAsc" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                            <Label x:Name="SortPriceAscLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Sort_PriceAsc}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnSortTapped" CommandParameter="PriceAsc" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
-                        <Border x:Name="SortPriceDesc" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                            <Label x:Name="SortPriceDescLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Sort_PriceDesc}" TextColor="#6B7280">
+                        <Border x:Name="SortPriceDesc" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                            <Label x:Name="SortPriceDescLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Sort_PriceDesc}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnSortTapped" CommandParameter="PriceDesc" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
-                        <Border x:Name="SortNewest" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                            <Label x:Name="SortNewestLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Sort_Newest}" TextColor="#6B7280">
+                        <Border x:Name="SortNewest" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                            <Label x:Name="SortNewestLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Sort_Newest}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnSortTapped" CommandParameter="Newest" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
                     </HorizontalStackLayout>
-                </ScrollView>
+                </controls:HorizontalScrollHint>
 
                 <!-- Rating filter -->
-                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                <controls:HorizontalScrollHint>
                     <HorizontalStackLayout Spacing="8">
-                        <Label Text="{loc:Translate Trainers_Filter_Rating}" FontAttributes="Bold" FontSize="13" TextColor="#6B7280" VerticalOptions="Center" Margin="0,0,4,0" />
-                        <Border x:Name="RatingAny" BackgroundColor="#7C3AED" StrokeThickness="0" Padding="14,8" StrokeShape="RoundRectangle 20">
+                        <Label Text="{loc:Translate Trainers_Filter_Rating}" FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" VerticalOptions="Center" Margin="0,0,4,0" />
+                        <Border x:Name="RatingAny" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}" StrokeThickness="0" Padding="14,8" StrokeShape="RoundRectangle 20">
                             <Label x:Name="RatingAnyLabel" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Rating_Any}" TextColor="White">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnRatingTapped" CommandParameter="0" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
-                        <Border x:Name="Rating45" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                            <Label x:Name="Rating45Label" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Rating_45}" TextColor="#6B7280">
+                        <Border x:Name="Rating45" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                            <Label x:Name="Rating45Label" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Rating_45}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnRatingTapped" CommandParameter="4.5" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
-                        <Border x:Name="Rating48" BackgroundColor="White" Stroke="#E5E7EB" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
-                            <Label x:Name="Rating48Label" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Rating_48}" TextColor="#6B7280">
+                        <Border x:Name="Rating48" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeThickness="1.5" Padding="14,8" StrokeShape="RoundRectangle 20">
+                            <Label x:Name="Rating48Label" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Trainers_Rating_48}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnRatingTapped" CommandParameter="4.8" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </Border>
                     </HorizontalStackLayout>
-                </ScrollView>
+                </controls:HorizontalScrollHint>
 
                 <!-- Recommended for you -->
                 <VerticalStackLayout Spacing="10" IsVisible="{Binding HasRecommended}">
                     <Label Text="{loc:Translate Trainers_Recommended}"
-                           FontAttributes="Bold" FontSize="18" TextColor="#111827" />
+                           FontAttributes="Bold" FontSize="18" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                    <controls:HorizontalCollectionHint ItemWidth="220" ItemSpacing="12">
                     <CollectionView ItemsSource="{Binding Recommended}" HeightRequest="150">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal" ItemSpacing="12" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="vm:TrainerCardItem">
-                                <Border BackgroundColor="White" Padding="16" WidthRequest="220"
-                                        Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 18">
+                                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="16" WidthRequest="220"
+                                        Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeThickness="1" StrokeShape="RoundRectangle 18">
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnTrainerTapped" CommandParameter="{Binding UserId}" />
                                     </Border.GestureRecognizers>
                                     <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="6">
                                         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
-                                            <Border Grid.Column="0" BackgroundColor="#EDE9FE" WidthRequest="40" HeightRequest="40"
+                                            <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}" WidthRequest="40" HeightRequest="40"
                                                     StrokeThickness="0" StrokeShape="RoundRectangle 20">
-                                                <Label Text="{Binding Emoji}" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                                                <Label Text="{Binding Emoji}" Style="{StaticResource FitnessIcon}" FontSize="22" HorizontalOptions="Center" VerticalOptions="Center" />
                                             </Border>
-                                            <Border Grid.Column="2" BackgroundColor="#F0FDF4" Padding="8,4"
+                                            <Border Grid.Column="2" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSuccessSoftLight}, Dark={StaticResource ThemeSuccessSoftDark}}" Padding="8,4"
                                                     StrokeThickness="0" StrokeShape="RoundRectangle 10" VerticalOptions="Center">
-                                                <Label Text="{Binding MatchLabel}" FontAttributes="Bold" FontSize="11" TextColor="{Binding MatchColor}" />
+                                                <Label Text="{Binding MatchLabel}" FontAttributes="Bold" FontSize="11" TextColor="{theme:ThemeBinding Path=MatchColor, Background=False}" />
                                             </Border>
                                         </Grid>
-                                        <Label Grid.Row="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="15" TextColor="#111827" />
-                                        <Label Grid.Row="2" Text="{Binding PriceLabel}" FontAttributes="Bold" FontSize="13" TextColor="#7C3AED" />
+                                        <Label Grid.Row="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="15" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                                        <Label Grid.Row="2" Text="{Binding PriceLabel}" FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
                                     </Grid>
                                 </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
+                    </controls:HorizontalCollectionHint>
                 </VerticalStackLayout>
 
                 <!-- All trainers -->
                 <Label Text="{loc:Translate Trainers_All}"
-                       FontAttributes="Bold" FontSize="18" TextColor="#111827" />
+                       FontAttributes="Bold" FontSize="18" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
 
                 <CollectionView ItemsSource="{Binding Results}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="vm:TrainerCardItem">
-                            <Border BackgroundColor="White" Padding="16" Margin="0,0,0,10"
-                                    Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 18">
+                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="16" Margin="0,0,0,10"
+                                    Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeThickness="1" StrokeShape="RoundRectangle 18">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnTrainerTapped" CommandParameter="{Binding UserId}" />
                                 </Border.GestureRecognizers>
                                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
                                     <!-- Avatar -->
-                                    <Border Grid.Column="0" BackgroundColor="#EDE9FE" WidthRequest="52" HeightRequest="52"
+                                    <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}" WidthRequest="52" HeightRequest="52"
                                             StrokeThickness="0" StrokeShape="RoundRectangle 26" VerticalOptions="Start">
-                                        <Label Text="{Binding Emoji}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" />
+                                        <Label Text="{Binding Emoji}" Style="{StaticResource FitnessIcon}" FontSize="26" HorizontalOptions="Center" VerticalOptions="Center" />
                                     </Border>
                                     <!-- Info -->
                                     <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
                                         <HorizontalStackLayout Spacing="6">
-                                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" TextColor="#111827" />
-                                            <Border BackgroundColor="#EFF6FF" Padding="6,2" StrokeThickness="0" StrokeShape="RoundRectangle 8"
+                                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeBlueSoftLight}, Dark={StaticResource ThemeBlueSoftDark}}" Padding="6,2" StrokeThickness="0" StrokeShape="RoundRectangle 8"
                                                     VerticalOptions="Center" IsVisible="{Binding IsVerified}">
-                                                <Label Text="{Binding VerifiedLabel}" FontAttributes="Bold" FontSize="10" TextColor="#2563EB" />
+                                                <Label Text="{Binding VerifiedLabel}" FontAttributes="Bold" FontSize="10" TextColor="{AppThemeBinding Light={StaticResource ThemeBlueLight}, Dark={StaticResource ThemeBlueDark}}" />
                                             </Border>
                                         </HorizontalStackLayout>
-                                        <Label Text="{Binding SubLabel}" FontSize="12" TextColor="#9CA3AF" />
-                                        <Label Text="{Binding RatingWithCountLabel}" FontSize="12" TextColor="#F59E0B" FontAttributes="Bold" />
-                                        <Label Text="{Binding About}" FontSize="12" TextColor="#6B7280" MaxLines="2" LineBreakMode="TailTruncation" IsVisible="{Binding HasAbout}" />
+                                        <Label Text="{Binding SubLabel}" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                                        <Label Text="{Binding RatingWithCountLabel}" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeWarningLight}, Dark={StaticResource ThemeWarningDark}}" FontAttributes="Bold" />
+                                        <Label Text="{Binding About}" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" MaxLines="2" LineBreakMode="TailTruncation" IsVisible="{Binding HasAbout}" />
                                     </VerticalStackLayout>
                                     <!-- Match + price -->
                                     <VerticalStackLayout Grid.Column="2" HorizontalOptions="End" Spacing="6" VerticalOptions="Center">
-                                        <Border BackgroundColor="#F0FDF4" Padding="8,4" StrokeThickness="0" StrokeShape="RoundRectangle 10" HorizontalOptions="End">
-                                            <Label Text="{Binding MatchLabel}" FontAttributes="Bold" FontSize="11" TextColor="{Binding MatchColor}" />
+                                        <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSuccessSoftLight}, Dark={StaticResource ThemeSuccessSoftDark}}" Padding="8,4" StrokeThickness="0" StrokeShape="RoundRectangle 10" HorizontalOptions="End">
+                                            <Label Text="{Binding MatchLabel}" FontAttributes="Bold" FontSize="11" TextColor="{theme:ThemeBinding Path=MatchColor, Background=False}" />
                                         </Border>
-                                        <Label Text="{Binding PriceLabel}" FontAttributes="Bold" FontSize="14" TextColor="#7C3AED" HorizontalOptions="End" />
+                                        <Label Text="{Binding PriceLabel}" FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" HorizontalOptions="End" />
                                     </VerticalStackLayout>
                                 </Grid>
                             </Border>
@@ -234,11 +237,11 @@
 
                 <!-- Empty state -->
                 <VerticalStackLayout IsVisible="{Binding IsEmpty}" Padding="0,32" Spacing="10" HorizontalOptions="Center">
-                    <Label FontSize="40" HorizontalOptions="Center" Text="🔍" />
+                    <Label Style="{StaticResource IconSearch}" FontSize="40" HorizontalOptions="Center" />
                     <Label FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"
-                           Text="{loc:Translate Trainers_Empty}" TextColor="#111827" />
+                           Text="{loc:Translate Trainers_Empty}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                     <Label FontSize="14" HorizontalOptions="Center"
-                           Text="{loc:Translate Trainers_EmptySubtitle}" TextColor="#9CA3AF" />
+                           Text="{loc:Translate Trainers_EmptySubtitle}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                 </VerticalStackLayout>
 
             </VerticalStackLayout>

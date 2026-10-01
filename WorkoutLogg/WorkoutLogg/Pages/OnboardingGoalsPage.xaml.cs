@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using Modules.Users.DTO.Auth;
 using Modules.Users.DTO.Users;
 using Modules.Users.Infrastructure.Api;
@@ -55,9 +56,9 @@ public partial class OnboardingGoalsPage : ContentPage
         foreach (var (key, (card, label, option)) in _goalMap)
         {
             bool active = _selectedGoals.Contains(key);
-            label.Text = active ? "✓" : "";
-            card.BackgroundColor = active ? purpleBg : white;
-            card.Stroke = active ? purple : grayStroke;
+            label.Text = active ? FitnessIcons.Check : "";
+            card.WithThemeColor("BackgroundColor", active ? purpleBg : white);
+            card.WithThemeColor("Stroke", active ? purple : grayStroke);
             card.StrokeThickness = active ? 2 : 1.5;
         }
     }
@@ -91,10 +92,10 @@ public partial class OnboardingGoalsPage : ContentPage
         foreach (var (n, (border, button)) in map)
         {
             bool active = n == _workoutsPerWeek;
-            border.BackgroundColor = active ? purple : white;
-            border.Stroke = active ? purple : grayStroke;
+            border.WithThemeColor("BackgroundColor", active ? purple : white);
+            border.WithThemeColor("Stroke", active ? purple : grayStroke);
             border.StrokeThickness = active ? 0 : 1.5;
-            button.TextColor = active ? white : gray;
+            button.WithThemeColor("TextColor", active ? white : gray);
         }
     }
 

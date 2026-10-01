@@ -5,61 +5,71 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls">
     <Border
-        BackgroundColor="White"
+        BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
         Padding="0,0,0,0"
-        Stroke="#F3F4F6"
+        Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}"
         StrokeShape="RoundRectangle 0"
         StrokeThickness="0">
         <Border.Shadow>
             <Shadow Brush="#000000" Offset="0,-2" Radius="12" Opacity="0.06" />
         </Border.Shadow>
 
-        <Grid ColumnDefinitions="*,*,*,*,*" HeightRequest="72" Padding="0,8,0,12">
+        <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="4" MinimumHeightRequest="80" Padding="8,8,8,12">
 
             <!-- Dashboard -->
-            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
+            <Border x:Name="DashboardTab" Grid.Column="0" StrokeThickness="0" StrokeShape="RoundRectangle 16" Padding="4,6" MinimumHeightRequest="56" BackgroundColor="Transparent">
+                <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnDashboardTapped" />
-                </VerticalStackLayout.GestureRecognizers>
-                <Label x:Name="DashboardIcon" FontSize="20" HorizontalOptions="Center" Text="⌂" TextColor="#9CA3AF" />
-                <Label x:Name="DashboardLabel" FontAttributes="Bold" FontSize="9" HorizontalOptions="Center" Text="Dashboard" TextColor="#9CA3AF" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="3" VerticalOptions="Center" InputTransparent="True">
+                <Label x:Name="DashboardIcon" Style="{StaticResource IconBrand}" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label x:Name="DashboardLabel" FontAttributes="Bold" FontSize="10" HorizontalTextAlignment="Center" Text="Dashboard" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
             </VerticalStackLayout>
+            </Border>
 
             <!-- Workouts -->
-            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
+            <Border x:Name="WorkoutsTab" Grid.Column="1" StrokeThickness="0" StrokeShape="RoundRectangle 16" Padding="4,6" MinimumHeightRequest="56" BackgroundColor="Transparent">
+                <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnWorkoutsTapped" />
-                </VerticalStackLayout.GestureRecognizers>
-                <Label x:Name="WorkoutsIcon" FontSize="20" HorizontalOptions="Center" Text="☰" TextColor="#9CA3AF" />
-                <Label x:Name="WorkoutsLabel" FontAttributes="Bold" FontSize="9" HorizontalOptions="Center" Text="Workouts" TextColor="#9CA3AF" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="3" VerticalOptions="Center" InputTransparent="True">
+                <Label x:Name="WorkoutsIcon" Style="{StaticResource IconStrength}" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label x:Name="WorkoutsLabel" FontAttributes="Bold" FontSize="10" HorizontalTextAlignment="Center" Text="Workouts" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
             </VerticalStackLayout>
+            </Border>
 
             <!-- Logger -->
-            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
+            <Border x:Name="LoggerTab" Grid.Column="2" StrokeThickness="0" StrokeShape="RoundRectangle 16" Padding="4,6" MinimumHeightRequest="56" BackgroundColor="Transparent">
+                <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLoggerTapped" />
-                </VerticalStackLayout.GestureRecognizers>
-                <Label x:Name="LoggerIcon" FontSize="20" HorizontalOptions="Center" Text="📋" TextColor="#9CA3AF" />
-                <Label x:Name="LoggerLabel" FontAttributes="Bold" FontSize="9" HorizontalOptions="Center" Text="Logger" TextColor="#9CA3AF" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="3" VerticalOptions="Center" InputTransparent="True">
+                <Label x:Name="LoggerIcon" Style="{StaticResource IconCalendar}" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label x:Name="LoggerLabel" FontAttributes="Bold" FontSize="10" HorizontalTextAlignment="Center" Text="Logger" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
             </VerticalStackLayout>
+            </Border>
 
             <!-- AI Coach -->
-            <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
+            <Border x:Name="AiTab" Grid.Column="3" StrokeThickness="0" StrokeShape="RoundRectangle 16" Padding="4,6" MinimumHeightRequest="56" BackgroundColor="Transparent">
+                <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnAiTapped" />
-                </VerticalStackLayout.GestureRecognizers>
-                <Label x:Name="AiIcon" FontSize="20" HorizontalOptions="Center" Text="🤖" TextColor="#9CA3AF" />
-                <Label x:Name="AiLabel" FontAttributes="Bold" FontSize="9" HorizontalOptions="Center" Text="AI" TextColor="#9CA3AF" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="3" VerticalOptions="Center" InputTransparent="True">
+                <Label x:Name="AiIcon" Style="{StaticResource IconCoach}" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label x:Name="AiLabel" FontAttributes="Bold" FontSize="10" HorizontalTextAlignment="Center" Text="AI" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
             </VerticalStackLayout>
+            </Border>
 
             <!-- Profile -->
-            <VerticalStackLayout Grid.Column="4" HorizontalOptions="Center" Spacing="4" VerticalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
+            <Border x:Name="ProfileTab" Grid.Column="4" StrokeThickness="0" StrokeShape="RoundRectangle 16" Padding="4,6" MinimumHeightRequest="56" BackgroundColor="Transparent">
+                <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnProfileTapped" />
-                </VerticalStackLayout.GestureRecognizers>
-                <Label x:Name="ProfileIcon" FontSize="20" HorizontalOptions="Center" Text="🪪" TextColor="#9CA3AF" />
-                <Label x:Name="ProfileLabel" FontAttributes="Bold" FontSize="9" HorizontalOptions="Center" Text="Profile" TextColor="#9CA3AF" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="3" VerticalOptions="Center" InputTransparent="True">
+                <Label x:Name="ProfileIcon" Style="{StaticResource IconProfile}" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
+                <Label x:Name="ProfileLabel" FontAttributes="Bold" FontSize="10" HorizontalTextAlignment="Center" Text="Profile" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
             </VerticalStackLayout>
+            </Border>
 
         </Grid>
     </Border>

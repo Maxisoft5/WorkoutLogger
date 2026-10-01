@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using System.Globalization;
 using WorkoutLogg.Localization;
 using WorkoutLogg.PageModels;
@@ -19,9 +20,10 @@ public partial class DashboardPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        PageLoading.Show();
+        var timer = System.Diagnostics.Stopwatch.StartNew();
         try
         {
+            await PageLoading.ShowAndRenderAsync();
             var culture = new CultureInfo(Loc.Get("_Culture"));
             DateLabel.Text = DateTime.Now.ToString("dddd, dd MMM", culture).ToUpper();
 
@@ -37,13 +39,13 @@ public partial class DashboardPage : ContentPage
             var currentUser = await CurrentUserStore.GetCurrentUser();
             if (currentUser != null)
             {
-                HelloUserText.Text = $"{greeting}, {currentUser.FullName} 👋";
+                HelloUserText.Text = $"{greeting}, {currentUser.FullName}";
                 AvatarLabel.Text = currentUser.FullName?.ToUpper().First().ToString() ?? "?";
                 ApplyAvatar(currentUser.ProfilePicture);
             }
             else
             {
-                HelloUserText.Text = $"{greeting} 👋";
+                HelloUserText.Text = greeting;
                 AvatarLabel.Text = "?";
                 ApplyAvatar(null);
             }
@@ -54,6 +56,7 @@ public partial class DashboardPage : ContentPage
         finally
         {
             PageLoading.Hide();
+            System.Diagnostics.Debug.WriteLine($"[PageLoad] Dashboard: {timer.ElapsedMilliseconds} ms");
         }
     }
 
@@ -135,11 +138,10 @@ public partial class DashboardPage : ContentPage
 
             var barBorder = new Border
             {
-                BackgroundColor = barColor,
                 HeightRequest = bar.BarHeight,
                 StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 6 },
-                StrokeThickness = 0,
-            };
+                StrokeThickness = 0
+            }.WithThemeColor("BackgroundColor", barColor);
             Grid.SetRow(barBorder, 1);
 
             var dayLabel = new Label
@@ -147,10 +149,9 @@ public partial class DashboardPage : ContentPage
                 Text = bar.DayLabel,
                 FontSize = 10,
                 HorizontalOptions = LayoutOptions.Center,
-                TextColor = labelColor,
                 FontAttributes = bar.IsToday ? FontAttributes.Bold : FontAttributes.None,
-                Margin = new Thickness(0, 4, 0, 0),
-            };
+                Margin = new Thickness(0, 4, 0, 0)
+            }.WithThemeColor("TextColor", labelColor);
             Grid.SetRow(dayLabel, 2);
 
             var col = new Grid
@@ -175,5 +176,5 @@ public partial class DashboardPage : ContentPage
     }
 
     private async void OnSeeAllWorkoutsTapped(object sender, EventArgs e) =>
-        await Shell.Current.GoToAsync("//Logger");
+        await AppShell.NavigateAsync("//Logger");
 }

@@ -4,6 +4,12 @@
 *.suo
 
 # Build output
+node_modules/
+dist/
+*.tsbuildinfo
+WorkoutLogger.WebApi/appsettings.Tenants.json
+WorkoutLogger.WebApi/wwwroot/assets/
+WorkoutLogger.WebApi/wwwroot/index.html
 bin/
 obj/
 

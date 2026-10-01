@@ -17,7 +17,8 @@ public record WorkoutUpdateEvent(
     Guid WorkoutId,
     DateTime TimestampUtc,
     SetCompletedEvent? SetCompleted = null,
-    WorkoutFinishedEvent? Finished = null);
+    WorkoutFinishedEvent? Finished = null,
+    string TenantId = "legacy");
 
 /// <summary>
 /// In-process-брокер live-обновлений тренировок для gRPC WatchWorkout:
@@ -28,10 +29,10 @@ public class WorkoutUpdatesBroker
 {
     private const int SubscriberBufferSize = 64;
 
-    private readonly ConcurrentDictionary<Guid, ConcurrentDictionary<Guid, Channel<WorkoutUpdateEvent>>> _subscribers = new();
+    private readonly ConcurrentDictionary<(string TenantId, Guid WorkoutId), ConcurrentDictionary<Guid, Channel<WorkoutUpdateEvent>>> _subscribers = new();
 
     /// <summary>Подписка на события тренировки. Dispose снимает подписку.</summary>
-    public (ChannelReader<WorkoutUpdateEvent> Reader, IDisposable Subscription) Subscribe(Guid workoutId)
+    public (ChannelReader<WorkoutUpdateEvent> Reader, IDisposable Subscription) Subscribe(Guid workoutId, string tenantId = "legacy")
     {
         var channel = Channel.CreateBounded<WorkoutUpdateEvent>(new BoundedChannelOptions(SubscriberBufferSize)
         {
@@ -40,17 +41,17 @@ public class WorkoutUpdatesBroker
         });
 
         var subscriptionId = Guid.NewGuid();
-        var workoutSubscribers = _subscribers.GetOrAdd(workoutId,
+        var workoutSubscribers = _subscribers.GetOrAdd((tenantId, workoutId),
             _ => new ConcurrentDictionary<Guid, Channel<WorkoutUpdateEvent>>());
         workoutSubscribers[subscriptionId] = channel;
 
-        return (channel.Reader, new Subscription(this, workoutId, subscriptionId));
+        return (channel.Reader, new Subscription(this, workoutId, subscriptionId, tenantId));
     }
 
     /// <summary>Разослать событие всем подписчикам тренировки.</summary>
     public void Publish(WorkoutUpdateEvent update)
     {
-        if (!_subscribers.TryGetValue(update.WorkoutId, out var workoutSubscribers))
+        if (!_subscribers.TryGetValue((update.TenantId, update.WorkoutId), out var workoutSubscribers))
             return;
 
         foreach (var channel in workoutSubscribers.Values)
@@ -58,29 +59,29 @@ public class WorkoutUpdatesBroker
     }
 
     /// <summary>Число активных подписчиков тренировки (для тестов и диагностики).</summary>
-    public int SubscriberCount(Guid workoutId) =>
-        _subscribers.TryGetValue(workoutId, out var subs) ? subs.Count : 0;
+    public int SubscriberCount(Guid workoutId, string tenantId = "legacy") =>
+        _subscribers.TryGetValue((tenantId, workoutId), out var subs) ? subs.Count : 0;
 
-    private void Unsubscribe(Guid workoutId, Guid subscriptionId)
+    private void Unsubscribe(Guid workoutId, Guid subscriptionId, string tenantId)
     {
-        if (!_subscribers.TryGetValue(workoutId, out var workoutSubscribers))
+        if (!_subscribers.TryGetValue((tenantId, workoutId), out var workoutSubscribers))
             return;
 
         if (workoutSubscribers.TryRemove(subscriptionId, out var channel))
             channel.Writer.TryComplete();
 
         if (workoutSubscribers.IsEmpty)
-            _subscribers.TryRemove(workoutId, out _);
+            _subscribers.TryRemove((tenantId, workoutId), out _);
     }
 
-    private sealed class Subscription(WorkoutUpdatesBroker broker, Guid workoutId, Guid subscriptionId) : IDisposable
+    private sealed class Subscription(WorkoutUpdatesBroker broker, Guid workoutId, Guid subscriptionId, string tenantId) : IDisposable
     {
         private int _disposed;
 
         public void Dispose()
         {
             if (Interlocked.Exchange(ref _disposed, 1) == 0)
-                broker.Unsubscribe(workoutId, subscriptionId);
+                broker.Unsubscribe(workoutId, subscriptionId, tenantId);
         }
     }
 }

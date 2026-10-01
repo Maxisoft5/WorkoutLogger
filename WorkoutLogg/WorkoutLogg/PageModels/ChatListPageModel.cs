@@ -65,7 +65,7 @@ namespace WorkoutLogg.PageModels
             ? Loc.Get("Chat_WithStudent")
             : Loc.Get("Chat_WithTrainer");
 
-        public string Emoji => IsTrainerSide ? "🎓" : "🏋️";
+        public string Emoji => IsTrainerSide ? FitnessIcons.Coach : FitnessIcons.Strength;
 
         public string PreviewLabel => string.IsNullOrWhiteSpace(LastMessageText)
             ? Loc.Get("Chat_NoMessages")

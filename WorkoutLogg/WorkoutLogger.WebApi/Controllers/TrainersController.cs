@@ -33,10 +33,20 @@ namespace WorkoutLogger.WebApi.Controllers
         /// <summary>Создать или обновить собственную карточку тренера.</summary>
         [HttpPut("profile")]
         public async Task<IActionResult> UpsertMyProfile(
-            [FromBody] UpsertTrainerProfileRequest request, CancellationToken ct)
+            [FromBody] UpsertTrainerProfileRequest request, CancellationToken ct,
+            [FromServices] Modules.Common.Infrastructure.Tenancy.TenantContext tenant)
         {
             var userId = _currentUser.UserId;
             if (userId is null) return Unauthorized();
+
+            // Branded clubs curate their staff through the administrator. Keep the
+            // existing self-service marketplace behavior only for the legacy app.
+            if (tenant.Current.Schema is not null && !tenant.Current.OwnerUserIds.Contains(userId))
+            {
+                var existing = await _trainerProfileService.GetMyAsync(userId, ct);
+                if (!existing.IsSuccess || existing.Value is null || existing.Value.IsActive != request.IsActive)
+                    return Forbid();
+            }
 
             var result = await _trainerProfileService.UpsertAsync(userId, request, ct);
             return result.ToActionResult();

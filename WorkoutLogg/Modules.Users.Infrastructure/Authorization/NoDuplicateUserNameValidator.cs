@@ -19,7 +19,9 @@ namespace Modules.Users.Infrastructure.Authorization
                 var email = await manager.GetEmailAsync(user);
                 if (string.IsNullOrWhiteSpace(email))
                 {
-                    errors.Add(_describer.InvalidEmail(email));
+                    if (user is not Modules.Users.Domain.Users.User phoneUser ||
+                        Modules.Users.DTO.Auth.LoginIdentifier.NormalizePhone(phoneUser.NormalizedPhoneNumber) is null)
+                        errors.Add(_describer.InvalidEmail(email));
                 }
                 else
                 {

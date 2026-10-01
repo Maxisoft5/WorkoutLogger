@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="*,Auto">
@@ -14,10 +14,10 @@
 
                 <!-- Header: back + region pill -->
                 <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,24">
-                    <Border Grid.Column="0" BackgroundColor="White"
+                    <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
                             HeightRequest="65" WidthRequest="65"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 12" StrokeThickness="1">
-                        <Label Text="←" FontSize="16" TextColor="#111827"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 12" StrokeThickness="1">
+                        <Label Style="{StaticResource IconBackAction}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                HorizontalOptions="Center" VerticalOptions="Center" />
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnBackTapped" />
@@ -25,83 +25,83 @@
                     </Border>
                     <Label Grid.Column="1"
                            Text="{loc:Translate Payment_Title}"
-                           FontAttributes="Bold" FontSize="17" TextColor="#111827"
+                           FontAttributes="Bold" FontSize="17" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                            HorizontalOptions="Center" VerticalOptions="Center" />
                     <Border Grid.Column="2" x:Name="RegionPill"
-                            BackgroundColor="#EDE9FE" Padding="10,5"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}" Padding="10,5"
                             StrokeShape="RoundRectangle 99" StrokeThickness="0"
                             VerticalOptions="Center">
                         <Label x:Name="RegionLabel"
-                               FontSize="11" FontAttributes="Bold" TextColor="#7C3AED" />
+                               FontSize="11" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
                     </Border>
                 </Grid>
 
                 <!-- TestMode banner — only shown in development builds with TestMode=true -->
                 <Border x:Name="TestModeBanner" IsVisible="False"
-                        BackgroundColor="#FEF3C7" Padding="12,10"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource ThemeWarningSoftLight}, Dark={StaticResource ThemeWarningSoftDark}}" Padding="12,10"
                         StrokeShape="RoundRectangle 12" StrokeThickness="0"
                         Margin="0,0,0,16">
                     <Label Text="ТЕСТОВЫЙ РЕЖИМ — оплата пропущена, Premium активируется сразу"
-                           FontSize="12" FontAttributes="Bold" TextColor="#92400E"
+                           FontSize="12" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeWarningLight}, Dark={StaticResource ThemeWarningDark}}"
                            HorizontalOptions="Center" HorizontalTextAlignment="Center" />
                 </Border>
 
                 <!-- Order summary card -->
-                <Border BackgroundColor="White" Padding="16,14"
-                        Stroke="#F3F4F6" StrokeShape="RoundRectangle 18" StrokeThickness="1"
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="16,14"
+                        Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 18" StrokeThickness="1"
                         Margin="0,0,0,16">
                     <VerticalStackLayout Spacing="10">
                         <Label Text="{loc:Translate Payment_OrderSummary}"
-                               FontAttributes="Bold" FontSize="13" TextColor="#9CA3AF" />
+                               FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Grid.Column="0" x:Name="PlanNameLabel"
-                                   FontAttributes="Bold" FontSize="16" TextColor="#111827"
+                                   FontAttributes="Bold" FontSize="16" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                    VerticalOptions="Center" />
                             <Label Grid.Column="1" x:Name="PriceLabel"
-                                   FontAttributes="Bold" FontSize="16" TextColor="#7C3AED"
+                                   FontAttributes="Bold" FontSize="16" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}"
                                    VerticalOptions="Center" />
                         </Grid>
-                        <BoxView BackgroundColor="#F3F4F6" HeightRequest="1" />
+                        <BoxView BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" HeightRequest="1" />
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Grid.Column="0" Text="{loc:Translate Payment_Trial_Label}"
-                                   FontSize="13" TextColor="#6B7280" VerticalOptions="Center" />
+                                   FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" VerticalOptions="Center" />
                             <Label Grid.Column="1" x:Name="DueTodayLabel"
-                                   FontAttributes="Bold" FontSize="13" TextColor="#22C55E"
+                                   FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeSuccessLight}, Dark={StaticResource ThemeSuccessDark}}"
                                    VerticalOptions="Center" />
                         </Grid>
                         <Label x:Name="BilledAfterLabel"
-                               FontSize="11" TextColor="#9CA3AF" />
+                               FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- Payment methods -->
                 <Label Text="{loc:Translate Payment_ChooseMethod}"
-                       FontAttributes="Bold" FontSize="13" TextColor="#6B7280"
+                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}"
                        Margin="4,0,0,10" />
 
                 <!-- RU methods (YooKassa) -->
                 <VerticalStackLayout x:Name="RuMethods" Spacing="8">
 
                     <!-- СБП — recommended -->
-                    <Border x:Name="SbpBorder" BackgroundColor="#EDE9FE"
+                    <Border x:Name="SbpBorder" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}"
                             Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="2">
                         <Border.Stroke>
-                            <SolidColorBrush Color="#7C3AED" />
+                            <SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
                         </Border.Stroke>
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                            <Label Grid.Column="0" Text="⚡" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="0" Style="{StaticResource IconProgress}" FontSize="24" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                 <Label Text="{loc:Translate Payment_Method_SBP}"
-                                       FontAttributes="Bold" FontSize="14" TextColor="#111827" />
-                                <Border BackgroundColor="#7C3AED" Padding="6,2"
+                                       FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}" Padding="6,2"
                                         StrokeShape="RoundRectangle 99" StrokeThickness="0"
                                         HorizontalOptions="Start">
                                     <Label Text="{loc:Translate Payment_Rec}"
                                            FontSize="9" FontAttributes="Bold" TextColor="White" />
                                 </Border>
                             </VerticalStackLayout>
-                            <Label Grid.Column="2" x:Name="SbpCheck" Text="✓"
-                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                            <Label Grid.Column="2" x:Name="SbpCheck" Style="{StaticResource IconCheck}"
+                                   FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}"
                                    VerticalOptions="Center" />
                         </Grid>
                         <Border.GestureRecognizers>
@@ -110,18 +110,18 @@
                     </Border>
 
                     <!-- SberPay -->
-                    <Border x:Name="SberBorder" BackgroundColor="White"
+                    <Border x:Name="SberBorder" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
                             Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <Border.Stroke>
-                            <SolidColorBrush Color="#E5E7EB" />
+                            <SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" />
                         </Border.Stroke>
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                            <Label Grid.Column="0" Text="🏦" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="0" Style="{StaticResource IconBank}" FontSize="24" VerticalOptions="Center" />
                             <Label Grid.Column="1" Text="{loc:Translate Payment_Method_SberPay}"
-                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                    VerticalOptions="Center" />
-                            <Label Grid.Column="2" x:Name="SberCheck" Text="✓"
-                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                            <Label Grid.Column="2" x:Name="SberCheck" Style="{StaticResource IconCheck}"
+                                   FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}"
                                    IsVisible="False" VerticalOptions="Center" />
                         </Grid>
                         <Border.GestureRecognizers>
@@ -130,18 +130,18 @@
                     </Border>
 
                     <!-- T-Pay -->
-                    <Border x:Name="TpayBorder" BackgroundColor="White"
+                    <Border x:Name="TpayBorder" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
                             Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <Border.Stroke>
-                            <SolidColorBrush Color="#E5E7EB" />
+                            <SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" />
                         </Border.Stroke>
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                            <Label Grid.Column="0" Text="💳" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="0" Style="{StaticResource IconPayment}" FontSize="24" VerticalOptions="Center" />
                             <Label Grid.Column="1" Text="{loc:Translate Payment_Method_TPay}"
-                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                    VerticalOptions="Center" />
-                            <Label Grid.Column="2" x:Name="TpayCheck" Text="✓"
-                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                            <Label Grid.Column="2" x:Name="TpayCheck" Style="{StaticResource IconCheck}"
+                                   FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}"
                                    IsVisible="False" VerticalOptions="Center" />
                         </Grid>
                         <Border.GestureRecognizers>
@@ -150,18 +150,18 @@
                     </Border>
 
                     <!-- Card (RU) -->
-                    <Border x:Name="CardRuBorder" BackgroundColor="White"
+                    <Border x:Name="CardRuBorder" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
                             Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <Border.Stroke>
-                            <SolidColorBrush Color="#E5E7EB" />
+                            <SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" />
                         </Border.Stroke>
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                            <Label Grid.Column="0" Text="💳" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="0" Style="{StaticResource IconPayment}" FontSize="24" VerticalOptions="Center" />
                             <Label Grid.Column="1" Text="{loc:Translate Payment_Method_Card}"
-                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                    VerticalOptions="Center" />
-                            <Label Grid.Column="2" x:Name="CardRuCheck" Text="✓"
-                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                            <Label Grid.Column="2" x:Name="CardRuCheck" Style="{StaticResource IconCheck}"
+                                   FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}"
                                    IsVisible="False" VerticalOptions="Center" />
                         </Grid>
                         <Border.GestureRecognizers>
@@ -175,18 +175,18 @@
                 <VerticalStackLayout x:Name="EnMethods" Spacing="8" IsVisible="False">
 
                     <!-- Apple Pay -->
-                    <Border x:Name="AppleBorder" BackgroundColor="#EDE9FE"
+                    <Border x:Name="AppleBorder" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}"
                             Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="2">
                         <Border.Stroke>
-                            <SolidColorBrush Color="#7C3AED" />
+                            <SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
                         </Border.Stroke>
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                            <Label Grid.Column="0" Text="🍎" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="0" Style="{StaticResource IconPhone}" FontSize="24" VerticalOptions="Center" />
                             <Label Grid.Column="1" Text="{loc:Translate Payment_Method_ApplePay}"
-                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                    VerticalOptions="Center" />
-                            <Label Grid.Column="2" x:Name="AppleCheck" Text="✓"
-                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                            <Label Grid.Column="2" x:Name="AppleCheck" Style="{StaticResource IconCheck}"
+                                   FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}"
                                    VerticalOptions="Center" />
                         </Grid>
                         <Border.GestureRecognizers>
@@ -195,18 +195,18 @@
                     </Border>
 
                     <!-- Google Pay -->
-                    <Border x:Name="GoogleBorder" BackgroundColor="White"
+                    <Border x:Name="GoogleBorder" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
                             Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <Border.Stroke>
-                            <SolidColorBrush Color="#E5E7EB" />
+                            <SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" />
                         </Border.Stroke>
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                            <Label Grid.Column="0" Text="🟢" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="0" Style="{StaticResource IconPhone}" FontSize="24" TextColor="{AppThemeBinding Light={StaticResource ThemeSuccessLight}, Dark={StaticResource ThemeSuccessDark}}" VerticalOptions="Center" />
                             <Label Grid.Column="1" Text="{loc:Translate Payment_Method_GooglePay}"
-                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                    VerticalOptions="Center" />
-                            <Label Grid.Column="2" x:Name="GoogleCheck" Text="✓"
-                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                            <Label Grid.Column="2" x:Name="GoogleCheck" Style="{StaticResource IconCheck}"
+                                   FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}"
                                    IsVisible="False" VerticalOptions="Center" />
                         </Grid>
                         <Border.GestureRecognizers>
@@ -215,18 +215,18 @@
                     </Border>
 
                     <!-- Card (EN) -->
-                    <Border x:Name="CardEnBorder" BackgroundColor="White"
+                    <Border x:Name="CardEnBorder" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
                             Padding="16,14" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <Border.Stroke>
-                            <SolidColorBrush Color="#E5E7EB" />
+                            <SolidColorBrush Color="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" />
                         </Border.Stroke>
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                            <Label Grid.Column="0" Text="💳" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="0" Style="{StaticResource IconPayment}" FontSize="24" VerticalOptions="Center" />
                             <Label Grid.Column="1" Text="{loc:Translate Payment_Method_Card}"
-                                   FontAttributes="Bold" FontSize="14" TextColor="#111827"
+                                   FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                    VerticalOptions="Center" />
-                            <Label Grid.Column="2" x:Name="CardEnCheck" Text="✓"
-                                   FontSize="14" FontAttributes="Bold" TextColor="#7C3AED"
+                            <Label Grid.Column="2" x:Name="CardEnCheck" Style="{StaticResource IconCheck}"
+                                   FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}"
                                    IsVisible="False" VerticalOptions="Center" />
                         </Grid>
                         <Border.GestureRecognizers>
@@ -238,7 +238,7 @@
 
                 <!-- Restore link -->
                 <Label Text="{loc:Translate Payment_Restore}"
-                       TextColor="#9CA3AF" FontSize="12"
+                       TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" FontSize="12"
                        HorizontalOptions="Center" Margin="0,20,0,0">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnRestoreTapped" />
@@ -249,8 +249,8 @@
         </ScrollView>
 
         <!-- Sticky CTA -->
-        <VerticalStackLayout Grid.Row="1" Padding="20,12,20,28" BackgroundColor="#EEEEF6" Spacing="10">
-            <Border BackgroundColor="#7C3AED"
+        <VerticalStackLayout Grid.Row="1" Padding="20,12,20,28" BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}" Spacing="10">
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                     Padding="16" StrokeShape="RoundRectangle 18" StrokeThickness="0">
                 <Label Text="{loc:Translate Payment_CTA}"
                        FontAttributes="Bold" FontSize="15" TextColor="White"
@@ -260,7 +260,7 @@
                 </Border.GestureRecognizers>
             </Border>
             <Label Text="{loc:Translate Payment_Legal}"
-                   TextColor="#9CA3AF" FontSize="10"
+                   TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" FontSize="10"
                    HorizontalOptions="Center" HorizontalTextAlignment="Center"
                    LineBreakMode="WordWrap" />
         </VerticalStackLayout>

@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using Modules.Users.Infrastructure.Api;
 using Modules.Users.DTO.Auth;
 using WorkoutLogg.Localization;
@@ -54,15 +55,15 @@ public partial class EnterPasswordCode : ContentPage
             if (i < text.Length)
             {
                 _labels[i].Text = text[i].ToString();
-                _labels[i].TextColor = Color.FromArgb("#7C3AED");
-                _boxes[i].Stroke = Color.FromArgb("#7C3AED");
+                _labels[i].WithThemeColor("TextColor", Color.FromArgb("#7C3AED"));
+                _boxes[i].WithThemeColor("Stroke", Color.FromArgb("#7C3AED"));
                 _boxes[i].StrokeThickness = 2;
             }
             else
             {
                 _labels[i].Text = "·";
-                _labels[i].TextColor = Color.FromArgb("#D1D5DB");
-                _boxes[i].Stroke = Color.FromArgb("#E5E7EB");
+                _labels[i].WithThemeColor("TextColor", Color.FromArgb("#D1D5DB"));
+                _boxes[i].WithThemeColor("Stroke", Color.FromArgb("#E5E7EB"));
                 _boxes[i].StrokeThickness = 1.5;
             }
         }
@@ -93,12 +94,12 @@ public partial class EnterPasswordCode : ContentPage
         if (_resendSeconds > 0)
         {
             ResendLabel.Text = $"{resendText} ({_resendSeconds}s)";
-            ResendLabel.TextColor = Color.FromArgb("#9CA3AF");
+            ResendLabel.WithThemeColor("TextColor", Color.FromArgb("#9CA3AF"));
         }
         else
         {
             ResendLabel.Text = resendText;
-            ResendLabel.TextColor = Color.FromArgb("#7C3AED");
+            ResendLabel.WithThemeColor("TextColor", Color.FromArgb("#7C3AED"));
         }
     }
 

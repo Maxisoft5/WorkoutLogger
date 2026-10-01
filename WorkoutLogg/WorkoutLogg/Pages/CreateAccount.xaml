@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     xmlns:fonts="clr-namespace:Fonts"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <ScrollView>
@@ -14,13 +14,13 @@
             <!-- App Icon -->
             <Border
                 Margin="0,0,0,24"
-                BackgroundColor="#7C3AED"
+                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                 HorizontalOptions="Center"
                 StrokeShape="RoundRectangle 20"
                 StrokeThickness="0"
                 HeightRequest="100"
                 WidthRequest="100">
-                <Label FontSize="36" HorizontalOptions="Center" Text="🚀" VerticalOptions="Center" />
+                <Label Style="{StaticResource IconBrand}" FontSize="44" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
 
             <!-- Title -->
@@ -31,7 +31,7 @@
                 HorizontalTextAlignment="Center"
                 Margin="0,0,0,6"
                 Text="{loc:Translate Register_Title}"
-                TextColor="#111827" />
+                TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
 
             <Label
                 FontSize="14"
@@ -39,82 +39,123 @@
                 HorizontalTextAlignment="Center"
                 Margin="0,0,0,32"
                 Text="{loc:Translate Register_Subtitle}"
-                TextColor="#9CA3AF" />
+                TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
 
             <!-- FULL NAME -->
-            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Register_FullName}" TextColor="#6B7280" />
-            <Border x:Name="FullNameBorder" Margin="0,0,0,16" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
-                <Entry x:Name="FullNameEntry" BackgroundColor="Transparent" FontSize="15" Margin="14,0" Placeholder="Alex Petrov" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Next" />
+            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Register_FullName}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" />
+            <Border x:Name="FullNameBorder" Margin="0,0,0,16" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                <Entry x:Name="FullNameEntry" BackgroundColor="Transparent" FontSize="15" Margin="14,0" Placeholder="Alex Petrov" PlaceholderColor="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" VerticalOptions="Center" ReturnType="Next" />
             </Border>
-            <Label x:Name="FullNameError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+            <Label x:Name="FullNameError" Margin="4,0,0,12" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeDangerLight}, Dark={StaticResource ThemeDangerDark}}" IsVisible="False" />
 
             <!-- EMAIL -->
-            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Register_Email}" TextColor="#6B7280" />
-            <Border x:Name="EmailBorder" Margin="0,0,0,16" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
-                <Entry x:Name="EmailEntry" BackgroundColor="Transparent" FontSize="15" Keyboard="Email" Margin="14,0" Placeholder="alex@gmail.com" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Next" />
+            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Register_Email}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" />
+            <Border x:Name="EmailBorder" Margin="0,0,0,16" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                <Entry x:Name="EmailEntry" BackgroundColor="Transparent" FontSize="15" Keyboard="Email" Margin="14,0" Placeholder="alex@gmail.com" PlaceholderColor="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" VerticalOptions="Center" ReturnType="Next" />
             </Border>
-            <Label x:Name="EmailError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+            <Label x:Name="EmailError" Margin="4,0,0,12" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeDangerLight}, Dark={StaticResource ThemeDangerDark}}" IsVisible="False" />
 
             <!-- PASSWORD -->
-            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Register_Password}" TextColor="#6B7280" />
-            <Border x:Name="PasswordBorder" Margin="0,0,0,16" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
-                <Grid ColumnDefinitions="*,44">
-                    <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" FontSize="15" IsPassword="True" Margin="14,0,0,0" Placeholder="••••••••" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Next" />
-                    <Image x:Name="PasswordEyeImage" Grid.Column="1" HeightRequest="20" WidthRequest="20" HorizontalOptions="Center" VerticalOptions="Center">
-                        <Image.Source>
-                            <FontImageSource Glyph="{x:Static fonts:FluentUI.eye_20_regular}" FontFamily="{x:Static fonts:FluentUI.FontFamily}" Color="#9CA3AF" Size="20"/>
-                        </Image.Source>
-                        <Image.GestureRecognizers>
+            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Register_Password}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" />
+            <Border x:Name="PasswordBorder" Margin="0,0,0,16" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                <Grid ColumnDefinitions="*,48">
+                    <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" FontSize="15" IsPassword="True" Margin="14,0,0,0" Placeholder="••••••••" PlaceholderColor="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" VerticalOptions="Center" ReturnType="Next" />
+                    <Grid Grid.Column="1" BackgroundColor="Transparent" MinimumHeightRequest="48" WidthRequest="48">
+                        <Grid.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnTogglePasswordVisibility" />
-                        </Image.GestureRecognizers>
-                    </Image>
+                        </Grid.GestureRecognizers>
+                        <Image x:Name="PasswordEyeImage" HeightRequest="20" WidthRequest="20" HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True">
+                            <Image.Source>
+                                <FontImageSource Glyph="{x:Static fonts:FluentUI.eye_20_regular}" FontFamily="{x:Static fonts:FluentUI.FontFamily}" Color="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" Size="20"/>
+                            </Image.Source>
+                        </Image>
+                    </Grid>
                 </Grid>
             </Border>
-            <Label x:Name="PasswordError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+            <Label x:Name="PasswordError" Margin="4,0,0,12" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeDangerLight}, Dark={StaticResource ThemeDangerDark}}" IsVisible="False" />
 
             <!-- CONFIRM PASSWORD -->
-            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Register_ConfirmPassword}" TextColor="#6B7280" />
-            <Border x:Name="ConfirmPasswordBorder" Margin="0,0,0,20" BackgroundColor="White" Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
-                <Grid ColumnDefinitions="*,44">
-                    <Entry x:Name="ConfirmPasswordEntry" BackgroundColor="Transparent" FontSize="15" IsPassword="True" Margin="14,0,0,0" Placeholder="••••••••" PlaceholderColor="#D1D5DB" TextColor="#111827" VerticalOptions="Center" ReturnType="Done" />
-                    <Image x:Name="ConfirmPasswordEyeImage" Grid.Column="1" HeightRequest="20" WidthRequest="20" HorizontalOptions="Center" VerticalOptions="Center">
-                        <Image.Source>
-                            <FontImageSource Glyph="{x:Static fonts:FluentUI.eye_20_regular}" FontFamily="{x:Static fonts:FluentUI.FontFamily}" Color="#9CA3AF" Size="20"/>
-                        </Image.Source>
-                        <Image.GestureRecognizers>
+            <Label CharacterSpacing="1.2" FontAttributes="Bold" FontSize="11" Margin="4,0,0,8" Text="{loc:Translate Register_ConfirmPassword}" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" />
+            <Border x:Name="ConfirmPasswordBorder" Margin="0,0,0,20" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                <Grid ColumnDefinitions="*,48">
+                    <Entry x:Name="ConfirmPasswordEntry" BackgroundColor="Transparent" FontSize="15" IsPassword="True" Margin="14,0,0,0" Placeholder="••••••••" PlaceholderColor="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" VerticalOptions="Center" ReturnType="Done" />
+                    <Grid Grid.Column="1" BackgroundColor="Transparent" MinimumHeightRequest="48" WidthRequest="48">
+                        <Grid.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnToggleConfirmPasswordVisibility" />
-                        </Image.GestureRecognizers>
-                    </Image>
+                        </Grid.GestureRecognizers>
+                        <Image x:Name="ConfirmPasswordEyeImage" HeightRequest="20" WidthRequest="20" HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True">
+                            <Image.Source>
+                                <FontImageSource Glyph="{x:Static fonts:FluentUI.eye_20_regular}" FontFamily="{x:Static fonts:FluentUI.FontFamily}" Color="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" Size="20"/>
+                            </Image.Source>
+                        </Image>
+                    </Grid>
                 </Grid>
             </Border>
-            <Label x:Name="ConfirmPasswordError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+            <Label x:Name="ConfirmPasswordError" Margin="4,0,0,12" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeDangerLight}, Dark={StaticResource ThemeDangerDark}}" IsVisible="False" />
 
             <!-- Terms Checkbox -->
-            <HorizontalStackLayout Margin="0,0,0,28" Spacing="10" VerticalOptions="Center">
-                <CheckBox x:Name="TermsCheckBox" Color="#7C3AED" VerticalOptions="Center" CheckedChanged="OnTermsCheckedChanged" />
-                <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
-                    <Label FontSize="13" Text="{loc:Translate Register_AgreeToThe}" TextColor="#6B7280" VerticalOptions="Center" />
-                    <Label FontAttributes="Bold" FontSize="13" Text="{loc:Translate Register_TermsOfService}" TextColor="#7C3AED" VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnTermsTapped" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <Label FontSize="13" Text="{loc:Translate Register_And}" TextColor="#6B7280" VerticalOptions="Center" />
-                    <Label FontAttributes="Bold" FontSize="13" Text="{loc:Translate Register_PrivacyPolicy}" TextColor="#7C3AED" VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnPrivacyTapped" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                </HorizontalStackLayout>
-            </HorizontalStackLayout>
-            <Label x:Name="TermsCheckBoxError" Margin="4,0,0,12" FontSize="12" TextColor="#EF4444" IsVisible="False" />
+            <Grid
+                Margin="0,0,0,28"
+                ColumnDefinitions="Auto,*"
+                ColumnSpacing="10">
+
+                <CheckBox
+                    x:Name="TermsCheckBox"
+                    Color="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}"
+                    VerticalOptions="Center"
+                    CheckedChanged="OnTermsCheckedChanged" />
+
+                <Label
+                    Grid.Column="1"
+                    FontSize="13"
+                    TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}"
+                    LineBreakMode="WordWrap"
+                    VerticalOptions="Center">
+
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{loc:Translate Register_AgreeToThe}" />
+                            <Span Text=" " />
+
+                            <Span
+                                Text="{loc:Translate Register_TermsOfService}"
+                                FontAttributes="Bold"
+                                TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnTermsTapped" />
+                                </Span.GestureRecognizers>
+                            </Span>
+
+                            <Span Text=" " />
+                            <Span Text="{loc:Translate Register_And}" />
+                            <Span Text=" " />
+
+                            <Span
+                                Text="{loc:Translate Register_PrivacyPolicy}"
+                                FontAttributes="Bold"
+                                TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnPrivacyTapped" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+
+            <Label
+                x:Name="TermsCheckBoxError"
+                Margin="4,0,0,12"
+                FontSize="12"
+                TextColor="{AppThemeBinding Light={StaticResource ThemeDangerLight}, Dark={StaticResource ThemeDangerDark}}"
+                IsVisible="False" />
 
             <!-- Create Account Button -->
             <Border Margin="0,0,0,24" StrokeShape="RoundRectangle 14" StrokeThickness="0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop x:Name="CreateAccountGradient1" Color="#cacdd9" Offset="0" />
-                        <GradientStop x:Name="CreateAccountGradient2" Color="#94969c" Offset="1" />
+                        <GradientStop x:Name="CreateAccountGradient1" Color="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" Offset="0" />
+                        <GradientStop x:Name="CreateAccountGradient2" Color="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
                 <Button x:Name="CreateAccountButton" BackgroundColor="Transparent" Clicked="OnCreateAccountClicked"
@@ -123,14 +164,19 @@
             </Border>
 
             <!-- Sign In Link -->
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
-                <Label FontSize="14" Text="{loc:Translate Register_AlreadyHaveAccount}" TextColor="#9CA3AF" VerticalOptions="Center" />
-                <Label FontAttributes="Bold" FontSize="14" Text="{loc:Translate Login_SignIn}" TextColor="#7C3AED" VerticalOptions="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnSignInTapped" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </HorizontalStackLayout>
+            <Label FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" HorizontalTextAlignment="Center" LineBreakMode="WordWrap">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{loc:Translate Register_AlreadyHaveAccount}" />
+                        <Span Text=" " />
+                        <Span FontAttributes="Bold" Text="{loc:Translate Login_SignIn}" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSignInTapped" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
         </VerticalStackLayout>
     </ScrollView>

@@ -4,10 +4,11 @@ using Modules.Workouts.DTO.Responses;
 using Modules.Users.Domain.Exercises;
 using Modules.Users.Domain.Workout;
 using Modules.Users.Infrastructure.Database;
+using Modules.Common.Infrastructure.Tenancy;
 
 namespace Modules.Users.Infrastructure.Workouts;
 
-public class WorkoutService(UsersDbContext dbContext, WorkoutUpdatesBroker? updatesBroker = null) : IWorkoutService
+public class WorkoutService(UsersDbContext dbContext, WorkoutUpdatesBroker? updatesBroker = null, TenantContext? tenant = null) : IWorkoutService
 {
     public async Task<WorkoutResponse> CreateAsync(string userId, CreateWorkoutRequest request, CancellationToken ct = default)
     {
@@ -98,7 +99,7 @@ public class WorkoutService(UsersDbContext dbContext, WorkoutUpdatesBroker? upda
             updatesBroker.Publish(new WorkoutUpdateEvent(
                 workoutId, now,
                 SetCompleted: new SetCompletedEvent(
-                    lastExercise.Id.ToString(), lastExercise.Name, lastSet.Reps, lastSet.WeightKg)));
+                    lastExercise.Id.ToString(), lastExercise.Name, lastSet.Reps, lastSet.WeightKg), TenantId: tenant?.Current.Id ?? "legacy"));
         }
 
         if (endDate != previousEndDate && endDate > startDate)
@@ -107,7 +108,7 @@ public class WorkoutService(UsersDbContext dbContext, WorkoutUpdatesBroker? upda
             var durationSeconds = (int)(endDate - startDate).TotalSeconds;
             updatesBroker.Publish(new WorkoutUpdateEvent(
                 workoutId, now,
-                Finished: new WorkoutFinishedEvent(totalSets, durationSeconds)));
+                Finished: new WorkoutFinishedEvent(totalSets, durationSeconds), TenantId: tenant?.Current.Id ?? "legacy"));
         }
     }
 

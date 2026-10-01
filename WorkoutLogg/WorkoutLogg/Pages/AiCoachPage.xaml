@@ -5,25 +5,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,*,Auto,Auto">
 
         <!-- ── Header ─────────────────────────────────────────── -->
         <Border Grid.Row="0"
-                BackgroundColor="#7C3AED"
+                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                 Padding="20,52,20,18"
                 StrokeShape="RoundRectangle 0,0,28,28"
                 StrokeThickness="0">
             <Grid ColumnDefinitions="84,*,84">
                 <!-- AI avatar -->
                 <Border Grid.Column="0"
-                        BackgroundColor="#9333EA"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}"
                         HeightRequest="80" WidthRequest="80"
                         StrokeShape="RoundRectangle 14" StrokeThickness="0"
                         VerticalOptions="Center">
-                    <Label Text="🤖" FontSize="20"
+                    <Label Style="{StaticResource IconCoach}" TextColor="White" FontSize="24"
                            HorizontalOptions="Center" VerticalOptions="Center" />
                 </Border>
 
@@ -34,14 +34,14 @@
                         <Label Text="{loc:Translate AiCoach_Title}"
                                FontAttributes="Bold" FontSize="17" TextColor="White"
                                VerticalOptions="Center" />
-                        <Border BackgroundColor="#9333EA" Padding="6,2"
+                        <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" Padding="6,2"
                                 StrokeShape="RoundRectangle 6" StrokeThickness="0"
                                 VerticalOptions="Center">
-                            <Label Text="⭐ PREMIUM" FontSize="9" FontAttributes="Bold" TextColor="#DDD6FE" />
+                            <Label Text="PREMIUM" FontSize="9" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" />
                         </Border>
                     </HorizontalStackLayout>
                     <Label x:Name="KnowsLabel"
-                           FontSize="11" TextColor="#DDD6FE"
+                           FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}"
                            HorizontalOptions="Center" />
                 </VerticalStackLayout>
             </Grid>
@@ -52,21 +52,21 @@
                              IsVisible="False"
                              VerticalOptions="Center"
                              Padding="32" Spacing="20">
-            <Border BackgroundColor="#9333EA"
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}"
                     HeightRequest="100" WidthRequest="100"
                     StrokeShape="RoundRectangle 22" StrokeThickness="0"
                     HorizontalOptions="Center">
-                <Label Text="🤖" FontSize="36"
+                <Label Style="{StaticResource IconCoach}" FontSize="36" TextColor="White"
                        HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
             <Label Text="{loc:Translate AiCoach_PremiumOnly}"
-                   FontAttributes="Bold" FontSize="20" TextColor="#111827"
+                   FontAttributes="Bold" FontSize="20" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                    HorizontalOptions="Center" HorizontalTextAlignment="Center" />
             <Label Text="{loc:Translate AiCoach_PremiumSub}"
-                   FontSize="14" TextColor="#6B7280"
+                   FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}"
                    HorizontalOptions="Center" HorizontalTextAlignment="Center"
                    LineBreakMode="WordWrap" />
-            <Border BackgroundColor="#7C3AED"
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                     Padding="20,14" StrokeShape="RoundRectangle 16" StrokeThickness="0"
                     HorizontalOptions="Center">
                 <Label Text="{loc:Translate AiCoach_Upgrade}"
@@ -85,36 +85,36 @@
                 <VerticalStackLayout x:Name="WelcomeSection" Padding="20,20,20,8" Spacing="16">
 
                     <!-- Greeting card -->
-                    <Border BackgroundColor="White" Padding="20,18"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 20" StrokeThickness="1">
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="20,18"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 20" StrokeThickness="1">
                         <VerticalStackLayout Spacing="10">
                             <HorizontalStackLayout Spacing="14">
-                                <Border BackgroundColor="#EDE9FE"
+                                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}"
                                         HeightRequest="82" WidthRequest="82"
                                         StrokeShape="RoundRectangle 16" StrokeThickness="0">
-                                    <Label Text="🤖" FontSize="24"
+                                    <Label Style="{StaticResource IconCoach}" FontSize="24"
                                            HorizontalOptions="Center" VerticalOptions="Center" />
                                 </Border>
                                 <VerticalStackLayout VerticalOptions="Center" Spacing="3">
                                     <Label x:Name="GreetingLabel"
-                                           FontAttributes="Bold" FontSize="16" TextColor="#111827" />
+                                           FontAttributes="Bold" FontSize="16" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                     <Label x:Name="GreetingSubLabel"
-                                           FontSize="12" TextColor="#6B7280" LineBreakMode="WordWrap" />
+                                           FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" LineBreakMode="WordWrap" />
                                 </VerticalStackLayout>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Border>
 
                     <!-- Insight card -->
-                    <Border BackgroundColor="White" Padding="16,14"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="16,14"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <HorizontalStackLayout Spacing="12">
-                            <Label Text="💡" FontSize="18" VerticalOptions="Start" Margin="0,2,0,0" />
+                            <Label Style="{StaticResource IconCoach}" FontSize="22" VerticalOptions="Start" Margin="0,2,0,0" />
                             <VerticalStackLayout Spacing="4" HorizontalOptions="FillAndExpand">
                                 <Label Text="{loc:Translate AiCoach_InsightTitle}"
-                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label x:Name="InsightLabel"
-                                       FontSize="12" TextColor="#6B7280"
+                                       FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}"
                                        LineBreakMode="WordWrap" />
                             </VerticalStackLayout>
                         </HorizontalStackLayout>
@@ -122,20 +122,20 @@
 
                     <!-- Quick action chips -->
                     <Label Text="{loc:Translate AiCoach_QuickActions}"
-                           FontSize="10" FontAttributes="Bold" TextColor="#9CA3AF"
+                           FontSize="10" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                            CharacterSpacing="0.8" Margin="0,4,0,0" />
 
                     <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
                         <!-- Tip -->
                         <Border Grid.Row="0" Grid.Column="0"
-                                BackgroundColor="White" Padding="14,12"
-                                Stroke="#F3F4F6" StrokeShape="RoundRectangle 14" StrokeThickness="1">
+                                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,12"
+                                Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 14" StrokeThickness="1">
                             <VerticalStackLayout Spacing="4">
-                                <Label Text="🏃" FontSize="20" />
+                                <Label Style="{StaticResource IconCardio}" FontSize="22" />
                                 <Label Text="{loc:Translate AiCoach_Action_Tip}"
-                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Text="{loc:Translate AiCoach_Action_Tip_Hint}"
-                                       FontSize="11" TextColor="#9CA3AF" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnTipTapped" />
@@ -144,14 +144,14 @@
 
                         <!-- PR Forecast -->
                         <Border Grid.Row="0" Grid.Column="1"
-                                BackgroundColor="White" Padding="14,12"
-                                Stroke="#F3F4F6" StrokeShape="RoundRectangle 14" StrokeThickness="1">
+                                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,12"
+                                Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 14" StrokeThickness="1">
                             <VerticalStackLayout Spacing="4">
-                                <Label Text="📈" FontSize="20" />
+                                <Label Style="{StaticResource IconProgress}" FontSize="22" />
                                 <Label Text="{loc:Translate AiCoach_Action_PR}"
-                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Text="{loc:Translate AiCoach_Action_PR_Hint}"
-                                       FontSize="11" TextColor="#9CA3AF" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnPRForecastTapped" />
@@ -160,14 +160,14 @@
 
                         <!-- Create plan -->
                         <Border Grid.Row="1" Grid.Column="0"
-                                BackgroundColor="White" Padding="14,12"
-                                Stroke="#F3F4F6" StrokeShape="RoundRectangle 14" StrokeThickness="1">
+                                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,12"
+                                Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 14" StrokeThickness="1">
                             <VerticalStackLayout Spacing="4">
-                                <Label Text="🏋️" FontSize="20" />
+                                <Label Style="{StaticResource IconStrength}" FontSize="22" />
                                 <Label Text="{loc:Translate AiCoach_Action_Plan}"
-                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Text="{loc:Translate AiCoach_Action_Plan_Hint}"
-                                       FontSize="11" TextColor="#9CA3AF" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnPlanTapped" />
@@ -176,14 +176,14 @@
 
                         <!-- Analytics -->
                         <Border Grid.Row="1" Grid.Column="1"
-                                BackgroundColor="White" Padding="14,12"
-                                Stroke="#F3F4F6" StrokeShape="RoundRectangle 14" StrokeThickness="1">
+                                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,12"
+                                Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 14" StrokeThickness="1">
                             <VerticalStackLayout Spacing="4">
-                                <Label Text="📊" FontSize="20" />
+                                <Label Style="{StaticResource IconChart}" FontSize="22" />
                                 <Label Text="{loc:Translate AiCoach_Action_Analytics}"
-                                       FontAttributes="Bold" FontSize="13" TextColor="#111827" />
+                                       FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                                 <Label Text="{loc:Translate AiCoach_Action_Analytics_Hint}"
-                                       FontSize="11" TextColor="#9CA3AF" />
+                                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnAnalyticsTapped" />
@@ -204,30 +204,30 @@
         <Border x:Name="TypingIndicator"
                 Grid.Row="2"
                 IsVisible="False"
-                BackgroundColor="White"
+                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
                 Padding="14,10" Margin="16,0,16,4"
                 StrokeShape="RoundRectangle 18,18,18,4"
-                Stroke="#F3F4F6" StrokeThickness="1"
+                Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeThickness="1"
                 HorizontalOptions="Start">
             <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
-                <Ellipse Fill="#9CA3AF" HeightRequest="7" WidthRequest="7" />
-                <Ellipse Fill="#9CA3AF" HeightRequest="7" WidthRequest="7" Opacity="0.6" />
-                <Ellipse Fill="#9CA3AF" HeightRequest="7" WidthRequest="7" Opacity="0.3" />
+                <Ellipse Fill="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" HeightRequest="7" WidthRequest="7" />
+                <Ellipse Fill="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" HeightRequest="7" WidthRequest="7" Opacity="0.6" />
+                <Ellipse Fill="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" HeightRequest="7" WidthRequest="7" Opacity="0.3" />
             </HorizontalStackLayout>
         </Border>
 
         <!-- ── Input bar + tab bar ────────────────────────────── -->
         <VerticalStackLayout Grid.Row="3" Spacing="0">
-            <Border BackgroundColor="White"
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
                     Margin="16,0,16,10"
                     StrokeShape="RoundRectangle 22" StrokeThickness="1"
-                    Stroke="#E5E7EB">
+                    Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}">
                 <Grid ColumnDefinitions="*,Auto" Padding="16,8,8,8">
                     <Entry x:Name="MessageEntry"
                            Grid.Column="0"
                            Placeholder="{loc:Translate AiCoach_Placeholder}"
-                           PlaceholderColor="#9CA3AF"
-                           FontSize="14" TextColor="#111827"
+                           PlaceholderColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
+                           FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                            VerticalOptions="Center"
                            ReturnCommand="{Binding Source={x:Reference MessageEntry}, Path=ReturnCommand}"
                            ReturnType="Send">
@@ -235,11 +235,11 @@
                         </Entry.GestureRecognizers>
                     </Entry>
                     <Border Grid.Column="1"
-                            BackgroundColor="#7C3AED"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                             HeightRequest="58" WidthRequest="58"
                             Margin="10"
                             StrokeShape="RoundRectangle 13" StrokeThickness="0">
-                        <Label Text="↑" FontAttributes="Bold" FontSize="18" TextColor="White"
+                        <Label Style="{StaticResource IconSendAction}" InputTransparent="True" TextColor="White"
                                HorizontalOptions="Center" VerticalOptions="Center" />
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnSendTapped" />
@@ -251,5 +251,6 @@
             <controls:MainTabBar ActiveTab="AI" />
         </VerticalStackLayout>
 
+        <controls:LoadingOverlayView x:Name="PageLoading" Grid.RowSpan="4" />
     </Grid>
 </ContentPage>

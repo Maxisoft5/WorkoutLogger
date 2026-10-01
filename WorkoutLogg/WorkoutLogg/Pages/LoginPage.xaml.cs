@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using FluentValidation;
 using FluentValidation.Results;
 using Modules.Users.DTO.Auth;
@@ -11,6 +12,7 @@ public partial class LoginPage : ContentPage
 {
     public IAuthApi AuthApi { get; set; }
     private IValidator<UserDto> _loginToAccountValidator;
+    private bool _isSubmitting;
     public LoginPage()
 	{
 		InitializeComponent();
@@ -21,62 +23,96 @@ public partial class LoginPage : ContentPage
 
     private async void OnSignInClicked(object sender, EventArgs e)
     {
-        var userDto = new UserDto()
-        {
-            Email = EmailEntry.Text,
-            Password = PasswordEntry.Text
-        };
-        ClearErrors();
-
-        var result = _loginToAccountValidator.Validate(userDto);
-        if (!result.IsValid)
-        {
-            ShowErrors(result);
+        if (_isSubmitting)
             return;
-        }
 
-        Application.Current!.Windows[0].Page = new LoadingPage();
+        _isSubmitting = true;
+        var window = Application.Current!.Windows[0];
+        var loadingPage = new LoadingPage();
 
-        var loginRes = await AuthApi.Login(userDto);
-        var res = loginRes.Content;
-        if (loginRes.IsSuccessStatusCode && !string.IsNullOrWhiteSpace(res?.Token))
+        try
         {
-            await LoginService.AddToken(res.Token);
-            var currentUser = await AuthApi.GetCurrentUser($"Bearer {res.Token}");
-            if (currentUser != null && currentUser.IsSuccessStatusCode && currentUser.Content != null)
+            var userDto = new UserDto()
             {
-                await CurrentUserStore.SetCurrentUser(currentUser.Content);
+                Email = EmailEntry.Text,
+                Password = PasswordEntry.Text
+            };
+            ClearErrors();
+
+            var result = _loginToAccountValidator.Validate(userDto);
+            if (!result.IsValid)
+            {
+                ShowErrors(result);
+                return;
             }
-            if (currentUser.IsSuccessful && currentUser.Content.UserRegistrationStep
-                == Modules.Users.DTO.Users.UserRegistrationStep.Profile)
+
+            window.Page = loadingPage;
+
+            using var loginRes = await AuthApi.Login(userDto);
+            var res = loginRes.Content;
+            if (loginRes.IsSuccessStatusCode && !string.IsNullOrWhiteSpace(res?.Token))
             {
-                Application.Current!.Windows[0].Page = new OnboardingProfilePage();
-            }
-            if (currentUser.IsSuccessful && currentUser.Content.UserRegistrationStep
-                == Modules.Users.DTO.Users.UserRegistrationStep.Body)
-            {
-                Application.Current!.Windows[0].Page = new OnboardingBodyStatsPage();
-            }
-            if (currentUser.IsSuccessful && currentUser.Content.UserRegistrationStep
-              == Modules.Users.DTO.Users.UserRegistrationStep.Goals)
-            {
-                Application.Current!.Windows[0].Page = new OnboardingGoalsPage();
-            }
-            if (currentUser.IsSuccessful && currentUser.Content.UserRegistrationStep
-             == Modules.Users.DTO.Users.UserRegistrationStep.Finished)
-            {
-                Application.Current!.Windows[0].Page = new AppShell();
-                Application.Current!.Windows[0].Page.Loaded += async (_, _) =>
+                await LoginService.AddToken(res.Token);
+                using var currentUser = await AuthApi.GetCurrentUser($"Bearer {res.Token}");
+                if (!currentUser.IsSuccessful || currentUser.Content == null)
                 {
-                    await Shell.Current.GoToAsync("//Dashboard");
+                    await ShowRequestErrorAsync(ApiProblem.GetDetail(currentUser, Loc.Get("Common_TryAgain")));
+                    return;
+                }
+
+                await CurrentUserStore.SetCurrentUser(currentUser.Content);
+                Page? nextPage = currentUser.Content.UserRegistrationStep switch
+                {
+                    Modules.Users.DTO.Users.UserRegistrationStep.Profile => new OnboardingProfilePage(),
+                    Modules.Users.DTO.Users.UserRegistrationStep.Body => new OnboardingBodyStatsPage(),
+                    Modules.Users.DTO.Users.UserRegistrationStep.Goals => new OnboardingGoalsPage(),
+                    Modules.Users.DTO.Users.UserRegistrationStep.Finished => new AppShell(),
+                    _ => null
                 };
+
+                if (nextPage == null)
+                {
+                    await ShowRequestErrorAsync(Loc.Get("Common_TryAgain"));
+                    return;
+                }
+
+                if (nextPage is AppShell shell)
+                {
+                    shell.Loaded += async (_, _) =>
+                    {
+                        await shell.GoToAsync("//Dashboard");
+                    };
+                }
+                window.Page = nextPage;
+            }
+            else
+            {
+                await ShowRequestErrorAsync(ApiProblem.GetDetail(loginRes, Loc.Get("Login_InvalidCredentials")));
             }
         }
-        else
+        catch (Exception ex) when (ex is OperationCanceledException or TimeoutException)
         {
-            var loginPage = new LoginPage();
-            Application.Current!.Windows[0].Page = loginPage;
-            await loginPage.DisplayAlert("", Loc.Get("Login_InvalidCredentials"), "OK");
+            await ShowRequestErrorAsync(Loc.Get("Common_RequestTimeout"));
+        }
+        catch (HttpRequestException)
+        {
+            await ShowRequestErrorAsync(Loc.Get("Common_ConnectionError"));
+        }
+        catch (Exception)
+        {
+            await ShowRequestErrorAsync(Loc.Get("Common_TryAgain"));
+        }
+        finally
+        {
+            if (window.Page == loadingPage)
+                window.Page = this;
+            _isSubmitting = false;
+        }
+
+        async Task ShowRequestErrorAsync(string message)
+        {
+            window.Page = this;
+            await DisplayAlertAsync(Loc.Get("Common_Error"), message, Loc.Get("Common_OK"));
         }
     }
 
@@ -91,13 +127,13 @@ public partial class LoginPage : ContentPage
         if (string.IsNullOrEmpty(message))
         {
             errorLabel.IsVisible = false;
-            border.Stroke = Color.FromArgb("#E5E7EB");
+            border.WithThemeColor("Stroke", Color.FromArgb("#E5E7EB"));
         }
         else
         {
             errorLabel.Text = message;
             errorLabel.IsVisible = true;
-            border.Stroke = Color.FromArgb("#EF4444");
+            border.WithThemeColor("Stroke", Color.FromArgb("#EF4444"));
         }
     }
 
@@ -129,9 +165,8 @@ public partial class LoginPage : ContentPage
         {
             Glyph = PasswordEntry.IsPassword ? FluentUI.eye_20_regular : FluentUI.eye_off_20_regular,
             FontFamily = FluentUI.FontFamily,
-            Color = Color.FromArgb("#9CA3AF"),
             Size = 20
-        };
+        }.WithThemeColor("Color", Color.FromArgb("#9CA3AF"));
     }
 
     private async void OnSignUpTapped(object sender, EventArgs e)

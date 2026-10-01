@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:icons="clr-namespace:WorkoutLogg.Utilities">
+    <Style x:Key="FitnessIcon" TargetType="Label">
+        <Setter Property="FontFamily" Value="{x:Static icons:FitnessIcons.FontFamily}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontAutoScalingEnabled" Value="False" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="FitnessActionIcon" TargetType="Label" BasedOn="{StaticResource FitnessIcon}">
+        <Setter Property="MinimumWidthRequest" Value="48" />
+        <Setter Property="MinimumHeightRequest" Value="48" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+    <Style x:Key="IconBrand" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Brand}" /></Style>
+    <Style x:Key="IconStrength" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Strength}" /></Style>
+    <Style x:Key="IconCardio" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Cardio}" /></Style>
+    <Style x:Key="IconMobility" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Mobility}" /></Style>
+    <Style x:Key="IconCoach" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Coach}" /></Style>
+    <Style x:Key="IconProfile" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Profile}" /></Style>
+    <Style x:Key="IconCalendar" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Calendar}" /></Style>
+    <Style x:Key="IconJournal" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Journal}" /></Style>
+    <Style x:Key="IconFire" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Fire}" /></Style>
+    <Style x:Key="IconTrophy" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Trophy}" /></Style>
+    <Style x:Key="IconTarget" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Target}" /></Style>
+    <Style x:Key="IconPremium" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Premium}" /></Style>
+    <Style x:Key="IconChart" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Chart}" /></Style>
+    <Style x:Key="IconProgress" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Progress}" /></Style>
+    <Style x:Key="IconTimer" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Timer}" /></Style>
+    <Style x:Key="IconWallet" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Wallet}" /></Style>
+    <Style x:Key="IconPayment" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Payment}" /></Style>
+    <Style x:Key="IconBank" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Bank}" /></Style>
+    <Style x:Key="IconPhone" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Phone}" /></Style>
+    <Style x:Key="IconPeople" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.People}" /></Style>
+    <Style x:Key="IconChat" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Chat}" /></Style>
+    <Style x:Key="IconMail" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Mail}" /></Style>
+    <Style x:Key="IconKey" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Key}" /></Style>
+    <Style x:Key="IconLock" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Lock}" /></Style>
+    <Style x:Key="IconShield" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Shield}" /></Style>
+    <Style x:Key="IconSettings" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Settings}" /></Style>
+    <Style x:Key="IconDocument" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Document}" /></Style>
+    <Style x:Key="IconLegal" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Legal}" /></Style>
+    <Style x:Key="IconLink" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Link}" /></Style>
+    <Style x:Key="IconSearch" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Search}" /></Style>
+    <Style x:Key="IconCheckCircle" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.CheckCircle}" /></Style>
+    <Style x:Key="IconCheck" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Check}" /></Style>
+    <Style x:Key="IconRight" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Right}" /></Style>
+    <Style x:Key="IconProhibited" TargetType="Label" BasedOn="{StaticResource FitnessIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Prohibited}" /></Style>
+    <Style x:Key="IconAddAction" TargetType="Label" BasedOn="{StaticResource FitnessActionIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Add}" /></Style>
+    <Style x:Key="IconBackAction" TargetType="Label" BasedOn="{StaticResource FitnessActionIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Back}" /></Style>
+    <Style x:Key="IconCloseAction" TargetType="Label" BasedOn="{StaticResource FitnessActionIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Close}" /></Style>
+    <Style x:Key="IconMoreAction" TargetType="Label" BasedOn="{StaticResource FitnessActionIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.More}" /></Style>
+    <Style x:Key="IconUpAction" TargetType="Label" BasedOn="{StaticResource FitnessActionIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Up}" /></Style>
+    <Style x:Key="IconDownAction" TargetType="Label" BasedOn="{StaticResource FitnessActionIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Down}" /></Style>
+    <Style x:Key="IconEditAction" TargetType="Label" BasedOn="{StaticResource FitnessActionIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Edit}" /></Style>
+    <Style x:Key="IconSendAction" TargetType="Label" BasedOn="{StaticResource FitnessActionIcon}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Send}" /></Style>
+    <Style x:Key="FitnessIconButton" TargetType="Button">
+        <Setter Property="FontFamily" Value="{x:Static icons:FitnessIcons.FontFamily}" />
+        <Setter Property="FontAutoScalingEnabled" Value="False" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
+        <Setter Property="MinimumWidthRequest" Value="48" />
+        <Setter Property="MinimumHeightRequest" Value="48" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style x:Key="IconBackButton" TargetType="Button" BasedOn="{StaticResource FitnessIconButton}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Back}" /></Style>
+    <Style x:Key="IconPreviousButton" TargetType="Button" BasedOn="{StaticResource FitnessIconButton}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Left}" /></Style>
+    <Style x:Key="IconNextButton" TargetType="Button" BasedOn="{StaticResource FitnessIconButton}"><Setter Property="Text" Value="{x:Static icons:FitnessIcons.Right}" /></Style>
+</ResourceDictionary>

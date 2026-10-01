@@ -26,12 +26,12 @@ public class AuthServiceTests
     {
         _userManager = Substitute.For<UserManager<User>>(
             Substitute.For<IUserStore<User>>(), null, null, null, null, null, null, null, null);
-        // Identity 2.3.x: SignInManager ctor has 6 parameters (no IUserConfirmation).
+        // Match the ASP.NET Core runtime used by WebApi integration tests.
         _signInManager = Substitute.For<SignInManager<User>>(
             _userManager,
             Substitute.For<IHttpContextAccessor>(),
             Substitute.For<IUserClaimsPrincipalFactory<User>>(),
-            null, null, null);
+            null, null, null, Substitute.For<IUserConfirmation<User>>());
         _cache = Substitute.For<ICacheService>();
 
         _sut = new AuthService(

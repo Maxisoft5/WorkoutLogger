@@ -2,25 +2,26 @@
 <ContentPage
     x:Class="WorkoutLogg.Pages.MyBookingsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:theme="clr-namespace:WorkoutLogg.Utilities"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
     xmlns:vm="clr-namespace:WorkoutLogg.PageModels"
     x:DataType="vm:MyBookingsPageModel"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,*">
 
         <!-- Header -->
-        <Border Grid.Row="0" BackgroundColor="#7C3AED"
+        <Border Grid.Row="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                 Padding="20,52,20,20"
                 StrokeShape="RoundRectangle 0,0,28,28"
                 StrokeThickness="0">
             <Grid ColumnDefinitions="Auto,*">
-                <Border Grid.Column="0" BackgroundColor="#9333EA" Padding="10,8"
+                <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" Padding="0"
                         StrokeShape="RoundRectangle 10" StrokeThickness="0" VerticalOptions="Center">
-                    <Label Text="←" FontSize="18" TextColor="White" VerticalOptions="Center">
+                    <Label Style="{StaticResource IconBackAction}" TextColor="White" VerticalOptions="Center" SemanticProperties.Description="{loc:Translate Common_Back}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnBackTapped" />
                         </Label.GestureRecognizers>
@@ -37,26 +38,26 @@
                 <CollectionView ItemsSource="{Binding Bookings}" SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="vm:BookingItem">
-                            <Border BackgroundColor="White" Padding="16,14" Margin="0,0,0,10"
-                                    Stroke="#F3F4F6" StrokeThickness="1" StrokeShape="RoundRectangle 16">
+                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="16,14" Margin="0,0,0,10"
+                                    Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeThickness="1" StrokeShape="RoundRectangle 16">
                                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                                    <Border Grid.Column="0" BackgroundColor="#EDE9FE" WidthRequest="44" HeightRequest="44"
+                                    <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}" WidthRequest="44" HeightRequest="44"
                                             StrokeThickness="0" StrokeShape="RoundRectangle 22" VerticalOptions="Center">
-                                        <Label Text="{Binding Emoji}" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                                        <Label Text="{Binding Emoji}" Style="{StaticResource FitnessIcon}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" />
                                     </Border>
                                     <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
                                         <Label Text="{Binding StatusLabel}" FontAttributes="Bold" FontSize="14"
-                                               TextColor="{Binding StatusColor}" />
-                                        <Label Text="{Binding SubLabel}" FontSize="12" TextColor="#6B7280"
+                                               TextColor="{theme:ThemeBinding Path=StatusColor, Background=False}" />
+                                        <Label Text="{Binding SubLabel}" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}"
                                                LineBreakMode="TailTruncation" MaxLines="2" />
                                     </VerticalStackLayout>
-                                    <Border Grid.Column="2" BackgroundColor="#FEF2F2" Padding="12,6" StrokeThickness="0"
+                                    <Border Grid.Column="2" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeDangerSoftLight}, Dark={StaticResource ThemeDangerSoftDark}}" Padding="12,6" StrokeThickness="0" MinimumHeightRequest="48"
                                             StrokeShape="RoundRectangle 10" VerticalOptions="Center"
                                             IsVisible="{Binding CanCancel}">
-                                        <Label Text="{loc:Translate Bookings_Cancel}" FontAttributes="Bold" FontSize="12" TextColor="#EF4444">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="OnCancelTapped" CommandParameter="{Binding .}" />
-                                            </Label.GestureRecognizers>
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnCancelTapped" CommandParameter="{Binding .}" />
+                                        </Border.GestureRecognizers>
+                                        <Label Text="{loc:Translate Bookings_Cancel}" InputTransparent="True" VerticalOptions="Center" FontAttributes="Bold" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeDangerLight}, Dark={StaticResource ThemeDangerDark}}">
                                         </Label>
                                     </Border>
                                 </Grid>
@@ -67,11 +68,11 @@
 
                 <!-- Empty state -->
                 <VerticalStackLayout IsVisible="{Binding IsEmpty}" Padding="0,48" Spacing="10" HorizontalOptions="Center">
-                    <Label FontSize="40" HorizontalOptions="Center" Text="📅" />
+                    <Label Style="{StaticResource IconCalendar}" FontSize="40" HorizontalOptions="Center" />
                     <Label FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"
-                           Text="{loc:Translate Bookings_Empty}" TextColor="#111827" />
+                           Text="{loc:Translate Bookings_Empty}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                     <Label FontSize="14" HorizontalOptions="Center" HorizontalTextAlignment="Center"
-                           Text="{loc:Translate Bookings_EmptySubtitle}" TextColor="#9CA3AF" />
+                           Text="{loc:Translate Bookings_EmptySubtitle}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                 </VerticalStackLayout>
 
             </VerticalStackLayout>

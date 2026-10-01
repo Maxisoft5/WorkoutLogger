@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using System.Globalization;
 using WorkoutLogg.Localization;
 using WorkoutLogg.Services;
@@ -117,8 +118,8 @@ public partial class PaymentPage : ContentPage
         Border border, Label check, bool selected,
         Color purple, Color gray, bool isFirstRu = false)
     {
-        border.BackgroundColor = selected ? Color.FromArgb("#EDE9FE") : Colors.White;
-        border.Stroke = new SolidColorBrush(selected ? purple : gray);
+        border.WithThemeColor("BackgroundColor", selected ? Color.FromArgb("#EDE9FE") : Colors.White);
+        border.WithThemeColor("Stroke", new SolidColorBrush(selected ? purple : gray));
         border.StrokeThickness = selected ? 2 : 1;
         // For СБП, the check is always shown (it has the RECOMMENDED badge); for others toggle
         if (!isFirstRu) check.IsVisible = selected;

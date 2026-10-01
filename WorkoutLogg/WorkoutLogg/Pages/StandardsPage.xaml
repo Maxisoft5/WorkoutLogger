@@ -4,21 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
-    BackgroundColor="#EEEEF6"
+    xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,Auto,*">
 
         <!-- Header -->
-        <Border Grid.Row="0" BackgroundColor="#7C3AED"
+        <Border Grid.Row="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                 Padding="20,52,20,20"
                 StrokeShape="RoundRectangle 0,0,28,28"
                 StrokeThickness="0">
             <Grid ColumnDefinitions="Auto,*">
-                <Border Grid.Column="0" BackgroundColor="#9333EA" Padding="10,8"
+                <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroRaisedLight}, Dark={StaticResource ThemeHeroRaisedDark}}" Padding="0"
                         StrokeShape="RoundRectangle 10" StrokeThickness="0"
                         VerticalOptions="Center">
-                    <Label Text="←" FontSize="18" TextColor="White" VerticalOptions="Center">
+                    <Label Style="{StaticResource IconBackAction}" TextColor="White" VerticalOptions="Center" SemanticProperties.Description="{loc:Translate Common_Back}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnBackTapped" />
                         </Label.GestureRecognizers>
@@ -28,7 +29,7 @@
                     <Label Text="{loc:Translate Standards_Title}"
                            FontAttributes="Bold" FontSize="20" TextColor="White" />
                     <Label Text="{loc:Translate Standards_Subtitle}"
-                           FontSize="12" TextColor="#DDD6FE" />
+                           FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeOnHeroMutedLight}, Dark={StaticResource ThemeOnHeroMutedDark}}" />
                 </VerticalStackLayout>
             </Grid>
         </Border>
@@ -37,7 +38,7 @@
         <VerticalStackLayout Grid.Row="1" Padding="20,16,20,0" Spacing="12">
             <!-- Sex toggle -->
             <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
-                <Border x:Name="MenBorder" BackgroundColor="#7C3AED"
+                <Border x:Name="MenBorder" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                         StrokeShape="RoundRectangle 12" StrokeThickness="0">
                     <Label x:Name="MenLabel" Text="{loc:Translate Standards_Men}"
                            FontAttributes="Bold" FontSize="14" TextColor="White"
@@ -47,10 +48,10 @@
                         </Label.GestureRecognizers>
                     </Label>
                 </Border>
-                <Border x:Name="WomenBorder" Grid.Column="1" BackgroundColor="White"
-                        Stroke="#E5E7EB" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
+                <Border x:Name="WomenBorder" Grid.Column="1" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}"
+                        Stroke="{AppThemeBinding Light={StaticResource ThemeBorderLight}, Dark={StaticResource ThemeBorderDark}}" StrokeShape="RoundRectangle 12" StrokeThickness="1.5">
                     <Label x:Name="WomenLabel" Text="{loc:Translate Standards_Women}"
-                           FontAttributes="Bold" FontSize="14" TextColor="#374151"
+                           FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                            HorizontalOptions="Center" Padding="0,10">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnWomenTapped" />
@@ -59,9 +60,9 @@
                 </Border>
             </Grid>
             <!-- Weight class chips -->
-            <ScrollView Orientation="Horizontal">
+            <controls:HorizontalScrollHint>
                 <HorizontalStackLayout x:Name="WeightChipsStack" Spacing="8" />
-            </ScrollView>
+            </controls:HorizontalScrollHint>
         </VerticalStackLayout>
 
         <!-- Standards table -->
@@ -70,11 +71,11 @@
 
                 <!-- Note -->
                 <Label Text="{loc:Translate Standards_Note}"
-                       FontSize="11" TextColor="#9CA3AF"
+                       FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                        HorizontalTextAlignment="Center" />
 
                 <!-- Table header -->
-                <Border BackgroundColor="#7C3AED" Padding="12,10"
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}" Padding="12,10"
                         StrokeShape="RoundRectangle 12" StrokeThickness="0">
                     <Grid ColumnDefinitions="*,*,*,*,*">
                         <Label Grid.Column="0" Text="{loc:Translate Standards_Rank}"

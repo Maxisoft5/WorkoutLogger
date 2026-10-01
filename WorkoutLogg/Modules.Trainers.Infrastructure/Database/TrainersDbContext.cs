@@ -1,9 +1,11 @@
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Modules.Common.Infrastructure.Tenancy;
 using Microsoft.EntityFrameworkCore;
 using Modules.Trainers.Infrastructure.Domain;
 
 namespace Modules.Trainers.Infrastructure.Database
 {
-    public class TrainersDbContext : DbContext
+    public class TrainersDbContext : DbContext, ITenantDbContext
     {
         public DbSet<TrainerProfile> TrainerProfiles { get; set; } = null!;
         public DbSet<TrainingRequest> TrainingRequests { get; set; } = null!;
@@ -18,12 +20,17 @@ namespace Modules.Trainers.Infrastructure.Database
         public DbSet<AvailabilitySlot> AvailabilitySlots { get; set; } = null!;
         public DbSet<Booking> Bookings { get; set; } = null!;
 
-        public TrainersDbContext(DbContextOptions<TrainersDbContext> options) : base(options) { }
+        public TrainersDbContext(DbContextOptions<TrainersDbContext> options, TenantContext? tenant = null) : base(options) { Schema = tenant?.Current.Schema ?? "trainers"; }
+
+        public string Schema { get; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.ReplaceService<IModelCacheKeyFactory, TenantModelCacheKeyFactory>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.HasDefaultSchema("trainers");
+            modelBuilder.HasDefaultSchema(Schema);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TrainersDbContext).Assembly);
         }
     }

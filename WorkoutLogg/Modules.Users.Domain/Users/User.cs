@@ -8,6 +8,7 @@ namespace Modules.Users.Domain.Users
 {
     public class User : IdentityUser, IAuditableEntity
     {
+        public string? NormalizedPhoneNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
         public UserSex Identity { get; set; }
         public BodyStats BodyStats { get; set; } = new();

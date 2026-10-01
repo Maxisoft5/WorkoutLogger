@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using WorkoutLogg.Localization;
 using WorkoutLogg.Services;
 
@@ -56,8 +57,8 @@ public partial class PremiumPage : ContentPage
         // Badge: trial vs active
         var isTrial = status.TrialEndsAt.HasValue && status.TrialEndsAt.Value > DateTime.UtcNow;
         SubStatusBadge.Text = isTrial
-            ? $"⭐ {Loc.Get("Premium_Active_Trial").ToUpperInvariant()}"
-            : $"⭐ {Loc.Get("Premium_Status_Active").ToUpperInvariant()}";
+            ? Loc.Get("Premium_Active_Trial").ToUpperInvariant()
+            : Loc.Get("Premium_Status_Active").ToUpperInvariant();
 
         // Plan label
         SubPlanLabel.Text = string.Equals(status.Plan, "Annual", StringComparison.OrdinalIgnoreCase)
@@ -72,9 +73,9 @@ public partial class PremiumPage : ContentPage
             SubDaysLeftLabel.Text = daysLeft > 0
                 ? string.Format(Loc.Get("Premium_Active_DaysLeft"), daysLeft)
                 : Loc.Get("Premium_Expired");
-            SubDaysLeftLabel.TextColor = daysLeft > 7
+            SubDaysLeftLabel.WithThemeColor("TextColor", daysLeft > 7
                 ? Color.FromArgb("#16A34A")
-                : Color.FromArgb("#DC2626");
+                : Color.FromArgb("#DC2626"));
         }
         else
         {
@@ -150,17 +151,17 @@ public partial class PremiumPage : ContentPage
 
     private void UpdatePlanUI()
     {
-        AnnualBorder.BackgroundColor  = _isAnnual ? Color.FromArgb("#EDE9FE") : Colors.White;
-        AnnualBorder.Stroke           = new SolidColorBrush(_isAnnual ? Purple : Gray);
-        AnnualRadio.BackgroundColor   = _isAnnual ? Purple : Colors.Transparent;
-        AnnualRadio.Stroke            = new SolidColorBrush(_isAnnual ? Purple : Gray);
+        AnnualBorder.WithThemeColor("BackgroundColor", _isAnnual ? Color.FromArgb("#EDE9FE") : Colors.White);
+        AnnualBorder.WithThemeColor("Stroke", new SolidColorBrush(_isAnnual ? Purple : Gray));
+        AnnualRadio.WithThemeColor("BackgroundColor", _isAnnual ? Purple : Colors.Transparent);
+        AnnualRadio.WithThemeColor("Stroke", new SolidColorBrush(_isAnnual ? Purple : Gray));
         AnnualRadio.StrokeThickness   = _isAnnual ? 0 : 2;
         AnnualCheck.IsVisible         = _isAnnual;
 
-        MonthlyBorder.BackgroundColor = !_isAnnual ? Color.FromArgb("#EDE9FE") : Colors.White;
-        MonthlyBorder.Stroke          = new SolidColorBrush(!_isAnnual ? Purple : Gray);
-        MonthlyRadio.BackgroundColor  = !_isAnnual ? Purple : Colors.Transparent;
-        MonthlyRadio.Stroke           = new SolidColorBrush(!_isAnnual ? Purple : Gray);
+        MonthlyBorder.WithThemeColor("BackgroundColor", !_isAnnual ? Color.FromArgb("#EDE9FE") : Colors.White);
+        MonthlyBorder.WithThemeColor("Stroke", new SolidColorBrush(!_isAnnual ? Purple : Gray));
+        MonthlyRadio.WithThemeColor("BackgroundColor", !_isAnnual ? Purple : Colors.Transparent);
+        MonthlyRadio.WithThemeColor("Stroke", new SolidColorBrush(!_isAnnual ? Purple : Gray));
         MonthlyRadio.StrokeThickness  = !_isAnnual ? 0 : 2;
         MonthlyCheck.IsVisible        = !_isAnnual;
 

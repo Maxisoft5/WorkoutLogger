@@ -1,7 +1,9 @@
+using WorkoutLogg.Utilities;
 using FluentValidation;
 using FluentValidation.Results;
 using Modules.Users.DTO.Auth;
 using Modules.Users.Infrastructure.Api;
+using WorkoutLogg.Localization;
 using WorkoutLogg.Validators;
 
 namespace WorkoutLogg.Pages;
@@ -10,6 +12,7 @@ public partial class CreateAccount : ContentPage
 {
     public IAuthApi AuthApi { get; set; }
     private readonly IValidator<UserDto> _validator;
+    private bool _isSubmitting;
     public CreateAccount()
     {
         InitializeComponent();
@@ -20,36 +23,70 @@ public partial class CreateAccount : ContentPage
 
     private async void OnCreateAccountClicked(object sender, EventArgs e)
     {
-        var userDto = new UserDto()
-        {
-            FullName = FullNameEntry.Text,
-            Email = EmailEntry.Text,
-            Password = PasswordEntry.Text,
-            ConfirmPassword = ConfirmPasswordEntry.Text,
-            AcceptedTerms = TermsCheckBox.IsChecked
-        };
-        ClearErrors();
-
-        ValidationResult result = await _validator.ValidateAsync(userDto);
-        if (!result.IsValid)
-        {
-            ShowErrors(result);
+        if (_isSubmitting)
             return;
+
+        _isSubmitting = true;
+        var window = Application.Current!.Windows[0];
+        var loadingPage = new LoadingPage();
+
+        try
+        {
+            var userDto = new UserDto()
+            {
+                FullName = FullNameEntry.Text,
+                Email = EmailEntry.Text,
+                Password = PasswordEntry.Text,
+                ConfirmPassword = ConfirmPasswordEntry.Text,
+                AcceptedTerms = TermsCheckBox.IsChecked
+            };
+            ClearErrors();
+
+            ValidationResult result = await _validator.ValidateAsync(userDto);
+            if (!result.IsValid)
+            {
+                ShowErrors(result);
+                return;
+            }
+
+            window.Page = loadingPage;
+
+            using var created = await AuthApi.CreateAccount(userDto);
+            var res = created.Content;
+
+            if (created.IsSuccessStatusCode && !string.IsNullOrWhiteSpace(res?.Token))
+            {
+                await LoginService.AddToken(res.Token);
+                window.Page = new OnboardingProfilePage();
+            }
+            else
+            {
+                await ShowRequestErrorAsync(ApiProblem.GetDetail(created, Loc.Get("Common_TryAgain")));
+            }
+        }
+        catch (Exception ex) when (ex is OperationCanceledException or TimeoutException)
+        {
+            await ShowRequestErrorAsync(Loc.Get("Common_RequestTimeout"));
+        }
+        catch (HttpRequestException ex)
+        {
+            await ShowRequestErrorAsync(Loc.Get("Common_ConnectionError"));
+        }
+        catch (Exception ex)
+        {
+            await ShowRequestErrorAsync(Loc.Get("Common_TryAgain"));
+        }
+        finally
+        {
+            if (window.Page == loadingPage)
+                window.Page = this;
+            _isSubmitting = false;
         }
 
-        Application.Current!.Windows[0].Page = new LoadingPage();
-
-        var created = await AuthApi.CreateAccount(userDto);
-        var res = created.Content;
-
-        if (created.IsSuccessStatusCode && !string.IsNullOrWhiteSpace(res?.Token))
+        async Task ShowRequestErrorAsync(string message)
         {
-            await LoginService.AddToken(res.Token);
-            Application.Current!.Windows[0].Page = new OnboardingProfilePage();
-        } 
-        else
-        {
-            await DisplayAlertAsync("Error", ApiProblem.GetDetail(created, "Failed to create account"), "Ok");
+            window.Page = this;
+            await DisplayAlertAsync(Loc.Get("Common_Error"), message, Loc.Get("Common_OK"));
         }
     }
 
@@ -67,13 +104,13 @@ public partial class CreateAccount : ContentPage
         if (string.IsNullOrEmpty(message))
         {
             errorLabel.IsVisible = false;
-            border.Stroke = Color.FromArgb("#E5E7EB");
+            border.WithThemeColor("Stroke", Color.FromArgb("#E5E7EB"));
         }
         else
         {
             errorLabel.Text = message;
             errorLabel.IsVisible = true;
-            border.Stroke = Color.FromArgb("#EF4444");
+            border.WithThemeColor("Stroke", Color.FromArgb("#EF4444"));
         }
     }
 
@@ -107,13 +144,13 @@ public partial class CreateAccount : ContentPage
     {
         if (e.Value)
         {
-            CreateAccountGradient1.Color = new Color(124, 58, 237);
-            CreateAccountGradient2.Color = new Color(147, 51, 234);
+            CreateAccountGradient1.WithThemeColor("Color", new Color(124, 58, 237));
+            CreateAccountGradient2.WithThemeColor("Color", new Color(147, 51, 234));
         } 
         else
         {
-            CreateAccountGradient1.Color = new Color(228, 221, 235);
-            CreateAccountGradient2.Color = new Color(129, 127, 133);
+            CreateAccountGradient1.WithThemeColor("Color", new Color(228, 221, 235));
+            CreateAccountGradient2.WithThemeColor("Color", new Color(129, 127, 133));
         }
     }
 
@@ -136,9 +173,8 @@ public partial class CreateAccount : ContentPage
         {
             Glyph = PasswordEntry.IsPassword ? FluentUI.eye_20_regular : FluentUI.eye_off_20_regular,
             FontFamily = FluentUI.FontFamily,
-            Color = Color.FromArgb("#9CA3AF"),
             Size = 20
-        };
+        }.WithThemeColor("Color", Color.FromArgb("#9CA3AF"));
     }
 
     private void OnToggleConfirmPasswordVisibility(object sender, EventArgs e)
@@ -148,9 +184,8 @@ public partial class CreateAccount : ContentPage
         {
             Glyph = ConfirmPasswordEntry.IsPassword ? FluentUI.eye_20_regular : FluentUI.eye_off_20_regular,
             FontFamily = FluentUI.FontFamily,
-            Color = Color.FromArgb("#9CA3AF"),
             Size = 20
-        };
+        }.WithThemeColor("Color", Color.FromArgb("#9CA3AF"));
     }
 
     private async void OnSignInTapped(object sender, EventArgs e)

@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using WorkoutLogg.PageModels;
 using WorkoutLogg.Services;
 
@@ -15,6 +16,12 @@ public partial class TrainersPage : ContentPage
     public TrainersPage(TrainersPageModel vm)
     {
         InitializeComponent();
+        foreach (var chip in new[]
+        {
+            ChipStrength, ChipWeightLoss, ChipCrossfit, ChipYoga, ChipRehabilitation, ChipRunning,
+            SortMatch, SortPriceAsc, SortPriceDesc, SortNewest, RatingAny, Rating45, Rating48
+        })
+            TouchTargets.ExpandLabel(chip);
         _vm = vm;
         BindingContext = vm;
         PageLoading.Preload();
@@ -115,9 +122,9 @@ public partial class TrainersPage : ContentPage
 
     private static void SetChip(Border border, Label label, bool active)
     {
-        border.BackgroundColor = active ? Purple : White;
-        border.Stroke = active ? Purple : ChipStroke;
+        border.WithThemeColor("BackgroundColor", active ? Purple : White);
+        border.WithThemeColor("Stroke", active ? Purple : ChipStroke);
         border.StrokeThickness = active ? 0 : 1.5;
-        label.TextColor = active ? White : ChipText;
+        label.WithThemeColor("TextColor", active ? White : ChipText);
     }
 }

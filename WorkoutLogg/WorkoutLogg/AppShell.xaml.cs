@@ -1,10 +1,55 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using System.Diagnostics;
+using WorkoutLogg.Localization;
+using WorkoutLogg.Pages.Controls;
 using Font = Microsoft.Maui.Font;
 namespace WorkoutLogg;
 
 public partial class AppShell : Shell
 {
+    private bool _isNavigating;
+
+    public static Task NavigateAsync(string route) => Current is AppShell shell
+        ? shell.NavigateWithFeedbackAsync(route)
+        : Current.GoToAsync(route);
+
+    private async Task NavigateWithFeedbackAsync(string route)
+    {
+        if (_isNavigating)
+            return;
+
+        _isNavigating = true;
+        var sourcePage = CurrentPage;
+        var overlay = sourcePage?.FindByName<LoadingOverlayView>("PageLoading");
+        var timer = Stopwatch.StartNew();
+        try
+        {
+            if (overlay is not null)
+                await overlay.ShowAndRenderAsync();
+
+            Debug.WriteLine($"[Navigation] {route}: feedback {timer.ElapsedMilliseconds} ms");
+            // При уходе приложения из Shell не выполняем отложенный переход.
+            if (Current != this || CurrentPage != sourcePage)
+                return;
+
+            await GoToAsync(route, animate: false);
+            Debug.WriteLine($"[Navigation] {route}: Shell transition {timer.ElapsedMilliseconds} ms (including feedback; excludes async data loading)");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[Navigation] {route}: {ex}");
+            overlay?.Hide();
+            await DisplayAlertAsync(Loc.Get("Common_Error"), Loc.Get("Common_TryAgain"), Loc.Get("Common_OK"));
+        }
+        finally
+        {
+            if (CurrentPage == sourcePage)
+                overlay?.Hide();
+            _isNavigating = false;
+        }
+    }
+
 	public AppShell()
 	{
 		InitializeComponent();
@@ -69,6 +114,6 @@ public partial class AppShell : Shell
 
 	private void SfSegmentedControl_SelectionChanged(object? sender, Syncfusion.Maui.Toolkit.SegmentedControl.SelectionChangedEventArgs e)
     {
-		Application.Current!.UserAppTheme = e.NewIndex == 0 ? AppTheme.Light : AppTheme.Dark;
+        Services.ThemeService.Set(e.NewIndex == 0 ? "light" : "dark");
     }
 }

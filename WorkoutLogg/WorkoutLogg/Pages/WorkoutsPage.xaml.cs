@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using Modules.Workouts.DTO.Enums;
 using WorkoutLogg.Localization;
 using WorkoutLogg.PageModels;
@@ -12,6 +13,8 @@ public partial class WorkoutsPage : ContentPage
     public WorkoutsPage(WorkoutsPageModel vm)
     {
         InitializeComponent();
+        foreach (var chip in new[] { FilterAll, FilterStrength, FilterCardio, FilterStretch })
+            TouchTargets.ExpandLabel(chip);
         _vm = vm;
         BindingContext = vm;
         PageLoading.Preload();
@@ -20,9 +23,10 @@ public partial class WorkoutsPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        PageLoading.Show();
+        var timer = System.Diagnostics.Stopwatch.StartNew();
         try
         {
+            await PageLoading.ShowAndRenderAsync();
             await _vm.LoadAsync();
             SessionCountLabel.Text = _vm.SessionCount;
             Calendar.MarkedDates = _vm.MarkedDates;
@@ -30,12 +34,13 @@ public partial class WorkoutsPage : ContentPage
         finally
         {
             PageLoading.Hide();
+            System.Diagnostics.Debug.WriteLine($"[PageLoad] Workouts: {timer.ElapsedMilliseconds} ms");
         }
     }
 
     private async void OnAddWorkoutTapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync("AddWorkout");
+        await AppShell.NavigateAsync("AddWorkout");
     }
 
     private async void OnWorkoutOptionsTapped(object sender, TappedEventArgs e)
@@ -112,10 +117,10 @@ public partial class WorkoutsPage : ContentPage
         foreach (var (key, (border, label)) in map)
         {
             bool isActive = key == active;
-            border.BackgroundColor = isActive ? purple : white;
-            border.Stroke = isActive ? purple : gray;
+            border.WithThemeColor("BackgroundColor", isActive ? purple : white);
+            border.WithThemeColor("Stroke", isActive ? purple : gray);
             border.StrokeThickness = isActive ? 0 : 1.5;
-            label.TextColor = isActive ? white : grayText;
+            label.WithThemeColor("TextColor", isActive ? white : grayText);
         }
     }
 }

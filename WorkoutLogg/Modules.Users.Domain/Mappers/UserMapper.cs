@@ -11,6 +11,7 @@ namespace Modules.Users.Domain.Mappers
             {
                 Id = user.Id,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
                 FullName = user.UserName,
                 BodyStats = new UserBodyStatsDto()
                 {

@@ -96,13 +96,13 @@ namespace WorkoutLogg.PageModels
 
         public string Emoji => Type switch
         {
-            WalletTransactionType.StreakBonus => "🔥",
-            WalletTransactionType.ChallengeReward => "🏆",
-            WalletTransactionType.ReferralBonus => "👥",
-            WalletTransactionType.TrainingPayment => "🏋️",
-            WalletTransactionType.TrainingPayout => "💸",
-            WalletTransactionType.Refund => "↩️",
-            _ => "💰",
+            WalletTransactionType.StreakBonus => FitnessIcons.Fire,
+            WalletTransactionType.ChallengeReward => FitnessIcons.Trophy,
+            WalletTransactionType.ReferralBonus => FitnessIcons.People,
+            WalletTransactionType.TrainingPayment => FitnessIcons.Strength,
+            WalletTransactionType.TrainingPayout => FitnessIcons.Payment,
+            WalletTransactionType.Refund => FitnessIcons.Back,
+            _ => FitnessIcons.Wallet,
         };
 
         public string DateLabel =>

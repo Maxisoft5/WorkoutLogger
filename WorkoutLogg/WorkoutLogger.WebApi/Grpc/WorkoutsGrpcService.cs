@@ -3,6 +3,11 @@ using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Modules.Users.Infrastructure.Workouts;
 using WorkoutLogger.Grpc.Contracts;
+using Microsoft.EntityFrameworkCore;
+using Modules.Common.Infrastructure.Tenancy;
+using Modules.Users.Infrastructure.Database;
+using Modules.Trainers.Infrastructure.Database;
+using Modules.Trainers.Infrastructure.Domain;
 
 namespace WorkoutLogger.WebApi.Grpc
 {
@@ -12,7 +17,7 @@ namespace WorkoutLogger.WebApi.Grpc
     /// WorkoutFinished, которые публикует WorkoutService при каждом sync.
     /// </summary>
     [Authorize]
-    public class WorkoutsGrpcService(WorkoutUpdatesBroker broker) : WorkoutsService.WorkoutsServiceBase
+    public class WorkoutsGrpcService(WorkoutUpdatesBroker broker, UsersDbContext users, TrainersDbContext trainers, TenantContext tenant) : WorkoutsService.WorkoutsServiceBase
     {
         public override async Task WatchWorkout(
             WatchWorkoutRequest request,
@@ -22,7 +27,12 @@ namespace WorkoutLogger.WebApi.Grpc
             if (!Guid.TryParse(request.WorkoutId, out var workoutId))
                 throw new RpcException(new Status(StatusCode.InvalidArgument, "workout_id must be a GUID"));
 
-            var (reader, subscription) = broker.Subscribe(workoutId);
+            var userId = context.GetHttpContext().User.FindFirst("userid")?.Value;
+            var ownerId = await users.Workouts.Where(w => w.Id == workoutId).Select(w => w.UserId).SingleOrDefaultAsync(context.CancellationToken);
+            if (ownerId is null || userId is null || (ownerId != userId && !await trainers.TrainingRequests.AnyAsync(
+                r => r.StudentUserId == ownerId && r.TrainerUserId == userId && r.Status == TrainingRequestStatus.Accepted, context.CancellationToken)))
+                throw new RpcException(new Status(StatusCode.NotFound, "Workout not found"));
+            var (reader, subscription) = broker.Subscribe(workoutId, tenant.Current.Id);
             using (subscription)
             {
                 try

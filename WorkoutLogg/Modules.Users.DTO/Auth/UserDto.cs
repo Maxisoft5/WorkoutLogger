@@ -13,6 +13,8 @@ namespace Modules.Users.DTO.Auth
 
         [EmailAddress]
         public string? Email { get; set; }
+        [MaxLength(40)]
+        public string? PhoneNumber { get; set; }
 
         [MaxLength(128)]
         public string? Password { get; set; }

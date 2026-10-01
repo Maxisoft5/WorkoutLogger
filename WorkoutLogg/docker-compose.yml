@@ -154,7 +154,19 @@ services:
       opensearch:
         condition: service_healthy
 
+  omniroute:
+    image: diegosouzapw/omniroute:latest
+    container_name: workoutlogger-omniroute
+    restart: unless-stopped
+    ports:
+      - "20128:20128"
+    environment:
+      STORAGE_ENCRYPTION_KEY: ${STORAGE_ENCRYPTION_KEY:?STORAGE_ENCRYPTION_KEY is required (see .env.example)}
+    volumes:
+      - omniroute-data:/app/data
+   
   api:
+    profiles: ["api"]
     build:
       context: .
       dockerfile: WorkoutLogger.WebApi/Dockerfile
@@ -165,6 +177,7 @@ services:
       - "5001:5001"
     environment:
       ASPNETCORE_ENVIRONMENT: Production
+      UseLocalhost: "false"
       ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       ASPNETCORE_Kestrel__Certificates__Default__Password: ${CERT_PASSWORD:?CERT_PASSWORD is required (see .env.example)}
       ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=${POSTGRES_DB:-workoutLogger};Username=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}"
@@ -192,3 +205,4 @@ volumes:
   kafka-data:
   opensearch-data:
   grafana-data:
+  omniroute-data:

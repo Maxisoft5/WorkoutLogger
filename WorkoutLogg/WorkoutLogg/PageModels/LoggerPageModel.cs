@@ -58,7 +58,7 @@ namespace WorkoutLogg.PageModels
         public int TotalSets { get; set; }
         public double TotalWeightKg { get; set; }
 
-        public string Emoji => IsCustom ? "⚡" : "📋";
+        public string Emoji => IsCustom ? FitnessIcons.Cardio : FitnessIcons.Journal;
         public string Title => IsCustom ? Loc.Get("Dashboard_CustomWorkout") : WorkoutLabel;
         public string SubLabel => $"{ExerciseCount} {Loc.Get("Common_Exercises")} · {TotalSets} {Loc.Get("Common_Sets")}";
 

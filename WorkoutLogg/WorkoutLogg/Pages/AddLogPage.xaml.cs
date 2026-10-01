@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using Modules.Workouts.DTO.Enums;
 using WorkoutLogg.Database;
 using WorkoutLogg.Database.Entities;
@@ -225,19 +226,15 @@ internal class ExerciseLogFormRow
         _nameEntry = new Entry
         {
             Placeholder = Loc.Get("AddLog_ExercisePlaceholder"),
-            PlaceholderColor = Color.FromArgb("#9CA3AF"),
-            TextColor = Color.FromArgb("#111827"),
             FontSize = 15,
             FontAttributes = FontAttributes.Bold,
-            Text = existing?.ExerciseName ?? fromPlan?.ExerciseName ?? "",
-        };
+            Text = existing?.ExerciseName ?? fromPlan?.ExerciseName ?? ""
+        }.WithThemeColor("PlaceholderColor", Color.FromArgb("#9CA3AF")).WithThemeColor("TextColor", Color.FromArgb("#111827"));
 
         _complexityPicker = new Picker
         {
-            Title = Loc.Get("AddWorkout_Complexity"),
-            TextColor = Color.FromArgb("#111827"),
-            TitleColor = Color.FromArgb("#9CA3AF"),
-        };
+            Title = Loc.Get("AddWorkout_Complexity")
+        }.WithThemeColor("TextColor", Color.FromArgb("#111827")).WithThemeColor("TitleColor", Color.FromArgb("#9CA3AF"));
         _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_Low"));
         _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_Middle"));
         _complexityPicker.Items.Add(Loc.Get("AddWorkout_Complexity_High"));
@@ -279,7 +276,7 @@ internal class ExerciseLogFormRow
 
         var addSetBtn = new Border
         {
-            BackgroundColor = Color.FromArgb("#EDE9FE"),
+            MinimumHeightRequest = 48,
             Padding = new Thickness(12, 8),
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 10 },
             StrokeThickness = 0,
@@ -288,23 +285,15 @@ internal class ExerciseLogFormRow
             {
                 Text = Loc.Get("AddWorkout_AddSet"),
                 FontSize = 13,
-                FontAttributes = FontAttributes.Bold,
-                TextColor = Color.FromArgb("#7C3AED"),
-            },
-        };
+                FontAttributes = FontAttributes.Bold
+            }.WithThemeColor("TextColor", Color.FromArgb("#7C3AED"))
+        }.WithThemeColor("BackgroundColor", Color.FromArgb("#EDE9FE"));
         addSetBtn.GestureRecognizers.Add(new TapGestureRecognizer
         {
             Command = new Command(AddSet),
         });
 
-        var deleteBtn = new Label
-        {
-            Text = "✕",
-            FontSize = 16,
-            TextColor = Color.FromArgb("#EF4444"),
-            HorizontalOptions = LayoutOptions.End,
-            VerticalOptions = LayoutOptions.Center,
-        };
+        var deleteBtn = FitnessIcons.Action(FitnessIcons.Close, Loc.Get("Common_Delete"), Color.FromArgb("#EF4444"));
         deleteBtn.GestureRecognizers.Add(new TapGestureRecognizer
         {
             Command = new Command(() => DeleteRequested?.Invoke(this)),
@@ -322,17 +311,15 @@ internal class ExerciseLogFormRow
 
         View = new Border
         {
-            BackgroundColor = Colors.White,
             Padding = new Thickness(16),
-            Stroke = Color.FromArgb("#F3F4F6"),
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 16 },
             StrokeThickness = 1,
             Content = new VerticalStackLayout
             {
                 Spacing = 10,
                 Children = { header, badge, _complexityPicker, _setsContainer, addSetBtn },
-            },
-        };
+            }
+        }.WithThemeColor("BackgroundColor", Colors.White).WithThemeColor("Stroke", Color.FromArgb("#F3F4F6"));
     }
 
     private Border BuildBadge()
@@ -343,7 +330,6 @@ internal class ExerciseLogFormRow
 
         return new Border
         {
-            BackgroundColor = Color.FromArgb(bg),
             Padding = new Thickness(8, 4),
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 6 },
             StrokeThickness = 0,
@@ -352,10 +338,9 @@ internal class ExerciseLogFormRow
             {
                 Text = text,
                 FontSize = 11,
-                FontAttributes = FontAttributes.Bold,
-                TextColor = Color.FromArgb(fg),
-            },
-        };
+                FontAttributes = FontAttributes.Bold
+            }.WithThemeColor("TextColor", Color.FromArgb(fg))
+        }.WithThemeColor("BackgroundColor", Color.FromArgb(bg));
     }
 
     private void AddSet()
@@ -423,10 +408,9 @@ internal class SetLogFormRow
             Text = $"{Loc.Get("Common_Set")} {number}",
             FontSize = 12,
             FontAttributes = FontAttributes.Bold,
-            TextColor = Color.FromArgb("#9CA3AF"),
             VerticalOptions = LayoutOptions.Center,
-            MinimumWidthRequest = 42,
-        };
+            MinimumWidthRequest = 42
+        }.WithThemeColor("TextColor", Color.FromArgb("#9CA3AF"));
 
         _warmupBadge = BuildWarmupBadge();
 
@@ -440,22 +424,17 @@ internal class SetLogFormRow
             Text = Loc.Get("Common_Sec"),
             FontSize = 11,
             FontAttributes = FontAttributes.Bold,
-            TextColor = Color.FromArgb("#7C3AED"),
             VerticalOptions = LayoutOptions.Center,
             Padding = new Thickness(4, 2),
-        };
+            MinimumWidthRequest = 48,MinimumHeightRequest = 48,
+            HorizontalTextAlignment = TextAlignment.Center,VerticalTextAlignment = TextAlignment.Center
+        }.WithThemeColor("TextColor", Color.FromArgb("#7C3AED")).WithThemeColor("BackgroundColor", Colors.Transparent);
         _unitToggle.GestureRecognizers.Add(new TapGestureRecognizer
         {
             Command = new Command(ToggleUnit),
         });
 
-        var deleteBtn = new Label
-        {
-            Text = "✕",
-            FontSize = 13,
-            TextColor = Color.FromArgb("#EF4444"),
-            VerticalOptions = LayoutOptions.Center,
-        };
+        var deleteBtn = FitnessIcons.Action(FitnessIcons.Close, Loc.Get("Common_Delete"), Color.FromArgb("#EF4444"));
         deleteBtn.GestureRecognizers.Add(new TapGestureRecognizer
         {
             Command = new Command(() => DeleteRequested?.Invoke(this)),
@@ -463,51 +442,47 @@ internal class SetLogFormRow
 
         if (existing is not null) Fill(existing);
 
+        var actions = new Grid { ColumnDefinitions = new ColumnDefinitionCollection(new(GridLength.Star), new(GridLength.Auto), new(GridLength.Auto)) };
+        actions.Add(_numberLabel);
+        actions.Add(_warmupBadge, 1);
+        actions.Add(deleteBtn, 2);
         var row = new Grid
         {
             ColumnDefinitions = new ColumnDefinitionCollection(
-                new ColumnDefinition(GridLength.Auto),
-                new ColumnDefinition(GridLength.Auto),
                 new ColumnDefinition(new GridLength(1, GridUnitType.Star)),
                 new ColumnDefinition(GridLength.Auto),
                 new ColumnDefinition(new GridLength(1, GridUnitType.Star)),
                 new ColumnDefinition(GridLength.Auto),
                 new ColumnDefinition(new GridLength(1, GridUnitType.Star)),
-                new ColumnDefinition(GridLength.Auto),
                 new ColumnDefinition(GridLength.Auto)),
             ColumnSpacing = 4,
             Padding = new Thickness(0, 4),
         };
 
-        var kgX = new Label { Text = Loc.Get("Common_KgX"), FontSize = 12, TextColor = Color.FromArgb("#9CA3AF"), VerticalOptions = LayoutOptions.Center };
-        var clock = new Label { Text = "⏱", FontSize = 13, VerticalOptions = LayoutOptions.Center };
+        var kgX = new Label { Text = Loc.Get("Common_KgX"),FontSize = 12,VerticalOptions = LayoutOptions.Center }.WithThemeColor("TextColor", Color.FromArgb("#9CA3AF"));
+        var clock = new Label { Text = FitnessIcons.Timer,FontFamily = FitnessIcons.FontFamily,FontSize = 18,VerticalOptions = LayoutOptions.Center }.WithThemeColor("TextColor", Color.FromArgb("#7C3AED"));
 
-        Grid.SetColumn(_numberLabel, 0);
-        Grid.SetColumn(_warmupBadge, 1);
-        Grid.SetColumn(_weightEntry, 2);
-        Grid.SetColumn(kgX, 3);
-        Grid.SetColumn(_repsEntry, 4);
-        Grid.SetColumn(clock, 5);
-        Grid.SetColumn(_restEntry, 6);
-        Grid.SetColumn(_unitToggle, 7);
-        Grid.SetColumn(deleteBtn, 8);
+        Grid.SetColumn(_weightEntry, 0);
+        Grid.SetColumn(kgX, 1);
+        Grid.SetColumn(_repsEntry, 2);
+        Grid.SetColumn(clock, 3);
+        Grid.SetColumn(_restEntry, 4);
+        Grid.SetColumn(_unitToggle, 5);
 
-        row.Children.Add(_numberLabel);
-        row.Children.Add(_warmupBadge);
         row.Children.Add(_weightEntry);
         row.Children.Add(kgX);
         row.Children.Add(_repsEntry);
         row.Children.Add(clock);
         row.Children.Add(_restEntry);
         row.Children.Add(_unitToggle);
-        row.Children.Add(deleteBtn);
 
         View = new VerticalStackLayout
         {
             Spacing = 0,
             Children =
             {
-                new BoxView { HeightRequest = 1, Color = Color.FromArgb("#F3F4F6") },
+                new BoxView { HeightRequest = 1}.WithThemeColor("Color", Color.FromArgb("#F3F4F6")),
+                actions,
                 row,
             },
         };
@@ -515,13 +490,7 @@ internal class SetLogFormRow
 
     private Label BuildWarmupBadge()
     {
-        var badge = new Label
-        {
-            Text = _isWarmup ? "🔥" : "○",
-            FontSize = 16,
-            VerticalOptions = LayoutOptions.Center,
-            Margin = new Thickness(4, 0),
-        };
+        var badge = FitnessIcons.Action(_isWarmup ? FitnessIcons.Fire : FitnessIcons.Circle, Loc.Get("Common_ToggleWarmup"));
         badge.GestureRecognizers.Add(new TapGestureRecognizer
         {
             Command = new Command(() => ToggleWarmup(badge)),
@@ -532,7 +501,7 @@ internal class SetLogFormRow
     private void ToggleWarmup(Label badge)
     {
         _isWarmup = !_isWarmup;
-        badge.Text = _isWarmup ? "🔥" : "○";
+        badge.Text = _isWarmup ? FitnessIcons.Fire : FitnessIcons.Circle;
     }
 
     private void ToggleUnit()
@@ -554,20 +523,17 @@ internal class SetLogFormRow
         _repsEntry.Text = s.Reps > 0 ? s.Reps.ToString() : "";
         _restEntry.Text = s.RestSeconds > 0 ? s.RestSeconds.ToString() : "";
         _isWarmup = s.IsWarmup;
-        _warmupBadge.Text = _isWarmup ? "🔥" : "○";
+        _warmupBadge.Text = _isWarmup ? FitnessIcons.Fire : FitnessIcons.Circle;
     }
 
     public void UpdateNumber(int n) => _numberLabel.Text = $"{Loc.Get("Common_Set")} {n}";
 
-    private static Entry NumEntry(string placeholder) => new()
+    private static Entry NumEntry(string placeholder) => new Entry()
     {
         Placeholder = placeholder,
-        PlaceholderColor = Color.FromArgb("#C0C0C0"),
-        TextColor = Color.FromArgb("#111827"),
         Keyboard = Keyboard.Numeric,
         FontSize = 13,
-        HorizontalTextAlignment = TextAlignment.Center,
-    };
+        HorizontalTextAlignment = TextAlignment.Center    }.WithThemeColor("PlaceholderColor", Color.FromArgb("#C0C0C0")).WithThemeColor("TextColor", Color.FromArgb("#111827"));
 
     private int GetRestSeconds()
     {

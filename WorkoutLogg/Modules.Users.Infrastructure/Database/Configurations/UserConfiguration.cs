@@ -12,6 +12,8 @@ namespace Modules.Users.Infrastructure.Database.Configurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("users");
+            builder.Property(x => x.NormalizedPhoneNumber).HasMaxLength(16);
+            builder.HasIndex(x => x.NormalizedPhoneNumber).IsUnique();
             builder.HasIndex(x => x.NormalizedUserName).IsUnique(false);
             builder.HasIndex(x => x.UserName).IsUnique(false);
             builder.Property(x=> x.DateOfBirth).HasColumnName("birth_date");

@@ -18,9 +18,10 @@ public partial class LoggerPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        PageLoading.Show();
+        var timer = System.Diagnostics.Stopwatch.StartNew();
         try
         {
+            await PageLoading.ShowAndRenderAsync();
             await _vm.LoadAsync();
             DateLabel.Text = _vm.DateLabel;
             Calendar.MarkedDates = _vm.MarkedDates;
@@ -28,6 +29,7 @@ public partial class LoggerPage : ContentPage
         finally
         {
             PageLoading.Hide();
+            System.Diagnostics.Debug.WriteLine($"[PageLoad] Logger: {timer.ElapsedMilliseconds} ms");
         }
     }
 
@@ -39,7 +41,7 @@ public partial class LoggerPage : ContentPage
 
     private async void OnAddLogTapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync($"AddLog?date={_vm.SelectedDate:yyyy-MM-dd}");
+        await AppShell.NavigateAsync($"AddLog?date={_vm.SelectedDate:yyyy-MM-dd}");
     }
 
     private async void OnDateSelected(object sender, DateTime date)

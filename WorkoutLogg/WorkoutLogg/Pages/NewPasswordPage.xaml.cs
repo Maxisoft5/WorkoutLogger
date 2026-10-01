@@ -1,3 +1,4 @@
+using WorkoutLogg.Utilities;
 using Modules.Users.DTO.Auth;
 using Modules.Users.Infrastructure.Api;
 
@@ -23,9 +24,8 @@ public partial class NewPasswordPage : ContentPage
         {
             Glyph = NewPasswordEntry.IsPassword ? FluentUI.eye_20_regular : FluentUI.eye_off_20_regular,
             FontFamily = FluentUI.FontFamily,
-            Color = Color.FromArgb("#9CA3AF"),
             Size = 20
-        };
+        }.WithThemeColor("Color", Color.FromArgb("#9CA3AF"));
     }
 
     private void OnToggleConfirmPasswordVisibility(object sender, EventArgs e)
@@ -35,9 +35,8 @@ public partial class NewPasswordPage : ContentPage
         {
             Glyph = ConfirmPasswordEntry.IsPassword ? FluentUI.eye_20_regular : FluentUI.eye_off_20_regular,
             FontFamily = FluentUI.FontFamily,
-            Color = Color.FromArgb("#9CA3AF"),
             Size = 20
-        };
+        }.WithThemeColor("Color", Color.FromArgb("#9CA3AF"));
     }
 
     // ── Password strength ─────────────────────────
@@ -47,14 +46,14 @@ public partial class NewPasswordPage : ContentPage
         var (level, label, color) = GetStrength(pw);
 
         StrengthLabel.Text = label;
-        StrengthLabel.TextColor = Color.FromArgb(color);
+        StrengthLabel.WithThemeColor("TextColor", Color.FromArgb(color));
 
         var bars = new[] { Bar0, Bar1, Bar2 };
         var active = Color.FromArgb(color);
         var inactive = Color.FromArgb("#E5E7EB");
 
         for (int i = 0; i < 3; i++)
-            bars[i].Color = i < level ? active : inactive;
+            bars[i].WithThemeColor("Color", i < level ? active : inactive);
     }
 
     private static (int level, string label, string hex) GetStrength(string pw)

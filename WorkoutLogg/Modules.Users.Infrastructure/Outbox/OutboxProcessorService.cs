@@ -5,12 +5,13 @@ using Microsoft.Extensions.Logging;
 using Modules.Common.Infrastructure.Email;
 using Modules.Users.Infrastructure.Database;
 using System.Text.Json;
+using Modules.Common.Infrastructure.Tenancy;
 
 namespace Modules.Users.Infrastructure.Outbox;
 
 public class OutboxProcessorService(
     IServiceScopeFactory scopeFactory,
-    ILogger<OutboxProcessorService> logger) : BackgroundService
+    ILogger<OutboxProcessorService> logger, TenantCatalog? tenants = null) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -31,11 +32,21 @@ public class OutboxProcessorService(
 
     private async Task ProcessAsync(CancellationToken ct)
     {
-        using var scope = scopeFactory.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
-        var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
-
-        await ProcessBatchAsync(db, emailSender, ct);
+        foreach (var tenant in tenants?.Tenants ?? [new TenantDefinition { Id = "legacy" }])
+        {
+            try
+            {
+                using var scope = scopeFactory.CreateScope();
+                scope.ServiceProvider.GetService<TenantContext>()?.Set(tenant);
+                var db = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
+                var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
+                await ProcessBatchAsync(db, emailSender, ct);
+            }
+            catch (Exception ex) when (!ct.IsCancellationRequested)
+            {
+                logger.LogError(ex, "Outbox processing failed for tenant {TenantId}", tenant.Id);
+            }
+        }
     }
 
     // Internal so the batch logic can be unit-tested directly

@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:WorkoutLogg.Pages.Controls"
     xmlns:loc="clr-namespace:WorkoutLogg.Localization"
-    BackgroundColor="#EEEEF6"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ThemePageLight}, Dark={StaticResource ThemePageDark}}"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="*,Auto">
@@ -16,11 +16,11 @@
                 <!-- Header -->
                 <Grid ColumnDefinitions="*,Auto">
                     <VerticalStackLayout Grid.Column="0" Spacing="2">
-                        <Label x:Name="DateLabel" CharacterSpacing="1" FontAttributes="Bold" FontSize="11" TextColor="#9CA3AF" />
+                        <Label x:Name="DateLabel" CharacterSpacing="1" FontAttributes="Bold" FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                         <Label x:Name="HelloUserText"
                                FontAttributes="Bold"
                                FontSize="24"
-                               TextColor="#111827"
+                               TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}"
                                LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
                     <Grid Grid.Column="1"
@@ -28,7 +28,7 @@
                           VerticalOptions="Center">
                         <!-- Initials -->
                         <Border x:Name="DashAvatarInitialsBorder"
-                                BackgroundColor="#7C3AED"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource ThemeHeroLight}, Dark={StaticResource ThemeHeroDark}}"
                                 HeightRequest="68"
                                 WidthRequest="68"
                                 StrokeShape="Ellipse"
@@ -52,7 +52,7 @@
                                     <EllipseGeometry Center="34,34" RadiusX="34" RadiusY="34" />
                                 </Image.Clip>
                             </Image>
-                            <Ellipse Stroke="#7C3AED" StrokeThickness="2"
+                            <Ellipse Stroke="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" StrokeThickness="2"
                                      HeightRequest="68" WidthRequest="68"
                                      Fill="Transparent" />
                         </Grid>
@@ -62,88 +62,88 @@
                 <!-- Stats Cards Row -->
                 <Grid ColumnDefinitions="*,8,*,8,*">
                     <!-- Total Workouts -->
-                    <Border Grid.Column="0" BackgroundColor="White" Padding="14,14"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,14"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <VerticalStackLayout Spacing="2">
-                            <Label FontSize="20" Text="🏋️" />
-                            <Label x:Name="TotalWorkoutsLabel" FontAttributes="Bold" FontSize="24" TextColor="#111827" Text="0" />
-                            <Label x:Name="WeeklyChangeLabel" FontAttributes="Bold" FontSize="11" TextColor="#7C3AED" Text="+0 this week" />
-                            <Label FontSize="11" Text="{loc:Translate Dashboard_TotalWorkouts}" TextColor="#9CA3AF" />
+                            <Label Style="{StaticResource IconStrength}" FontSize="22" />
+                            <Label x:Name="TotalWorkoutsLabel" FontAttributes="Bold" FontSize="24" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" Text="0" />
+                            <Label x:Name="WeeklyChangeLabel" FontAttributes="Bold" FontSize="11" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" Text="+0 this week" />
+                            <Label FontSize="11" Text="{loc:Translate Dashboard_TotalWorkouts}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                         </VerticalStackLayout>
                     </Border>
                     <!-- Streak -->
-                    <Border Grid.Column="2" BackgroundColor="White" Padding="14,14"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border Grid.Column="2" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,14"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <VerticalStackLayout Spacing="2">
-                            <Label FontSize="20" Text="🔥" />
-                            <Label x:Name="StreakLabel" FontAttributes="Bold" FontSize="24" TextColor="#111827" Text="0" />
-                            <Label FontSize="11" Text="{loc:Translate Dashboard_DayStreak}" TextColor="#7C3AED" />
-                            <Label FontSize="11" Text="{loc:Translate Dashboard_Streak}" TextColor="#9CA3AF" />
+                            <Label Style="{StaticResource IconFire}" FontSize="22" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
+                            <Label x:Name="StreakLabel" FontAttributes="Bold" FontSize="24" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" Text="0" />
+                            <Label FontSize="11" Text="{loc:Translate Dashboard_DayStreak}" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
+                            <Label FontSize="11" Text="{loc:Translate Dashboard_Streak}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                         </VerticalStackLayout>
                     </Border>
                     <!-- Volume -->
-                    <Border Grid.Column="4" BackgroundColor="White" Padding="14,14"
-                            Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                    <Border Grid.Column="4" BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="14,14"
+                            Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                         <VerticalStackLayout Spacing="2">
-                            <Label FontSize="20" Text="⚡" />
-                            <Label x:Name="WeekVolumeLabel" FontAttributes="Bold" FontSize="24" TextColor="#111827" Text="0 kg" />
-                            <Label FontAttributes="Bold" FontSize="11" Text="{loc:Translate Dashboard_ThisWeek}" TextColor="#7C3AED" />
-                            <Label FontSize="11" Text="{loc:Translate Dashboard_Volume}" TextColor="#9CA3AF" />
+                            <Label Style="{StaticResource IconProgress}" FontSize="22" />
+                            <Label x:Name="WeekVolumeLabel" FontAttributes="Bold" FontSize="24" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" Text="0 kg" />
+                            <Label FontAttributes="Bold" FontSize="11" Text="{loc:Translate Dashboard_ThisWeek}" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" />
+                            <Label FontSize="11" Text="{loc:Translate Dashboard_Volume}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                         </VerticalStackLayout>
                     </Border>
                 </Grid>
 
                 <!-- Weekly Activity -->
-                <Border BackgroundColor="White" Padding="18,16"
-                        Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="18,16"
+                        Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                     <VerticalStackLayout Spacing="16">
-                        <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Dashboard_WeeklyActivity}" TextColor="#111827" />
+                        <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Dashboard_WeeklyActivity}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                         <!-- Bar chart built in code-behind -->
                         <Grid x:Name="WeeklyBarsGrid" HeightRequest="90" ColumnSpacing="6" />
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- Goals -->
-                <Border BackgroundColor="White" Padding="18,16"
-                        Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="18,16"
+                        Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                     <VerticalStackLayout Spacing="16">
-                        <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Dashboard_WeeklyGoals}" TextColor="#111827" />
+                        <Label FontAttributes="Bold" FontSize="16" Text="{loc:Translate Dashboard_WeeklyGoals}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
                         <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
 
                             <!-- Workouts goal -->
                             <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="6">
-                                <Border BackgroundColor="#F3F0FF" HeightRequest="74" WidthRequest="74"
+                                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}" HeightRequest="74" WidthRequest="74"
                                         StrokeShape="Ellipse" StrokeThickness="0" HorizontalOptions="Center">
                                     <Label x:Name="WorkoutsGoalPct" FontAttributes="Bold" FontSize="14"
-                                           HorizontalOptions="Center" TextColor="#7C3AED" VerticalOptions="Center" Text="0%" />
+                                           HorizontalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" VerticalOptions="Center" Text="0%" />
                                 </Border>
                                 <Label x:Name="WorkoutsGoalSub" FontSize="11" HorizontalOptions="Center"
-                                       TextColor="#6B7280" Text="0 / 4" />
-                                <Label FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Dashboard_Workouts}" TextColor="#9CA3AF" />
+                                       TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" Text="0 / 4" />
+                                <Label FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Dashboard_Workouts}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
 
                             <!-- Volume goal -->
                             <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="6">
-                                <Border BackgroundColor="#F3F0FF" HeightRequest="74" WidthRequest="74"
+                                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}" HeightRequest="74" WidthRequest="74"
                                         StrokeShape="Ellipse" StrokeThickness="0" HorizontalOptions="Center">
                                     <Label x:Name="VolumeGoalPct" FontAttributes="Bold" FontSize="14"
-                                           HorizontalOptions="Center" TextColor="#7C3AED" VerticalOptions="Center" Text="0%" />
+                                           HorizontalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" VerticalOptions="Center" Text="0%" />
                                 </Border>
                                 <Label x:Name="VolumeGoalSub" FontSize="11" HorizontalOptions="Center"
-                                       TextColor="#6B7280" Text="0 / 5 000" />
-                                <Label FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Dashboard_VolumeKg}" TextColor="#9CA3AF" />
+                                       TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" Text="0 / 5 000" />
+                                <Label FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Dashboard_VolumeKg}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
 
                             <!-- Consistency goal -->
                             <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="6">
-                                <Border BackgroundColor="#F3F0FF" HeightRequest="74" WidthRequest="74"
+                                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}" HeightRequest="74" WidthRequest="74"
                                         StrokeShape="Ellipse" StrokeThickness="0" HorizontalOptions="Center">
                                     <Label x:Name="ConsistencyGoalPct" FontAttributes="Bold" FontSize="14"
-                                           HorizontalOptions="Center" TextColor="#7C3AED" VerticalOptions="Center" Text="0%" />
+                                           HorizontalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" VerticalOptions="Center" Text="0%" />
                                 </Border>
                                 <Label x:Name="ConsistencyGoalSub" FontSize="11" HorizontalOptions="Center"
-                                       TextColor="#6B7280" Text="0 / 5" />
-                                <Label FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Dashboard_ActiveDays}" TextColor="#9CA3AF" />
+                                       TextColor="{AppThemeBinding Light={StaticResource ThemeSecondaryLight}, Dark={StaticResource ThemeSecondaryDark}}" Text="0 / 5" />
+                                <Label FontSize="11" HorizontalOptions="Center" Text="{loc:Translate Dashboard_ActiveDays}" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" />
                             </VerticalStackLayout>
 
                         </Grid>
@@ -151,12 +151,12 @@
                 </Border>
 
                 <!-- Last Workout -->
-                <Border BackgroundColor="White" Padding="18,16"
-                        Stroke="#F3F4F6" StrokeShape="RoundRectangle 16" StrokeThickness="1">
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ThemeSurfaceLight}, Dark={StaticResource ThemeSurfaceDark}}" Padding="18,16"
+                        Stroke="{AppThemeBinding Light={StaticResource ThemeSoftLight}, Dark={StaticResource ThemeSoftDark}}" StrokeShape="RoundRectangle 16" StrokeThickness="1">
                     <VerticalStackLayout Spacing="14">
                         <Grid ColumnDefinitions="*,Auto">
-                            <Label Grid.Column="0" FontAttributes="Bold" FontSize="16" Text="{loc:Translate Dashboard_LastWorkout}" TextColor="#111827" />
-                            <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Dashboard_SeeAll}" TextColor="#7C3AED">
+                            <Label Grid.Column="0" FontAttributes="Bold" FontSize="16" Text="{loc:Translate Dashboard_LastWorkout}" TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" />
+                            <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="{loc:Translate Dashboard_SeeAll}" TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnSeeAllWorkoutsTapped" />
                                 </Label.GestureRecognizers>
@@ -166,30 +166,30 @@
                         <!-- Has workout -->
                         <Grid x:Name="LastWorkoutCard" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
                             <Border Grid.Column="0"
-                                    BackgroundColor="#EDE9FE"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource ThemeAccentSoftLight}, Dark={StaticResource ThemeAccentSoftDark}}"
                                     HeightRequest="72"
                                     WidthRequest="72"
                                     StrokeShape="RoundRectangle 14"
                                     StrokeThickness="0"
                                     VerticalOptions="Center">
                                 <Label x:Name="LastWorkoutEmoji" FontSize="24"
-                                       HorizontalOptions="Center" VerticalOptions="Center" Text="🏋️" />
+                                       HorizontalOptions="Center" VerticalOptions="Center" Style="{StaticResource FitnessIcon}" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
                                 <Label x:Name="LastWorkoutTitle" FontAttributes="Bold" FontSize="15"
-                                       TextColor="#111827" Text="—" />
-                                <Label x:Name="LastWorkoutSub" FontSize="12" TextColor="#9CA3AF" Text="—" />
+                                       TextColor="{AppThemeBinding Light={StaticResource ThemeTextLight}, Dark={StaticResource ThemeTextDark}}" Text="—" />
+                                <Label x:Name="LastWorkoutSub" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}" Text="—" />
                             </VerticalStackLayout>
                             <Label x:Name="LastWorkoutVolume" Grid.Column="2"
                                    FontAttributes="Bold" FontSize="14"
-                                   TextColor="#7C3AED" VerticalOptions="Center" Text="—" />
+                                   TextColor="{AppThemeBinding Light={StaticResource ThemeAccentLight}, Dark={StaticResource ThemeAccentDark}}" VerticalOptions="Center" Text="—" />
                         </Grid>
 
                         <!-- No workout placeholder -->
                         <Label x:Name="NoWorkoutLabel"
                                IsVisible="False"
                                FontSize="13"
-                               TextColor="#9CA3AF"
+                               TextColor="{AppThemeBinding Light={StaticResource ThemeMutedLight}, Dark={StaticResource ThemeMutedDark}}"
                                HorizontalOptions="Center"
                                Text="{loc:Translate Dashboard_NoWorkouts}" />
 
